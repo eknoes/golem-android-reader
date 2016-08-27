@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:padding="5dip"
+              android:orientation="vertical">
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/articleSubtitle"
+            android:textSize="16dp"
+            android:text="TEST"
+
+            android:textColor="#A5A5A5"/>
+    <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/articleOfflineAvailable"
+            android:layout_alignParentEnd="false"
+            android:layout_alignParentStart="false"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentLeft="false"
+            android:layout_toLeftOf="@+id/articleSubtitle"/>
+    <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/articleTitle"
+            android:textSize="22sp"
+            android:text="Test title of this Article"
+            android:layout_below="@+id/articleSubtitle"
+            android:textStyle="bold"
+            android:textColor="#000000"/>
+    <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/articleInfo"
+            android:textColor="#A5A5A5"
+            android:textSize="12dp"
+            android:text="Published on 23.03.2016"
+            android:layout_below="@id/articleTitle"
+            />
+    <com.android.volley.toolbox.NetworkImageView
+            android:id="@+id/articleImage"
+            android:layout_width="80dip"
+            android:layout_height="80dip"
+            android:layout_below="@id/articleInfo"
+            android:layout_marginRight="10dip"
+            android:layout_marginTop="10dip"
+            android:scaleType="fitStart"/>
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/articleTeaser"
+            android:textSize="15sp"
+            android:text="Test text of this Article"
+            android:layout_below="@+id/articleInfo"
+            android:layout_toRightOf="@id/articleImage"/>
+</RelativeLayout>
