@@ -6,6 +6,7 @@ It currently supports:
 
 Planned features:
 * Search
+
 ## Setup Environment
 1. Clone this repository
 2. Get an API Key from [api.golem.de](http://api.golem.de/)
