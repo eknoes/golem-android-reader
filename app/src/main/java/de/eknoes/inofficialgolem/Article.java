@@ -7,7 +7,7 @@ import java.util.Date;
 /**
  * Created by soenke on 10.04.16.
  */
-public class Article extends GolemItem {
+class Article extends GolemItem {
     private String title;
     private String subheadline;
     private String teaser;
@@ -43,7 +43,7 @@ public class Article extends GolemItem {
     }
 
     public String getSubheadline() {
-        if(subheadline == null) {
+        if (subheadline == null) {
             return null;
         }
         return subheadline.toUpperCase();
@@ -66,7 +66,7 @@ public class Article extends GolemItem {
     }
 
     public void setDate(int date) {
-        this.date = new java.sql.Date((long) date*1000);
+        this.date = new java.sql.Date((long) date * 1000);
     }
 
     public boolean isOffline() {

@@ -10,7 +10,7 @@
                 sample:msbp_minValue="0"
                 sample:msbp_maxValue="200"
                 sample:msbp_interval="1"
-                sample:msbp_measurementUnit="@string/articles"></com.pavelsikun.seekbarpreference.SeekBarPreference>
+                sample:msbp_measurementUnit="@string/articles"/>
 
         <com.pavelsikun.seekbarpreference.SeekBarPreference
                 android:key="refresh_limit"
@@ -20,7 +20,7 @@
                 sample:msbp_minValue="0"
                 sample:msbp_maxValue="60"
                 sample:msbp_interval="1"
-                sample:msbp_measurementUnit="@string/minutes"></com.pavelsikun.seekbarpreference.SeekBarPreference>
+                sample:msbp_measurementUnit="@string/minutes"/>
     </PreferenceCategory>
     <PreferenceCategory
         android:title="@string/pref_abo_title">
@@ -30,13 +30,11 @@
                 android:title="@string/pref_has_abo"
                 android:defaultValue="false"/>
         <EditTextPreference
-                android:id="@+id/abo_key"
                 android:key="abo_key"
                 android:title="@string/pref_abo_key"
                 android:summary="@string/pref_abo_key_sum"/>
         <CheckBoxPreference
                 android:key="media_rss"
-                android:id="@+id/media_rss"
                 android:title="@string/pref_media_rss"
                 android:summary="@string/pref_media_rss_sum"
                 android:defaultValue="true"/>
@@ -45,19 +43,16 @@
     <PreferenceCategory
         android:title="@string/setting_contact">
         <Preference
-                android:id="@+id/contact"
                 android:key="start_contact"
                 android:title="@string/pref_contact_title"
                 android:summary="@string/pref_contact_sum">
         </Preference>
         <Preference
-                android:id="@+id/how_to_key"
                 android:key="how_to_key"
                 android:title="@string/how_to_key"
                 android:summary="@string/how_to_key_content">
         </Preference>
         <Preference
-                android:id="@+id/privacy"
                 android:key="privacy"
                 android:title="@string/privacy_title"
                 android:summary="@string/privacy_sum">

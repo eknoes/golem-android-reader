@@ -27,10 +27,6 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
 /**
- * Created by soenke on 20.04.16.
- */
-
-/**
  * Fetches articles for users with golem abo token
  */
 public class AboArticleUpdater extends GolemUpdater {
@@ -45,7 +41,7 @@ public class AboArticleUpdater extends GolemUpdater {
 
     @Override
     public List<GolemItem> getItems() throws TimeoutError, NoConnectionError, AuthFailureError {
-        if(PreferenceManager.getDefaultSharedPreferences(context).getBoolean("has_abo", false)) {
+        if (PreferenceManager.getDefaultSharedPreferences(context).getBoolean("has_abo", false)) {
             Log.d(TAG, "fetchAbo: Fetching Abo RSS Feed");
             RequestFuture<String> future = RequestFuture.newFuture();
             StringRequest request = new StringRequest(buildAboURL(PreferenceManager.getDefaultSharedPreferences(context).getString("abo_key", null)), future, future);
@@ -56,10 +52,10 @@ public class AboArticleUpdater extends GolemUpdater {
                 return new GolemRSSParser(PreferenceManager.getDefaultSharedPreferences(context).getBoolean("media_rss", true)).parse(stream);
             } catch (InterruptedException | ExecutionException e) {
                 e.printStackTrace();
-                if(e.getCause() instanceof NoConnectionError || e.getCause() instanceof TimeoutError) {
+                if (e.getCause() instanceof NoConnectionError || e.getCause() instanceof TimeoutError) {
                     Log.d(TAG, "getItems: No Connection");
                     throw new NoConnectionError();
-                } else if(e.getCause() instanceof AuthFailureError) {
+                } else if (e.getCause() instanceof AuthFailureError) {
                     Log.d(TAG, "getItems: Invalid Abo key");
                     throw new AuthFailureError();
                 }
@@ -75,18 +71,18 @@ public class AboArticleUpdater extends GolemUpdater {
         return new LinkedList<>();
     }
 
-    public String buildAboURL(String key) {
-        if(PreferenceManager.getDefaultSharedPreferences(context).getBoolean("media_rss", false)) {
+    private String buildAboURL(String key) {
+        if (PreferenceManager.getDefaultSharedPreferences(context).getBoolean("media_rss", false)) {
             return "http://rss.golem.de/rss_sub_media.php?token=" + Uri.encode(key);
         } else {
             return "http://rss.golem.de/rss_sub.php?token=" + Uri.encode(key);
         }
     }
 
-    protected class GolemRSSParser {
+    class GolemRSSParser {
 
-        private String ns = "";
-        private String TAG = this.getClass().getCanonicalName();
+        private final String ns = "";
+        private final String TAG = this.getClass().getCanonicalName();
         private Boolean mediaRss = false;
 
         GolemRSSParser() {
@@ -111,11 +107,11 @@ public class AboArticleUpdater extends GolemUpdater {
             } finally {
                 in.close();
             }
-            return new ArrayList();
+            return new ArrayList<>();
         }
 
         private List<GolemItem> readFeed(XmlPullParser parser) throws IOException, XmlPullParserException {
-            List entries = new ArrayList<GolemItem>();
+            List<GolemItem> entries = new ArrayList<>();
 
             parser.require(XmlPullParser.START_TAG, ns, "feed");
             while (parser.next() != XmlPullParser.END_TAG) {
@@ -146,16 +142,22 @@ public class AboArticleUpdater extends GolemUpdater {
                     continue;
                 }
                 String name = parser.getName();
-                if (name.equals("title")) {
-                    title = readText(parser);
-                } else if (name.equals("link")) {
-                    url = readLink(parser);
-                } else if (name.equals("author")) {
-                    author = readAuthor(parser);
-                } else if (name.equals("summary")) {
-                    text = readText(parser);
-                } else {
-                    skip(parser);
+                switch (name) {
+                    case "title":
+                        title = readText(parser);
+                        break;
+                    case "link":
+                        url = readLink(parser);
+                        break;
+                    case "author":
+                        author = readAuthor(parser);
+                        break;
+                    case "summary":
+                        text = readText(parser);
+                        break;
+                    default:
+                        skip(parser);
+                        break;
                 }
             }
             GolemItem article = new GolemItem();

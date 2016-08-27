@@ -22,9 +22,9 @@ public class SettingsActivity extends PreferenceActivity implements SharedPrefer
         findPreference("how_to_key").setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
             @Override
             public boolean onPreferenceClick(Preference preference) {
-                Intent webIntent = new Intent( Intent.ACTION_VIEW );
-                webIntent.setData( Uri.parse("https://account.golem.de/subscription") );
-                startActivity( webIntent );
+                Intent webIntent = new Intent(Intent.ACTION_VIEW);
+                webIntent.setData(Uri.parse("https://account.golem.de/subscription"));
+                startActivity(webIntent);
                 return true;
             }
         });
@@ -32,9 +32,9 @@ public class SettingsActivity extends PreferenceActivity implements SharedPrefer
         findPreference("privacy").setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
             @Override
             public boolean onPreferenceClick(Preference preference) {
-                Intent webIntent = new Intent( Intent.ACTION_VIEW );
-                webIntent.setData( Uri.parse("http://projekte.eknoes.de/datenschutz.html") );
-                startActivity( webIntent );
+                Intent webIntent = new Intent(Intent.ACTION_VIEW);
+                webIntent.setData(Uri.parse("http://projekte.eknoes.de/datenschutz.html"));
+                startActivity(webIntent);
                 return true;
             }
         });
@@ -42,10 +42,14 @@ public class SettingsActivity extends PreferenceActivity implements SharedPrefer
         findPreference("start_contact").setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
             @Override
             public boolean onPreferenceClick(Preference preference) {
-                Intent emailIntent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts(
+                /*Intent emailIntent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts(
                         "mailto","projekte@eknoes.de", null));
                 emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Inofficial golem.de Reader");
-                startActivity(Intent.createChooser(emailIntent, getResources().getString(R.string.sendMail)));
+                startActivity(Intent.createChooser(emailIntent, getResources().getString(R.string.sendMail)));*/
+                Intent webIntent = new Intent(Intent.ACTION_VIEW);
+                webIntent.setData(Uri.parse("https://github.com/eknoes/golem-android-reader/issues"));
+                startActivity(webIntent);
+
 
                 return true;
             }
@@ -54,7 +58,7 @@ public class SettingsActivity extends PreferenceActivity implements SharedPrefer
 
     @Override
     public void onSharedPreferenceChanged(final SharedPreferences sharedPreferences, String key) {
-        if(key.equals("has_abo")) {
+        if (key.equals("has_abo")) {
             findPreference("abo_key").setEnabled(sharedPreferences.getBoolean(key, false));
             findPreference("media_rss").setEnabled(sharedPreferences.getBoolean(key, true));
         }
@@ -74,7 +78,7 @@ public class SettingsActivity extends PreferenceActivity implements SharedPrefer
         getPreferenceScreen().getSharedPreferences()
                 .unregisterOnSharedPreferenceChangeListener(this);
         View v = findViewById(R.id.has_abo);
-        if(v != null) {
+        if (v != null) {
             v.invalidate();
         }
 

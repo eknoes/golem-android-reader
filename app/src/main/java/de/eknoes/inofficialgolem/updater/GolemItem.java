@@ -10,14 +10,14 @@ public class GolemItem {
     private int id = 0;
     private String url;
     private GolemItem.Type type;
-    private Map<ItemProperties, String> properties = new HashMap<>();
+    private final Map<ItemProperties, String> properties = new HashMap<>();
 
     public boolean hasProp(ItemProperties key) {
         return properties.containsKey(key);
     }
 
     public String getProp(ItemProperties key) {
-        if(hasProp(key)) {
+        if (hasProp(key)) {
             return properties.get(key);
         } else {
             return null;
@@ -53,5 +53,6 @@ public class GolemItem {
     }
 
     public enum Type {ARTICLE, VIDEO}
+
     public enum ItemProperties {TITLE, PUBLISHED, TEASER, IMG_URL, DATE, FULLTEXT, AUTHORS, OFFLINE_AVAILABLE, HAS_MEDIA_FULLTEXT}
 }

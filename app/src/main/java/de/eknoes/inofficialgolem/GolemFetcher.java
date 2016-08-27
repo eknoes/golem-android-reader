@@ -27,12 +27,13 @@ import java.util.List;
  * Created by soenke on 27.08.16.
  */
 public class GolemFetcher extends AsyncTask<Void, Float, GolemFetcher.FETCH_STATE> {
-    private SQLiteDatabase db;
-    private ProgressBar mProgress;
+    private final SQLiteDatabase db;
+    private final ProgressBar mProgress;
     private static final String TAG = "GolemFetcher";
-    private GolemUpdater[] updater;
-    private Context context;
-    enum FETCH_STATE {SUCCESS, NO_CONNECTION, TIMEOUT, ABO_INVALID, UNDEFINED_ERROR};
+    private final GolemUpdater[] updater;
+    private final Context context;
+
+    enum FETCH_STATE {SUCCESS, NO_CONNECTION, TIMEOUT, ABO_INVALID, UNDEFINED_ERROR}
 
     public GolemFetcher(Context context, ProgressBar mProgress) {
         this.db = FeedReaderDbHelper.getInstance(context).getWritableDatabase();
@@ -79,7 +80,7 @@ public class GolemFetcher extends AsyncTask<Void, Float, GolemFetcher.FETCH_STAT
     @Override
     protected void onPostExecute(GolemFetcher.FETCH_STATE finished) {
         super.onPostExecute(finished);
-        if(mProgress != null) {
+        if (mProgress != null) {
             mProgress.setVisibility(View.GONE);
         }
         int msgString;
@@ -100,7 +101,7 @@ public class GolemFetcher extends AsyncTask<Void, Float, GolemFetcher.FETCH_STAT
                 msgString = R.string.refresh_error_undefined;
         }
         Toast.makeText(context, msgString, Toast.LENGTH_SHORT).show();
-        if(finished == FETCH_STATE.ABO_INVALID) {
+        if (finished == FETCH_STATE.ABO_INVALID) {
             PreferenceManager.getDefaultSharedPreferences(context).edit().putBoolean("has_abo", false).apply();
             Toast.makeText(context, R.string.golem_token_reset, Toast.LENGTH_SHORT).show();
         }
@@ -108,11 +109,11 @@ public class GolemFetcher extends AsyncTask<Void, Float, GolemFetcher.FETCH_STAT
 
     private boolean writeArticles(List<GolemItem> articles) {
         for (GolemItem item : articles) {
-            if(item.getType() == GolemItem.Type.ARTICLE) {
+            if (item.getType() == GolemItem.Type.ARTICLE) {
                 int id = item.getId();
                 boolean createNew = false;
                 if (item.getId() == 0 && item.getUrl() != null) {
-                    if(item.getUrl().endsWith("-rss.html")) {
+                    if (item.getUrl().endsWith("-rss.html")) {
                         item.setUrl(item.getUrl().substring(0, (item.getUrl().length() - "-rss.html".length())) + ".html");
                     }
 
@@ -134,7 +135,7 @@ public class GolemFetcher extends AsyncTask<Void, Float, GolemFetcher.FETCH_STAT
                         cursor.close();
                         continue;
                     }
-                } else if(id != 0) {
+                } else if (id != 0) {
                     String[] cols = {FeedReaderContract.Article.COLUMN_NAME_ID};
                     Cursor cursor = db.query(
                             FeedReaderContract.Article.TABLE_NAME,
@@ -160,11 +161,11 @@ public class GolemFetcher extends AsyncTask<Void, Float, GolemFetcher.FETCH_STAT
 
                 if (item.hasProp(GolemItem.ItemProperties.TITLE)) {
                     String[] titles = item.getProp(GolemItem.ItemProperties.TITLE).split(":");
-                    if(titles.length == 1) {
+                    if (titles.length == 1) {
                         values.put(FeedReaderContract.Article.COLUMN_NAME_TITLE, titles[0]);
-                    } else if(titles.length == 2) {
+                    } else if (titles.length == 2) {
                         values.put(FeedReaderContract.Article.COLUMN_NAME_TITLE, titles[1].trim());
-                        values.put(FeedReaderContract.Article.COLUMN_NAME_SUBHEADLINE, titles[0].trim());
+                        values.put(FeedReaderContract.Article.COLUMN_NAME_SUBHEADING, titles[0].trim());
                     }
                 }
                 if (item.hasProp(GolemItem.ItemProperties.TEASER)) {
@@ -196,7 +197,7 @@ public class GolemFetcher extends AsyncTask<Void, Float, GolemFetcher.FETCH_STAT
                     values.put(FeedReaderContract.Article.COLUMN_NAME_IMG, item.getProp(GolemItem.ItemProperties.IMG_URL));
                 }
 
-                if(!createNew) {
+                if (!createNew) {
                     Log.d(TAG, "doInBackground: Updating article with id " + Integer.toString(id));
                     db.update(FeedReaderContract.Article.TABLE_NAME, values, "id='" + Integer.toString(id) + "'", null);
                 } else {
@@ -204,7 +205,7 @@ public class GolemFetcher extends AsyncTask<Void, Float, GolemFetcher.FETCH_STAT
                     db.insert(FeedReaderContract.Article.TABLE_NAME, null, values);
                 }
 
-                if(isCancelled()) {
+                if (isCancelled()) {
                     return false;
                 }
             }

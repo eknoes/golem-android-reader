@@ -11,11 +11,12 @@ import java.util.List;
  * Created by soenke on 20.04.16.
  */
 public abstract class GolemUpdater {
-    protected Context context;
-    protected String TAG = this.getClass().getCanonicalName();
+    final Context context;
+    final String TAG = this.getClass().getCanonicalName();
 
     /**
      * Class that fetches data from Golem API, e.g. articles or videos
+     *
      * @param context
      */
     GolemUpdater(Context context) {
@@ -24,10 +25,11 @@ public abstract class GolemUpdater {
 
     /**
      * Fetches the data
+     *
      * @return List of fetched items
-     * @throws TimeoutError
-     * @throws NoConnectionError
-     * @throws AuthFailureError
+     * @throws TimeoutError on Timeout
+     * @throws NoConnectionError e.g. on Connection Error
+     * @throws AuthFailureError e.g. on Invalid Abo Key
      */
     public abstract List<GolemItem> getItems() throws TimeoutError, NoConnectionError, AuthFailureError;
 }

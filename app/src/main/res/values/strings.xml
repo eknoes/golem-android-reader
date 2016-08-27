@@ -10,7 +10,6 @@
     <string name="article_published">Published on %s</string>
     <string name="article_published_with_authors">Published on %1$s, written by %2$s</string>
     <string name="golem_title" translatable="false">golem.de</string>
-    <string name="title_activity_article_view" translatable="false">articleView</string>
     <string name="action_share">Share</string>
     <string name="shareAppText">Try this App for reading golem.de: %s</string>
     <string name="shareArticle">Have look at this awesome article: %s</string>
@@ -26,31 +25,19 @@
     <string name="pref_has_abo">Use golem.de Abo</string>
     <string name="pref_abo_key" translatable="false">golem.de Token</string>
     <string name="pref_abo_key_sum">Your abo of golem.de</string>
-    <string name="article_offline">is offline available</string>
     <string name="lorem_short" translatable="false">Lorem ipsum sim dolor</string>
     <string name="lorem_long" translatable="false">Lorem ipsum dolor sit amet, aliquip veritus fuisset per ex. In facete legendos deserunt sit, eum summo sonet recusabo cu, ea has enim falli philosophia. Assum platonem nam ne, sea exerci vivendum at, mea esse sonet persequeris at. Id doming eleifend interpretaris sed, posse dicta definitionem usu et.  Te nullam philosophia sed, wisi audire suscipiantur ut his. Vidit alienum suavitate ei est. At qui magna deserunt, ei timeam perpetua cum, dicant conceptam quaerendum duo ut. Vocibus menandri eu qui, vero virtute discere eum ad. Nobis nemore mei an. Pri an posse movet antiopam.</string>
     <string name="action_open_webbrowser">Open in Browser</string>
-    <string name="error_invalid_abokey">Your abo key is invalid</string>
-    <string name="error_no_gallery">There is no gallery for this article.</string>
-    <string name="firstStart">Thank you for choosing unofficial golem.de reader! We had a big update and unfortunaley we could\'t save your golem account credentials. \n\nIf you had an account, please update your Key.</string>
     <string name="setting_contact" translatable="false">INFO</string>
     <string name="how_to_key">How to get the golem token</string>
     <string name="how_to_key_content">You can find your token here under Fulltext-RSS-Feed. The characters after \"http://rss.golem.de/rss_sub.php?token=\" are your token.</string>
-    <string name="firstStartTitle">Version Update</string>
     <string name="pref_contact_title">Contact</string>
-    <string name="pref_contact_sum">This is not an official golem.de App. If you want to report a bug or have any ideas for improving this application just click here or send an E-Mail to: projekte@eknoes.de</string>
-    <string name="sendMail">Send mail</string>
+    <string name="pref_contact_sum">This is not an official golem.de App. If you want to report a bug or have any ideas for improving this application just click here to open our github repository</string>
     <string name="privacy_sum">Click here to open our Data Privacy Policy</string>
     <string name="privacy_title">Data Privacy Policy</string>
-    <string name="ok">Ok</string>
     <string name="pref_media_rss">Use Fulltext with inline media</string>
     <string name="pref_media_rss_sum">You can fetch the fulltext with or without inline media.\n\nWithout inline media, galleries are appended to the article. Otherwise, they are integrated into the article.</string>
     <string name="err_no_network">Sorry, this article is not available offline.</string>
-    <string name="pref_privacy_title">PRIVACY</string>
-    <string name="pref_allow_pw_title">Allow Piwik-Tracking</string>
-    <string name="pref_allow_pw_sum">For improving our app your anonymized visits are analyzed with the Open Source Tool Piwik.</string>
-    <string name="refresh_error_abo">Fulltext Article refresh failed.</string>
-    <string name="already_refreshing">Already refreshing</string>
     <string name="golem_token_reset">Your golem token has been resetted</string>
     <string name="articles">Article(s)</string>
     <string name="minutes">Minute(s)</string>

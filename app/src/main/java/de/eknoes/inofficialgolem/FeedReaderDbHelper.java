@@ -5,16 +5,16 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 public class FeedReaderDbHelper extends SQLiteOpenHelper {
-    public static final int DATABASE_VERSION = 5;
-    public static final String DATABASE_NAME = "FeedReader.db";
+    private static final int DATABASE_VERSION = 6;
+    private static final String DATABASE_NAME = "FeedReader.db";
     private static FeedReaderDbHelper self;
 
-    public static final String SQL_CREATE_ENTRIES =
+    private static final String SQL_CREATE_ENTRIES =
             "CREATE TABLE " + FeedReaderContract.Article.TABLE_NAME + " (" +
                     FeedReaderContract.Article._ID + " INTEGER PRIMARY KEY," +
                     FeedReaderContract.Article.COLUMN_NAME_ID + " INTEGER," +
                     FeedReaderContract.Article.COLUMN_NAME_TITLE + " TEXT, " +
-                    FeedReaderContract.Article.COLUMN_NAME_SUBHEADLINE + " TEXT, " +
+                    FeedReaderContract.Article.COLUMN_NAME_SUBHEADING + " TEXT, " +
                     FeedReaderContract.Article.COLUMN_NAME_TEASER + " TEXT, " +
                     FeedReaderContract.Article.COLUMN_NAME_URL + " TEXT, " +
                     FeedReaderContract.Article.COLUMN_NAME_IMG + " TEXT, " +
@@ -25,15 +25,15 @@ public class FeedReaderDbHelper extends SQLiteOpenHelper {
                     FeedReaderContract.Article.COLUMN_NAME_MEDIA_FULLTEXT + " INTEGER" +
                     " )";
 
-    public static final String SQL_DELETE_ENTRIES = "DROP TABLE IF EXISTS " + FeedReaderContract.Article.TABLE_NAME;
+    private static final String SQL_DELETE_ENTRIES = "DROP TABLE IF EXISTS " + FeedReaderContract.Article.TABLE_NAME;
 
 
     private FeedReaderDbHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
-    public static FeedReaderDbHelper getInstance(Context c) {
-        if(self == null) {
+    static FeedReaderDbHelper getInstance(Context c) {
+        if (self == null) {
             self = new FeedReaderDbHelper(c);
         }
         return self;
@@ -46,12 +46,12 @@ public class FeedReaderDbHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        if(oldVersion < 3) {
+        if (oldVersion < 3) {
             db.execSQL("CREATE TABLE " + FeedReaderContract.Article.TABLE_NAME + "_temp (" +
                     FeedReaderContract.Article._ID + " INTEGER PRIMARY KEY," +
                     FeedReaderContract.Article.COLUMN_NAME_ID + " INTEGER," +
                     FeedReaderContract.Article.COLUMN_NAME_TITLE + " TEXT, " +
-                    FeedReaderContract.Article.COLUMN_NAME_SUBHEADLINE + " TEXT, " +
+                    FeedReaderContract.Article.COLUMN_NAME_SUBHEADING + " TEXT, " +
                     FeedReaderContract.Article.COLUMN_NAME_TEASER + " TEXT, " +
                     FeedReaderContract.Article.COLUMN_NAME_URL + " TEXT, " +
                     FeedReaderContract.Article.COLUMN_NAME_IMG + " TEXT, " +
@@ -69,8 +69,14 @@ public class FeedReaderDbHelper extends SQLiteOpenHelper {
         if (oldVersion < 5) {
             db.execSQL("ALTER TABLE " + FeedReaderContract.Article.TABLE_NAME + " ADD COLUMN " + FeedReaderContract.Article.COLUMN_NAME_MEDIA_FULLTEXT + " INTEGER;");
         }
+        if (oldVersion < 6) {
+            db.execSQL("ALTER TABLE " + FeedReaderContract.Article.TABLE_NAME + " RENAME TO backup;");
+            db.execSQL(SQL_CREATE_ENTRIES);
+            db.execSQL("INSERT INTO " + FeedReaderContract.Article.TABLE_NAME + " SELECT * FROM backup");
+            db.execSQL("DROP TABLE backup");
+        }
 
-        if(oldVersion > 5) {
+        if (oldVersion > 6) {
             db.execSQL(SQL_DELETE_ENTRIES);
             onCreate(db);
         }

@@ -21,16 +21,12 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
 /**
- * Created by soenke on 10.04.16.
- */
-
-/**
  * Fetches articles and their meta information from the golem api
  */
 public class NewestArticleUpdater extends GolemUpdater {
 
     public final String LOG_TAG = this.getClass().getCanonicalName();
-    private RequestQueue queue;
+    private final RequestQueue queue;
 
 
     public NewestArticleUpdater(Context c) {
@@ -39,12 +35,12 @@ public class NewestArticleUpdater extends GolemUpdater {
     }
 
 
-    public String buildArticleAPIUrl(String key) {
+    private String buildArticleAPIUrl(String key) {
         Integer limit = PreferenceManager.getDefaultSharedPreferences(context).getInt("article_limit", 50);
-        if(limit > 50) {
+        if (limit > 50) {
             limit = 50;
         }
-        return "http://api.golem.de/api/article/" + key + "/?key=" + context.getString(R.string.golem_api_key) + "&format=json&limit="+Integer.toString(limit);
+        return "http://api.golem.de/api/article/" + key + "/?key=" + context.getString(R.string.golem_api_key) + "&format=json&limit=" + Integer.toString(limit);
     }
 
     @Override
@@ -58,7 +54,7 @@ public class NewestArticleUpdater extends GolemUpdater {
 
         try {
             JSONObject response = future.get(15, TimeUnit.SECONDS);
-            if(response.getBoolean("success")) {
+            if (response.getBoolean("success")) {
                 Log.d(TAG, "doInBackground: Got positive Response");
                 JSONArray data = response.getJSONArray("data");
                 for (int i = 0; i < data.length(); i++) {
@@ -84,7 +80,7 @@ public class NewestArticleUpdater extends GolemUpdater {
             throw new TimeoutError();
         } catch (ExecutionException e) {
             Log.e(TAG, "doInBackground: " + e.getMessage());
-            if(e.getCause() instanceof NoConnectionError || e.getCause() instanceof TimeoutError) {
+            if (e.getCause() instanceof NoConnectionError || e.getCause() instanceof TimeoutError) {
                 Log.d(TAG, "doInBackground: No Connection");
                 throw new NoConnectionError();
             }

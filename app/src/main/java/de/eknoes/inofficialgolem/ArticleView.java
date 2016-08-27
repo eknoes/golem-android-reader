@@ -36,24 +36,21 @@ import java.util.concurrent.ExecutionException;
 
 public class ArticleView extends AppCompatActivity {
 
-    private FeedReaderDbHelper dbHelper;
-    private SQLiteDatabase db;
     private WebView webView;
-    private ImageLoader imgLoader;
-    private Article article = new Article();
+    private final Article article = new Article();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        dbHelper = FeedReaderDbHelper.getInstance(getApplicationContext());
-        db = dbHelper.getReadableDatabase();
+        FeedReaderDbHelper dbHelper = FeedReaderDbHelper.getInstance(getApplicationContext());
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
         //Fetch article from db + display in WebView
         long articleId = getIntent().getLongExtra(MainActivity.ARTICLE_URL, 0);
         String[] columns = {
                 FeedReaderContract.Article.COLUMN_NAME_ID,
                 FeedReaderContract.Article.COLUMN_NAME_TITLE,
-                FeedReaderContract.Article.COLUMN_NAME_SUBHEADLINE,
+                FeedReaderContract.Article.COLUMN_NAME_SUBHEADING,
                 FeedReaderContract.Article.COLUMN_NAME_TEASER,
                 FeedReaderContract.Article.COLUMN_NAME_DATE,
                 FeedReaderContract.Article.COLUMN_NAME_IMG,
@@ -73,7 +70,7 @@ public class ArticleView extends AppCompatActivity {
                 null);
         cursor.moveToFirst();
 
-        if(cursor.getInt(cursor.getColumnIndex(FeedReaderContract.Article.COLUMN_NAME_OFFLINE)) != 1) {
+        if (cursor.getInt(cursor.getColumnIndex(FeedReaderContract.Article.COLUMN_NAME_OFFLINE)) != 1) {
             setContentView(R.layout.activity_article_view);
             webView = (WebView) findViewById(R.id.articleWebView);
 
@@ -96,8 +93,9 @@ public class ArticleView extends AppCompatActivity {
 
         } else {
 
-            imgLoader = new ImageLoader(Volley.newRequestQueue(this), new ImageLoader.ImageCache() {
-                private final LruCache<String, Bitmap> mCache = new LruCache<String, Bitmap>(10);
+            ImageLoader imgLoader = new ImageLoader(Volley.newRequestQueue(this), new ImageLoader.ImageCache() {
+                private final LruCache<String, Bitmap> mCache = new LruCache<>(10);
+
                 @Override
                 public Bitmap getBitmap(String url) {
                     return mCache.get(url);
@@ -111,7 +109,7 @@ public class ArticleView extends AppCompatActivity {
 
             article.setId(cursor.getInt(cursor.getColumnIndex(FeedReaderContract.Article.COLUMN_NAME_ID)));
             article.setTitle(cursor.getString(cursor.getColumnIndex(FeedReaderContract.Article.COLUMN_NAME_TITLE)));
-            article.setSubheadline(cursor.getString(cursor.getColumnIndex(FeedReaderContract.Article.COLUMN_NAME_SUBHEADLINE)));
+            article.setSubheadline(cursor.getString(cursor.getColumnIndex(FeedReaderContract.Article.COLUMN_NAME_SUBHEADING)));
             article.setTeaser(cursor.getString(cursor.getColumnIndex(FeedReaderContract.Article.COLUMN_NAME_TEASER)));
             article.setDate(cursor.getInt(cursor.getColumnIndex(FeedReaderContract.Article.COLUMN_NAME_DATE)));
             article.setImgUrl(cursor.getString(cursor.getColumnIndex(FeedReaderContract.Article.COLUMN_NAME_IMG)));
@@ -122,7 +120,7 @@ public class ArticleView extends AppCompatActivity {
             article.setMediaFulltext((cursor.getInt(cursor.getColumnIndex(FeedReaderContract.Article.COLUMN_NAME_MEDIA_FULLTEXT)) == 1));
 
 
-            if(article.isMediaFulltext()) {
+            if (article.isMediaFulltext()) {
                 setContentView(R.layout.activity_article_view);
                 webView = (WebView) findViewById(R.id.articleWebView);
                 webView.getSettings().setJavaScriptEnabled(true);
@@ -135,12 +133,12 @@ public class ArticleView extends AppCompatActivity {
                 TextView text = (TextView) findViewById(R.id.articleText);
                 String infoText = String.format(getResources().getString(R.string.article_published_with_authors), DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.SHORT).format(article.getDate()), article.getAuthors());
                 TextView title = (TextView) findViewById(R.id.articleTitle);
-                TextView subheadline = (TextView) findViewById(R.id.articleSubtitle);
+                TextView subheading = (TextView) findViewById(R.id.articleSubtitle);
                 TextView info = (TextView) findViewById(R.id.articleInfo);
                 NetworkImageView image = (NetworkImageView) findViewById(R.id.articleImage);
 
                 title.setText(article.getTitle());
-                subheadline.setText(article.getSubheadline());
+                subheading.setText(article.getSubheadline());
                 image.setImageUrl(article.getImgUrl(), imgLoader);
                 info.setText(infoText);
 
@@ -150,7 +148,7 @@ public class ArticleView extends AppCompatActivity {
                 gb.execute(articleId);
             }
         }
-
+        cursor.close();
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -178,36 +176,36 @@ public class ArticleView extends AppCompatActivity {
             Intent shareIntent = new Intent();
             shareIntent.setAction(Intent.ACTION_SEND);
             String link = "";
-            if(webView != null && !article.isMediaFulltext()) {
+            if (webView != null && !article.isMediaFulltext()) {
                 link = webView.getUrl();
-            } else if (article != null){
+            } else if (article != null) {
                 link = article.getUrl();
             }
             shareIntent.putExtra(Intent.EXTRA_TEXT, String.format(getString(R.string.shareArticle), link));
             shareIntent.setType("text/plain");
             startActivity(shareIntent);
-        } else if(id == R.id.action_settings) {
+        } else if (id == R.id.action_settings) {
             Intent i = new Intent(this, SettingsActivity.class);
             startActivity(i);
-        } else if(id == R.id.action_open) {
-            Intent webIntent = new Intent( Intent.ACTION_VIEW );
-            String link = "";
-            if(webView != null && !article.isMediaFulltext()) {
+        } else if (id == R.id.action_open) {
+            Intent webIntent = new Intent(Intent.ACTION_VIEW);
+            String link;
+            if (webView != null && !article.isMediaFulltext()) {
                 link = webView.getUrl();
             } else {
                 link = article.getUrl();
             }
-            webIntent.setData( Uri.parse(link) );
-            startActivity( webIntent );
+            webIntent.setData(Uri.parse(link));
+            startActivity(webIntent);
         }
-    return super.onOptionsItemSelected(item);
+        return super.onOptionsItemSelected(item);
     }
 
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (event.getAction() == KeyEvent.ACTION_DOWN) {
             switch (keyCode) {
                 case KeyEvent.KEYCODE_BACK:
-                    if(webView == null) {
+                    if (webView == null) {
                         break;
                     } else if (webView.canGoBack()) {
                         webView.goBack();
@@ -243,7 +241,7 @@ public class ArticleView extends AppCompatActivity {
 
         @Override
         protected List<GolemImg> doInBackground(Long... params) {
-            if(params.length != 1) {
+            if (params.length != 1) {
                 throw new InvalidParameterException("No article id provided");
             } else {
                 Long articleId = params[0];
@@ -261,15 +259,11 @@ public class ArticleView extends AppCompatActivity {
                         imageUrls.add(new GolemImg(medImg.getString("url"), img.getString("subtext"), medImg.getInt("width"), medImg.getInt("height")));
                     }
                     return imageUrls;
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                } catch (ExecutionException e) {
-                    e.printStackTrace();
-                } catch (JSONException e) {
+                } catch (InterruptedException | JSONException | ExecutionException e) {
                     e.printStackTrace();
                 }
             }
-            return new LinkedList<GolemImg>();
+            return new LinkedList<>();
         }
 
         @Override
@@ -277,11 +271,11 @@ public class ArticleView extends AppCompatActivity {
             super.onPostExecute(imgs);
             int maxWidth = findViewById(R.id.articleScroller).getWidth();
 
-            if(imgs.size() == 0) {
+            if (imgs.size() == 0) {
 
             } else {
                 ImageLoader imgLoader = new ImageLoader(queue, new ImageLoader.ImageCache() {
-                    private final LruCache<String, Bitmap> mCache = new LruCache<String, Bitmap>(10);
+                    private final LruCache<String, Bitmap> mCache = new LruCache<>(10);
 
                     @Override
                     public Bitmap getBitmap(String url) {
@@ -327,11 +321,11 @@ public class ArticleView extends AppCompatActivity {
 
         }
 
-        protected class GolemImg {
-            private String url;
-            private String text;
-            private int height;
-            private int width;
+        class GolemImg {
+            private final String url;
+            private final String text;
+            private final int height;
+            private final int width;
 
             public GolemImg(String url, String text, int width, int height) {
                 this.url = url;

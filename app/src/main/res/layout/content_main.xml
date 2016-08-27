@@ -9,7 +9,7 @@
         tools:showIn="@layout/activity_main"
         tools:context="de.eknoes.inofficialgolem.MainActivity"
         android:orientation="vertical"
-        android:id="@+id/mainLayout">
+        >
 
     <ProgressBar
             style="?android:attr/progressBarStyleHorizontal"

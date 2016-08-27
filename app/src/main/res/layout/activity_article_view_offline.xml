@@ -33,7 +33,7 @@
             android:layout_below="@+id/appBar">
         <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:orientation="vertical">
             <RelativeLayout
                     android:layout_width="match_parent"
@@ -83,16 +83,16 @@
                     android:id="@+id/articleText"
                     android:textSize="15sp"
                     android:text="@string/lorem_long"
-                    android:layout_below="@id/articleInfo"
                     android:padding="5dp"/>
             <HorizontalScrollView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
+
                 <LinearLayout
                         android:id="@+id/galleryLayout"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:orientation="horizontal"></LinearLayout>
+                        android:orientation="horizontal"/>
             </HorizontalScrollView>
         </LinearLayout>
     </ScrollView>

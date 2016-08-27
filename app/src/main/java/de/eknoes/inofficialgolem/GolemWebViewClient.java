@@ -8,7 +8,7 @@ import android.webkit.WebViewClient;
 /**
  * Created by soenke on 12.04.16.
  */
-public class GolemWebViewClient extends WebViewClient {
+class GolemWebViewClient extends WebViewClient {
 
     @Override
     public boolean shouldOverrideUrlLoading(WebView view, String url) {

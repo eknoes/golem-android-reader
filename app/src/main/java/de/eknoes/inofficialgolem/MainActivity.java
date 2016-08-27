@@ -19,8 +19,6 @@ import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
 
-    private ArticleAdapter adapter;
-
     public static final String ARTICLE_URL = "de.eknoes.inofficialgolem.ARTICLE_URL";
 
     private final String TAG = this.getClass().getCanonicalName();
@@ -36,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         ListView listView = (ListView) findViewById(R.id.articleList);
-        adapter = new ArticleAdapter(this);
+        ArticleAdapter adapter = new ArticleAdapter(this);
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -79,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
         long last_refresh = PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getLong("last_refresh", 0);
         int refresh_limit = PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getInt("refresh_limit", 5) * 1000 * 60; //Saved as minutes
 
-        if(last_refresh + refresh_limit < new Date().getTime()) {
+        if (last_refresh + refresh_limit < new Date().getTime()) {
             Log.d(TAG, "onCreate: Refresh, last refresh was " + ((new Date().getTime() - last_refresh) / 1000) + "sec ago");
             refresh();
         } else {
@@ -106,7 +104,7 @@ public class MainActivity extends AppCompatActivity {
         if (id == R.id.action_refresh) {
             refresh();
             return true;
-        } else if(id == R.id.action_share) {
+        } else if (id == R.id.action_share) {
             //Get Package Link
             final String appPackageName = getPackageName();
             Uri storeUri = Uri.parse("https://play.google.com/store/apps/details?id=" + appPackageName);
@@ -116,7 +114,7 @@ public class MainActivity extends AppCompatActivity {
             shareIntent.setType("text/plain");
             startActivity(shareIntent);
 
-        } else if(id == R.id.action_settings) {
+        } else if (id == R.id.action_settings) {
             Intent i = new Intent(this, SettingsActivity.class);
             startActivity(i);
         }
@@ -124,13 +122,12 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void refresh() {
-        if(fetcher == null || fetcher.getStatus() != AsyncTask.Status.RUNNING) {
+    private void refresh() {
+        if (fetcher == null || fetcher.getStatus() != AsyncTask.Status.RUNNING) {
             fetcher = new GolemFetcher(getApplicationContext(), mProgress);
             fetcher.execute();
         }
     }
-
 
 
 }

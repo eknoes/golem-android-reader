@@ -23,19 +23,18 @@ import java.text.DateFormat;
 /**
  * Created by soenke on 10.04.16.
  */
-public class ArticleAdapter extends BaseAdapter {
+class ArticleAdapter extends BaseAdapter {
 
-    private LayoutInflater inflater;
+    private final LayoutInflater inflater;
     private Cursor cursor;
-    private FeedReaderDbHelper dbHelper;
-    private SQLiteDatabase db;
-    private ImageLoader imgLoader;
-    private Context context;
+    private final SQLiteDatabase db;
+    private final ImageLoader imgLoader;
+    private final Context context;
 
     public ArticleAdapter(Context context) {
         super();
         inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        dbHelper = FeedReaderDbHelper.getInstance(context);
+        FeedReaderDbHelper dbHelper = FeedReaderDbHelper.getInstance(context);
         db = dbHelper.getReadableDatabase();
         this.context = context;
         loadData();
@@ -48,7 +47,8 @@ public class ArticleAdapter extends BaseAdapter {
         });
 
         imgLoader = new ImageLoader(Volley.newRequestQueue(context), new ImageLoader.ImageCache() {
-            private final LruCache<String, Bitmap> mCache = new LruCache<String, Bitmap>(10);
+            private final LruCache<String, Bitmap> mCache = new LruCache<>(10);
+
             @Override
             public Bitmap getBitmap(String url) {
                 return mCache.get(url);
@@ -61,11 +61,11 @@ public class ArticleAdapter extends BaseAdapter {
         });
     }
 
-    public void loadData() {
+    private void loadData() {
         String[] columns = {
                 FeedReaderContract.Article.COLUMN_NAME_ID,
                 FeedReaderContract.Article.COLUMN_NAME_TITLE,
-                FeedReaderContract.Article.COLUMN_NAME_SUBHEADLINE,
+                FeedReaderContract.Article.COLUMN_NAME_SUBHEADING,
                 FeedReaderContract.Article.COLUMN_NAME_TEASER,
                 FeedReaderContract.Article.COLUMN_NAME_DATE,
                 FeedReaderContract.Article.COLUMN_NAME_IMG,
@@ -101,7 +101,7 @@ public class ArticleAdapter extends BaseAdapter {
         Article a = new Article();
         a.setId(cursor.getInt(cursor.getColumnIndex(FeedReaderContract.Article.COLUMN_NAME_ID)));
         a.setTitle(cursor.getString(cursor.getColumnIndex(FeedReaderContract.Article.COLUMN_NAME_TITLE)));
-        a.setSubheadline(cursor.getString(cursor.getColumnIndex(FeedReaderContract.Article.COLUMN_NAME_SUBHEADLINE)));
+        a.setSubheadline(cursor.getString(cursor.getColumnIndex(FeedReaderContract.Article.COLUMN_NAME_SUBHEADING)));
         a.setTeaser(cursor.getString(cursor.getColumnIndex(FeedReaderContract.Article.COLUMN_NAME_TEASER)));
         a.setDate(cursor.getInt(cursor.getColumnIndex(FeedReaderContract.Article.COLUMN_NAME_DATE)));
         a.setImgUrl(cursor.getString(cursor.getColumnIndex(FeedReaderContract.Article.COLUMN_NAME_IMG)));
@@ -122,7 +122,7 @@ public class ArticleAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         View view = convertView;
 
-        if(convertView == null) {
+        if (convertView == null) {
             view = inflater.inflate(R.layout.list_article, parent, false);
         }
 
@@ -130,17 +130,17 @@ public class ArticleAdapter extends BaseAdapter {
 
         TextView teaser = (TextView) view.findViewById(R.id.articleTeaser);
         TextView title = (TextView) view.findViewById(R.id.articleTitle);
-        TextView subheadline = (TextView) view.findViewById(R.id.articleSubtitle);
+        TextView subheading = (TextView) view.findViewById(R.id.articleSubtitle);
         TextView info = (TextView) view.findViewById(R.id.articleInfo);
         NetworkImageView image = (NetworkImageView) view.findViewById(R.id.articleImage);
         ImageView offlineImage = (ImageView) view.findViewById(R.id.articleOfflineAvailable);
 
         title.setText(art.getTitle());
-        subheadline.setText(art.getSubheadline());
+        subheading.setText(art.getSubheadline());
         teaser.setText(art.getTeaser());
         image.setImageUrl(art.getImgUrl(), imgLoader);
         String infoText = String.format(context.getResources().getString(R.string.article_published), DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.SHORT).format(art.getDate()));
-        if(art.isOffline()) {
+        if (art.isOffline()) {
             offlineImage.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_offline_pin_black_24dp));
         } else {
             offlineImage.setImageDrawable(null);
@@ -150,7 +150,6 @@ public class ArticleAdapter extends BaseAdapter {
 
         return view;
     }
-
 
 
 }
