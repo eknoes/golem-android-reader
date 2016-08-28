@@ -16,15 +16,6 @@ class Article extends GolemItem {
     private String fulltext = null;
     private Date date;
     private String imgUrl;
-    private boolean mediaFulltext;
-
-    public boolean isMediaFulltext() {
-        return mediaFulltext;
-    }
-
-    public void setMediaFulltext(boolean mediaFulltext) {
-        this.mediaFulltext = mediaFulltext;
-    }
 
     public String getImgUrl() {
         return imgUrl;

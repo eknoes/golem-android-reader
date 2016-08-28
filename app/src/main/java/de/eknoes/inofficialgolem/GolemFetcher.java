@@ -22,6 +22,7 @@ import de.eknoes.inofficialgolem.updater.NewestArticleUpdater;
 
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.Callable;
 
 /**
  * Created by soenke on 27.08.16.
@@ -32,13 +33,15 @@ public class GolemFetcher extends AsyncTask<Void, Float, GolemFetcher.FETCH_STAT
     private static final String TAG = "GolemFetcher";
     private final GolemUpdater[] updater;
     private final Context context;
+    private final Callable<Void> notifier;
 
     enum FETCH_STATE {SUCCESS, NO_CONNECTION, TIMEOUT, ABO_INVALID, UNDEFINED_ERROR}
 
-    public GolemFetcher(Context context, ProgressBar mProgress) {
+    GolemFetcher(Context context, ProgressBar mProgress, Callable<Void> notifier) {
         this.db = FeedReaderDbHelper.getInstance(context).getWritableDatabase();
         this.mProgress = mProgress;
         this.context = context;
+        this.notifier = notifier;
         updater = new GolemUpdater[]{new NewestArticleUpdater(context), new AboArticleUpdater(context)};
     }
 
@@ -96,6 +99,7 @@ public class GolemFetcher extends AsyncTask<Void, Float, GolemFetcher.FETCH_STAT
                 break;
             case ABO_INVALID:
                 msgString = R.string.refresh_error_invalid_abo;
+                break;
             case UNDEFINED_ERROR:
             default:
                 msgString = R.string.refresh_error_undefined;
@@ -104,6 +108,11 @@ public class GolemFetcher extends AsyncTask<Void, Float, GolemFetcher.FETCH_STAT
         if (finished == FETCH_STATE.ABO_INVALID) {
             PreferenceManager.getDefaultSharedPreferences(context).edit().putBoolean("has_abo", false).apply();
             Toast.makeText(context, R.string.golem_token_reset, Toast.LENGTH_SHORT).show();
+        }
+        try {
+            notifier.call();
+        } catch (Exception e) {
+            Log.w(TAG, "onPostExecute: " + e.getMessage());
         }
     }
 
@@ -179,10 +188,6 @@ public class GolemFetcher extends AsyncTask<Void, Float, GolemFetcher.FETCH_STAT
                 if (item.hasProp(GolemItem.ItemProperties.FULLTEXT)) {
                     values.put(FeedReaderContract.Article.COLUMN_NAME_FULLTEXT, item.getProp(GolemItem.ItemProperties.FULLTEXT));
                     values.put(FeedReaderContract.Article.COLUMN_NAME_OFFLINE, item.getProp(GolemItem.ItemProperties.OFFLINE_AVAILABLE));
-                }
-
-                if (item.hasProp(GolemItem.ItemProperties.HAS_MEDIA_FULLTEXT)) {
-                    values.put(FeedReaderContract.Article.COLUMN_NAME_MEDIA_FULLTEXT, Boolean.valueOf(item.getProp(GolemItem.ItemProperties.HAS_MEDIA_FULLTEXT)));
                 }
 
                 if (item.hasProp(GolemItem.ItemProperties.OFFLINE_AVAILABLE)) {

@@ -5,7 +5,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 public class FeedReaderDbHelper extends SQLiteOpenHelper {
-    private static final int DATABASE_VERSION = 6;
+    private static final int DATABASE_VERSION = 7;
     private static final String DATABASE_NAME = "FeedReader.db";
     private static FeedReaderDbHelper self;
 
@@ -21,8 +21,7 @@ public class FeedReaderDbHelper extends SQLiteOpenHelper {
                     FeedReaderContract.Article.COLUMN_NAME_DATE + " INTEGER," +
                     FeedReaderContract.Article.COLUMN_NAME_FULLTEXT + " TEXT," +
                     FeedReaderContract.Article.COLUMN_NAME_AUTHORS + " TEXT," +
-                    FeedReaderContract.Article.COLUMN_NAME_OFFLINE + " INTEGER," +
-                    FeedReaderContract.Article.COLUMN_NAME_MEDIA_FULLTEXT + " INTEGER" +
+                    FeedReaderContract.Article.COLUMN_NAME_OFFLINE + " INTEGER" +
                     " )";
 
     private static final String SQL_DELETE_ENTRIES = "DROP TABLE IF EXISTS " + FeedReaderContract.Article.TABLE_NAME;
@@ -66,17 +65,17 @@ public class FeedReaderDbHelper extends SQLiteOpenHelper {
             db.execSQL("ALTER TABLE " + FeedReaderContract.Article.TABLE_NAME + " ADD COLUMN " + FeedReaderContract.Article.COLUMN_NAME_AUTHORS + " TEXT;");
             db.execSQL("ALTER TABLE " + FeedReaderContract.Article.TABLE_NAME + " ADD COLUMN " + FeedReaderContract.Article.COLUMN_NAME_OFFLINE + " INTEGER;");
         }
-        if (oldVersion < 5) {
+        /*if (oldVersion < 5) {
             db.execSQL("ALTER TABLE " + FeedReaderContract.Article.TABLE_NAME + " ADD COLUMN " + FeedReaderContract.Article.COLUMN_NAME_MEDIA_FULLTEXT + " INTEGER;");
-        }
-        if (oldVersion < 6) {
+        }*/
+        if (oldVersion < 7) {
             db.execSQL("ALTER TABLE " + FeedReaderContract.Article.TABLE_NAME + " RENAME TO backup;");
             db.execSQL(SQL_CREATE_ENTRIES);
             db.execSQL("INSERT INTO " + FeedReaderContract.Article.TABLE_NAME + " SELECT * FROM backup");
             db.execSQL("DROP TABLE backup");
         }
 
-        if (oldVersion > 6) {
+        if (oldVersion > 7) {
             db.execSQL(SQL_DELETE_ENTRIES);
             onCreate(db);
         }

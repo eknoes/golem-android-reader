@@ -72,14 +72,10 @@ public class AboArticleUpdater extends GolemUpdater {
     }
 
     private String buildAboURL(String key) {
-        if (PreferenceManager.getDefaultSharedPreferences(context).getBoolean("media_rss", false)) {
-            return "http://rss.golem.de/rss_sub_media.php?token=" + Uri.encode(key);
-        } else {
-            return "http://rss.golem.de/rss_sub.php?token=" + Uri.encode(key);
-        }
+        return "http://rss.golem.de/rss_sub_media.php?token=" + Uri.encode(key);
     }
 
-    class GolemRSSParser {
+    private class GolemRSSParser {
 
         private final String ns = "";
         private final String TAG = this.getClass().getCanonicalName();
@@ -94,7 +90,7 @@ public class AboArticleUpdater extends GolemUpdater {
             mediaRss = media_rss;
         }
 
-        public List<GolemItem> parse(InputStream in) throws IOException {
+        List<GolemItem> parse(InputStream in) throws IOException {
             try {
                 Log.d(TAG, "parse: Got InputStream, start parsing RSS");
                 XmlPullParser parser = Xml.newPullParser();

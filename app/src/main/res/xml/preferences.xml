@@ -33,12 +33,6 @@
                 android:key="abo_key"
                 android:title="@string/pref_abo_key"
                 android:summary="@string/pref_abo_key_sum"/>
-        <CheckBoxPreference
-                android:key="media_rss"
-                android:title="@string/pref_media_rss"
-                android:summary="@string/pref_media_rss_sum"
-                android:defaultValue="true"/>
-
     </PreferenceCategory>
     <PreferenceCategory
         android:title="@string/setting_contact">

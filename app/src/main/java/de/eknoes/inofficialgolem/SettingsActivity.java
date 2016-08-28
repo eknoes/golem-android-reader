@@ -17,7 +17,6 @@ public class SettingsActivity extends PreferenceActivity implements SharedPrefer
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.preferences);
         findPreference("abo_key").setEnabled(PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getBoolean("has_abo", false));
-        findPreference("media_rss").setEnabled(PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getBoolean("has_abo", false));
 
         findPreference("how_to_key").setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
             @Override
@@ -60,7 +59,6 @@ public class SettingsActivity extends PreferenceActivity implements SharedPrefer
     public void onSharedPreferenceChanged(final SharedPreferences sharedPreferences, String key) {
         if (key.equals("has_abo")) {
             findPreference("abo_key").setEnabled(sharedPreferences.getBoolean(key, false));
-            findPreference("media_rss").setEnabled(sharedPreferences.getBoolean(key, true));
         }
         //TODO: Check Abo Token
     }

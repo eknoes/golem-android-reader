@@ -22,7 +22,6 @@ final class FeedReaderContract {
         public static final String COLUMN_NAME_FULLTEXT = "fulltext";
         public static final String COLUMN_NAME_AUTHORS = "authors";
         public static final String COLUMN_NAME_OFFLINE = "offline_available";
-        public static final String COLUMN_NAME_MEDIA_FULLTEXT = "media_fulltext";
     }
 }
 

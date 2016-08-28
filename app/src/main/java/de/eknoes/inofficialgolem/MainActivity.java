@@ -16,6 +16,7 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 
 import java.util.Date;
+import java.util.concurrent.Callable;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -24,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
     private final String TAG = this.getClass().getCanonicalName();
     private GolemFetcher fetcher;
     private ProgressBar mProgress;
+    private ArticleAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         ListView listView = (ListView) findViewById(R.id.articleList);
-        ArticleAdapter adapter = new ArticleAdapter(this);
+        adapter = new ArticleAdapter(this);
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -124,7 +126,15 @@ public class MainActivity extends AppCompatActivity {
 
     private void refresh() {
         if (fetcher == null || fetcher.getStatus() != AsyncTask.Status.RUNNING) {
-            fetcher = new GolemFetcher(getApplicationContext(), mProgress);
+            fetcher = new GolemFetcher(getApplicationContext(), mProgress, new Callable<Void>() {
+                @Override
+                public Void call() throws Exception {
+                    if(adapter != null) {
+                        adapter.notifyDataSetChanged();
+                    }
+                    return null;
+                }
+            });
             fetcher.execute();
         }
     }
