@@ -7,6 +7,9 @@ It currently supports:
 Planned features:
 * Search
 
+## Beta Updates in Play Store
+To get beta updates in Google Play Store, click [here](https://play.google.com/apps/testing/de.eknoes.inofficialgolem)
+
 ## Setup Environment
 1. Clone this repository
 2. Get an API Key from [api.golem.de](http://api.golem.de/)
