@@ -83,9 +83,7 @@ public class ArticleView extends AppCompatActivity {
 
                 webView.loadUrl(url);
                 webView.setWebViewClient(new GolemWebViewClient());
-                webView.getSettings().setJavaScriptEnabled(true);
             } else {
-                webView.getSettings().setJavaScriptEnabled(false);
                 webView.getSettings().setDefaultTextEncodingName("utf-8");
                 webView.setWebViewClient(new GolemWebViewClient());
                 webView.loadData(getResources().getString(R.string.err_no_network), "text/html; charset=utf-8", "UTF-8");
@@ -123,7 +121,6 @@ public class ArticleView extends AppCompatActivity {
             if (article.isMediaFulltext()) {
                 setContentView(R.layout.activity_article_view);
                 webView = (WebView) findViewById(R.id.articleWebView);
-                webView.getSettings().setJavaScriptEnabled(true);
                 webView.getSettings().setDefaultTextEncodingName("utf-8");
                 webView.setWebViewClient(new GolemWebViewClient());
                 webView.loadData(article.getFulltext(), "text/html; charset=utf-8", "UTF-8");
