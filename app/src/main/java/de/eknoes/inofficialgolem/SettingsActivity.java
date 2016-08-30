@@ -59,6 +59,9 @@ public class SettingsActivity extends PreferenceActivity implements SharedPrefer
     public void onSharedPreferenceChanged(final SharedPreferences sharedPreferences, String key) {
         if (key.equals("has_abo")) {
             findPreference("abo_key").setEnabled(sharedPreferences.getBoolean(key, false));
+            //Force refresh
+            PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().putLong("last_refresh", 0).apply();
+
         }
         //TODO: Check Abo Token
     }
