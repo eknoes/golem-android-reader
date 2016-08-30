@@ -7,12 +7,15 @@ import android.database.sqlite.SQLiteDatabase;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 
 public class ArticleView extends AppCompatActivity {
@@ -55,9 +58,6 @@ public class ArticleView extends AppCompatActivity {
 
         webView = (WebView) findViewById(R.id.articleWebView);
         webView.setWebViewClient(new GolemWebViewClient());
-        webView.getSettings().setBuiltInZoomControls(true);
-        webView.getSettings().setDisplayZoomControls(false);
-        webView.getSettings().setDefaultTextEncodingName("utf-8");
 
         article.setId(cursor.getInt(cursor.getColumnIndex(FeedReaderContract.Article.COLUMN_NAME_ID)));
         article.setTitle(cursor.getString(cursor.getColumnIndex(FeedReaderContract.Article.COLUMN_NAME_TITLE)));
@@ -84,7 +84,53 @@ public class ArticleView extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        if(getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
+    }
+
+    private void calculateSettings() {
+        WebSettings settings = webView.getSettings();
+        settings.setBuiltInZoomControls(true);
+        settings.setDisplayZoomControls(false);
+        settings.setDefaultTextEncodingName("utf-8");
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
+            int value;
+            switch (PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("text_zoom", "normal")) {
+                case "smaller":
+                    value = 90;
+                    break;
+                case "bigger":
+                    value = 110;
+                    break;
+                default:
+                    value = 100;
+            }
+
+            settings.setTextZoom(value);
+        } else {
+            WebSettings.TextSize value;
+            switch (PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("text_zoom", "normal")) {
+                case "smaller":
+                    value = WebSettings.TextSize.SMALLER;
+                    break;
+                case "larger":
+                    value = WebSettings.TextSize.LARGER;
+                    break;
+                default:
+                    value = WebSettings.TextSize.NORMAL;
+            }
+
+            settings.setTextSize(value);
+        }
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        calculateSettings();
     }
 
     @Override

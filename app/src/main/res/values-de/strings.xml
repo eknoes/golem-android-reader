@@ -31,4 +31,9 @@
     <string name="refresh_error_timeout">Aktualisierung nicht möglich: Timeout</string>
     <string name="articles">Artikel</string>
     <string name="minutes">Minute(n)</string>
+    <string name="pref_access">BARRIEREFREIHEIT</string>
+    <string name="pref_text_zoom">Schriftgröße</string>
+    <string name="pref_zoom_larger">Größer</string>
+    <string name="pref_zoom_normal">Normal</string>
+    <string name="pref_zoom_smaller">Kleiner</string>
 </resources>

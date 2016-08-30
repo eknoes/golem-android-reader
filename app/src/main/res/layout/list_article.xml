@@ -8,7 +8,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/articleSubtitle"
-            android:textSize="16sp"
+            android:textSize="@dimen/subheading_size"
             android:text="TEST"
 
             android:textColor="#A5A5A5"/>
@@ -25,7 +25,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/articleTitle"
-            android:textSize="22sp"
+            android:textSize="@dimen/title_size"
             android:text="Test title of this Article"
             android:layout_below="@+id/articleSubtitle"
             android:textStyle="bold"
@@ -35,7 +35,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/articleInfo"
             android:textColor="#A5A5A5"
-            android:textSize="12sp"
+            android:textSize="@dimen/info_size"
             android:text="Published on 23.03.2016"
             android:layout_below="@id/articleTitle"
             />
@@ -51,7 +51,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/articleTeaser"
-            android:textSize="15sp"
+            android:textSize="@dimen/text_size"
+            android:textColor="#707070"
             android:text="Test text of this Article"
             android:layout_below="@+id/articleInfo"
             android:layout_toRightOf="@id/articleImage"/>

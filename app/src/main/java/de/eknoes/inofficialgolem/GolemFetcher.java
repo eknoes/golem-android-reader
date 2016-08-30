@@ -74,7 +74,10 @@ public class GolemFetcher extends AsyncTask<Void, Float, GolemFetcher.FETCH_STAT
                     result = FETCH_STATE.ABO_INVALID;
                 }
             }
-            PreferenceManager.getDefaultSharedPreferences(context).edit().putLong("last_refresh", new Date().getTime()).apply();
+
+            if(result == FETCH_STATE.SUCCESS) {
+                PreferenceManager.getDefaultSharedPreferences(context).edit().putLong("last_refresh", new Date().getTime()).apply();
+            }
             return result;
         }
         return FETCH_STATE.NO_CONNECTION;
