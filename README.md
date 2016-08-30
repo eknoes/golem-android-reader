@@ -6,6 +6,8 @@ It currently supports:
 
 Planned features:
 * Search
+* Move to fragment-based app
+* Improve Tablet view
 
 ## Beta Updates in Play Store
 To get beta updates in Google Play Store, click [here](https://play.google.com/apps/testing/de.eknoes.inofficialgolem)
