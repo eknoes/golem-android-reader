@@ -22,8 +22,6 @@
     <string name="refresh_success">Artikel wurden erfolgreich aktualisiert</string>
     <string name="shareAppText">Teste diese App zum lesen von golem.de: %s</string>
     <string name="shareArticle">Schau dir diesen interessanten Artikel an: %s</string>
-    <string name="pref_media_rss">Volltext mit integrierten Medien</string>
-    <string name="pref_media_rss_sum">Sie können den Volltext RSS-Feed mit oder ohne integrierte Medien abrufen.\n\nOhne Medien werden Galerien an den Artikel angehangen. Ansonsten werden diese in den Artikel integriert.</string>
     <string name="err_no_network">Entschuldigung, aber dieser Artikel ist nicht offline verfügbar.</string>
     <string name="refresh_error_connection">Kann nicht aktualisieren, keine Internetverbindung</string>
     <string name="golem_token_reset">Ihr Golem Token wurde zurückgesetzt</string>
@@ -37,6 +35,6 @@
     <string name="pref_zoom_normal">Normal</string>
     <string name="pref_zoom_smaller">Kleiner</string>
     <string name="choose_layout">Ansicht wählen</string>
-    <string name="choose_layout_content">Wählen sie aus, oh sie die Mobile- oder Dektopansicht angezeigt bekommen wollen</string>
+    <string name="choose_layout_content">Wählen sie aus, ob sie die Mobile- oder Dektopansicht angezeigt bekommen wollen</string>
     <string name="undefined_error">Undefinierter Fehler</string>
 </resources>
