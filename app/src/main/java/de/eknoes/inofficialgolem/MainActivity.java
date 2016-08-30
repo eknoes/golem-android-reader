@@ -26,11 +26,11 @@ import java.util.Date;
 import java.util.concurrent.Callable;
 
 import static android.util.TypedValue.COMPLEX_UNIT_PX;
+import static de.eknoes.inofficialgolem.ArticleView.ARTICLE_URL;
+import static de.eknoes.inofficialgolem.ArticleView.FORCE_WEBVIEW;
 
 public class MainActivity extends AppCompatActivity {
 
-    public static final String ARTICLE_URL = "de.eknoes.inofficialgolem.ARTICLE_URL";
-    public static final String FORCE_WEBVIEW = "de.eknoes.inofficialgolem.FORCE_WEBVIEW";
 
     private final String TAG = this.getClass().getCanonicalName();
     private GolemFetcher fetcher;

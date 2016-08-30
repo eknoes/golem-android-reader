@@ -36,4 +36,7 @@
     <string name="pref_zoom_larger">Größer</string>
     <string name="pref_zoom_normal">Normal</string>
     <string name="pref_zoom_smaller">Kleiner</string>
+    <string name="choose_layout">Ansicht wählen</string>
+    <string name="choose_layout_content">Wählen sie aus, oh sie die Mobile- oder Dektopansicht angezeigt bekommen wollen</string>
+    <string name="undefined_error">Undefinierter Fehler</string>
 </resources>

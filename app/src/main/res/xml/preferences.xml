@@ -29,7 +29,13 @@
                 android:key="text_zoom"
                 android:entries="@array/textZoomString"
                 android:entryValues="@array/textZoomValue"
-                android:defaultValue="1"/>
+                android:defaultValue="normal"/>
+        <Preference
+                android:key="choose_layout"
+                android:title="@string/choose_layout"
+                android:summary="@string/choose_layout_content">
+        </Preference>
+
     </PreferenceCategory>
     <PreferenceCategory
         android:title="@string/pref_abo_title">

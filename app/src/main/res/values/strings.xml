@@ -4,6 +4,7 @@
     <string name="action_refresh">Refresh</string>
     <string name="refresh_success">Successfully refreshed articles</string>
     <string name="refresh_error_undefined">Error while refreshing articles</string>
+    <string name="undefined_error">Undefined Error</string>
     <string name="refresh_error_connection">No connection while refreshing articles</string>
     <string name="refresh_error_timeout">Timeout while refreshing articles</string>
     <string name="refresh_error_invalid_abo">Invalid Abo key, can\'t refresh</string>
@@ -46,5 +47,7 @@
     <string name="pref_zoom_larger">Larger</string>
     <string name="pref_zoom_normal">Normal</string>
     <string name="pref_zoom_smaller">Smaller</string>
+    <string name="choose_layout">Choose Layout</string>
+    <string name="choose_layout_content">Choose wether it should be opened the Desktop- or Mobile Layout</string>
 
 </resources>

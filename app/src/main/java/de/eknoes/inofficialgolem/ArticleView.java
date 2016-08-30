@@ -12,16 +12,24 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
+import android.widget.Toast;
 
 public class ArticleView extends AppCompatActivity {
 
     private WebView webView;
     private final Article article = new Article();
+    private static final String TAG = "ArticleView";
+
+    public static final String ARTICLE_URL = "de.eknoes.inofficialgolem.ARTICLE_URL";
+    public static final String FORCE_WEBVIEW = "de.eknoes.inofficialgolem.FORCE_WEBVIEW";
+    public static final String OPEN_URL = "de.eknoes.inofficialgolem.OPEN_URL";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,56 +39,69 @@ public class ArticleView extends AppCompatActivity {
         FeedReaderDbHelper dbHelper = FeedReaderDbHelper.getInstance(getApplicationContext());
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         //Fetch article from db + display in WebView
-        long articleId = getIntent().getLongExtra(MainActivity.ARTICLE_URL, 0);
-        boolean forceWebview = getIntent().getBooleanExtra(MainActivity.FORCE_WEBVIEW, false);
-
-        String[] columns = {
-                FeedReaderContract.Article.COLUMN_NAME_ID,
-                FeedReaderContract.Article.COLUMN_NAME_TITLE,
-                FeedReaderContract.Article.COLUMN_NAME_SUBHEADING,
-                FeedReaderContract.Article.COLUMN_NAME_TEASER,
-                FeedReaderContract.Article.COLUMN_NAME_DATE,
-                FeedReaderContract.Article.COLUMN_NAME_IMG,
-                FeedReaderContract.Article.COLUMN_NAME_URL,
-                FeedReaderContract.Article.COLUMN_NAME_AUTHORS,
-                FeedReaderContract.Article.COLUMN_NAME_OFFLINE,
-                FeedReaderContract.Article.COLUMN_NAME_FULLTEXT,
-        };
-        Cursor cursor = db.query(
-                FeedReaderContract.Article.TABLE_NAME,
-                columns,
-                "id=" + articleId,
-                null,
-                null,
-                null,
-                null);
-        cursor.moveToFirst();
+        long articleId = getIntent().getLongExtra(ARTICLE_URL, 0);
+        boolean forceWebview = getIntent().getBooleanExtra(FORCE_WEBVIEW, false);
 
         webView = (WebView) findViewById(R.id.articleWebView);
         webView.setWebViewClient(new GolemWebViewClient());
 
-        article.setId(cursor.getInt(cursor.getColumnIndex(FeedReaderContract.Article.COLUMN_NAME_ID)));
-        article.setTitle(cursor.getString(cursor.getColumnIndex(FeedReaderContract.Article.COLUMN_NAME_TITLE)));
-        article.setSubheadline(cursor.getString(cursor.getColumnIndex(FeedReaderContract.Article.COLUMN_NAME_SUBHEADING)));
-        article.setUrl(cursor.getString(cursor.getColumnIndex(FeedReaderContract.Article.COLUMN_NAME_URL)));
-        article.setOffline(cursor.getInt(cursor.getColumnIndex(FeedReaderContract.Article.COLUMN_NAME_OFFLINE)) == 1);
-        article.setFulltext(cursor.getString(cursor.getColumnIndex(FeedReaderContract.Article.COLUMN_NAME_FULLTEXT)));
+        if(articleId != 0) {
 
-        if (!article.isOffline() || forceWebview) {
+            String[] columns = {
+                    FeedReaderContract.Article.COLUMN_NAME_ID,
+                    FeedReaderContract.Article.COLUMN_NAME_TITLE,
+                    FeedReaderContract.Article.COLUMN_NAME_SUBHEADING,
+                    FeedReaderContract.Article.COLUMN_NAME_TEASER,
+                    FeedReaderContract.Article.COLUMN_NAME_DATE,
+                    FeedReaderContract.Article.COLUMN_NAME_IMG,
+                    FeedReaderContract.Article.COLUMN_NAME_URL,
+                    FeedReaderContract.Article.COLUMN_NAME_AUTHORS,
+                    FeedReaderContract.Article.COLUMN_NAME_OFFLINE,
+                    FeedReaderContract.Article.COLUMN_NAME_FULLTEXT,
+            };
+            Cursor cursor = db.query(
+                    FeedReaderContract.Article.TABLE_NAME,
+                    columns,
+                    "id=" + articleId,
+                    null,
+                    null,
+                    null,
+                    null);
+            cursor.moveToFirst();
 
-            ConnectivityManager connMgr = (ConnectivityManager)
-                    getSystemService(Context.CONNECTIVITY_SERVICE);
-            NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
-            if (networkInfo != null && networkInfo.isConnected()) {
-                webView.loadUrl(article.getUrl());
+
+            article.setId(cursor.getInt(cursor.getColumnIndex(FeedReaderContract.Article.COLUMN_NAME_ID)));
+            article.setTitle(cursor.getString(cursor.getColumnIndex(FeedReaderContract.Article.COLUMN_NAME_TITLE)));
+            article.setSubheadline(cursor.getString(cursor.getColumnIndex(FeedReaderContract.Article.COLUMN_NAME_SUBHEADING)));
+            article.setUrl(cursor.getString(cursor.getColumnIndex(FeedReaderContract.Article.COLUMN_NAME_URL)));
+            article.setOffline(cursor.getInt(cursor.getColumnIndex(FeedReaderContract.Article.COLUMN_NAME_OFFLINE)) == 1);
+            article.setFulltext(cursor.getString(cursor.getColumnIndex(FeedReaderContract.Article.COLUMN_NAME_FULLTEXT)));
+
+            if (!article.isOffline() || forceWebview) {
+
+                ConnectivityManager connMgr = (ConnectivityManager)
+                        getSystemService(Context.CONNECTIVITY_SERVICE);
+                NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
+                if (networkInfo != null && networkInfo.isConnected()) {
+                    webView.loadUrl(article.getUrl());
+                } else {
+                    webView.loadData(getResources().getString(R.string.err_no_network), "text/html; charset=utf-8", "UTF-8");
+                }
+
             } else {
-                webView.loadData(getResources().getString(R.string.err_no_network), "text/html; charset=utf-8", "UTF-8");
+                webView.loadData(article.getFulltext(), "text/html; charset=utf-8", "UTF-8");
             }
 
+            cursor.close();
         } else {
-            webView.loadData(article.getFulltext(), "text/html; charset=utf-8", "UTF-8");
+            String url = getIntent().getStringExtra(OPEN_URL);
+            if(url != null) {
+                webView.loadUrl(url);
+            } else {
+                Log.w(TAG, "onCreate: No Article ID and open_url empty!");
+                Toast.makeText(getApplicationContext(), R.string.undefined_error, Toast.LENGTH_LONG).show();
+            }
         }
-        cursor.close();
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 

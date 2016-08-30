@@ -10,6 +10,8 @@ import android.preference.PreferenceActivity;
 import android.preference.PreferenceManager;
 import android.view.View;
 
+import static de.eknoes.inofficialgolem.ArticleView.OPEN_URL;
+
 public class SettingsActivity extends PreferenceActivity implements SharedPreferences.OnSharedPreferenceChangeListener {
 
     @Override
@@ -21,9 +23,19 @@ public class SettingsActivity extends PreferenceActivity implements SharedPrefer
         findPreference("how_to_key").setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
             @Override
             public boolean onPreferenceClick(Preference preference) {
-                Intent webIntent = new Intent(Intent.ACTION_VIEW);
-                webIntent.setData(Uri.parse("https://account.golem.de/subscription"));
-                startActivity(webIntent);
+                Intent intent = new Intent(SettingsActivity.this, ArticleView.class);
+                intent.putExtra(OPEN_URL, "https://account.golem.de/subscription");
+                startActivity(intent);
+                return true;
+            }
+        });
+
+        findPreference("choose_layout").setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+            @Override
+            public boolean onPreferenceClick(Preference preference) {
+                Intent intent = new Intent(SettingsActivity.this, ArticleView.class);
+                intent.putExtra(OPEN_URL, "http://www.golem.de/sonstiges/ansicht/");
+                startActivity(intent);
                 return true;
             }
         });
@@ -31,9 +43,9 @@ public class SettingsActivity extends PreferenceActivity implements SharedPrefer
         findPreference("privacy").setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
             @Override
             public boolean onPreferenceClick(Preference preference) {
-                Intent webIntent = new Intent(Intent.ACTION_VIEW);
-                webIntent.setData(Uri.parse("http://projekte.eknoes.de/datenschutz.html"));
-                startActivity(webIntent);
+                Intent intent = new Intent(SettingsActivity.this, ArticleView.class);
+                intent.putExtra(OPEN_URL, "http://projekte.eknoes.de/datenschutz.html");
+                startActivity(intent);
                 return true;
             }
         });
