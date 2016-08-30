@@ -311,7 +311,7 @@ public class MainActivity extends AppCompatActivity {
                 offlineImage.setImageDrawable(null);
             }
 
-
+            art = null;
             return view;
         }
 

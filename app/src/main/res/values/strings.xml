@@ -32,12 +32,10 @@
     <string name="setting_contact" translatable="false">INFO</string>
     <string name="how_to_key">How to get the golem token</string>
     <string name="how_to_key_content">You can find your token here under Fulltext-RSS-Feed. The characters after \"http://rss.golem.de/rss_sub.php?token=\" are your token.</string>
-    <string name="pref_contact_title">Contact</string>
+    <string name="pref_contact_title" translatable="false">Github</string>
     <string name="pref_contact_sum">This is not an official golem.de App. If you want to report a bug or have any ideas for improving this application just click here to open our github repository</string>
     <string name="privacy_sum">Click here to open our Data Privacy Policy</string>
     <string name="privacy_title">Data Privacy Policy</string>
-    <string name="pref_media_rss">Use Fulltext with inline media</string>
-    <string name="pref_media_rss_sum">You can fetch the fulltext with or without inline media.\n\nWithout inline media, galleries are appended to the article. Otherwise, they are integrated into the article.</string>
     <string name="err_no_network">Sorry, this article is not available offline.</string>
     <string name="golem_token_reset">Your golem token has been resetted</string>
     <string name="articles">Article(s)</string>
@@ -49,5 +47,7 @@
     <string name="pref_zoom_smaller">Smaller</string>
     <string name="choose_layout">Choose Layout</string>
     <string name="choose_layout_content">Choose wether it should be opened the Desktop- or Mobile Layout</string>
+    <string name="pref_beta_title">Join beta</string>
+    <string name="pref_beta_sum">To join our beta click here</string>
 
 </resources>

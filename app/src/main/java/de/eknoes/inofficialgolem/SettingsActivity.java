@@ -23,9 +23,9 @@ public class SettingsActivity extends PreferenceActivity implements SharedPrefer
         findPreference("how_to_key").setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
             @Override
             public boolean onPreferenceClick(Preference preference) {
-                Intent intent = new Intent(SettingsActivity.this, ArticleView.class);
-                intent.putExtra(OPEN_URL, "https://account.golem.de/subscription");
-                startActivity(intent);
+                Intent webIntent = new Intent(Intent.ACTION_VIEW);
+                webIntent.setData(Uri.parse("https://account.golem.de/subscription"));
+                startActivity(webIntent);
                 return true;
             }
         });
@@ -50,6 +50,16 @@ public class SettingsActivity extends PreferenceActivity implements SharedPrefer
             }
         });
 
+        findPreference("join_beta").setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+            @Override
+            public boolean onPreferenceClick(Preference preference) {
+                Intent webIntent = new Intent(Intent.ACTION_VIEW);
+                webIntent.setData(Uri.parse("https://play.google.com/apps/testing/de.eknoes.inofficialgolem"));
+                startActivity(webIntent);
+                return true;
+            }
+        });
+
         findPreference("start_contact").setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
             @Override
             public boolean onPreferenceClick(Preference preference) {
@@ -60,8 +70,6 @@ public class SettingsActivity extends PreferenceActivity implements SharedPrefer
                 Intent webIntent = new Intent(Intent.ACTION_VIEW);
                 webIntent.setData(Uri.parse("https://github.com/eknoes/golem-android-reader/issues"));
                 startActivity(webIntent);
-
-
                 return true;
             }
         });

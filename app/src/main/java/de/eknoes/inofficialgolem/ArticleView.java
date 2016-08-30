@@ -173,7 +173,7 @@ public class ArticleView extends AppCompatActivity {
             Intent shareIntent = new Intent();
             shareIntent.setAction(Intent.ACTION_SEND);
             String link = article.getUrl();
-            shareIntent.putExtra(Intent.EXTRA_TEXT, String.format(getString(R.string.shareArticle), link));
+            shareIntent.putExtra(Intent.EXTRA_TEXT, article.getSubheadline() + ": " + article.getTitle() + " - " + link);
             shareIntent.setType("text/plain");
             startActivity(shareIntent);
         } else if (id == R.id.action_settings) {

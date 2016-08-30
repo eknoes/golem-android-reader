@@ -39,6 +39,11 @@
     </PreferenceCategory>
     <PreferenceCategory
         android:title="@string/pref_abo_title">
+        <Preference
+                android:key="how_to_key"
+                android:title="@string/how_to_key"
+                android:summary="@string/how_to_key_content">
+        </Preference>
         <CheckBoxPreference
                 android:key="has_abo"
                 android:id="@+id/has_abo"
@@ -57,9 +62,9 @@
                 android:summary="@string/pref_contact_sum">
         </Preference>
         <Preference
-                android:key="how_to_key"
-                android:title="@string/how_to_key"
-                android:summary="@string/how_to_key_content">
+                android:key="join_beta"
+                android:title="@string/pref_beta_title"
+                android:summary="@string/pref_beta_sum">
         </Preference>
         <Preference
                 android:key="privacy"

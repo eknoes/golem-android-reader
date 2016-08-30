@@ -6,15 +6,14 @@
     <string name="action_share">Teilen</string>
     <string name="article_published">Veröffentlicht am %s</string>
     <string name="article_published_with_authors">Veröffentlicht am %1$s, geschrieben von %2$s</string>
-    <string name="how_to_key">Golem Token finden</string>
-    <string name="how_to_key_content">Sie können Ihren Token hier unter Volltext-RSS-Feed finden. Die Zeichen nach \"http://rss.golem.de/rss_sub.php?token=\" sind ihr Token.</string>
+    <string name="how_to_key">Golem.de Abo Account</string>
+    <string name="how_to_key_content">Hier können Sie Ihren Abo Token unter Volltext-RSS-Feed finden. Die Zeichen nach \"http://rss.golem.de/rss_sub.php?token=\" sind ihr Token. Außerdem können Sie hier auch ein Abo abschließen.</string>
     <string name="pref_abo_key_sum">Richten sie hier ihr Abo ein</string>
     <string name="pref_article_limit">Anzahl Artikel</string>
     <string name="pref_article_limit_sum">Anzahl der Artikel, welche gespeichert bleiben sollen.</string>
     <string name="pref_article_refresh">Aktualisierungsintervall</string>
     <string name="pref_article_refresh_sum">Artikel werden regelmäßig aktualisiert, wenn die App geöffnet ist</string>
-    <string name="pref_contact_sum">Dies ist keine offizielle golem.de App. Wenn sie einen Bug melden oder Ideen zur Verbesserung haben, öffnen sie bitte unser Github Repository</string>
-    <string name="pref_contact_title">Kontakt</string>
+    <string name="pref_contact_sum">Dies ist keine offizielle golem.de App. Wenn sie einen Bug melden wollen oder Ideen zur Verbesserung haben, öffnen sie unser Github Repository</string>
     <string name="pref_has_abo">Golem.de Abo nutzen</string>
     <string name="privacy_sum">Datenschutzerklärung öffnen</string>
     <string name="privacy_title">Datenschutzerklärung</string>
@@ -37,4 +36,8 @@
     <string name="choose_layout">Ansicht wählen</string>
     <string name="choose_layout_content">Wählen sie aus, ob sie die Mobile- oder Dektopansicht angezeigt bekommen wollen</string>
     <string name="undefined_error">Undefinierter Fehler</string>
+    <string name="pref_media_rss"></string>
+    <string name="pref_media_rss_sum"></string>
+    <string name="pref_beta_sum">Um am Beta-Programm teilzunehmen klicken sie hier</string>
+    <string name="pref_beta_title">An Beta teilnehmen</string>
 </resources>
