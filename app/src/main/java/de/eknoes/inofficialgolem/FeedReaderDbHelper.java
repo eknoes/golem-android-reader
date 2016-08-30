@@ -71,7 +71,7 @@ public class FeedReaderDbHelper extends SQLiteOpenHelper {
         if (oldVersion < 7) {
             db.execSQL("ALTER TABLE " + FeedReaderContract.Article.TABLE_NAME + " RENAME TO backup;");
             db.execSQL(SQL_CREATE_ENTRIES);
-            db.execSQL("INSERT INTO " + FeedReaderContract.Article.TABLE_NAME + " SELECT * FROM backup");
+            db.execSQL("INSERT INTO " + FeedReaderContract.Article.TABLE_NAME + " SELECT _id, id, title, subheading, teaser, url, img, date, fulltext, authors, offline_available FROM backup");
             db.execSQL("DROP TABLE backup");
         }
 
