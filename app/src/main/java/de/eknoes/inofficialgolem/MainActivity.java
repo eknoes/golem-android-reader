@@ -21,6 +21,7 @@ import java.util.concurrent.Callable;
 public class MainActivity extends AppCompatActivity {
 
     public static final String ARTICLE_URL = "de.eknoes.inofficialgolem.ARTICLE_URL";
+    public static final String FORCE_WEBVIEW = "de.eknoes.inofficialgolem.FORCE_WEBVIEW";
 
     private final String TAG = this.getClass().getCanonicalName();
     private GolemFetcher fetcher;
@@ -43,8 +44,18 @@ public class MainActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(MainActivity.this, ArticleView.class);
                 intent.putExtra(ARTICLE_URL, id);
+                intent.putExtra(FORCE_WEBVIEW, false);
                 startActivity(intent);
-
+            }
+        });
+        listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(MainActivity.this, ArticleView.class);
+                intent.putExtra(ARTICLE_URL, id);
+                intent.putExtra(FORCE_WEBVIEW, true);
+                startActivity(intent);
+                return true;
             }
         });
 
