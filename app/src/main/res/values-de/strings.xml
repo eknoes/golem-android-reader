@@ -36,8 +36,6 @@
     <string name="choose_layout">Ansicht wählen</string>
     <string name="choose_layout_content">Wählen sie aus, ob sie die Mobile- oder Dektopansicht angezeigt bekommen wollen</string>
     <string name="undefined_error">Undefinierter Fehler</string>
-    <string name="pref_media_rss"></string>
-    <string name="pref_media_rss_sum"></string>
     <string name="pref_beta_sum">Um am Beta-Programm teilzunehmen klicken sie hier</string>
     <string name="pref_beta_title">An Beta teilnehmen</string>
 </resources>
