@@ -1,4 +1,4 @@
-package de.eknoes.inofficialgolem;
+package de.eknoes.inofficialgolem.updater;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -15,10 +15,9 @@ import android.widget.Toast;
 import com.android.volley.AuthFailureError;
 import com.android.volley.NoConnectionError;
 import com.android.volley.TimeoutError;
-import de.eknoes.inofficialgolem.updater.AboArticleUpdater;
-import de.eknoes.inofficialgolem.updater.GolemItem;
-import de.eknoes.inofficialgolem.updater.GolemUpdater;
-import de.eknoes.inofficialgolem.updater.NewestArticleUpdater;
+import de.eknoes.inofficialgolem.FeedReaderContract;
+import de.eknoes.inofficialgolem.FeedReaderDbHelper;
+import de.eknoes.inofficialgolem.R;
 
 import java.util.Date;
 import java.util.List;
@@ -37,7 +36,7 @@ public class GolemFetcher extends AsyncTask<Void, Float, GolemFetcher.FETCH_STAT
 
     enum FETCH_STATE {SUCCESS, NO_CONNECTION, TIMEOUT, ABO_INVALID, UNDEFINED_ERROR}
 
-    GolemFetcher(Context context, ProgressBar mProgress, Callable<Void> notifier) {
+    public GolemFetcher(Context context, ProgressBar mProgress, Callable<Void> notifier) {
         this.db = FeedReaderDbHelper.getInstance(context).getWritableDatabase();
         this.mProgress = mProgress;
         this.context = context;
@@ -50,7 +49,7 @@ public class GolemFetcher extends AsyncTask<Void, Float, GolemFetcher.FETCH_STAT
         super.onPreExecute();
         ConnectivityManager connMgr = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
-        if (networkInfo != null && networkInfo.isConnected()) {
+        if (networkInfo != null && networkInfo.isConnected() && mProgress != null) {
             mProgress.setProgress(1);
             mProgress.setIndeterminate(true);
             mProgress.setVisibility(View.VISIBLE);

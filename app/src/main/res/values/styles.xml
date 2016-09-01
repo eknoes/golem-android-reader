@@ -9,18 +9,22 @@
         <item name="actionOverflowButtonStyle">@style/OverflowStyle</item>
 
     </style>
+
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
         <item name="android:icon">@drawable/golem_eye</item>
     </style>
+
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
         <item name="android:icon">@drawable/golem_eye</item>
 
     </style>
+
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light">
         <item name="android:icon">@drawable/golem_eye</item>
     </style>
+
     <style name="OverflowStyle">
         <item name="android:src">@drawable/options</item>
         <item name="android:padding">20dip</item>

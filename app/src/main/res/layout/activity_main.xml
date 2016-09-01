@@ -18,12 +18,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 android:background="?attr/colorPrimary"
-                app:logo="@drawable/golem_eye"
-                app:title="@string/golem_title"
                 app:popupTheme="@style/AppTheme.PopupOverlay"
-                android:title="@string/golem_title"/>
-
+                app:logo="@drawable/golem_eye"
+                app:title="@string/golem_title"/>
     </android.support.design.widget.AppBarLayout>
 
-    <include layout="@layout/content_main"/>
+    <include layout="@layout/content_main2"/>
 </android.support.design.widget.CoordinatorLayout>
