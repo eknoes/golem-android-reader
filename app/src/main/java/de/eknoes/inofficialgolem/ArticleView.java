@@ -29,6 +29,7 @@ public class ArticleView extends AppCompatActivity {
     public static final String ARTICLE_URL = "de.eknoes.inofficialgolem.ARTICLE_URL";
     public static final String FORCE_WEBVIEW = "de.eknoes.inofficialgolem.FORCE_WEBVIEW";
     public static final String OPEN_URL = "de.eknoes.inofficialgolem.OPEN_URL";
+    private String url;
 
 
     @Override
@@ -44,6 +45,7 @@ public class ArticleView extends AppCompatActivity {
 
         webView = (WebView) findViewById(R.id.articleWebView);
         webView.setWebViewClient(new GolemWebViewClient());
+        webView.getSettings().setJavaScriptEnabled(true);
 
         if(articleId != 0) {
 
@@ -94,7 +96,7 @@ public class ArticleView extends AppCompatActivity {
 
             cursor.close();
         } else {
-            String url = getIntent().getStringExtra(OPEN_URL);
+            url = getIntent().getStringExtra(OPEN_URL);
             if(url != null) {
                 webView.loadUrl(url);
             } else {
@@ -172,18 +174,33 @@ public class ArticleView extends AppCompatActivity {
         if (id == R.id.action_share) {
             Intent shareIntent = new Intent();
             shareIntent.setAction(Intent.ACTION_SEND);
-            String link = article.getUrl();
-            shareIntent.putExtra(Intent.EXTRA_TEXT, article.getSubheadline() + ": " + article.getTitle() + " - " + link);
-            shareIntent.setType("text/plain");
-            startActivity(shareIntent);
+            String link = null;
+            if(article.getUrl() != null) {
+                link = article.getUrl();
+            } else if(url != null) {
+                link = url;
+            }
+
+            if(link != null) {
+                shareIntent.putExtra(Intent.EXTRA_TEXT, article.getSubheadline() + ": " + article.getTitle() + " - " + link);
+                shareIntent.setType("text/plain");
+                startActivity(shareIntent);
+            }
         } else if (id == R.id.action_settings) {
             Intent i = new Intent(this, SettingsActivity.class);
             startActivity(i);
         } else if (id == R.id.action_open) {
             Intent webIntent = new Intent(Intent.ACTION_VIEW);
-            String link = article.getUrl();
-            webIntent.setData(Uri.parse(link));
-            startActivity(webIntent);
+            String link = null;
+            if(article.getUrl() != null) {
+                link = article.getUrl();
+            } else if(url != null) {
+                link = url;
+            }
+            if(link != null) {
+                webIntent.setData(Uri.parse(link));
+                startActivity(webIntent);
+            }
         }
         return super.onOptionsItemSelected(item);
     }

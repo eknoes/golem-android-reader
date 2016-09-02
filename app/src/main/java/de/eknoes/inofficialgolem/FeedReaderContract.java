@@ -5,7 +5,7 @@ import android.provider.BaseColumns;
 /**
  * Created by soenke on 10.04.16.
  */
-final class FeedReaderContract {
+public final class FeedReaderContract {
 
     public FeedReaderContract() {
     }

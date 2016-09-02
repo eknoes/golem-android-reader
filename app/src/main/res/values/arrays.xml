@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <array name="textZoomString">
+        <item>@string/pref_zoom_smaller</item>
+        <item>@string/pref_zoom_normal</item>
+        <item>@string/pref_zoom_larger</item>
+    </array>
+    <array name="textZoomValue">
+        <item>"smaller"</item>
+        <item>"normal"</item>
+        <item>"larger"</item>
+    </array></resources>
