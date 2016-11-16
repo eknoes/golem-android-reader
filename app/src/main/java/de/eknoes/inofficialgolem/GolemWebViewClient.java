@@ -15,7 +15,8 @@ class GolemWebViewClient extends WebViewClient {
 
     @Override
     public boolean shouldOverrideUrlLoading(WebView view, String url) {
-        if (Uri.parse(url).getHost().equals("www.golem.de") || Uri.parse(url).getHost().equals("golem.de") || Uri.parse(url).getHost().equals("forum.golem.de")) {
+        String host = Uri.parse(url).getHost();
+        if (host != null && (host.equals("www.golem.de") || host.equals("golem.de") || host.equals("forum.golem.de"))) {
             return false;
         }
         // Otherwise, the link is not for a page on my site, so launch another Activity that handles URLs
