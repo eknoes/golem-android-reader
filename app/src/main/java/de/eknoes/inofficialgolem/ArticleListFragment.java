@@ -7,8 +7,10 @@ import android.database.DataSetObserver;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
+import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.support.v4.app.ListFragment;
+import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.util.LruCache;
 import android.view.*;
@@ -18,7 +20,8 @@ import com.android.volley.toolbox.NetworkImageView;
 import com.android.volley.toolbox.Volley;
 import de.eknoes.inofficialgolem.updater.GolemFetcher;
 
-import java.net.URI;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.text.DateFormat;
 import java.util.Date;
 import java.util.concurrent.Callable;
@@ -28,16 +31,17 @@ import static android.util.TypedValue.COMPLEX_UNIT_PX;
 /**
  * A placeholder fragment containing a simple view.
  */
-public class ArticleListFragment extends ListFragment {
+public class ArticleListFragment extends Fragment {
     private GolemFetcher fetcher;
-    private ArticleAdapter adapter;
+    private ArticleAdapter listAdapter;
+    private ListView listView;
     private ProgressBar mProgress; //Not yet implemented
     private static final String TAG = "ArticleListFragment";
     private OnArticleSelectedListener mListener;
 
     public interface OnArticleSelectedListener {
-        public void onArticleSelected(int id, boolean forceWebview);
-        public void onArticleSelected(URI externUrl);
+        public void onArticleSelected(URL articleUrl, boolean forceWebview);
+        public void onArticleSelected(URL articleUrl);
     }
 
     @Override
@@ -57,26 +61,49 @@ public class ArticleListFragment extends ListFragment {
     }
 
     @Override
-    public void onStart() {
-        super.onStart();
-        if(getListAdapter() == null) {
-            Log.d(TAG, "onStart: Creating Article List Adapter");
-            adapter = new ArticleAdapter();
-            setListAdapter(adapter);
-            getListView().setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    mListener.onArticleSelected((int) id, false);
+    public void onDetach() {
+        super.onDetach();
+        mListener = null;
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        //super.onCreateView(inflater, container, savedInstanceState);
+        View v = inflater.inflate(R.layout.fragment_articlelist, container, false);
+        mProgress = (ProgressBar) v.findViewById(R.id.progressBar);
+        listView = (ListView) v.findViewById(R.id.articleList);
+
+        Log.d(TAG, "onStart: Creating Article List Adapter");
+        listAdapter = new ArticleAdapter();
+        listView.setAdapter(listAdapter);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                try {
+                    mListener.onArticleSelected(new URL(listAdapter.getItem(position).getUrl()), false);
+                } catch (MalformedURLException e) {
+                    e.printStackTrace();
                 }
-            });
-            getListView().setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-                @Override
-                public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                    mListener.onArticleSelected((int) id, true);
-                    return true;
+            }
+        });
+        listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                try {
+                    mListener.onArticleSelected(new URL(listAdapter.getItem(position).getUrl()), true);
+                } catch (MalformedURLException e) {
+                    e.printStackTrace();
                 }
-            });
-        }
+                return true;
+            }
+        });
+        return v;
     }
 
     @Override
@@ -91,7 +118,9 @@ public class ArticleListFragment extends ListFragment {
         } else {
             Log.d(TAG, "onCreate: No refresh, last refresh was " + (new Date().getTime() - last_refresh) / 1000 + "sec ago");
         }
-        adapter.calculateZoom();
+        if(listAdapter != null) {
+            listAdapter.calculateZoom();
+        }
     }
 
 
@@ -100,18 +129,15 @@ public class ArticleListFragment extends ListFragment {
             fetcher = new GolemFetcher(getContext(), mProgress, new Callable<Void>() {
                 @Override
                 public Void call() throws Exception {
-                    if(adapter != null) {
-                        adapter.notifyDataSetChanged();
-                        setListShown(true);
+                    if(listAdapter != null) {
+                        listAdapter.notifyDataSetChanged();
                     }
                     return null;
                 }
             });
-            setListShown(false);
             fetcher.execute();
         }
     }
-
 
     private class ArticleAdapter extends BaseAdapter {
 
@@ -207,7 +233,7 @@ public class ArticleListFragment extends ListFragment {
         }
 
         @Override
-        public Object getItem(int position) {
+        public Article getItem(int position) {
             cursor.moveToPosition(position);
             Article a = new Article();
             a.setId(cursor.getInt(cursor.getColumnIndex(FeedReaderContract.Article.COLUMN_NAME_ID)));

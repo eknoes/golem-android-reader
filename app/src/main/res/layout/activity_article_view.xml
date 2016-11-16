@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
+        xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -26,8 +26,10 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <WebView
+    <fragment
             android:layout_width="match_parent"
-            android:layout_height="fill_parent"
-            android:id="@+id/articleWebView"/>
+            android:layout_height="match_parent"
+            android:id="@+id/articleFragment"
+            android:name="de.eknoes.inofficialgolem.ArticleFragment"
+            tools:layout="@layout/fragment_article"/>
 </LinearLayout>

@@ -1,0 +1,14 @@
+<FrameLayout xmlns:tools="http://schemas.android.com/tools"
+             xmlns:android="http://schemas.android.com/apk/res/android"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             xmlns:app="http://schemas.android.com/apk/res-auto"
+             tools:context="de.eknoes.inofficialgolem.ArticleFragment"
+             app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+    <WebView
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
+            android:id="@+id/articleWebView"/>
+
+</FrameLayout>

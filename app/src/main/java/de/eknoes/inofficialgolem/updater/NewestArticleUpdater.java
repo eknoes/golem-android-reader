@@ -53,7 +53,7 @@ public class NewestArticleUpdater extends GolemUpdater {
         queue.add(request);
 
         try {
-            JSONObject response = future.get(15, TimeUnit.SECONDS);
+            JSONObject response = future.get(60, TimeUnit.SECONDS);
             if (response.getBoolean("success")) {
                 Log.d(TAG, "doInBackground: Got positive Response");
                 JSONArray data = response.getJSONArray("data");

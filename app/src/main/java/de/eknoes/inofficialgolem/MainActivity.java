@@ -8,7 +8,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import java.net.URI;
+import java.net.URL;
 
 public class MainActivity extends AppCompatActivity implements ArticleListFragment.OnArticleSelectedListener {
 
@@ -58,12 +58,15 @@ public class MainActivity extends AppCompatActivity implements ArticleListFragme
 
 
     @Override
-    public void onArticleSelected(int id, boolean forceWebview) {
-
+    public void onArticleSelected(URL articleUrl, boolean forceWebview) {
+        Intent articleIntent = new Intent(this, ArticleView.class);
+        articleIntent.putExtra(ArticleFragment.ARTICLE_URL, articleUrl.toExternalForm());
+        articleIntent.putExtra(ArticleFragment.FORCE_WEBVIEW, forceWebview);
+        startActivity(articleIntent);
     }
 
     @Override
-    public void onArticleSelected(URI externUrl) {
-
+    public void onArticleSelected(URL articleUrl) {
+        onArticleSelected(articleUrl, false);
     }
 }

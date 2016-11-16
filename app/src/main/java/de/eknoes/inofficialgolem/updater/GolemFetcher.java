@@ -67,8 +67,10 @@ public class GolemFetcher extends AsyncTask<Void, Float, GolemFetcher.FETCH_STAT
                     writeArticles(u.getItems());
                 } catch (TimeoutError e) {
                     result = FETCH_STATE.TIMEOUT;
+                    break;
                 } catch (NoConnectionError e) {
                     result = FETCH_STATE.NO_CONNECTION;
+                    break;
                 } catch (AuthFailureError authFailureError) {
                     result = FETCH_STATE.ABO_INVALID;
                 }
