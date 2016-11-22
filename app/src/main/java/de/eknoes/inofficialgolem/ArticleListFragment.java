@@ -34,7 +34,6 @@ import static android.util.TypedValue.COMPLEX_UNIT_PX;
 public class ArticleListFragment extends Fragment {
     private GolemFetcher fetcher;
     private ArticleAdapter listAdapter;
-    private ListView listView;
     private ProgressBar mProgress; //Not yet implemented
     private static final String TAG = "ArticleListFragment";
     private OnArticleSelectedListener mListener;
@@ -77,7 +76,7 @@ public class ArticleListFragment extends Fragment {
         //super.onCreateView(inflater, container, savedInstanceState);
         View v = inflater.inflate(R.layout.fragment_articlelist, container, false);
         mProgress = (ProgressBar) v.findViewById(R.id.progressBar);
-        listView = (ListView) v.findViewById(R.id.articleList);
+        ListView listView = (ListView) v.findViewById(R.id.articleList);
 
         Log.d(TAG, "onStart: Creating Article List Adapter");
         listAdapter = new ArticleAdapter();

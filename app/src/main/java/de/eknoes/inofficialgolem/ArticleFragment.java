@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -35,7 +36,7 @@ public class ArticleFragment extends Fragment {
     private WebView webView;
 
     private Article article;
-
+    private loadArticleTask mTask;
     public ArticleFragment() {
         super();
         // Required empty public constructor
@@ -56,6 +57,13 @@ public class ArticleFragment extends Fragment {
         args.putBoolean(FORCE_WEBVIEW, forceWebview);
         fragment.setArguments(args);
         return fragment;
+    }
+    
+    public void updateArticle(String url, boolean forceWebview) {
+        this.url = url;
+        this.forceWebview = forceWebview;
+        mTask = new loadArticleTask();
+        mTask.execute();
     }
 
     @Override
@@ -82,56 +90,14 @@ public class ArticleFragment extends Fragment {
             url = savedInstanceState.getString(ARTICLE_URL);
             forceWebview = savedInstanceState.getBoolean(FORCE_WEBVIEW);
         }
-        if (webView != null) {
+
+        if(webView != null) {
             webView.setWebViewClient(new GolemWebViewClient());
             webView.getSettings().setJavaScriptEnabled(true);
-
-            FeedReaderDbHelper dbHelper = FeedReaderDbHelper.getInstance(getContext());
-            SQLiteDatabase db = dbHelper.getReadableDatabase();
-
-            if (url != null) {
-                String[] columns = {
-                        FeedReaderContract.Article.COLUMN_NAME_ID,
-                        FeedReaderContract.Article.COLUMN_NAME_TITLE,
-                        FeedReaderContract.Article.COLUMN_NAME_SUBHEADING,
-                        FeedReaderContract.Article.COLUMN_NAME_URL,
-                        FeedReaderContract.Article.COLUMN_NAME_OFFLINE,
-                        FeedReaderContract.Article.COLUMN_NAME_FULLTEXT,
-                };
-                Cursor cursor = db.query(
-                        FeedReaderContract.Article.TABLE_NAME,
-                        columns,
-                        "url=\"" + url + "\"",
-                        null,
-                        null,
-                        null,
-                        null);
-                if (cursor.moveToFirst()) {
-                    article = new Article();
-                    article.setId(cursor.getInt(cursor.getColumnIndex(FeedReaderContract.Article.COLUMN_NAME_ID)));
-                    article.setTitle(cursor.getString(cursor.getColumnIndex(FeedReaderContract.Article.COLUMN_NAME_TITLE)));
-                    article.setSubheadline(cursor.getString(cursor.getColumnIndex(FeedReaderContract.Article.COLUMN_NAME_SUBHEADING)));
-                    article.setUrl(cursor.getString(cursor.getColumnIndex(FeedReaderContract.Article.COLUMN_NAME_URL)));
-                    article.setOffline(cursor.getInt(cursor.getColumnIndex(FeedReaderContract.Article.COLUMN_NAME_OFFLINE)) == 1);
-                    article.setFulltext(cursor.getString(cursor.getColumnIndex(FeedReaderContract.Article.COLUMN_NAME_FULLTEXT)));
-                }
-
-                if (article == null || !article.isOffline() || forceWebview) {
-                    ConnectivityManager connMgr = (ConnectivityManager)
-                            getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
-                    NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
-                    if (networkInfo != null && networkInfo.isConnected()) {
-                        webView.loadUrl(url);
-                    } else {
-                        webView.loadData(getResources().getString(R.string.err_no_network), "text/html; charset=utf-8", "UTF-8");
-                    }
-                } else {
-                    webView.loadData(article.getFulltext(), "text/html; charset=utf-8", "UTF-8");
-                }
-
-                cursor.close();
-            }
         }
+
+        mTask = new loadArticleTask();
+        mTask.execute();
     }
 
     @Override
@@ -154,6 +120,9 @@ public class ArticleFragment extends Fragment {
     @Override
     public void onDetach() {
         super.onDetach();
+        if(mTask != null) {
+            mTask.cancel(false);
+        }
     }
 
     @Override
@@ -218,6 +187,85 @@ public class ArticleFragment extends Fragment {
             settings.setTextSize(value);
         }
 
+    }
+
+    private class loadArticleTask extends AsyncTask<Void, Void, Void> {
+
+        /**
+         * Override this method to perform a computation on a background thread. The
+         * specified parameters are the parameters passed to {@link #execute}
+         * by the caller of this task.
+         * <p>
+         * This method can call {@link #publishProgress} to publish updates
+         * on the UI thread.
+         *
+         * @param params The parameters of the task.
+         * @return A result, defined by the subclass of this task.
+         * @see #onPreExecute()
+         * @see #onPostExecute
+         * @see #publishProgress
+         */
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            if (webView != null) {
+
+                FeedReaderDbHelper dbHelper = FeedReaderDbHelper.getInstance(getContext());
+                SQLiteDatabase db = dbHelper.getReadableDatabase();
+
+                if (url != null) {
+                    String[] columns = {
+                            FeedReaderContract.Article.COLUMN_NAME_ID,
+                            FeedReaderContract.Article.COLUMN_NAME_TITLE,
+                            FeedReaderContract.Article.COLUMN_NAME_SUBHEADING,
+                            FeedReaderContract.Article.COLUMN_NAME_URL,
+                            FeedReaderContract.Article.COLUMN_NAME_OFFLINE,
+                            FeedReaderContract.Article.COLUMN_NAME_FULLTEXT,
+                    };
+                    Cursor cursor = db.query(
+                            FeedReaderContract.Article.TABLE_NAME,
+                            columns,
+                            "url=\"" + url + "\"",
+                            null,
+                            null,
+                            null,
+                            null);
+                    if (cursor.moveToFirst()) {
+                        article = new Article();
+                        article.setId(cursor.getInt(cursor.getColumnIndex(FeedReaderContract.Article.COLUMN_NAME_ID)));
+                        article.setTitle(cursor.getString(cursor.getColumnIndex(FeedReaderContract.Article.COLUMN_NAME_TITLE)));
+                        article.setSubheadline(cursor.getString(cursor.getColumnIndex(FeedReaderContract.Article.COLUMN_NAME_SUBHEADING)));
+                        article.setUrl(cursor.getString(cursor.getColumnIndex(FeedReaderContract.Article.COLUMN_NAME_URL)));
+                        article.setOffline(cursor.getInt(cursor.getColumnIndex(FeedReaderContract.Article.COLUMN_NAME_OFFLINE)) == 1);
+                        article.setFulltext(cursor.getString(cursor.getColumnIndex(FeedReaderContract.Article.COLUMN_NAME_FULLTEXT)));
+                    }
+
+
+                    cursor.close();
+                }
+            }
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void vVoid) {
+            if(isCancelled()) {
+                return;
+            }
+            if (article == null || !article.isOffline() || forceWebview ) {
+                ConnectivityManager connMgr = (ConnectivityManager)
+                        getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+                NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
+                if (networkInfo != null && networkInfo.isConnected()) {
+                    webView.loadUrl(url);
+                } else {
+                    webView.loadData(getResources().getString(R.string.err_no_network), "text/html; charset=utf-8", "UTF-8");
+                }
+            } else {
+                webView.loadData(article.getFulltext(), "text/html; charset=utf-8", "UTF-8");
+            }
+        }
     }
 
 }

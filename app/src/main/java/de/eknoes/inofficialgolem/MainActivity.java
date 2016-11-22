@@ -5,13 +5,14 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import java.net.URL;
 
 public class MainActivity extends AppCompatActivity implements ArticleListFragment.OnArticleSelectedListener {
-
+    private static final String TAG = "MainActivity";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,10 +60,24 @@ public class MainActivity extends AppCompatActivity implements ArticleListFragme
 
     @Override
     public void onArticleSelected(URL articleUrl, boolean forceWebview) {
-        Intent articleIntent = new Intent(this, ArticleView.class);
-        articleIntent.putExtra(ArticleFragment.ARTICLE_URL, articleUrl.toExternalForm());
-        articleIntent.putExtra(ArticleFragment.FORCE_WEBVIEW, forceWebview);
-        startActivity(articleIntent);
+        ArticleFragment articleFragment = (ArticleFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_article);
+        if(articleFragment != null) {
+            articleFragment.updateArticle(articleUrl.toExternalForm(), forceWebview);
+        } else {
+            Log.d(TAG, "onArticleSelected: Creating new Article Fragment");
+
+            Intent articleIntent = new Intent(this, ArticleView.class);
+            articleIntent.putExtra(ArticleFragment.ARTICLE_URL, articleUrl.toExternalForm());
+            articleIntent.putExtra(ArticleFragment.FORCE_WEBVIEW, forceWebview);
+            startActivity(articleIntent);
+
+/*            articleFragment = ArticleFragment.newInstance(articleUrl.toExternalForm(), forceWebview);
+
+            FragmentTransaction mTransaction = getSupportFragmentManager().beginTransaction();
+            mTransaction.replace(R.id.fragment_articlelist, articleFragment);
+            mTransaction.addToBackStack(null);
+            mTransaction.commit();*/
+        }
     }
 
     @Override
