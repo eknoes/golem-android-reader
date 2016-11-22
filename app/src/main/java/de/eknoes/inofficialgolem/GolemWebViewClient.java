@@ -20,6 +20,9 @@ class GolemWebViewClient extends WebViewClient {
             return false;
         }
         // Otherwise, the link is not for a page on my site, so launch another Activity that handles URLs
+        if(!url.startsWith("http")) {
+            url = "http://" + url;
+        }
         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
         view.getContext().startActivity(intent);
         return true;
