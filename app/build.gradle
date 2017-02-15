@@ -2,12 +2,12 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 25
-    buildToolsVersion "25.0.1"
+    buildToolsVersion "25.0.2"
     defaultConfig {
         applicationId "de.eknoes.inofficialgolem"
         minSdkVersion 12
         targetSdkVersion 25
-        versionCode 108
+        versionCode 109
         versionName "0.9.9"
         if (project.hasProperty('golem_api_key')) {
             resValue "string", "golem_api_key", golem_api_key
@@ -26,8 +26,8 @@ android {
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     testCompile 'junit:junit:4.12'
-    compile 'com.android.support:appcompat-v7:25.0.1'
-    compile 'com.android.support:design:25.0.1'
-    compile 'com.android.support:support-v4:25.0.1'
+    compile 'com.android.support:appcompat-v7:25.1.1'
+    compile 'com.android.support:design:25.1.1'
+    compile 'com.android.support:support-v4:25.1.1'
     compile 'com.pavelsikun:material-seekbar-preference:0.12.1'
 }

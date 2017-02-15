@@ -1,16 +1,16 @@
 package de.eknoes.inofficialgolem;
 
+import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 public class FeedReaderDbHelper extends SQLiteOpenHelper {
-    private static final int DATABASE_VERSION = 8;
+    private static final int DATABASE_VERSION = 11;
     private static final String DATABASE_NAME = "FeedReader.db";
-    private static FeedReaderDbHelper self;
     private static final String TAG = "FeedReaderDbHelper";
-
     private static final String SQL_CREATE_ENTRIES =
             "CREATE TABLE " + FeedReaderContract.Article.TABLE_NAME + " (" +
                     FeedReaderContract.Article._ID + " INTEGER PRIMARY KEY," +
@@ -25,8 +25,8 @@ public class FeedReaderDbHelper extends SQLiteOpenHelper {
                     FeedReaderContract.Article.COLUMN_NAME_AUTHORS + " TEXT," +
                     FeedReaderContract.Article.COLUMN_NAME_OFFLINE + " INTEGER" +
                     " )";
-
     private static final String SQL_DELETE_ENTRIES = "DROP TABLE IF EXISTS " + FeedReaderContract.Article.TABLE_NAME;
+    private static FeedReaderDbHelper self;
 
 
     private FeedReaderDbHelper(Context context) {
@@ -78,7 +78,54 @@ public class FeedReaderDbHelper extends SQLiteOpenHelper {
                 db.execSQL("DROP TABLE backup");
             }
 
-            if (oldVersion > 8) {
+            if (oldVersion < 11) {
+                String[] columns = {
+                        FeedReaderContract.Article.COLUMN_NAME_ID,
+                        FeedReaderContract.Article.COLUMN_NAME_TITLE,
+                        FeedReaderContract.Article.COLUMN_NAME_SUBHEADING,
+                        FeedReaderContract.Article.COLUMN_NAME_TEASER,
+                        FeedReaderContract.Article.COLUMN_NAME_DATE,
+                        FeedReaderContract.Article.COLUMN_NAME_IMG,
+                        FeedReaderContract.Article.COLUMN_NAME_URL,
+                        FeedReaderContract.Article.COLUMN_NAME_AUTHORS,
+                        FeedReaderContract.Article.COLUMN_NAME_OFFLINE,
+                        FeedReaderContract.Article.COLUMN_NAME_FULLTEXT
+                };
+
+                Cursor cursor = db.query(
+                        FeedReaderContract.Article.TABLE_NAME,
+                        columns,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null);
+
+                while (cursor.moveToNext()) {
+                    String url = cursor.getString(cursor.getColumnIndex(FeedReaderContract.Article.COLUMN_NAME_URL));
+                    String newUrl = url.replace("http://", "https://");
+
+                    Log.d(TAG, "onUpgrade: Changed URL From " + url + " to " + newUrl);
+
+                    ContentValues values = new ContentValues();
+                    values.put(FeedReaderContract.Article.COLUMN_NAME_URL, newUrl);
+
+                    int affected = db.update(FeedReaderContract.Article.TABLE_NAME,
+                            values,
+                            FeedReaderContract.Article.COLUMN_NAME_ID + "=?",
+                            new String[]{String.valueOf(cursor.getInt(cursor.getColumnIndex(FeedReaderContract.Article.COLUMN_NAME_ID)))});
+
+                    if (affected != 1) {
+                        Log.d(TAG, "onUpgrade: Affected " + affected + " rows!");
+                    }
+                }
+                cursor.close();
+
+
+            }
+
+            if (oldVersion > 9) {
                 db.execSQL(SQL_DELETE_ENTRIES);
                 onCreate(db);
             }

@@ -28,14 +28,12 @@ import java.util.concurrent.Callable;
  * Created by soenke on 27.08.16.
  */
 public class GolemFetcher extends AsyncTask<Void, Float, GolemFetcher.FETCH_STATE> {
+    private static final String TAG = "GolemFetcher";
     private final SQLiteDatabase db;
     private final ProgressBar mProgress;
-    private static final String TAG = "GolemFetcher";
     private final GolemUpdater[] updater;
     private final Context context;
     private final Callable<Void> notifier;
-
-    enum FETCH_STATE {SUCCESS, NO_CONNECTION, TIMEOUT, ABO_INVALID, UNDEFINED_ERROR}
 
     GolemFetcher(Context context, ProgressBar mProgress, Callable<Void> notifier) {
         this.db = FeedReaderDbHelper.getInstance(context).getWritableDatabase();
@@ -124,10 +122,16 @@ public class GolemFetcher extends AsyncTask<Void, Float, GolemFetcher.FETCH_STAT
             if (item.getType() == GolemItem.Type.ARTICLE) {
                 int id = item.getId();
                 boolean createNew = false;
+
+                if (item.getUrl().startsWith("http://")) {
+                    item.setUrl(item.getUrl().replace("http://", "https://"));
+                }
+
                 if (item.getId() == 0 && item.getUrl() != null) {
                     if (item.getUrl().endsWith("-rss.html")) {
                         item.setUrl(item.getUrl().substring(0, (item.getUrl().length() - "-rss.html".length())) + ".html");
                     }
+
 
                     String[] cols = {FeedReaderContract.Article.COLUMN_NAME_ID};
                     Cursor cursor = db.query(
@@ -162,7 +166,7 @@ public class GolemFetcher extends AsyncTask<Void, Float, GolemFetcher.FETCH_STAT
                     }
                     cursor.close();
                 } else {
-                    Log.d(TAG, "doInBackground: No id given. Continue");
+                    Log.d(TAG, "doInBackground: No URL given. Continue");
                     continue;
                 }
 
@@ -220,4 +224,6 @@ public class GolemFetcher extends AsyncTask<Void, Float, GolemFetcher.FETCH_STAT
         }
         return true;
     }
+
+    enum FETCH_STATE {SUCCESS, NO_CONNECTION, TIMEOUT, ABO_INVALID, UNDEFINED_ERROR}
 }
