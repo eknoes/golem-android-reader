@@ -49,7 +49,7 @@
     <string name="choose_layout_content">Choose wether it should be opened the Desktop- or Mobile Layout</string>
     <string name="pref_beta_title">Join beta</string>
     <string name="pref_beta_sum">To join our beta click here</string>
-    <string name="choose_share_article">Share article with...</string>
-    <string name="choose_share_app">Share app with...</string>
+    <string name="choose_share_article">Share article with…</string>
+    <string name="choose_share_app">Share app with…</string>
 
 </resources>

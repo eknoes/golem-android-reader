@@ -38,4 +38,6 @@
     <string name="undefined_error">Undefinierter Fehler</string>
     <string name="pref_beta_sum">Um am Beta-Programm teilzunehmen klicken sie hier</string>
     <string name="pref_beta_title">An Beta teilnehmen</string>
+    <string name="choose_share_app">Teile die App mit…</string>
+    <string name="choose_share_article">Teile den Artikel mit…</string>
 </resources>
