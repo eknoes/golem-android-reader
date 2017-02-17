@@ -72,7 +72,7 @@ public class MainActivity extends AppCompatActivity implements ArticleListFragme
             shareIntent.setAction(Intent.ACTION_SEND);
             shareIntent.putExtra(Intent.EXTRA_TEXT, String.format(getString(R.string.shareAppText), storeUri));
             shareIntent.setType("text/plain");
-            startActivity(shareIntent);
+            startActivity(Intent.createChooser(shareIntent, getResources().getString(R.string.choose_share_app)));
 
         } else if (id == R.id.action_settings) {
             Intent i = new Intent(this, SettingsActivity.class);

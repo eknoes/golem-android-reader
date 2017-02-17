@@ -181,7 +181,7 @@ public class ArticleFragment extends Fragment {
             if (link != null) {
                 shareIntent.putExtra(Intent.EXTRA_TEXT, article.getSubheadline() + ": " + article.getTitle() + " - " + link);
                 shareIntent.setType("text/plain");
-                startActivity(shareIntent);
+                startActivity(Intent.createChooser(shareIntent, getResources().getString(R.string.choose_share_article)));
             }
         }
 
