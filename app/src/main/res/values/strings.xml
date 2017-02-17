@@ -51,5 +51,15 @@
     <string name="pref_beta_sum">To join our beta click here</string>
     <string name="choose_share_article">Share article with…</string>
     <string name="choose_share_app">Share app with…</string>
+    <string name="welcome_head">Thank you…</string>
+    <string name="welcome_text">For using this Golem.de Reader!
+
+        I always try to enhance this app. If you have any wishes let me know.
+    </string>
+    <string name="welcome_text2">If you like what I did, I would really appreciate it if you rate this app in the app store. If not, let me know!</string>
+    <string name="welcome_text3" translatable="false">Sönke</string>
+    <string name="take_me_to_store">Take me to the App Store</string>
+    <string name="write_a_mail">Mail me!</string>
+    <string name="sendMail">Write an E-Mail</string>
 
 </resources>

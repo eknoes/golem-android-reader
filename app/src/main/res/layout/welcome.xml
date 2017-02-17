@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:padding="@dimen/activity_horizontal_margin">
+
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/welcome_head"
+            style="@style/Base.TextAppearance.AppCompat.Headline"/>
+
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/TextAppearance.AppCompat.Body1"
+            android:text="@string/welcome_text"
+            android:layout_marginTop="@dimen/activity_vertical_margin"/>
+
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/TextAppearance.AppCompat.Body1"
+            android:text="@string/welcome_text2"
+            android:layout_marginTop="@dimen/activity_vertical_margin"/>
+
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/TextAppearance.AppCompat.Body2"
+            android:text="@string/welcome_text3"
+            android:layout_marginTop="@dimen/activity_vertical_margin"/>
+
+    <Button
+            android:id="@+id/storeBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/take_me_to_store"/>
+
+    <Button
+            android:id="@+id/mailBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/write_a_mail"/>
+</LinearLayout>

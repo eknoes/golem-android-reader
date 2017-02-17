@@ -18,6 +18,7 @@ import android.util.Log;
 import android.view.*;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
+import android.widget.Button;
 import android.widget.ProgressBar;
 
 
@@ -124,6 +125,50 @@ public class ArticleFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_article, container, false);
         webView = (WebView) v.findViewById(R.id.articleWebView);
         progress = (ProgressBar) v.findViewById(R.id.articleProgress);
+
+        Button mailBtn = (Button) v.findViewById(R.id.mailBtn);
+        Button storeBtn = (Button) v.findViewById(R.id.storeBtn);
+
+        storeBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String packageName = getContext().getPackageName();
+                Intent playStoreIntent = new Intent(Intent.ACTION_VIEW,
+                        Uri.parse("market://details?id=" + packageName));
+                playStoreIntent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    playStoreIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT);
+                } else {
+                    playStoreIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
+                }
+
+                try {
+                    startActivity(playStoreIntent);
+                } catch (Exception e) {
+                    Intent webIntent = new Intent(Intent.ACTION_VIEW,
+                            Uri.parse("https://play.google.com/store/apps/details?id=" + packageName));
+
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                        webIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT);
+                    } else {
+                        webIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
+                    }
+
+                    startActivity(webIntent);
+                }
+            }
+        });
+
+        mailBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent emailIntent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts(
+                        "mailto", "projekte@eknoes.de", null));
+                emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Inofficial golem.de Reader");
+                startActivity(Intent.createChooser(emailIntent, getResources().getString(R.string.sendMail)));
+            }
+        });
         return v;
     }
 
