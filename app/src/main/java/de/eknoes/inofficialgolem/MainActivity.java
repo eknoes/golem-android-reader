@@ -2,12 +2,15 @@ package de.eknoes.inofficialgolem;
 
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity implements ArticleListFragment.OnArticleSelectedListener {
     private static final String TAG = "MainActivity";
@@ -27,6 +30,53 @@ public class MainActivity extends AppCompatActivity implements ArticleListFragme
                 onArticleSelected(currentArticle);
             }
         }
+
+        Button mailBtn = (Button) findViewById(R.id.mailBtn);
+        Button storeBtn = (Button) findViewById(R.id.storeBtn);
+
+        if (mailBtn != null && storeBtn != null) {
+            storeBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    String packageName = getApplicationContext().getPackageName();
+                    Intent playStoreIntent = new Intent(Intent.ACTION_VIEW,
+                            Uri.parse("market://details?id=" + packageName));
+                    playStoreIntent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                        playStoreIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT);
+                    } else {
+                        playStoreIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
+                    }
+
+                    try {
+                        startActivity(playStoreIntent);
+                    } catch (Exception e) {
+                        Intent webIntent = new Intent(Intent.ACTION_VIEW,
+                                Uri.parse("https://play.google.com/store/apps/details?id=" + packageName));
+
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                            webIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT);
+                        } else {
+                            webIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
+                        }
+
+                        startActivity(webIntent);
+                    }
+                }
+            });
+
+            mailBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent emailIntent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts(
+                            "mailto", "projekte@eknoes.de", null));
+                    emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Inofficial golem.de Reader");
+                    startActivity(Intent.createChooser(emailIntent, getResources().getString(R.string.sendMail)));
+                }
+            });
+        }
+
     }
 
     @Override
