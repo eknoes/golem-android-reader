@@ -1,4 +1,4 @@
-package de.eknoes.inofficialgolem.updater;
+package de.eknoes.inofficialgolem;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -15,9 +15,10 @@ import android.widget.Toast;
 import com.android.volley.AuthFailureError;
 import com.android.volley.NoConnectionError;
 import com.android.volley.TimeoutError;
-import de.eknoes.inofficialgolem.FeedReaderContract;
-import de.eknoes.inofficialgolem.FeedReaderDbHelper;
-import de.eknoes.inofficialgolem.R;
+import de.eknoes.inofficialgolem.updater.AboArticleUpdater;
+import de.eknoes.inofficialgolem.updater.GolemItem;
+import de.eknoes.inofficialgolem.updater.GolemUpdater;
+import de.eknoes.inofficialgolem.updater.NewestArticleUpdater;
 
 import java.util.Date;
 import java.util.List;
@@ -27,16 +28,14 @@ import java.util.concurrent.Callable;
  * Created by soenke on 27.08.16.
  */
 public class GolemFetcher extends AsyncTask<Void, Float, GolemFetcher.FETCH_STATE> {
+    private static final String TAG = "GolemFetcher";
     private final SQLiteDatabase db;
     private final ProgressBar mProgress;
-    private static final String TAG = "GolemFetcher";
     private final GolemUpdater[] updater;
     private final Context context;
     private final Callable<Void> notifier;
 
-    enum FETCH_STATE {SUCCESS, NO_CONNECTION, TIMEOUT, ABO_INVALID, UNDEFINED_ERROR}
-
-    public GolemFetcher(Context context, ProgressBar mProgress, Callable<Void> notifier) {
+    GolemFetcher(Context context, ProgressBar mProgress, Callable<Void> notifier) {
         this.db = FeedReaderDbHelper.getInstance(context).getWritableDatabase();
         this.mProgress = mProgress;
         this.context = context;
@@ -49,7 +48,7 @@ public class GolemFetcher extends AsyncTask<Void, Float, GolemFetcher.FETCH_STAT
         super.onPreExecute();
         ConnectivityManager connMgr = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
-        if (networkInfo != null && networkInfo.isConnected() && mProgress != null) {
+        if (networkInfo != null && networkInfo.isConnected()) {
             mProgress.setProgress(1);
             mProgress.setIndeterminate(true);
             mProgress.setVisibility(View.VISIBLE);
@@ -67,10 +66,8 @@ public class GolemFetcher extends AsyncTask<Void, Float, GolemFetcher.FETCH_STAT
                     writeArticles(u.getItems());
                 } catch (TimeoutError e) {
                     result = FETCH_STATE.TIMEOUT;
-                    break;
                 } catch (NoConnectionError e) {
                     result = FETCH_STATE.NO_CONNECTION;
-                    break;
                 } catch (AuthFailureError authFailureError) {
                     result = FETCH_STATE.ABO_INVALID;
                 }
@@ -125,10 +122,16 @@ public class GolemFetcher extends AsyncTask<Void, Float, GolemFetcher.FETCH_STAT
             if (item.getType() == GolemItem.Type.ARTICLE) {
                 int id = item.getId();
                 boolean createNew = false;
+
+                if (item.getUrl().startsWith("http://")) {
+                    item.setUrl(item.getUrl().replace("http://", "https://"));
+                }
+
                 if (item.getId() == 0 && item.getUrl() != null) {
                     if (item.getUrl().endsWith("-rss.html")) {
                         item.setUrl(item.getUrl().substring(0, (item.getUrl().length() - "-rss.html".length())) + ".html");
                     }
+
 
                     String[] cols = {FeedReaderContract.Article.COLUMN_NAME_ID};
                     Cursor cursor = db.query(
@@ -163,7 +166,7 @@ public class GolemFetcher extends AsyncTask<Void, Float, GolemFetcher.FETCH_STAT
                     }
                     cursor.close();
                 } else {
-                    Log.d(TAG, "doInBackground: No id given. Continue");
+                    Log.d(TAG, "doInBackground: No URL given. Continue");
                     continue;
                 }
 
@@ -221,4 +224,6 @@ public class GolemFetcher extends AsyncTask<Void, Float, GolemFetcher.FETCH_STAT
         }
         return true;
     }
+
+    enum FETCH_STATE {SUCCESS, NO_CONNECTION, TIMEOUT, ABO_INVALID, UNDEFINED_ERROR}
 }

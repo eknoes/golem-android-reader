@@ -6,10 +6,7 @@ import android.preference.PreferenceManager;
 import android.text.TextUtils;
 import android.util.Log;
 import android.util.Xml;
-import com.android.volley.AuthFailureError;
-import com.android.volley.NoConnectionError;
-import com.android.volley.RequestQueue;
-import com.android.volley.TimeoutError;
+import com.android.volley.*;
 import com.android.volley.toolbox.RequestFuture;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
@@ -58,6 +55,8 @@ public class AboArticleUpdater extends GolemUpdater {
                 } else if (e.getCause() instanceof AuthFailureError) {
                     Log.d(TAG, "getItems: Invalid Abo key");
                     throw new AuthFailureError();
+                } else if (e.getCause() instanceof RedirectError) {
+                    Log.w(TAG, "getItems: Redirect Error: Can not get Feed items");
                 }
             } catch (IOException e) {
                 e.printStackTrace();
@@ -72,7 +71,7 @@ public class AboArticleUpdater extends GolemUpdater {
     }
 
     private String buildAboURL(String key) {
-        return "http://rss.golem.de/rss_sub_media.php?token=" + Uri.encode(key);
+        return "https://rss.golem.de/rss_sub_media.php?token=" + Uri.encode(key);
     }
 
     private class GolemRSSParser {

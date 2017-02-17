@@ -40,7 +40,7 @@ public class NewestArticleUpdater extends GolemUpdater {
         if (limit > 50) {
             limit = 50;
         }
-        return "http://api.golem.de/api/article/" + key + "/?key=" + context.getString(R.string.golem_api_key) + "&format=json&limit=" + Integer.toString(limit);
+        return "https://api.golem.de/api/article/" + key + "/?key=" + context.getString(R.string.golem_api_key) + "&format=json&limit=" + Integer.toString(limit);
     }
 
     @Override
