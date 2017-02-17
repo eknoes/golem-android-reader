@@ -9,16 +9,24 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import java.net.URL;
-
 public class MainActivity extends AppCompatActivity implements ArticleListFragment.OnArticleSelectedListener {
     private static final String TAG = "MainActivity";
+    private static final String CURRENT_ARTICLE = "currentArticle";
+    private String currentArticle;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        if (savedInstanceState != null) {
+            currentArticle = savedInstanceState.getString(CURRENT_ARTICLE);
+            if (currentArticle != null && getResources().getBoolean(R.bool.twoPaneMode)) {
+                onArticleSelected(currentArticle);
+            }
+        }
     }
 
     @Override
@@ -29,13 +37,30 @@ public class MainActivity extends AppCompatActivity implements ArticleListFragme
     }
 
     @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString(CURRENT_ARTICLE, currentArticle);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (!getResources().getBoolean(R.bool.twoPaneMode)) {
+            ArticleFragment articleFragment = (ArticleFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_article);
+
+            if (articleFragment != null) {
+                getSupportFragmentManager().beginTransaction().remove(articleFragment).commit();
+            }
+        }
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
         if (id == R.id.action_refresh) {
             ((ArticleListFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_articlelist)).refresh();
             return true;
@@ -59,29 +84,33 @@ public class MainActivity extends AppCompatActivity implements ArticleListFragme
 
 
     @Override
-    public void onArticleSelected(URL articleUrl, boolean forceWebview) {
-        ArticleFragment articleFragment = (ArticleFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_article);
-        if(articleFragment != null) {
-            articleFragment.updateArticle(articleUrl.toExternalForm(), forceWebview);
+    public void onArticleSelected(String articleUrl, boolean forceWebview) {
+        ArticleFragment articleFragment;
+
+        currentArticle = articleUrl;
+
+        if (getResources().getBoolean(R.bool.twoPaneMode)) {
+            articleFragment = (ArticleFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_article);
+            if (articleFragment == null) {
+                Log.d(TAG, "onArticleSelected: Creating new Article Fragment");
+                articleFragment = ArticleFragment.newInstance(articleUrl, forceWebview);
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_article, articleFragment).commit();
+            } else {
+                Log.d(TAG, "onArticleSelected: Article Fragment present, update it");
+                articleFragment.updateArticle(articleUrl, forceWebview);
+            }
         } else {
-            Log.d(TAG, "onArticleSelected: Creating new Article Fragment");
+            Log.d(TAG, "onArticleSelected: Creating new Article View");
 
             Intent articleIntent = new Intent(this, ArticleView.class);
-            articleIntent.putExtra(ArticleFragment.ARTICLE_URL, articleUrl.toExternalForm());
+            articleIntent.putExtra(ArticleFragment.ARTICLE_URL, articleUrl);
             articleIntent.putExtra(ArticleFragment.FORCE_WEBVIEW, forceWebview);
             startActivity(articleIntent);
-
-/*            articleFragment = ArticleFragment.newInstance(articleUrl.toExternalForm(), forceWebview);
-
-            FragmentTransaction mTransaction = getSupportFragmentManager().beginTransaction();
-            mTransaction.replace(R.id.fragment_articlelist, articleFragment);
-            mTransaction.addToBackStack(null);
-            mTransaction.commit();*/
         }
     }
 
     @Override
-    public void onArticleSelected(URL articleUrl) {
+    public void onArticleSelected(String articleUrl) {
         onArticleSelected(articleUrl, false);
     }
 }

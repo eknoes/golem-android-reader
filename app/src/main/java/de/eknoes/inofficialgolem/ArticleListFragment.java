@@ -20,8 +20,6 @@ import com.android.volley.toolbox.NetworkImageView;
 import com.android.volley.toolbox.Volley;
 import de.eknoes.inofficialgolem.updater.GolemFetcher;
 
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.text.DateFormat;
 import java.util.Date;
 import java.util.concurrent.Callable;
@@ -32,16 +30,11 @@ import static android.util.TypedValue.COMPLEX_UNIT_PX;
  * A placeholder fragment containing a simple view.
  */
 public class ArticleListFragment extends Fragment {
+    private static final String TAG = "ArticleListFragment";
     private GolemFetcher fetcher;
     private ArticleAdapter listAdapter;
     private ProgressBar mProgress; //Not yet implemented
-    private static final String TAG = "ArticleListFragment";
     private OnArticleSelectedListener mListener;
-
-    public interface OnArticleSelectedListener {
-        public void onArticleSelected(URL articleUrl, boolean forceWebview);
-        public void onArticleSelected(URL articleUrl);
-    }
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
@@ -84,21 +77,13 @@ public class ArticleListFragment extends Fragment {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                try {
-                    mListener.onArticleSelected(new URL(listAdapter.getItem(position).getUrl()), false);
-                } catch (MalformedURLException e) {
-                    e.printStackTrace();
-                }
+                mListener.onArticleSelected(listAdapter.getItem(position).getUrl(), false);
             }
         });
         listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                try {
-                    mListener.onArticleSelected(new URL(listAdapter.getItem(position).getUrl()), true);
-                } catch (MalformedURLException e) {
-                    e.printStackTrace();
-                }
+                mListener.onArticleSelected(listAdapter.getItem(position).getUrl(), true);
                 return true;
             }
         });
@@ -122,7 +107,6 @@ public class ArticleListFragment extends Fragment {
         }
     }
 
-
     public void refresh() {
         if (fetcher == null || fetcher.getStatus() != AsyncTask.Status.RUNNING) {
             fetcher = new GolemFetcher(getContext(), mProgress, new Callable<Void>() {
@@ -138,13 +122,20 @@ public class ArticleListFragment extends Fragment {
         }
     }
 
+
+    public interface OnArticleSelectedListener {
+        void onArticleSelected(String articleUrl, boolean forceWebview);
+
+        void onArticleSelected(String articleUrl);
+    }
+
     private class ArticleAdapter extends BaseAdapter {
 
         private final LayoutInflater inflater;
-        private Cursor cursor;
         private final SQLiteDatabase db;
         private final ImageLoader imgLoader;
         private final Context context;
+        private Cursor cursor;
         private float zoom = 1;
 
         ArticleAdapter() {
@@ -262,7 +253,7 @@ public class ArticleListFragment extends Fragment {
                 view = inflater.inflate(R.layout.list_article, parent, false);
             }
 
-            Article art = (Article) getItem(position);
+            Article art = getItem(position);
             String infoText = String.format(context.getResources().getString(R.string.article_published), DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.SHORT).format(art.getDate()));
 
             TextView teaser = (TextView) view.findViewById(R.id.articleTeaser);
@@ -290,7 +281,6 @@ public class ArticleListFragment extends Fragment {
                 offlineImage.setImageDrawable(null);
             }
 
-            art = null;
             return view;
         }
 

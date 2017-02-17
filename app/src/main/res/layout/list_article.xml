@@ -11,7 +11,7 @@
             android:textSize="@dimen/subheading_size"
             android:text="TEST"
 
-            android:textColor="#A5A5A5"/>
+            android:textColor="@color/textColorSubhead"/>
     <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -29,12 +29,12 @@
             android:text="Test title of this Article"
             android:layout_below="@+id/articleSubtitle"
             android:textStyle="bold"
-            android:textColor="#000000"/>
+            android:textColor="@color/textColorHeading"/>
     <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/articleInfo"
-            android:textColor="#A5A5A5"
+            android:textColor="@color/textColorSubhead"
             android:textSize="@dimen/info_size"
             android:text="Published on 23.03.2016"
             android:layout_below="@id/articleTitle"
@@ -52,7 +52,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/articleTeaser"
             android:textSize="@dimen/text_size"
-            android:textColor="#707070"
+            android:textColor="@color/textColorText"
             android:text="Test text of this Article"
             android:layout_below="@+id/articleInfo"
             android:layout_toRightOf="@id/articleImage"/>

@@ -1,15 +1,17 @@
 package de.eknoes.inofficialgolem;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 
 public class ArticleView extends AppCompatActivity {
 
     private static final String TAG = "ArticleView";
     private String url;
+
 
 
     @Override
@@ -19,14 +21,40 @@ public class ArticleView extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
+
 
         url = getIntent().getStringExtra(ArticleFragment.ARTICLE_URL);
         boolean forceWebview = getIntent().getBooleanExtra(ArticleFragment.FORCE_WEBVIEW, false);
+
         ArticleFragment articleFragment = ArticleFragment.newInstance(url, forceWebview);
 
-        fragmentTransaction.add(R.id.articleFragment, articleFragment);
-        fragmentTransaction.commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.articleFragment, articleFragment).commit();
+
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_articleview, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        if (id == R.id.action_settings) {
+            Intent i = new Intent(this, SettingsActivity.class);
+            startActivity(i);
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
 }

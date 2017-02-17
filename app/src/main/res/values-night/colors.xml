@@ -3,7 +3,7 @@
     <color name="colorPrimary">#000000</color>
     <color name="colorPrimaryDark">#000000</color>
     <color name="colorAccent">#EB5E2F</color>
-    <color name="textColorHeading">#000000</color>
-    <color name="textColorSubhead">#A5A5A5</color>
-    <color name="textColorText">#707070</color>
+    <color name="textColorHeading">#FFFFFF</color>
+    <color name="textColorSubhead">#CCCCCC</color>
+    <color name="textColorText">#EEEEEE</color>
 </resources>

@@ -18,6 +18,7 @@ import android.util.Log;
 import android.view.*;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
+import android.widget.ProgressBar;
 
 
 /**
@@ -27,16 +28,18 @@ import android.webkit.WebView;
  * create an instance of this fragment.
  */
 public class ArticleFragment extends Fragment {
-    public static final String ARTICLE_URL = "de.eknoes.inofficialgolem.ARTICLE_URL";
-    public static final String FORCE_WEBVIEW = "de.eknoes.inofficialgolem.FORCE_WEBVIEW";
+    static final String ARTICLE_URL = "de.eknoes.inofficialgolem.ARTICLE_URL";
+    static final String FORCE_WEBVIEW = "de.eknoes.inofficialgolem.FORCE_WEBVIEW";
 
     private static final String TAG = "ArticleFragment";
     private String url;
     private boolean forceWebview;
     private WebView webView;
+    private ProgressBar progress;
 
     private Article article;
     private loadArticleTask mTask;
+
     public ArticleFragment() {
         super();
         // Required empty public constructor
@@ -58,12 +61,13 @@ public class ArticleFragment extends Fragment {
         fragment.setArguments(args);
         return fragment;
     }
-    
-    public void updateArticle(String url, boolean forceWebview) {
+
+    void updateArticle(String url, boolean forceWebview) {
         this.url = url;
         this.forceWebview = forceWebview;
         mTask = new loadArticleTask();
         mTask.execute();
+
     }
 
     @Override
@@ -92,12 +96,23 @@ public class ArticleFragment extends Fragment {
         }
 
         if(webView != null) {
-            webView.setWebViewClient(new GolemWebViewClient());
+            webView.setWebViewClient(new GolemWebViewClient() {
+                @Override
+                public void onPageFinished(WebView view, String url) {
+                    super.onPageFinished(view, url);
+
+                    progress.setVisibility(View.GONE);
+                }
+            });
             webView.getSettings().setJavaScriptEnabled(true);
         }
 
-        mTask = new loadArticleTask();
-        mTask.execute();
+        if (url != null) {
+            mTask = new loadArticleTask();
+            mTask.execute();
+        } else {
+            Log.d(TAG, "onActivityCreated: URL is Null, do not fetch article");
+        }
     }
 
     @Override
@@ -108,13 +123,22 @@ public class ArticleFragment extends Fragment {
         Log.d(TAG, "onCreateView: Inflating Fragment layout");
         View v = inflater.inflate(R.layout.fragment_article, container, false);
         webView = (WebView) v.findViewById(R.id.articleWebView);
+        progress = (ProgressBar) v.findViewById(R.id.articleProgress);
         return v;
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        setHasOptionsMenu(false);
+
     }
 
     @Override
     public void onResume() {
         super.onResume();
         calculateSettings();
+        setHasOptionsMenu(true);
     }
 
     @Override
@@ -128,9 +152,7 @@ public class ArticleFragment extends Fragment {
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
-        if (menu.size() == 0) {
-            inflater.inflate(R.menu.menu_webview, menu);
-        }
+        inflater.inflate(R.menu.menu_webview, menu);
     }
 
     @Override
@@ -146,7 +168,23 @@ public class ArticleFragment extends Fragment {
                 webIntent.setData(Uri.parse(url));
                 startActivity(webIntent);
             }
+        } else if (id == R.id.action_share_article) {
+            Intent shareIntent = new Intent();
+            shareIntent.setAction(Intent.ACTION_SEND);
+            String link = null;
+            if (article.getUrl() != null) {
+                link = article.getUrl();
+            } else if (url != null) {
+                link = url;
+            }
+
+            if (link != null) {
+                shareIntent.putExtra(Intent.EXTRA_TEXT, article.getSubheadline() + ": " + article.getTitle() + " - " + link);
+                shareIntent.setType("text/plain");
+                startActivity(shareIntent);
+            }
         }
+
         return super.onOptionsItemSelected(item);
     }
 
@@ -254,13 +292,21 @@ public class ArticleFragment extends Fragment {
                 return;
             }
             if (article == null || !article.isOffline() || forceWebview ) {
-                ConnectivityManager connMgr = (ConnectivityManager)
-                        getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
-                NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
-                if (networkInfo != null && networkInfo.isConnected()) {
-                    webView.loadUrl(url);
+                Context c = getContext();
+                if (c != null) {
+                    ConnectivityManager connMgr = (ConnectivityManager)
+                            getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+                    NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
+                    if (networkInfo != null && networkInfo.isConnected()) {
+                        progress.setVisibility(View.VISIBLE);
+                        progress.setEnabled(true);
+                        progress.setIndeterminate(true);
+                        webView.loadUrl(url);
+                    } else {
+                        webView.loadData(getResources().getString(R.string.err_no_network), "text/html; charset=utf-8", "UTF-8");
+                    }
                 } else {
-                    webView.loadData(getResources().getString(R.string.err_no_network), "text/html; charset=utf-8", "UTF-8");
+                    webView.loadUrl(url);
                 }
             } else {
                 webView.loadData(article.getFulltext(), "text/html; charset=utf-8", "UTF-8");
