@@ -10,8 +10,7 @@ import android.preference.PreferenceActivity;
 import android.preference.PreferenceManager;
 import android.view.View;
 
-import static de.eknoes.inofficialgolem.ArticleFragment.ARTICLE_URL;
-import static de.eknoes.inofficialgolem.ArticleFragment.FORCE_WEBVIEW;
+import static de.eknoes.inofficialgolem.ArticleFragment.*;
 
 public class SettingsActivity extends PreferenceActivity implements SharedPreferences.OnSharedPreferenceChangeListener {
 
@@ -37,6 +36,7 @@ public class SettingsActivity extends PreferenceActivity implements SharedPrefer
                 Intent intent = new Intent(SettingsActivity.this, ArticleView.class);
                 intent.putExtra(ARTICLE_URL, "http://www.golem.de/sonstiges/ansicht/");
                 intent.putExtra(FORCE_WEBVIEW, true);
+                intent.putExtra(NO_ARTICLE, true);
                 startActivity(intent);
                 return true;
             }
@@ -48,6 +48,7 @@ public class SettingsActivity extends PreferenceActivity implements SharedPrefer
                 Intent intent = new Intent(SettingsActivity.this, ArticleView.class);
                 intent.putExtra(ARTICLE_URL, "http://projekte.eknoes.de/datenschutz.html");
                 intent.putExtra(FORCE_WEBVIEW, true);
+                intent.putExtra(NO_ARTICLE, true);
                 startActivity(intent);
                 return true;
             }

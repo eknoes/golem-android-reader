@@ -30,10 +30,12 @@ import android.widget.ProgressBar;
 public class ArticleFragment extends Fragment {
     static final String ARTICLE_URL = "de.eknoes.inofficialgolem.ARTICLE_URL";
     static final String FORCE_WEBVIEW = "de.eknoes.inofficialgolem.FORCE_WEBVIEW";
+    static final String NO_ARTICLE = "de.eknoes.inofficialgolem.NO_ARTICLE";
 
     private static final String TAG = "ArticleFragment";
     private String url;
     private boolean forceWebview;
+    private boolean noArticle;
     private WebView webView;
     private ProgressBar progress;
 
@@ -53,13 +55,18 @@ public class ArticleFragment extends Fragment {
      * @param forceWebview Force webView even if offline version is available
      * @return A new instance of fragment ArticleFragment.
      */
-    static ArticleFragment newInstance(String articleUrl, boolean forceWebview) {
+    static ArticleFragment newInstance(String articleUrl, boolean forceWebview, boolean noArticle) {
         ArticleFragment fragment = new ArticleFragment();
         Bundle args = new Bundle();
         args.putString(ARTICLE_URL, articleUrl);
         args.putBoolean(FORCE_WEBVIEW, forceWebview);
+        args.putBoolean(NO_ARTICLE, noArticle);
         fragment.setArguments(args);
         return fragment;
+    }
+
+    static ArticleFragment newInstance(String articleUrl, boolean forceWebview) {
+        return ArticleFragment.newInstance(articleUrl, forceWebview, false);
     }
 
     void updateArticle(String url, boolean forceWebview) {
@@ -73,7 +80,26 @@ public class ArticleFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setHasOptionsMenu(true);
+
+        if (getArguments() != null) {
+            url = getArguments().getString(ARTICLE_URL);
+            forceWebview = getArguments().getBoolean(FORCE_WEBVIEW);
+            noArticle = getArguments().getBoolean(NO_ARTICLE);
+        } else if (savedInstanceState != null) {
+            url = savedInstanceState.getString(ARTICLE_URL);
+            forceWebview = savedInstanceState.getBoolean(FORCE_WEBVIEW);
+            noArticle = savedInstanceState.getBoolean(NO_ARTICLE);
+        }
+
+        setHasOptionsMenu();
+    }
+
+    private void setHasOptionsMenu() {
+        if (noArticle) {
+            setHasOptionsMenu(false);
+        } else {
+            setHasOptionsMenu(true);
+        }
     }
 
     @Override
@@ -81,19 +107,13 @@ public class ArticleFragment extends Fragment {
         super.onSaveInstanceState(outState);
         outState.putBoolean(FORCE_WEBVIEW, forceWebview);
         outState.putString(ARTICLE_URL, url);
+        outState.putBoolean(NO_ARTICLE, noArticle);
     }
 
     @SuppressLint("SetJavaScriptEnabled")
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        if (getArguments() != null) {
-            url = getArguments().getString(ARTICLE_URL);
-            forceWebview = getArguments().getBoolean(FORCE_WEBVIEW);
-        } else if (savedInstanceState != null) {
-            url = savedInstanceState.getString(ARTICLE_URL);
-            forceWebview = savedInstanceState.getBoolean(FORCE_WEBVIEW);
-        }
 
         if(webView != null) {
             webView.setWebViewClient(new GolemWebViewClient() {
@@ -132,15 +152,13 @@ public class ArticleFragment extends Fragment {
     @Override
     public void onPause() {
         super.onPause();
-        setHasOptionsMenu(false);
-
     }
 
     @Override
     public void onResume() {
         super.onResume();
         calculateSettings();
-        setHasOptionsMenu(true);
+        setHasOptionsMenu();
     }
 
     @Override
@@ -174,17 +192,21 @@ public class ArticleFragment extends Fragment {
             Intent shareIntent = new Intent();
             shareIntent.setAction(Intent.ACTION_SEND);
             String link = null;
-            if (article.getUrl() != null) {
+            if (article != null && article.getUrl() != null) {
                 link = article.getUrl();
             } else if (url != null) {
                 link = url;
             }
 
-            if (link != null) {
+            if (link != null && article != null) {
                 shareIntent.putExtra(Intent.EXTRA_TEXT, article.getSubheadline() + ": " + article.getTitle() + " - " + link);
-                shareIntent.setType("text/plain");
-                startActivity(Intent.createChooser(shareIntent, getResources().getString(R.string.choose_share_article)));
+            } else {
+                shareIntent.putExtra(Intent.EXTRA_TEXT, link);
             }
+
+            shareIntent.setType("text/plain");
+            startActivity(Intent.createChooser(shareIntent, getResources().getString(R.string.choose_share_article)));
+
         }
 
         return super.onOptionsItemSelected(item);

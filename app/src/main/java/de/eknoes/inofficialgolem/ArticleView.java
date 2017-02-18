@@ -10,8 +10,6 @@ import android.view.MenuItem;
 public class ArticleView extends AppCompatActivity {
 
     private static final String TAG = "ArticleView";
-    private String url;
-
 
 
     @Override
@@ -26,10 +24,11 @@ public class ArticleView extends AppCompatActivity {
         }
 
 
-        url = getIntent().getStringExtra(ArticleFragment.ARTICLE_URL);
+        String url = getIntent().getStringExtra(ArticleFragment.ARTICLE_URL);
         boolean forceWebview = getIntent().getBooleanExtra(ArticleFragment.FORCE_WEBVIEW, false);
+        boolean noArticle = getIntent().getBooleanExtra(ArticleFragment.NO_ARTICLE, false);
 
-        ArticleFragment articleFragment = ArticleFragment.newInstance(url, forceWebview);
+        ArticleFragment articleFragment = ArticleFragment.newInstance(url, forceWebview, noArticle);
 
         getSupportFragmentManager().beginTransaction().replace(R.id.articleFragment, articleFragment).commit();
 
