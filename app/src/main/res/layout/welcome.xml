@@ -43,4 +43,18 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/write_a_mail"/>
+
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/TextAppearance.AppCompat.Body2"
+            android:text="@string/mobileViewTippText"
+            android:layout_marginTop="@dimen/activity_vertical_margin"/>
+
+    <Button
+            android:id="@+id/mobileViewBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/choose_layout"/>
+
 </LinearLayout>

@@ -61,5 +61,6 @@
     <string name="take_me_to_store">Take me to the App Store</string>
     <string name="write_a_mail">Mail me!</string>
     <string name="sendMail">Write an E-Mail</string>
+    <string name="mobileViewTippText">Golem.de shows the desktop layout for Tablets at this size. You can fix this issue by choosing the \"Mobile Layout\".</string>
 
 </resources>

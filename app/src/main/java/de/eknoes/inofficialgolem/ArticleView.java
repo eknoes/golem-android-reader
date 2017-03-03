@@ -10,6 +10,7 @@ import android.view.MenuItem;
 public class ArticleView extends AppCompatActivity {
 
     private static final String TAG = "ArticleView";
+    private ArticleFragment articleFragment;
 
 
     @Override
@@ -28,7 +29,7 @@ public class ArticleView extends AppCompatActivity {
         boolean forceWebview = getIntent().getBooleanExtra(ArticleFragment.FORCE_WEBVIEW, false);
         boolean noArticle = getIntent().getBooleanExtra(ArticleFragment.NO_ARTICLE, false);
 
-        ArticleFragment articleFragment = ArticleFragment.newInstance(url, forceWebview, noArticle);
+        articleFragment = ArticleFragment.newInstance(url, forceWebview, noArticle);
 
         getSupportFragmentManager().beginTransaction().replace(R.id.articleFragment, articleFragment).commit();
 
@@ -56,4 +57,10 @@ public class ArticleView extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public void onBackPressed() {
+        if (!articleFragment.handleBackPressed()) {
+            super.onBackPressed();
+        }
+    }
 }

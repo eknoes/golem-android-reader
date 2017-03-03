@@ -12,6 +12,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
+import static de.eknoes.inofficialgolem.ArticleFragment.*;
+
 public class MainActivity extends AppCompatActivity implements ArticleListFragment.OnArticleSelectedListener {
     private static final String TAG = "MainActivity";
     private static final String CURRENT_ARTICLE = "currentArticle";
@@ -33,6 +35,7 @@ public class MainActivity extends AppCompatActivity implements ArticleListFragme
 
         Button mailBtn = (Button) findViewById(R.id.mailBtn);
         Button storeBtn = (Button) findViewById(R.id.storeBtn);
+        Button layoutBtn = (Button) findViewById(R.id.mobileViewBtn);
 
         if (mailBtn != null && storeBtn != null) {
             storeBtn.setOnClickListener(new View.OnClickListener() {
@@ -75,6 +78,19 @@ public class MainActivity extends AppCompatActivity implements ArticleListFragme
                     startActivity(Intent.createChooser(emailIntent, getResources().getString(R.string.sendMail)));
                 }
             });
+
+            if (layoutBtn != null) {
+                layoutBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(MainActivity.this, ArticleView.class);
+                        intent.putExtra(ARTICLE_URL, "http://www.golem.de/sonstiges/ansicht/");
+                        intent.putExtra(FORCE_WEBVIEW, true);
+                        intent.putExtra(NO_ARTICLE, true);
+                        startActivity(intent);
+                    }
+                });
+            }
         }
 
     }
@@ -157,6 +173,17 @@ public class MainActivity extends AppCompatActivity implements ArticleListFragme
             articleIntent.putExtra(ArticleFragment.FORCE_WEBVIEW, forceWebview);
             startActivity(articleIntent);
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (getResources().getBoolean(R.bool.twoPaneMode)) {
+            ArticleFragment articleFragment = (ArticleFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_article);
+            if (articleFragment != null && articleFragment.handleBackPressed()) {
+                return;
+            }
+        }
+        super.onBackPressed();
     }
 
     @Override

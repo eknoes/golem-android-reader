@@ -251,6 +251,14 @@ public class ArticleFragment extends Fragment {
 
     }
 
+    boolean handleBackPressed() {
+        if (webView.canGoBack()) {
+            webView.goBack();
+            return true;
+        }
+        return false;
+    }
+
     private class loadArticleTask extends AsyncTask<Void, Void, Void> {
 
         /**

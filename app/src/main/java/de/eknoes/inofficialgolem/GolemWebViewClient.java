@@ -64,4 +64,6 @@ class GolemWebViewClient extends WebViewClient {
             view.setOnTouchListener(null);
         }
     }
+
+
 }

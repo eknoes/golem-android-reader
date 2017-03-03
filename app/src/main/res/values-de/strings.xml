@@ -43,7 +43,8 @@
     <string name="sendMail">Schreibe eine Mail</string>
     <string name="take_me_to_store">Bring mich zum Play Store</string>
     <string name="welcome_head">Danke…</string>
-    <string name="welcome_text">dass du diesen Reader für Golem.de nutzt. Ich versuche ihn stetig weiterzuentwickeln: Wenn du Wünsche oder Anregungen hast melde dich gerne bei mir.</string>
-    <string name="welcome_text2">Wenn die App dir gefällt, dann würde ich mich sehr über eine Bewertung freuen. Wenn nicht, dann schreib mir doch eine Mail mit deiner Kritik!</string>
+    <string name="welcome_text">dass du diesen Reader für Golem.de nutzt. Ich versuche ihn stetig weiterzuentwickeln: Wenn du Wünsche oder Anregungen hast, melde dich gerne bei mir.</string>
+    <string name="welcome_text2">Falls die App dir gefällt, würde ich mich sehr über eine Bewertung freuen. Hast du Kritik oder Verbesserungsvorschläge? Dann schreib mir doch eine E-Mail!</string>
     <string name="write_a_mail">Mail schreiben</string>
+    <string name="mobileViewTippText">Golem.de zeigt für Tablets in dieser Größe das Desktop Layout an. Wenn du eine kompaktere Artikelansicht nutzen möchtest, kannst du das \"Mobile Layout\" auswählen.</string>
 </resources>
