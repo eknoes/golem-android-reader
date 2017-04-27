@@ -94,9 +94,10 @@ public class ArticleListFragment extends Fragment {
     public void onResume() {
         super.onResume();
         long last_refresh = PreferenceManager.getDefaultSharedPreferences(getContext()).getLong("last_refresh", 0);
-        int refresh_limit = PreferenceManager.getDefaultSharedPreferences(getContext()).getInt("refresh_limit", 5) * 1000 * 60; //Saved as minutes
+        int refresh_limit = PreferenceManager.getDefaultSharedPreferences(getContext()).getInt("refresh_limit", 5); //Saved as minutes
 
-        if (last_refresh + refresh_limit < new Date().getTime()) {
+
+        if (refresh_limit != 0 && last_refresh + (refresh_limit * 1000 * 60) < new Date().getTime()) {
             Log.d(TAG, "onCreate: Refresh, last refresh was " + ((new Date().getTime() - last_refresh) / 1000) + "sec ago");
             refresh();
         } else {

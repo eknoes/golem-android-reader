@@ -12,7 +12,7 @@
     <string name="pref_article_limit">Anzahl Artikel</string>
     <string name="pref_article_limit_sum">Anzahl der Artikel, welche gespeichert bleiben sollen.</string>
     <string name="pref_article_refresh">Aktualisierungsintervall</string>
-    <string name="pref_article_refresh_sum">Artikel werden regelmäßig aktualisiert, wenn die App geöffnet ist</string>
+    <string name="pref_article_refresh_sum">Artikel werden regelmäßig aktualisiert, wenn die App geöffnet ist. Auswahl von 0 deaktiviert die automatische Aktualisierung.</string>
     <string name="pref_contact_sum">Dies ist keine offizielle golem.de App. Wenn sie einen Bug melden wollen oder Ideen zur Verbesserung haben, öffnen sie unser Github Repository</string>
     <string name="pref_has_abo">Golem.de Abo nutzen</string>
     <string name="privacy_sum">Datenschutzerklärung öffnen</string>
