@@ -141,7 +141,7 @@ public class ArticleListFragment extends Fragment {
 
         ArticleAdapter() {
             super();
-            context = getContext();
+            context = getContext().getApplicationContext();
             inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             FeedReaderDbHelper dbHelper = FeedReaderDbHelper.getInstance(context);
             db = dbHelper.getReadableDatabase();

@@ -280,7 +280,8 @@ public class ArticleFragment extends Fragment {
         protected Void doInBackground(Void... params) {
             if (webView != null) {
 
-                FeedReaderDbHelper dbHelper = FeedReaderDbHelper.getInstance(getContext());
+                FeedReaderDbHelper dbHelper = FeedReaderDbHelper.getInstance(getContext().getApplicationContext());
+
                 SQLiteDatabase db = dbHelper.getReadableDatabase();
 
                 if (url != null) {

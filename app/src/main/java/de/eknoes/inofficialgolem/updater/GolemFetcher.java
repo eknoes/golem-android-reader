@@ -35,7 +35,7 @@ public class GolemFetcher extends AsyncTask<Void, Float, GolemFetcher.FETCH_STAT
     private final Callable<Void> notifier;
 
     public GolemFetcher(Context context, ProgressBar mProgress, Callable<Void> notifier) {
-        this.db = FeedReaderDbHelper.getInstance(context).getWritableDatabase();
+        this.db = FeedReaderDbHelper.getInstance(context.getApplicationContext()).getWritableDatabase();
         this.mProgress = mProgress;
         this.context = context;
         this.notifier = notifier;
