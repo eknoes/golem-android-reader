@@ -22,7 +22,7 @@
     <string name="pref_article_refresh">Refresh Interval</string>
     <string name="pref_article_refresh_sum">Articles are refreshed periodically when the app is opened</string>
     <string name="pref_data_title" translatable="false">SYNC</string>
-    <string name="pref_abo_title" translatable="false">SUBSCRIPTION</string>
+    <string name="pref_abo_title">SUBSCRIPTION</string>
     <string name="pref_has_abo">Use golem.de subscription</string>
     <string name="pref_abo_key" translatable="false">golem.de Token</string>
     <string name="pref_abo_key_sum">Your subscription of golem.de</string>
