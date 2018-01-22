@@ -7,8 +7,8 @@ android {
         applicationId "de.eknoes.inofficialgolem"
         minSdkVersion 14
         targetSdkVersion 27
-        versionCode 118
-        versionName "1.0.3"
+        versionCode 119
+        versionName "1.0.4"
         if (project.hasProperty('golem_api_key')) {
             resValue "string", "golem_api_key", golem_api_key
         } else {
