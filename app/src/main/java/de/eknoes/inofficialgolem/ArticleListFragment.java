@@ -6,7 +6,9 @@ import android.database.Cursor;
 import android.database.DataSetObserver;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
@@ -68,8 +70,8 @@ public class ArticleListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         //super.onCreateView(inflater, container, savedInstanceState);
         View v = inflater.inflate(R.layout.fragment_articlelist, container, false);
-        mProgress = (ProgressBar) v.findViewById(R.id.progressBar);
-        ListView listView = (ListView) v.findViewById(R.id.articleList);
+        mProgress = v.findViewById(R.id.progressBar);
+        ListView listView = v.findViewById(R.id.articleList);
 
         Log.d(TAG, "onStart: Creating Article List Adapter");
         listAdapter = new ArticleAdapter();
@@ -108,11 +110,11 @@ public class ArticleListFragment extends Fragment {
         }
     }
 
-    public void refresh() {
+    void refresh() {
         if (fetcher == null || fetcher.getStatus() != AsyncTask.Status.RUNNING) {
             fetcher = new GolemFetcher(getContext(), mProgress, new Callable<Void>() {
                 @Override
-                public Void call() throws Exception {
+                public Void call() {
                     if(listAdapter != null) {
                         listAdapter.notifyDataSetChanged();
                     }
@@ -205,7 +207,7 @@ public class ArticleListFragment extends Fragment {
             };
 
             String sort = FeedReaderContract.Article.COLUMN_NAME_DATE + " DESC";
-            String limit = "0, " + Integer.toString(PreferenceManager.getDefaultSharedPreferences(context).getInt("article_limit", 200));
+            String limit = "0, " + PreferenceManager.getDefaultSharedPreferences(context).getInt("article_limit", 200);
 
 
             cursor = db.query(
@@ -259,12 +261,12 @@ public class ArticleListFragment extends Fragment {
             Article art = getItem(position);
             String infoText = String.format(context.getResources().getString(R.string.article_published), DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.SHORT).format(art.getDate()));
 
-            TextView teaser = (TextView) view.findViewById(R.id.articleTeaser);
-            TextView title = (TextView) view.findViewById(R.id.articleTitle);
-            TextView subheading = (TextView) view.findViewById(R.id.articleSubtitle);
-            TextView info = (TextView) view.findViewById(R.id.articleInfo);
-            NetworkImageView image = (NetworkImageView) view.findViewById(R.id.articleImage);
-            ImageView offlineImage = (ImageView) view.findViewById(R.id.articleOfflineAvailable);
+            TextView teaser = view.findViewById(R.id.articleTeaser);
+            TextView title = view.findViewById(R.id.articleTitle);
+            TextView subheading = view.findViewById(R.id.articleSubtitle);
+            TextView info = view.findViewById(R.id.articleInfo);
+            NetworkImageView image = view.findViewById(R.id.articleImage);
+            ImageView offlineImage = view.findViewById(R.id.articleOfflineAvailable);
 
             Resources res = context.getResources();
 
@@ -279,7 +281,13 @@ public class ArticleListFragment extends Fragment {
 
             image.setImageUrl(art.getImgUrl(), imgLoader);
             if (art.isOffline()) {
-                offlineImage.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_offline_pin_black_24dp));
+                Drawable offlineIcon;
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    offlineIcon = context.getResources().getDrawable(R.drawable.ic_offline_pin_black_24dp, null);
+                } else {
+                    offlineIcon = context.getResources().getDrawable(R.drawable.ic_offline_pin_black_24dp);
+                }
+                offlineImage.setImageDrawable(offlineIcon);
             } else {
                 offlineImage.setImageDrawable(null);
             }

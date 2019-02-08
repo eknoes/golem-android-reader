@@ -20,7 +20,9 @@
             android:layout_alignParentStart="false"
             android:layout_alignParentRight="true"
             android:layout_alignParentLeft="false"
-            android:layout_toLeftOf="@+id/articleSubtitle"/>
+            android:layout_toLeftOf="@+id/articleSubtitle"
+            android:layout_toStartOf="@+id/articleSubtitle"
+            android:contentDescription="@string/teaser_img_desc"/>
     <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -46,7 +48,8 @@
             android:layout_below="@id/articleInfo"
             android:layout_marginRight="10dip"
             android:layout_marginTop="10dip"
-            android:scaleType="fitStart"/>
+            android:scaleType="fitStart"
+            android:layout_marginEnd="10dip"/>
     <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -55,5 +58,6 @@
             android:textColor="@color/textColorText"
             android:text="Test text of this Article"
             android:layout_below="@+id/articleInfo"
-            android:layout_toRightOf="@id/articleImage"/>
+            android:layout_toRightOf="@id/articleImage"
+            android:layout_toEndOf="@id/articleImage"/>
 </RelativeLayout>

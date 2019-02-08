@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * Created by soenke on 20.04.16.
  */
-public abstract class GolemUpdater {
+abstract class GolemUpdater {
     final Context context;
     final String TAG = this.getClass().getCanonicalName();
 

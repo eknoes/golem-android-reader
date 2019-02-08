@@ -142,16 +142,11 @@ public class ArticleFragment extends Fragment {
         // Inflate the layout for this fragment
         Log.d(TAG, "onCreateView: Inflating Fragment layout");
         View v = inflater.inflate(R.layout.fragment_article, container, false);
-        webView = (WebView) v.findViewById(R.id.articleWebView);
-        progress = (ProgressBar) v.findViewById(R.id.articleProgress);
+        webView = v.findViewById(R.id.articleWebView);
+        progress = v.findViewById(R.id.articleProgress);
 
 
         return v;
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
     }
 
     @Override
@@ -281,8 +276,6 @@ public class ArticleFragment extends Fragment {
 
         @Override
         protected Void doInBackground(Void... params) {
-            if (webView != null) {
-
                 FeedReaderDbHelper dbHelper = FeedReaderDbHelper.getInstance(getContext().getApplicationContext());
 
                 SQLiteDatabase db = dbHelper.getReadableDatabase();
@@ -321,14 +314,12 @@ public class ArticleFragment extends Fragment {
 
                     cursor.close();
                 }
-            }
-
             return null;
         }
 
         @Override
         protected void onPostExecute(Void vVoid) {
-            if(isCancelled()) {
+            if(isCancelled() || webView == null) {
                 return;
             }
             if (article == null || !article.isOffline() || forceWebview ) {
@@ -336,7 +327,10 @@ public class ArticleFragment extends Fragment {
                 if (c != null) {
                     ConnectivityManager connMgr = (ConnectivityManager)
                             getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
-                    NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
+                    NetworkInfo networkInfo = null;
+                    if (connMgr != null) {
+                        networkInfo = connMgr.getActiveNetworkInfo();
+                    }
                     if (networkInfo != null && networkInfo.isConnected()) {
                         progress.setVisibility(View.VISIBLE);
                         progress.setEnabled(true);

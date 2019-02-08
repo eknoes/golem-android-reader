@@ -108,9 +108,4 @@ public class SettingsActivity extends PreferenceActivity implements SharedPrefer
         }
 
     }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-    }
 }

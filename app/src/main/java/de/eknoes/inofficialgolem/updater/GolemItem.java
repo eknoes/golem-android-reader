@@ -11,11 +11,11 @@ public class GolemItem {
     private String url;
     private final Map<ItemProperties, String> properties = new HashMap<>();
 
-    public boolean hasProp(ItemProperties key) {
+    boolean hasProp(ItemProperties key) {
         return properties.containsKey(key);
     }
 
-    public String getProp(ItemProperties key) {
+    String getProp(ItemProperties key) {
         if (hasProp(key)) {
             return properties.get(key);
         } else {
@@ -43,5 +43,5 @@ public class GolemItem {
         this.url = url;
     }
 
-    public enum ItemProperties {TITLE, PUBLISHED, TEASER, IMG_URL, COMMENT_URL, COMMENT_NR, DATE, FULLTEXT, OFFLINE_AVAILABLE, HAS_MEDIA_FULLTEXT}
+    public enum ItemProperties {TITLE, TEASER, IMG_URL, COMMENT_URL, COMMENT_NR, DATE, FULLTEXT, OFFLINE_AVAILABLE, HAS_MEDIA_FULLTEXT}
 }

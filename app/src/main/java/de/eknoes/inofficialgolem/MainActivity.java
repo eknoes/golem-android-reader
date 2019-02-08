@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity implements ArticleListFragme
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         if (savedInstanceState != null) {
@@ -33,9 +33,9 @@ public class MainActivity extends AppCompatActivity implements ArticleListFragme
             }
         }
 
-        Button mailBtn = (Button) findViewById(R.id.mailBtn);
-        Button storeBtn = (Button) findViewById(R.id.storeBtn);
-        Button layoutBtn = (Button) findViewById(R.id.mobileViewBtn);
+        Button mailBtn = findViewById(R.id.mailBtn);
+        Button storeBtn = findViewById(R.id.storeBtn);
+        Button layoutBtn = findViewById(R.id.mobileViewBtn);
 
         if (mailBtn != null && storeBtn != null) {
             storeBtn.setOnClickListener(new View.OnClickListener() {
@@ -139,6 +139,7 @@ public class MainActivity extends AppCompatActivity implements ArticleListFragme
             shareIntent.putExtra(Intent.EXTRA_TEXT, String.format(getString(R.string.shareAppText), storeUri));
             shareIntent.setType("text/plain");
             startActivity(Intent.createChooser(shareIntent, getResources().getString(R.string.choose_share_app)));
+            Log.d(TAG, "onOptionsItemSelected: Share App");
 
         } else if (id == R.id.action_settings) {
             Intent i = new Intent(this, SettingsActivity.class);

@@ -5,7 +5,6 @@
     <string name="action_settings">Einstellungen</string>
     <string name="action_share">Teilen</string>
     <string name="article_published">Veröffentlicht am %s</string>
-    <string name="article_published_with_authors">Veröffentlicht am %1$s, geschrieben von %2$s</string>
     <string name="how_to_key">Golem.de Abo Account</string>
     <string name="how_to_key_content">Hier können Sie Ihren Abo Token unter Volltext-RSS-Feed finden. Die Zeichen nach \"http://rss.golem.de/rss_sub.php?token=\" sind ihr Token. Außerdem können Sie hier auch ein Abo abschließen.</string>
     <string name="pref_abo_key_sum">Richten sie hier ihr Abo ein</string>
@@ -20,7 +19,6 @@
     <string name="refresh_error_undefined">Fehler bei der Aktualisierung der Artikel</string>
     <string name="refresh_success">Artikel wurden erfolgreich aktualisiert</string>
     <string name="shareAppText">Teste diese App zum lesen von golem.de: %s</string>
-    <string name="shareArticle">Schau dir diesen interessanten Artikel an: %s</string>
     <string name="err_no_network">Entschuldigung, aber dieser Artikel ist nicht offline verfügbar.</string>
     <string name="refresh_error_connection">Kann nicht aktualisieren, keine Internetverbindung</string>
     <string name="golem_token_reset">Ihr Golem Token wurde zurückgesetzt</string>
@@ -36,7 +34,6 @@
     <string name="pref_zoom_smaller">Kleiner</string>
     <string name="choose_layout">Ansicht wählen</string>
     <string name="choose_layout_content">Wählen sie aus, ob sie die Mobile- oder Dektopansicht angezeigt bekommen wollen</string>
-    <string name="undefined_error">Undefinierter Fehler</string>
     <string name="pref_beta_sum">Um am Beta-Programm teilzunehmen klicken sie hier</string>
     <string name="pref_beta_title">An Beta teilnehmen</string>
     <string name="choose_share_app">Teile die App mit…</string>

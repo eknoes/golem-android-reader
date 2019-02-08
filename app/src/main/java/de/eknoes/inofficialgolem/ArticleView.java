@@ -9,7 +9,6 @@ import android.view.MenuItem;
 
 public class ArticleView extends AppCompatActivity {
 
-    private static final String TAG = "ArticleView";
     private ArticleFragment articleFragment;
 
 
@@ -17,7 +16,7 @@ public class ArticleView extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_article_view);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         if (getSupportActionBar() != null) {

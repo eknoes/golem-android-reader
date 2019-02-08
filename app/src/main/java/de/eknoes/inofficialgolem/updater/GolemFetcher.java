@@ -19,6 +19,7 @@ import de.eknoes.inofficialgolem.FeedReaderContract;
 import de.eknoes.inofficialgolem.FeedReaderDbHelper;
 import de.eknoes.inofficialgolem.R;
 
+import java.lang.ref.WeakReference;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.Callable;
@@ -29,15 +30,15 @@ import java.util.concurrent.Callable;
 public class GolemFetcher extends AsyncTask<Void, Float, GolemFetcher.FETCH_STATE> {
     private static final String TAG = "GolemFetcher";
     private final SQLiteDatabase db;
-    private final ProgressBar mProgress;
+    private final WeakReference<ProgressBar> mProgress;
     private final GolemUpdater[] updater;
-    private final Context context;
+    private final WeakReference<Context> context;
     private final Callable<Void> notifier;
 
     public GolemFetcher(Context context, ProgressBar mProgress, Callable<Void> notifier) {
         this.db = FeedReaderDbHelper.getInstance(context.getApplicationContext()).getWritableDatabase();
-        this.mProgress = mProgress;
-        this.context = context;
+        this.mProgress = new WeakReference<>(mProgress);
+        this.context = new WeakReference<>(context);
         this.notifier = notifier;
         if(PreferenceManager.getDefaultSharedPreferences(context).getBoolean("has_abo", false)) {
             updater = new GolemUpdater[]{new articleUpdater(context, false), new articleUpdater(context, true)};
@@ -49,51 +50,68 @@ public class GolemFetcher extends AsyncTask<Void, Float, GolemFetcher.FETCH_STAT
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
-        ConnectivityManager connMgr = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
-        if (networkInfo != null && networkInfo.isConnected()) {
-            mProgress.setProgress(1);
-            mProgress.setIndeterminate(true);
-            mProgress.setVisibility(View.VISIBLE);
+        Context ctx = context.get();
+        if(ctx != null) {
+            ConnectivityManager connMgr = (ConnectivityManager) ctx.getSystemService(Context.CONNECTIVITY_SERVICE);
+            NetworkInfo networkInfo = null;
+            if (connMgr != null) {
+                networkInfo = connMgr.getActiveNetworkInfo();
+            }
+            if (networkInfo != null && networkInfo.isConnected()) {
+                ProgressBar progressBar = mProgress.get();
+                if(progressBar != null) {
+                    progressBar.setProgress(1);
+                    progressBar.setIndeterminate(true);
+                    progressBar.setVisibility(View.VISIBLE);
+                }
+            }
         }
     }
 
     @Override
     protected GolemFetcher.FETCH_STATE doInBackground(Void... voids) {
-        ConnectivityManager connMgr = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
-        if (networkInfo != null && networkInfo.isConnected()) {
-            FETCH_STATE result = FETCH_STATE.SUCCESS;
-            for (GolemUpdater u : updater) {
-                try {
-                    List<GolemItem> items = u.getItems();
-                    if (items != null && items.size() != 0) {
-                        writeArticles(items);
-                    } else {
-                        Log.d(TAG, "doInBackground: Updater did not return items");
+        Context ctx = context.get();
+        if(ctx != null) {
+            ConnectivityManager connMgr = (ConnectivityManager) ctx.getSystemService(Context.CONNECTIVITY_SERVICE);
+            NetworkInfo networkInfo = null;
+            if (connMgr != null) {
+                networkInfo = connMgr.getActiveNetworkInfo();
+            }
+            if (networkInfo != null && networkInfo.isConnected()) {
+                FETCH_STATE result = FETCH_STATE.SUCCESS;
+                for (GolemUpdater u : updater) {
+                    try {
+                        List<GolemItem> items = u.getItems();
+                        if (items != null && items.size() != 0) {
+                            writeArticles(items);
+                        } else {
+                            Log.d(TAG, "doInBackground: Updater did not return items");
+                        }
+                    } catch (TimeoutError e) {
+                        result = FETCH_STATE.TIMEOUT;
+                    } catch (NoConnectionError e) {
+                        result = FETCH_STATE.NO_CONNECTION;
+                    } catch (AuthFailureError authFailureError) {
+                        result = FETCH_STATE.ABO_INVALID;
                     }
-                } catch (TimeoutError e) {
-                    result = FETCH_STATE.TIMEOUT;
-                } catch (NoConnectionError e) {
-                    result = FETCH_STATE.NO_CONNECTION;
-                } catch (AuthFailureError authFailureError) {
-                    result = FETCH_STATE.ABO_INVALID;
                 }
-            }
 
-            if(result == FETCH_STATE.SUCCESS) {
-                PreferenceManager.getDefaultSharedPreferences(context).edit().putLong("last_refresh", new Date().getTime()).apply();
+                if (result == FETCH_STATE.SUCCESS) {
+                    PreferenceManager.getDefaultSharedPreferences(ctx).edit().putLong("last_refresh", new Date().getTime()).apply();
+                }
+                return result;
             }
-            return result;
+            return FETCH_STATE.NO_CONNECTION;
         }
-        return FETCH_STATE.NO_CONNECTION;
+        return FETCH_STATE.UNDEFINED_ERROR;
     }
 
     @Override
     protected void onPostExecute(GolemFetcher.FETCH_STATE finished) {
         super.onPostExecute(finished);
-        if (mProgress != null) {
-            mProgress.setVisibility(View.GONE);
+        ProgressBar progressBar = mProgress.get();
+        if(progressBar != null) {
+            progressBar.setVisibility(View.GONE);
         }
         int msgString;
         switch (finished) {
@@ -113,10 +131,13 @@ public class GolemFetcher extends AsyncTask<Void, Float, GolemFetcher.FETCH_STAT
             default:
                 msgString = R.string.refresh_error_undefined;
         }
-        Toast.makeText(context, msgString, Toast.LENGTH_SHORT).show();
-        if (finished == FETCH_STATE.ABO_INVALID) {
-            PreferenceManager.getDefaultSharedPreferences(context).edit().putBoolean("has_abo", false).apply();
-            Toast.makeText(context, R.string.golem_token_reset, Toast.LENGTH_SHORT).show();
+        Context ctx = context.get();
+        if(ctx != null) {
+            Toast.makeText(ctx, msgString, Toast.LENGTH_SHORT).show();
+            if (finished == FETCH_STATE.ABO_INVALID) {
+                PreferenceManager.getDefaultSharedPreferences(ctx).edit().putBoolean("has_abo", false).apply();
+                Toast.makeText(ctx, R.string.golem_token_reset, Toast.LENGTH_SHORT).show();
+            }
         }
         try {
             notifier.call();

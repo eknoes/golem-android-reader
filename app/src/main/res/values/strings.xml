@@ -4,16 +4,13 @@
     <string name="action_refresh">Refresh</string>
     <string name="refresh_success">Successfully refreshed articles</string>
     <string name="refresh_error_undefined">Error while refreshing articles</string>
-    <string name="undefined_error">Undefined Error</string>
     <string name="refresh_error_connection">No connection while refreshing articles</string>
     <string name="refresh_error_timeout">Timeout while refreshing articles</string>
     <string name="refresh_error_invalid_abo">Invalid subscription key, can\'t refresh</string>
     <string name="article_published">Published on %s</string>
-    <string name="article_published_with_authors">Published on %1$s, written by %2$s</string>
     <string name="golem_title" translatable="false">golem.de</string>
     <string name="action_share">Share</string>
     <string name="shareAppText">Try this App for reading golem.de: %s</string>
-    <string name="shareArticle">Have a look at this awesome article: %s</string>
     <string name="title_activity_settings" translatable="false">Settings</string>
 
     <!-- Settings -->
@@ -26,8 +23,6 @@
     <string name="pref_has_abo">Use golem.de subscription</string>
     <string name="pref_abo_key" translatable="false">golem.de Token</string>
     <string name="pref_abo_key_sum">Your subscription of golem.de</string>
-    <string name="lorem_short" translatable="false">Lorem ipsum sim dolor</string>
-    <string name="lorem_long" translatable="false">Lorem ipsum dolor sit amet, aliquip veritus fuisset per ex. In facete legendos deserunt sit, eum summo sonet recusabo cu, ea has enim falli philosophia. Assum platonem nam ne, sea exerci vivendum at, mea esse sonet persequeris at. Id doming eleifend interpretaris sed, posse dicta definitionem usu et.  Te nullam philosophia sed, wisi audire suscipiantur ut his. Vidit alienum suavitate ei est. At qui magna deserunt, ei timeam perpetua cum, dicant conceptam quaerendum duo ut. Vocibus menandri eu qui, vero virtute discere eum ad. Nobis nemore mei an. Pri an posse movet antiopam.</string>
     <string name="action_open_webbrowser">Open in Browser</string>
     <string name="setting_contact" translatable="false">INFO</string>
     <string name="how_to_key">How to get the golem token</string>
@@ -63,5 +58,6 @@
     <string name="sendMail">Write an E-Mail</string>
     <string name="mobileViewTippText">Golem.de shows the desktop layout for Tablets at this size. You can fix this issue by choosing the \"Mobile Layout\".</string>
     <string name="action_open_comments">Open Forum in Browser</string>
+    <string name="teaser_img_desc">Teaser image of article</string>
 
 </resources>
