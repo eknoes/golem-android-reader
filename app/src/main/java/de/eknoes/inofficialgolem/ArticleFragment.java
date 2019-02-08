@@ -1,6 +1,7 @@
 package de.eknoes.inofficialgolem;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
@@ -168,6 +169,10 @@ public class ArticleFragment extends Fragment {
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
         inflater.inflate(R.menu.menu_webview, menu);
+
+        if(article == null || article.getCommentUrl() == null) {
+            menu.findItem(R.id.action_comments).setVisible(false);
+        }
     }
 
     @Override
@@ -319,10 +324,10 @@ public class ArticleFragment extends Fragment {
 
         @Override
         protected void onPostExecute(Void vVoid) {
-            if(isCancelled() || webView == null) {
+            if (isCancelled() || webView == null) {
                 return;
             }
-            if (article == null || !article.isOffline() || forceWebview ) {
+            if (article == null || !article.isOffline() || forceWebview) {
                 Context c = getContext();
                 if (c != null) {
                     ConnectivityManager connMgr = (ConnectivityManager)
@@ -347,7 +352,14 @@ public class ArticleFragment extends Fragment {
                 webView.loadDataWithBaseURL(article.getUrl(), article.getFulltext(), "text/html", "UTF-8", null);
                 Log.d(TAG, "onPostExecute: Filled Webview");
                 webView.reload();
+
             }
+
+            //If comment menu button should appear or disappear
+            Activity mainActivity = getActivity();
+            if (mainActivity != null)
+                mainActivity.invalidateOptionsMenu();
+
         }
     }
 
