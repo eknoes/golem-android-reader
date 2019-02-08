@@ -188,6 +188,9 @@ public class ArticleFragment extends Fragment {
                 webIntent.setData(Uri.parse(url));
                 startActivity(webIntent);
             }
+        } else if (id == R.id.action_comments) {
+            Log.d(TAG, "onOptionsItemSelected: Open Comments: " + article.getCommentUrl());
+            webView.loadUrl(article.getCommentUrl());
         } else if (id == R.id.action_share_article) {
             Intent shareIntent = new Intent();
             shareIntent.setAction(Intent.ACTION_SEND);
@@ -290,6 +293,8 @@ public class ArticleFragment extends Fragment {
                             FeedReaderContract.Article.COLUMN_NAME_TITLE,
                             FeedReaderContract.Article.COLUMN_NAME_SUBHEADING,
                             FeedReaderContract.Article.COLUMN_NAME_URL,
+                            FeedReaderContract.Article.COLUMN_NAME_COMMENTNR,
+                            FeedReaderContract.Article.COLUMN_NAME_COMMENTURL,
                             FeedReaderContract.Article.COLUMN_NAME_OFFLINE,
                             FeedReaderContract.Article.COLUMN_NAME_FULLTEXT,
                     };
@@ -307,6 +312,8 @@ public class ArticleFragment extends Fragment {
                         article.setTitle(cursor.getString(cursor.getColumnIndex(FeedReaderContract.Article.COLUMN_NAME_TITLE)));
                         article.setSubheadline(cursor.getString(cursor.getColumnIndex(FeedReaderContract.Article.COLUMN_NAME_SUBHEADING)));
                         article.setUrl(cursor.getString(cursor.getColumnIndex(FeedReaderContract.Article.COLUMN_NAME_URL)));
+                        article.setCommentUrl(cursor.getString(cursor.getColumnIndex(FeedReaderContract.Article.COLUMN_NAME_COMMENTURL)));
+                        article.setCommentNr(cursor.getString(cursor.getColumnIndex(FeedReaderContract.Article.COLUMN_NAME_COMMENTNR)));
                         article.setOffline(cursor.getInt(cursor.getColumnIndex(FeedReaderContract.Article.COLUMN_NAME_OFFLINE)) == 1);
                         article.setFulltext(cursor.getString(cursor.getColumnIndex(FeedReaderContract.Article.COLUMN_NAME_FULLTEXT)));
                     }
@@ -342,7 +349,10 @@ public class ArticleFragment extends Fragment {
                     webView.loadUrl(url);
                 }
             } else {
-                webView.loadData(article.getFulltext(), "text/html; charset=utf-8", "UTF-8");
+                Log.d(TAG, "onPostExecute: Fill Webview");
+                webView.loadDataWithBaseURL(article.getUrl(), article.getFulltext(), "text/html", "UTF-8", null);
+                Log.d(TAG, "onPostExecute: Filled Webview");
+                webView.reload();
             }
         }
     }

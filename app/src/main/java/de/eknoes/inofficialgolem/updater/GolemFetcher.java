@@ -22,6 +22,8 @@ import de.eknoes.inofficialgolem.R;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.Callable;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Created by soenke on 27.08.16.
@@ -39,7 +41,11 @@ public class GolemFetcher extends AsyncTask<Void, Float, GolemFetcher.FETCH_STAT
         this.mProgress = mProgress;
         this.context = context;
         this.notifier = notifier;
-        updater = new GolemUpdater[]{new NewestArticleUpdater(context), new AboArticleUpdater(context)};
+        if(PreferenceManager.getDefaultSharedPreferences(context).getBoolean("has_abo", false)) {
+            updater = new GolemUpdater[]{new articleUpdater(context, false), new articleUpdater(context, true)};
+        } else {
+            updater = new GolemUpdater[]{new articleUpdater(context, false)};
+        }
     }
 
     @Override
@@ -62,7 +68,12 @@ public class GolemFetcher extends AsyncTask<Void, Float, GolemFetcher.FETCH_STAT
             FETCH_STATE result = FETCH_STATE.SUCCESS;
             for (GolemUpdater u : updater) {
                 try {
-                    writeArticles(u.getItems());
+                    List<GolemItem> items = u.getItems();
+                    if (items != null && items.size() != 0) {
+                        writeArticles(items);
+                    } else {
+                        Log.d(TAG, "doInBackground: Updater did not return items");
+                    }
                 } catch (TimeoutError e) {
                     result = FETCH_STATE.TIMEOUT;
                 } catch (NoConnectionError e) {
@@ -116,112 +127,96 @@ public class GolemFetcher extends AsyncTask<Void, Float, GolemFetcher.FETCH_STAT
         }
     }
 
-    private boolean writeArticles(List<GolemItem> articles) {
+    private void writeArticles(List<GolemItem> articles) {
         for (GolemItem item : articles) {
-            if (item.getType() == GolemItem.Type.ARTICLE) {
-                int id = item.getId();
-                boolean createNew = false;
+            int id = item.getId();
 
-                if (item.getUrl().startsWith("http://")) {
-                    item.setUrl(item.getUrl().replace("http://", "https://"));
-                }
+            if (item.getUrl().startsWith("http://")) {
+                item.setUrl(item.getUrl().replace("http://", "https://"));
+            }
 
-                if (item.getId() == 0 && item.getUrl() != null) {
-                    if (item.getUrl().endsWith("-rss.html")) {
-                        item.setUrl(item.getUrl().substring(0, (item.getUrl().length() - "-rss.html".length())) + ".html");
-                    }
+            if (item.getUrl().endsWith("-rss.html")) {
+                item.setUrl(item.getUrl().substring(0, (item.getUrl().length() - "-rss.html".length())) + ".html");
+            }
+
+            String[] cols = {FeedReaderContract.Article.COLUMN_NAME_ID};
+            Cursor cursor = db.query(
+                    FeedReaderContract.Article.TABLE_NAME,
+                    cols,
+                    "url='" + item.getUrl() + "'",
+                    null,
+                    null,
+                    null,
+                    null);
+            if (cursor.getCount() > 0) {
+                cursor.moveToFirst();
+                id = cursor.getInt(cursor.getColumnIndex(FeedReaderContract.Article.COLUMN_NAME_ID));
+            }
+
+            cursor.close();
 
 
-                    String[] cols = {FeedReaderContract.Article.COLUMN_NAME_ID};
-                    Cursor cursor = db.query(
-                            FeedReaderContract.Article.TABLE_NAME,
-                            cols,
-                            "url='" + item.getUrl() + "'",
-                            null,
-                            null,
-                            null,
-                            null);
-                    if (cursor.getCount() > 0) {
-                        cursor.moveToFirst();
-                        id = cursor.getInt(cursor.getColumnIndex(FeedReaderContract.Article.COLUMN_NAME_ID));
-                        cursor.close();
-                    } else {
-                        Log.w(TAG, "doInBackground: URL given, but nothing found:" + item.getUrl());
-                        cursor.close();
-                        continue;
-                    }
-                } else if (id != 0) {
-                    String[] cols = {FeedReaderContract.Article.COLUMN_NAME_ID};
-                    Cursor cursor = db.query(
-                            FeedReaderContract.Article.TABLE_NAME,
-                            cols,
-                            "id='" + id + "'",
-                            null,
-                            null,
-                            null,
-                            null);
-                    if (cursor.getCount() == 0) {
-                        createNew = true;
-                    }
-                    cursor.close();
+
+            ContentValues values = new ContentValues();
+
+            values.put(FeedReaderContract.Article.COLUMN_NAME_URL, item.getUrl());
+
+            if (item.hasProp(GolemItem.ItemProperties.TITLE)) {
+                String[] titles = item.getProp(GolemItem.ItemProperties.TITLE).split(":");
+                if (titles.length != 2) {
+                    values.put(FeedReaderContract.Article.COLUMN_NAME_TITLE, item.getProp(GolemItem.ItemProperties.TITLE));
                 } else {
-                    Log.d(TAG, "doInBackground: No URL given. Continue");
-                    continue;
-                }
-
-                ContentValues values = new ContentValues();
-
-                values.put(FeedReaderContract.Article.COLUMN_NAME_ID, id);
-                values.put(FeedReaderContract.Article.COLUMN_NAME_URL, item.getUrl());
-
-                if (item.hasProp(GolemItem.ItemProperties.TITLE)) {
-                    String[] titles = item.getProp(GolemItem.ItemProperties.TITLE).split(":");
-                    if (titles.length == 1) {
-                        values.put(FeedReaderContract.Article.COLUMN_NAME_TITLE, titles[0]);
-                    } else if (titles.length == 2) {
-                        values.put(FeedReaderContract.Article.COLUMN_NAME_TITLE, titles[1].trim());
-                        values.put(FeedReaderContract.Article.COLUMN_NAME_SUBHEADING, titles[0].trim());
-                    }
-                }
-                if (item.hasProp(GolemItem.ItemProperties.TEASER)) {
-                    values.put(FeedReaderContract.Article.COLUMN_NAME_TEASER, item.getProp(GolemItem.ItemProperties.TEASER));
-                }
-
-                if (item.hasProp(GolemItem.ItemProperties.DATE)) {
-                    values.put(FeedReaderContract.Article.COLUMN_NAME_DATE, item.getProp(GolemItem.ItemProperties.DATE));
-                }
-
-                if (item.hasProp(GolemItem.ItemProperties.FULLTEXT)) {
-                    values.put(FeedReaderContract.Article.COLUMN_NAME_FULLTEXT, item.getProp(GolemItem.ItemProperties.FULLTEXT));
-                    values.put(FeedReaderContract.Article.COLUMN_NAME_OFFLINE, item.getProp(GolemItem.ItemProperties.OFFLINE_AVAILABLE));
-                }
-
-                if (item.hasProp(GolemItem.ItemProperties.OFFLINE_AVAILABLE)) {
-                    values.put(FeedReaderContract.Article.COLUMN_NAME_OFFLINE, Boolean.valueOf(item.getProp(GolemItem.ItemProperties.OFFLINE_AVAILABLE)));
-                }
-
-                if (item.hasProp(GolemItem.ItemProperties.AUTHORS)) {
-                    values.put(FeedReaderContract.Article.COLUMN_NAME_AUTHORS, item.getProp(GolemItem.ItemProperties.AUTHORS));
-                }
-
-                if (item.hasProp(GolemItem.ItemProperties.IMG_URL)) {
-                    values.put(FeedReaderContract.Article.COLUMN_NAME_IMG, item.getProp(GolemItem.ItemProperties.IMG_URL));
-                }
-
-                if (!createNew) {
-                    Log.d(TAG, "doInBackground: Updating article with id " + Integer.toString(id));
-                    db.update(FeedReaderContract.Article.TABLE_NAME, values, "id='" + Integer.toString(id) + "'", null);
-                } else {
-                    Log.d(TAG, "doInBackground: Creating new article with Title " + item.getProp(GolemItem.ItemProperties.TITLE));
-                    db.insert(FeedReaderContract.Article.TABLE_NAME, null, values);
-                }
-
-                if (isCancelled()) {
-                    return false;
+                    values.put(FeedReaderContract.Article.COLUMN_NAME_TITLE, titles[1].trim());
+                    values.put(FeedReaderContract.Article.COLUMN_NAME_SUBHEADING, titles[0].trim());
                 }
             }
+            if (item.hasProp(GolemItem.ItemProperties.TEASER)) {
+                values.put(FeedReaderContract.Article.COLUMN_NAME_TEASER, cleanTeaser(item.getProp(GolemItem.ItemProperties.TEASER)));
+            }
+
+            if (item.hasProp(GolemItem.ItemProperties.DATE)) {
+                values.put(FeedReaderContract.Article.COLUMN_NAME_DATE, item.getProp(GolemItem.ItemProperties.DATE));
+            }
+
+            if (item.hasProp(GolemItem.ItemProperties.FULLTEXT)) {
+                values.put(FeedReaderContract.Article.COLUMN_NAME_FULLTEXT, item.getProp(GolemItem.ItemProperties.FULLTEXT));
+                values.put(FeedReaderContract.Article.COLUMN_NAME_OFFLINE, item.getProp(GolemItem.ItemProperties.OFFLINE_AVAILABLE));
+            }
+
+            if (item.hasProp(GolemItem.ItemProperties.OFFLINE_AVAILABLE)) {
+                values.put(FeedReaderContract.Article.COLUMN_NAME_OFFLINE, Boolean.valueOf(item.getProp(GolemItem.ItemProperties.OFFLINE_AVAILABLE)));
+            }
+
+            if (item.hasProp(GolemItem.ItemProperties.IMG_URL)) {
+                values.put(FeedReaderContract.Article.COLUMN_NAME_IMG, item.getProp(GolemItem.ItemProperties.IMG_URL));
+            }
+
+            if (item.hasProp(GolemItem.ItemProperties.COMMENT_URL)) {
+                values.put(FeedReaderContract.Article.COLUMN_NAME_COMMENTURL, item.getProp(GolemItem.ItemProperties.COMMENT_URL));
+            }
+
+            if (id != 0) {
+                Log.d(TAG, "doInBackground: Updating article with id " + id);
+                db.update(FeedReaderContract.Article.TABLE_NAME, values, FeedReaderContract.Article._ID + "='" + id + "'", null);
+            } else {
+                Log.d(TAG, "doInBackground: Creating new article with Title " + item.getProp(GolemItem.ItemProperties.TITLE));
+                db.insert(FeedReaderContract.Article.TABLE_NAME, null, values);
+            }
+
+            if (isCancelled()) {
+                return;
+            }
         }
-        return true;
+    }
+
+    private static Pattern teaserPattern = Pattern.compile("\\(<a href=\".*\\) <img src=\".*/>");
+
+    private static String cleanTeaser(String teaser) {
+        Matcher matcher = teaserPattern.matcher(teaser);
+        if(matcher.find())
+            teaser = teaser.substring(0, matcher.start(0));
+
+        return teaser;
     }
 
     enum FETCH_STATE {SUCCESS, NO_CONNECTION, TIMEOUT, ABO_INVALID, UNDEFINED_ERROR}

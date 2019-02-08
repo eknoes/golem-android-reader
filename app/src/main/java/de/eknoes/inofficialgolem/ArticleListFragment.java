@@ -198,7 +198,8 @@ public class ArticleListFragment extends Fragment {
                     FeedReaderContract.Article.COLUMN_NAME_DATE,
                     FeedReaderContract.Article.COLUMN_NAME_IMG,
                     FeedReaderContract.Article.COLUMN_NAME_URL,
-                    FeedReaderContract.Article.COLUMN_NAME_AUTHORS,
+                    FeedReaderContract.Article.COLUMN_NAME_COMMENTURL,
+                    FeedReaderContract.Article.COLUMN_NAME_COMMENTNR,
                     FeedReaderContract.Article.COLUMN_NAME_OFFLINE,
                     FeedReaderContract.Article.COLUMN_NAME_FULLTEXT
             };
@@ -231,10 +232,11 @@ public class ArticleListFragment extends Fragment {
             a.setTitle(cursor.getString(cursor.getColumnIndex(FeedReaderContract.Article.COLUMN_NAME_TITLE)));
             a.setSubheadline(cursor.getString(cursor.getColumnIndex(FeedReaderContract.Article.COLUMN_NAME_SUBHEADING)));
             a.setTeaser(cursor.getString(cursor.getColumnIndex(FeedReaderContract.Article.COLUMN_NAME_TEASER)));
-            a.setDate(cursor.getInt(cursor.getColumnIndex(FeedReaderContract.Article.COLUMN_NAME_DATE)));
+            a.setDate(cursor.getLong(cursor.getColumnIndex(FeedReaderContract.Article.COLUMN_NAME_DATE)));
             a.setImgUrl(cursor.getString(cursor.getColumnIndex(FeedReaderContract.Article.COLUMN_NAME_IMG)));
+            a.setCommentUrl(cursor.getString(cursor.getColumnIndex(FeedReaderContract.Article.COLUMN_NAME_COMMENTURL)));
+            a.setCommentNr(cursor.getString(cursor.getColumnIndex(FeedReaderContract.Article.COLUMN_NAME_COMMENTNR)));
             a.setUrl(cursor.getString(cursor.getColumnIndex(FeedReaderContract.Article.COLUMN_NAME_URL)));
-            a.setAuthors(cursor.getString(cursor.getColumnIndex(FeedReaderContract.Article.COLUMN_NAME_AUTHORS)));
             a.setOffline(cursor.getInt(cursor.getColumnIndex(FeedReaderContract.Article.COLUMN_NAME_OFFLINE)) == 1);
             a.setFulltext(cursor.getString(cursor.getColumnIndex(FeedReaderContract.Article.COLUMN_NAME_FULLTEXT)));
             return a;

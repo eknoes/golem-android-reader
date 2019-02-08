@@ -62,5 +62,6 @@
     <string name="write_a_mail">Mail me!</string>
     <string name="sendMail">Write an E-Mail</string>
     <string name="mobileViewTippText">Golem.de shows the desktop layout for Tablets at this size. You can fix this issue by choosing the \"Mobile Layout\".</string>
+    <string name="action_open_comments">Open Forum in Browser</string>
 
 </resources>

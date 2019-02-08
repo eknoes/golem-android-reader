@@ -9,7 +9,6 @@ import java.util.Map;
 public class GolemItem {
     private int id = 0;
     private String url;
-    private GolemItem.Type type;
     private final Map<ItemProperties, String> properties = new HashMap<>();
 
     public boolean hasProp(ItemProperties key) {
@@ -36,14 +35,6 @@ public class GolemItem {
         this.id = id;
     }
 
-    public Type getType() {
-        return type;
-    }
-
-    public void setType(Type type) {
-        this.type = type;
-    }
-
     public String getUrl() {
         return url;
     }
@@ -52,7 +43,5 @@ public class GolemItem {
         this.url = url;
     }
 
-    public enum Type {ARTICLE, VIDEO}
-
-    public enum ItemProperties {TITLE, PUBLISHED, TEASER, IMG_URL, DATE, FULLTEXT, AUTHORS, OFFLINE_AVAILABLE, HAS_MEDIA_FULLTEXT}
+    public enum ItemProperties {TITLE, PUBLISHED, TEASER, IMG_URL, COMMENT_URL, COMMENT_NR, DATE, FULLTEXT, OFFLINE_AVAILABLE, HAS_MEDIA_FULLTEXT}
 }

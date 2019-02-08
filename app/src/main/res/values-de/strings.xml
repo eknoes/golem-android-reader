@@ -48,4 +48,5 @@
     <string name="welcome_text2">Falls die App dir gefällt, würde ich mich sehr über eine Bewertung freuen. Hast du Kritik oder Verbesserungsvorschläge? Dann schreib mir doch eine E-Mail!</string>
     <string name="write_a_mail">Mail schreiben</string>
     <string name="mobileViewTippText">Golem.de zeigt für Tablets in dieser Größe das Desktop Layout an. Wenn du eine kompaktere Artikelansicht nutzen möchtest, kannst du das \"Mobile Layout\" auswählen.</string>
+    <string name="action_open_comments">Open Forum in Browser</string>
 </resources>
