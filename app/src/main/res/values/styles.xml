@@ -27,7 +27,7 @@
     </style>
 
     <style name="OverflowStyle">
-        <item name="android:src">@drawable/options</item>
+        <item name="android:src">@drawable/ic_options</item>
         <item name="android:padding">20dip</item>
     </style>
 
