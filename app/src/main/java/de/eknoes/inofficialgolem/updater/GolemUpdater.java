@@ -15,7 +15,7 @@ public abstract class GolemUpdater {
     final String TAG = this.getClass().getCanonicalName();
 
     /**
-     * Class that fetches data from Golem API, e.g. articles or videos
+     * Class that fetches data from Golem RSS Feed, e.g. articles or videos
      *
      * @param context
      */

@@ -10,11 +10,6 @@ android {
         targetSdkVersion 26
         versionCode 120
         versionName "1.1.0"
-        if (project.hasProperty('golem_api_key')) {
-            resValue "string", "golem_api_key", golem_api_key
-        } else {
-            logger.warn("You won't be able to fetch articles because api key is not set")
-        }
     }
     buildTypes {
         release {
