@@ -1,0 +1,423 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!-- generator="FeedCreator 1.6" -->
+<rss xmlns:content="http://purl.org/rss/1.0/modules/content/"
+    xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+    xmlns:atom="http://www.w3.org/2005/Atom"
+    version="2.0">
+    <channel>
+        <title>Golem.de</title>
+        <description>IT-News fuer Profis</description>
+        <link>https://www.golem.de/</link>
+        <atom:link rel="self" href="https://rss.golem.de/rss.php?feed=RSS2.0" />
+        <lastBuildDate>Thu, 07 Feb 2019 19:44:01 +0100</lastBuildDate>
+        <generator>FeedCreator 1.6</generator>
+        <image>
+            <url>https://www.golem.de/staticrl/images/golem-rss.png</url>
+            <title>Golem.de</title>
+            <link>https://www.golem.de/</link>
+            <description>Golem.de News Feed</description>
+        </image>
+        <language>de</language>
+        <atom:link rel="hub" href="http://golem.superfeedr.com/" />
+        <item>
+            <title>Geheime Sitzung: Deutsche Regierung schließt Huawei bei 5G nicht aus</title>
+            <link>https://www.golem.de/news/geheime-sitzung-deutsche-regierung-schliesst-huawei-bei-5g-nicht-aus-1902-139258-rss.html</link>
+            <description>Die Bundesregierung hat dem massiven Druck aus den USA nicht nachgegeben. Merkel und das Auswärtige Amt haben sich der Argumentation der Telekom angeschlossen, es gibt keinen Ausschluss von Huawei bei 5G. (&lt;a href=&quot;https://www.golem.de/specials/huawei/&quot;&gt;Huawei&lt;/a&gt;, &lt;a href=&quot;https://www.golem.de/specials/mobilfunk/&quot;&gt;Mobilfunk&lt;/a&gt;) &lt;img src=&quot;https://cpx.golem.de/cpx.php?class=17&amp;amp;aid=139258&amp;amp;page=1&amp;amp;ts=1549563360&quot; alt=&quot;&quot; width=&quot;1&quot; height=&quot;1&quot; /&gt;</description>
+            <comments>https://forum.golem.de/kommentare/wirtschaft/geheime-sitzung-deutsche-regierung-schliesst-huawei-bei-5g-nicht-aus/123876,list.html</comments>
+            <pubDate>Thu, 07 Feb 2019 19:16:00 +0100</pubDate>
+            <guid>https://www.golem.de/1902/139258-rss.html</guid>
+            <content:encoded><![CDATA[<img src="https://www.golem.de/1902/139258-186621-186618_rc.jpg" width="140" height="140" vspace="3" hspace="8" align="left">Die Bundesregierung hat dem massiven Druck aus den USA nicht nachgegeben. Merkel und das Auswärtige Amt haben sich der Argumentation der Telekom angeschlossen, es gibt keinen Ausschluss von Huawei bei 5G. (<a href="https://www.golem.de/specials/huawei/">Huawei</a>, <a href="https://www.golem.de/specials/mobilfunk/">Mobilfunk</a>) <img src="https://cpx.golem.de/cpx.php?class=17&amp;aid=139258&amp;page=1&amp;ts=1549563360" alt="" width="1" height="1" />]]></content:encoded>
+            <slash:comments />
+        </item>
+        <item>
+            <title>EU-Urheberrechtsreform: EU-Berichterstatter Axel Voss kupfert bei Bertelsmann ab</title>
+            <link>https://www.golem.de/news/eu-urheberrechtsreform-eu-berichterstatter-axel-voss-kupfert-bei-bertelsmann-ab-1902-139257-rss.html</link>
+            <description>Axel Voss, Berichterstatter des EU-Parlaments für die geplante EU-Urheberrechtsreform, hat den deutsch-französischen Kompromissvorschlag für Uploadfilter zurückgewiesen. Seine Kritik deckt sich teils bis in einzelne Formulierungen hinein mit dem Tenor einer Golem vorliegenden Stellungnahme von Bertelsmann zu dem Entwurf. Von Justus Staufburg (&lt;a href=&quot;https://www.golem.de/specials/urheberrecht/&quot;&gt;Urheberrecht&lt;/a&gt;, &lt;a href=&quot;https://www.golem.de/specials/uploadfilter/&quot;&gt;Uploadfilter&lt;/a&gt;) &lt;img src=&quot;https://cpx.golem.de/cpx.php?class=17&amp;amp;aid=139257&amp;amp;page=1&amp;amp;ts=1549559400&quot; alt=&quot;&quot; width=&quot;1&quot; height=&quot;1&quot; /&gt;</description>
+            <comments>https://forum.golem.de/kommentare/wirtschaft/eu-urheberrechtsreform-eu-berichterstatter-axel-voss-kupfert-bei-bertelsmann-ab/123875,list.html</comments>
+            <pubDate>Thu, 07 Feb 2019 18:10:00 +0100</pubDate>
+            <guid>https://www.golem.de/1902/139257-rss.html</guid>
+            <content:encoded><![CDATA[<img src="https://www.golem.de/1902/139257-186633-186630_rc.jpg" width="140" height="140" vspace="3" hspace="8" align="left">Axel Voss, Berichterstatter des EU-Parlaments für die geplante EU-Urheberrechtsreform, hat den deutsch-französischen Kompromissvorschlag für Uploadfilter zurückgewiesen. Seine Kritik deckt sich teils bis in einzelne Formulierungen hinein mit dem Tenor einer Golem vorliegenden Stellungnahme von Bertelsmann zu dem Entwurf. Von Justus Staufburg (<a href="https://www.golem.de/specials/urheberrecht/">Urheberrecht</a>, <a href="https://www.golem.de/specials/uploadfilter/">Uploadfilter</a>) <img src="https://cpx.golem.de/cpx.php?class=17&amp;aid=139257&amp;page=1&amp;ts=1549559400" alt="" width="1" height="1" />]]></content:encoded>
+            <slash:comments>1</slash:comments>
+        </item>
+        <item>
+            <title>Landkreis Zwickau: Illegales Krypto-Mining am Stromzähler vorbei</title>
+            <link>https://www.golem.de/news/landkreis-zwickau-illegales-krypto-mining-am-stromzaehler-vorbei-1902-139261-rss.html</link>
+            <description>Seit Anfang 2017 soll eine Gruppe in Deutschland Krypto-Mining betrieben haben. Dabei nutzte man eine Elektroinstallation, die den Stromzähler umging. Doch der hohe Verbrauch war zu auffällig, der Versorger bemerkte das Mining von Bitcoin, Dash und Ethereum. (&lt;a href=&quot;https://www.golem.de/specials/bitcoin/&quot;&gt;Bitcoin&lt;/a&gt;, &lt;a href=&quot;https://www.golem.de/specials/internet/&quot;&gt;Internet&lt;/a&gt;) &lt;img src=&quot;https://cpx.golem.de/cpx.php?class=17&amp;amp;aid=139261&amp;amp;page=1&amp;amp;ts=1549559340&quot; alt=&quot;&quot; width=&quot;1&quot; height=&quot;1&quot; /&gt;</description>
+            <comments>https://forum.golem.de/kommentare/politik-recht/landkreis-zwickau-illegales-krypto-mining-am-stromzaehler-vorbei/123874,list.html</comments>
+            <pubDate>Thu, 07 Feb 2019 18:09:00 +0100</pubDate>
+            <guid>https://www.golem.de/1902/139261-rss.html</guid>
+            <content:encoded><![CDATA[<img src="https://www.golem.de/1902/139261-186625-186622_rc.jpg" width="140" height="140" vspace="3" hspace="8" align="left">Seit Anfang 2017 soll eine Gruppe in Deutschland Krypto-Mining betrieben haben. Dabei nutzte man eine Elektroinstallation, die den Stromzähler umging. Doch der hohe Verbrauch war zu auffällig, der Versorger bemerkte das Mining von Bitcoin, Dash und Ethereum. (<a href="https://www.golem.de/specials/bitcoin/">Bitcoin</a>, <a href="https://www.golem.de/specials/internet/">Internet</a>) <img src="https://cpx.golem.de/cpx.php?class=17&amp;aid=139261&amp;page=1&amp;ts=1549559340" alt="" width="1" height="1" />]]></content:encoded>
+            <slash:comments>10</slash:comments>
+        </item>
+        <item>
+            <title>Deutschland: Netzbetreiber BBV bietet 1 GBit/s symmetrisch für Endkunden</title>
+            <link>https://www.golem.de/news/deutschland-netzbetreiber-bbv-bietet-1-gbit-s-symmetrisch-fuer-endkunden-1902-139256-rss.html</link>
+            <description>Für 200 Euro im Monat können private Kunden bei der BBV Deutschland den schnellsten Zugang buchen. Der FTTH-Betreiber hat all seine Anschlüsse auf symmetrische Datenraten umgestellt. (&lt;a href=&quot;https://www.golem.de/specials/glasfaser/&quot;&gt;Glasfaser&lt;/a&gt;, &lt;a href=&quot;https://www.golem.de/specials/openaccess/&quot;&gt;Open Access&lt;/a&gt;) &lt;img src=&quot;https://cpx.golem.de/cpx.php?class=17&amp;amp;aid=139256&amp;amp;page=1&amp;amp;ts=1549554300&quot; alt=&quot;&quot; width=&quot;1&quot; height=&quot;1&quot; /&gt;</description>
+            <comments>https://forum.golem.de/kommentare/wirtschaft/deutschland-netzbetreiber-bbv-bietet-1-gbit-s-symmetrisch-fuer-endkunden/123873,list.html</comments>
+            <pubDate>Thu, 07 Feb 2019 16:45:00 +0100</pubDate>
+            <guid>https://www.golem.de/1902/139256-rss.html</guid>
+            <content:encoded><![CDATA[<img src="https://www.golem.de/1902/139256-186614-186613_rc.jpg" width="140" height="140" vspace="3" hspace="8" align="left">Für 200 Euro im Monat können private Kunden bei der BBV Deutschland den schnellsten Zugang buchen. Der FTTH-Betreiber hat all seine Anschlüsse auf symmetrische Datenraten umgestellt. (<a href="https://www.golem.de/specials/glasfaser/">Glasfaser</a>, <a href="https://www.golem.de/specials/openaccess/">Open Access</a>) <img src="https://cpx.golem.de/cpx.php?class=17&amp;aid=139256&amp;page=1&amp;ts=1549554300" alt="" width="1" height="1" />]]></content:encoded>
+            <slash:comments>17</slash:comments>
+        </item>
+        <item>
+            <title>Codename Copper: HPs VR-Headset löst mit 4K pro Auge auf</title>
+            <link>https://www.golem.de/news/codename-copper-hps-vr-headset-loest-mit-4k-pro-auge-auf-1902-139253-rss.html</link>
+            <description>Mit dem intern Copper genannten VR-Headset arbeitet HP an einem Head-mounted-Display, welches 2.160 x 2.160 Pixel samt RGB-Matrix pro Auge aufweist. Die dafür verwendeten LCDs sollen überdies satte Farben darstellen, was sonst eher bei OLED-Panels der Fall ist. (&lt;a href=&quot;https://www.golem.de/specials/hp/&quot;&gt;HP&lt;/a&gt;, &lt;a href=&quot;https://www.golem.de/specials/oled/&quot;&gt;OLED&lt;/a&gt;) &lt;img src=&quot;https://cpx.golem.de/cpx.php?class=17&amp;amp;aid=139253&amp;amp;page=1&amp;amp;ts=1549553340&quot; alt=&quot;&quot; width=&quot;1&quot; height=&quot;1&quot; /&gt;</description>
+            <comments>https://forum.golem.de/kommentare/sonstiges/codename-copper-hps-vr-headset-loest-mit-4k-pro-auge-auf/123872,list.html</comments>
+            <pubDate>Thu, 07 Feb 2019 16:29:00 +0100</pubDate>
+            <guid>https://www.golem.de/1902/139253-rss.html</guid>
+            <content:encoded><![CDATA[<img src="https://www.golem.de/1902/139253-186602-186599_rc.jpg" width="140" height="140" vspace="3" hspace="8" align="left">Mit dem intern Copper genannten VR-Headset arbeitet HP an einem Head-mounted-Display, welches 2.160 x 2.160 Pixel samt RGB-Matrix pro Auge aufweist. Die dafür verwendeten LCDs sollen überdies satte Farben darstellen, was sonst eher bei OLED-Panels der Fall ist. (<a href="https://www.golem.de/specials/hp/">HP</a>, <a href="https://www.golem.de/specials/oled/">OLED</a>) <img src="https://cpx.golem.de/cpx.php?class=17&amp;aid=139253&amp;page=1&amp;ts=1549553340" alt="" width="1" height="1" />]]></content:encoded>
+            <slash:comments>8</slash:comments>
+        </item>
+        <item>
+            <title>Openchain: Microsoft tritt Kooperation für Open-Source-Einhaltung bei</title>
+            <link>https://www.golem.de/news/openchain-microsoft-tritt-kooperation-fuer-open-source-einhaltung-bei-1902-139255-rss.html</link>
+            <description>In großen Unternehmen wird mitunter sehr viel verschiedene Open-Source-Software eingesetzt und wiederverwendet. Um hier einen besseren Überblick zu behalten, gibt es das Openchain-Projekt der Linux-Foundation, dem Microsoft nun beitritt. (&lt;a href=&quot;https://www.golem.de/specials/microsoft/&quot;&gt;Microsoft&lt;/a&gt;, &lt;a href=&quot;https://www.golem.de/specials/urheberrecht/&quot;&gt;Urheberrecht&lt;/a&gt;) &lt;img src=&quot;https://cpx.golem.de/cpx.php?class=17&amp;amp;aid=139255&amp;amp;page=1&amp;amp;ts=1549551720&quot; alt=&quot;&quot; width=&quot;1&quot; height=&quot;1&quot; /&gt;</description>
+            <comments>https://forum.golem.de/kommentare/politik-recht/openchain-microsoft-tritt-kooperation-fuer-open-source-einhaltung-bei/123871,list.html</comments>
+            <pubDate>Thu, 07 Feb 2019 16:02:00 +0100</pubDate>
+            <guid>https://www.golem.de/1902/139255-rss.html</guid>
+            <content:encoded><![CDATA[<img src="https://www.golem.de/1902/139255-186612-186609_rc.jpg" width="140" height="140" vspace="3" hspace="8" align="left">In großen Unternehmen wird mitunter sehr viel verschiedene Open-Source-Software eingesetzt und wiederverwendet. Um hier einen besseren Überblick zu behalten, gibt es das Openchain-Projekt der Linux-Foundation, dem Microsoft nun beitritt. (<a href="https://www.golem.de/specials/microsoft/">Microsoft</a>, <a href="https://www.golem.de/specials/urheberrecht/">Urheberrecht</a>) <img src="https://cpx.golem.de/cpx.php?class=17&amp;aid=139255&amp;page=1&amp;ts=1549551720" alt="" width="1" height="1" />]]></content:encoded>
+            <slash:comments>9</slash:comments>
+        </item>
+        <item>
+            <title>C-Enduro: Britische Marine testet autonomes Wasserfahrzeug</title>
+            <link>https://www.golem.de/news/c-enduro-britische-marine-testet-autonomes-wasserfahrzeug-1902-139254-rss.html</link>
+            <description>Daten über das Wetter, das Meer und vielleicht auch über U-Boote: Die britische Marine testet ein autonomes Schiff für Langzeiteinsätze auf See. (&lt;a href=&quot;https://www.golem.de/specials/schiff/&quot;&gt;Schiff&lt;/a&gt;, &lt;a href=&quot;https://www.golem.de/specials/technologie/&quot;&gt;Technologie&lt;/a&gt;) &lt;img src=&quot;https://cpx.golem.de/cpx.php?class=17&amp;amp;aid=139254&amp;amp;page=1&amp;amp;ts=1549549800&quot; alt=&quot;&quot; width=&quot;1&quot; height=&quot;1&quot; /&gt;</description>
+            <comments>https://forum.golem.de/kommentare/automobil/c-enduro-britische-marine-testet-autonomes-wasserfahrzeug/123870,list.html</comments>
+            <pubDate>Thu, 07 Feb 2019 15:30:00 +0100</pubDate>
+            <guid>https://www.golem.de/1902/139254-rss.html</guid>
+            <content:encoded><![CDATA[<img src="https://www.golem.de/1902/139254-186608-186607_rc.jpg" width="140" height="140" vspace="3" hspace="8" align="left">Daten über das Wetter, das Meer und vielleicht auch über U-Boote: Die britische Marine testet ein autonomes Schiff für Langzeiteinsätze auf See. (<a href="https://www.golem.de/specials/schiff/">Schiff</a>, <a href="https://www.golem.de/specials/technologie/">Technologie</a>) <img src="https://cpx.golem.de/cpx.php?class=17&amp;aid=139254&amp;page=1&amp;ts=1549549800" alt="" width="1" height="1" />]]></content:encoded>
+            <slash:comments>2</slash:comments>
+        </item>
+        <item>
+            <title>Glasfaser: M-net und Nokia übertragen 500 GBit/s über eine Wellenlänge</title>
+            <link>https://www.golem.de/news/glasfaser-m-net-und-nokia-uebertragen-500-gbit-s-ueber-eine-wellenlaenge-1902-139252-rss.html</link>
+            <description>Zur Eröffnung seines neuen Hauptsitzes zeigt M-net mit Nokia neue Technik für sehr hohe Datenraten über Glasfaser. Nach der Krise in Cham zeigt sich M-net wieder von seiner besten Seite. (&lt;a href=&quot;https://www.golem.de/specials/glasfaser/&quot;&gt;Glasfaser&lt;/a&gt;, &lt;a href=&quot;https://www.golem.de/specials/nokia/&quot;&gt;Nokia&lt;/a&gt;) &lt;img src=&quot;https://cpx.golem.de/cpx.php?class=17&amp;amp;aid=139252&amp;amp;page=1&amp;amp;ts=1549548720&quot; alt=&quot;&quot; width=&quot;1&quot; height=&quot;1&quot; /&gt;</description>
+            <comments>https://forum.golem.de/kommentare/wirtschaft/glasfaser-m-net-und-nokia-uebertragen-500-gbit-s-ueber-eine-wellenlaenge/123869,list.html</comments>
+            <pubDate>Thu, 07 Feb 2019 15:12:00 +0100</pubDate>
+            <guid>https://www.golem.de/1902/139252-rss.html</guid>
+            <content:encoded><![CDATA[<img src="https://www.golem.de/1902/139252-186598-186595_rc.jpg" width="140" height="140" vspace="3" hspace="8" align="left">Zur Eröffnung seines neuen Hauptsitzes zeigt M-net mit Nokia neue Technik für sehr hohe Datenraten über Glasfaser. Nach der Krise in Cham zeigt sich M-net wieder von seiner besten Seite. (<a href="https://www.golem.de/specials/glasfaser/">Glasfaser</a>, <a href="https://www.golem.de/specials/nokia/">Nokia</a>) <img src="https://cpx.golem.de/cpx.php?class=17&amp;aid=139252&amp;page=1&amp;ts=1549548720" alt="" width="1" height="1" />]]></content:encoded>
+            <slash:comments>7</slash:comments>
+        </item>
+        <item>
+            <title>Radeon VII im Test: Die Grafikkarte für Videospeicher-Liebhaber</title>
+            <link>https://www.golem.de/news/radeon-vii-im-test-die-grafikkarte-fuer-videospeicher-liebhaber-1902-138906-rss.html</link>
+            <description>Höherer Preis, ähnliche Performance und doppelt so viel Videospeicher wie die Geforce RTX 2080: AMDs Radeon VII ist eine primär technisch spannende Grafikkarte. Bei Energie-Effizienz und Lautheit bleibt sie chancenlos, die 16 GByte Videospeicher sind eher ein Nischen-Bonus. Ein Test von Marc Sauter und Sebastian Grüner (&lt;a href=&quot;https://www.golem.de/specials/vega/&quot;&gt;AMD Vega&lt;/a&gt;, &lt;a href=&quot;https://www.golem.de/specials/amd/&quot;&gt;AMD&lt;/a&gt;) &lt;img src=&quot;https://cpx.golem.de/cpx.php?class=17&amp;amp;aid=138906&amp;amp;page=1&amp;amp;ts=1549548000&quot; alt=&quot;&quot; width=&quot;1&quot; height=&quot;1&quot; /&gt;</description>
+            <comments>https://forum.golem.de/kommentare/sonstiges/radeon-vii-im-test-die-grafikkarte-fuer-videospeicher-liebhaber/123868,list.html</comments>
+            <pubDate>Thu, 07 Feb 2019 15:00:00 +0100</pubDate>
+            <guid>https://www.golem.de/1902/138906-rss.html</guid>
+            <content:encoded><![CDATA[<img src="https://www.golem.de/1902/138906-186590-186589_rc.jpg" width="140" height="140" vspace="3" hspace="8" align="left">Höherer Preis, ähnliche Performance und doppelt so viel Videospeicher wie die Geforce RTX 2080: AMDs Radeon VII ist eine primär technisch spannende Grafikkarte. Bei Energie-Effizienz und Lautheit bleibt sie chancenlos, die 16 GByte Videospeicher sind eher ein Nischen-Bonus. Ein Test von Marc Sauter und Sebastian Grüner (<a href="https://www.golem.de/specials/vega/">AMD Vega</a>, <a href="https://www.golem.de/specials/amd/">AMD</a>) <img src="https://cpx.golem.de/cpx.php?class=17&amp;aid=138906&amp;page=1&amp;ts=1549548000" alt="" width="1" height="1" />]]></content:encoded>
+            <slash:comments>31</slash:comments>
+        </item>
+        <item>
+            <title>Lima-Projekt: Linux-Treiber für alte Mali-GPUs soll eingepflegt werden</title>
+            <link>https://www.golem.de/news/lima-projekt-linux-treiber-fuer-alte-mali-gpus-soll-eingepflegt-werden-1902-139251-rss.html</link>
+            <description>Der vor fast zwei Jahren wiederbelebte Linux-Kernel-Treiber Lima für ARMs ältere Mali-GPUs soll nach dem Willen des Hauptentwicklers in den Kernel eingepflegt werden. Noch fehlt es wohl aber am Feinschliff. (&lt;a href=&quot;https://www.golem.de/specials/linux/&quot;&gt;Linux&lt;/a&gt;, &lt;a href=&quot;https://www.golem.de/specials/treiber/&quot;&gt;Treiber&lt;/a&gt;) &lt;img src=&quot;https://cpx.golem.de/cpx.php?class=17&amp;amp;aid=139251&amp;amp;page=1&amp;amp;ts=1549547220&quot; alt=&quot;&quot; width=&quot;1&quot; height=&quot;1&quot; /&gt;</description>
+            <comments>https://forum.golem.de/kommentare/opensource/lima-projekt-linux-treiber-fuer-alte-mali-gpus-soll-eingepflegt-werden/123867,list.html</comments>
+            <pubDate>Thu, 07 Feb 2019 14:47:00 +0100</pubDate>
+            <guid>https://www.golem.de/1902/139251-rss.html</guid>
+            <content:encoded><![CDATA[<img src="https://www.golem.de/1902/139251-186594-186591_rc.jpg" width="140" height="140" vspace="3" hspace="8" align="left">Der vor fast zwei Jahren wiederbelebte Linux-Kernel-Treiber Lima für ARMs ältere Mali-GPUs soll nach dem Willen des Hauptentwicklers in den Kernel eingepflegt werden. Noch fehlt es wohl aber am Feinschliff. (<a href="https://www.golem.de/specials/linux/">Linux</a>, <a href="https://www.golem.de/specials/treiber/">Treiber</a>) <img src="https://cpx.golem.de/cpx.php?class=17&amp;aid=139251&amp;page=1&amp;ts=1549547220" alt="" width="1" height="1" />]]></content:encoded>
+            <slash:comments />
+        </item>
+        <item>
+            <title>Moto G7 Power: Lenovos neues Motorola-Smartphone hat einen großen Akku</title>
+            <link>https://www.golem.de/news/moto-g7-lenovo-bringt-vier-neue-motorola-smartphones-1902-139242-rss.html</link>
+            <description>Aus drei mach vier: Gab es vom Moto G6 noch drei Modelle, hat Lenovo vom Moto G7 gleich vier Varianten vorgestellt. Alle vier Moto-G7-Modelle unterscheiden sich bei der technischen Ausstattung erheblich. Mit der neuen Power-Kategorie gibt es ein Gerät mit großem Akku. (&lt;a href=&quot;https://www.golem.de/specials/motorola/&quot;&gt;Motorola&lt;/a&gt;, &lt;a href=&quot;https://www.golem.de/specials/smartphone/&quot;&gt;Smartphone&lt;/a&gt;) &lt;img src=&quot;https://cpx.golem.de/cpx.php?class=17&amp;amp;aid=139242&amp;amp;page=1&amp;amp;ts=1549544460&quot; alt=&quot;&quot; width=&quot;1&quot; height=&quot;1&quot; /&gt;</description>
+            <comments>https://forum.golem.de/kommentare/handy/moto-g7-power-lenovos-neues-motorola-smartphone-hat-einen-grossen-akku/123865,list.html</comments>
+            <pubDate>Thu, 07 Feb 2019 14:01:00 +0100</pubDate>
+            <guid>https://www.golem.de/1902/139242-rss.html</guid>
+            <content:encoded><![CDATA[<img src="https://www.golem.de/1902/139242-186576-186575_rc.jpg" width="140" height="140" vspace="3" hspace="8" align="left">Aus drei mach vier: Gab es vom Moto G6 noch drei Modelle, hat Lenovo vom Moto G7 gleich vier Varianten vorgestellt. Alle vier Moto-G7-Modelle unterscheiden sich bei der technischen Ausstattung erheblich. Mit der neuen Power-Kategorie gibt es ein Gerät mit großem Akku. (<a href="https://www.golem.de/specials/motorola/">Motorola</a>, <a href="https://www.golem.de/specials/smartphone/">Smartphone</a>) <img src="https://cpx.golem.de/cpx.php?class=17&amp;aid=139242&amp;page=1&amp;ts=1549544460" alt="" width="1" height="1" />]]></content:encoded>
+            <slash:comments>24</slash:comments>
+        </item>
+        <item>
+            <title>Mozilla: Firefox bekommt strikte Seitenisolierung wie Chrome</title>
+            <link>https://www.golem.de/news/mozilla-firefox-bekommt-strikte-seitenisolierung-wie-chrome-1902-139250-rss.html</link>
+            <description>Browserhersteller Mozilla will die Multiprozessarchitektur im Firefox so strikt umsetzen wie im Chrome-Browser und eine starke Seitenisolierung liefern. Künftig soll jeder Iframe seinen eigenen Prozess bekommen. (&lt;a href=&quot;https://www.golem.de/specials/firefox/&quot;&gt;Firefox&lt;/a&gt;, &lt;a href=&quot;https://www.golem.de/specials/browser/&quot;&gt;Browser&lt;/a&gt;) &lt;img src=&quot;https://cpx.golem.de/cpx.php?class=17&amp;amp;aid=139250&amp;amp;page=1&amp;amp;ts=1549543560&quot; alt=&quot;&quot; width=&quot;1&quot; height=&quot;1&quot; /&gt;</description>
+            <comments>https://forum.golem.de/kommentare/internet/mozilla-firefox-bekommt-strikte-seitenisolierung-wie-chrome/123864,list.html</comments>
+            <pubDate>Thu, 07 Feb 2019 13:46:00 +0100</pubDate>
+            <guid>https://www.golem.de/1902/139250-rss.html</guid>
+            <content:encoded><![CDATA[<img src="https://www.golem.de/1902/139250-186580-186577_rc.jpg" width="140" height="140" vspace="3" hspace="8" align="left">Browserhersteller Mozilla will die Multiprozessarchitektur im Firefox so strikt umsetzen wie im Chrome-Browser und eine starke Seitenisolierung liefern. Künftig soll jeder Iframe seinen eigenen Prozess bekommen. (<a href="https://www.golem.de/specials/firefox/">Firefox</a>, <a href="https://www.golem.de/specials/browser/">Browser</a>) <img src="https://cpx.golem.de/cpx.php?class=17&amp;aid=139250&amp;page=1&amp;ts=1549543560" alt="" width="1" height="1" />]]></content:encoded>
+            <slash:comments>4</slash:comments>
+        </item>
+        <item>
+            <title>USA: Italien steht unter massivem Druck, Huawei auszuschließen</title>
+            <link>https://www.golem.de/news/usa-italien-steht-unter-massivem-druck-huawei-auszuschliessen-1902-139246-rss.html</link>
+            <description>Die US-Regierung versucht derzeit, ihre Verbündeten in Europa unter Druck zu setzen, um dort einen schnellen 5G-Ausbau zu verhindern. Italien ist wohl bereit, sich den USA unterzuordnen und Huawei sowie ZTE auszuschließen. (&lt;a href=&quot;https://www.golem.de/specials/g.fast/&quot;&gt;G.fast&lt;/a&gt;, &lt;a href=&quot;https://www.golem.de/specials/technologie/&quot;&gt;Technologie&lt;/a&gt;) &lt;img src=&quot;https://cpx.golem.de/cpx.php?class=17&amp;amp;aid=139246&amp;amp;page=1&amp;amp;ts=1549542000&quot; alt=&quot;&quot; width=&quot;1&quot; height=&quot;1&quot; /&gt;</description>
+            <comments>https://forum.golem.de/kommentare/politik-recht/usa-italien-steht-unter-massivem-druck-huawei-auszuschliessen/123863,list.html</comments>
+            <pubDate>Thu, 07 Feb 2019 13:20:00 +0100</pubDate>
+            <guid>https://www.golem.de/1902/139246-rss.html</guid>
+            <content:encoded><![CDATA[<img src="https://www.golem.de/1902/139246-186559-186558_rc.jpg" width="140" height="140" vspace="3" hspace="8" align="left">Die US-Regierung versucht derzeit, ihre Verbündeten in Europa unter Druck zu setzen, um dort einen schnellen 5G-Ausbau zu verhindern. Italien ist wohl bereit, sich den USA unterzuordnen und Huawei sowie ZTE auszuschließen. (<a href="https://www.golem.de/specials/g.fast/">G.fast</a>, <a href="https://www.golem.de/specials/technologie/">Technologie</a>) <img src="https://cpx.golem.de/cpx.php?class=17&amp;aid=139246&amp;page=1&amp;ts=1549542000" alt="" width="1" height="1" />]]></content:encoded>
+            <slash:comments>40</slash:comments>
+        </item>
+        <item>
+            <title>Arduino: Die IoT Cloud richtet Arduino-Boards aus der Ferne ein</title>
+            <link>https://www.golem.de/news/arduino-die-iot-cloud-richtet-arduino-boards-aus-der-ferne-ein-1902-139249-rss.html</link>
+            <description>Die Arduino IoT Cloud ermöglicht es Nutzern, mehrere Sensoren zentral zu verwalten und einzurichten. Die Umgebung macht es auch möglich, Scripts mit anderen Nutzern zu teilen und aus der Ferne zu verteilen. Nicht nur Arduino-Boards, sondern viele andere Linux-Geräte sind damit kompatibel. (&lt;a href=&quot;https://www.golem.de/specials/arduino/&quot;&gt;Arduino&lt;/a&gt;, &lt;a href=&quot;https://www.golem.de/specials/api/&quot;&gt;API&lt;/a&gt;) &lt;img src=&quot;https://cpx.golem.de/cpx.php?class=17&amp;amp;aid=139249&amp;amp;page=1&amp;amp;ts=1549540680&quot; alt=&quot;&quot; width=&quot;1&quot; height=&quot;1&quot; /&gt;</description>
+            <comments>https://forum.golem.de/kommentare/internet/arduino-die-iot-cloud-richtet-arduino-boards-aus-der-ferne-ein/123861,list.html</comments>
+            <pubDate>Thu, 07 Feb 2019 12:58:00 +0100</pubDate>
+            <guid>https://www.golem.de/1902/139249-rss.html</guid>
+            <content:encoded><![CDATA[<img src="https://www.golem.de/1902/139249-186570-186567_rc.jpg" width="140" height="140" vspace="3" hspace="8" align="left">Die Arduino IoT Cloud ermöglicht es Nutzern, mehrere Sensoren zentral zu verwalten und einzurichten. Die Umgebung macht es auch möglich, Scripts mit anderen Nutzern zu teilen und aus der Ferne zu verteilen. Nicht nur Arduino-Boards, sondern viele andere Linux-Geräte sind damit kompatibel. (<a href="https://www.golem.de/specials/arduino/">Arduino</a>, <a href="https://www.golem.de/specials/api/">API</a>) <img src="https://cpx.golem.de/cpx.php?class=17&amp;aid=139249&amp;page=1&amp;ts=1549540680" alt="" width="1" height="1" />]]></content:encoded>
+            <slash:comments>1</slash:comments>
+        </item>
+        <item>
+            <title>Smartphone: LG G8 Thinq kommt mit ToF-Frontkamera</title>
+            <link>https://www.golem.de/news/smartphone-lg-g8-thinq-kommt-mit-tof-frontkamera-1902-139248-rss.html</link>
+            <description>Wie bei früheren Geräten hat LG kurz vor der Vorstellung seines neuen Smartphones erste Details verraten: Das G8 Thinq wird auf der Vorderseite neben einer normalen Kamera eine ToF-Kamera haben, die unter anderem für eine sicherere Gesichtsentsperrung sorgen soll. (&lt;a href=&quot;https://www.golem.de/specials/lg-electronics/&quot;&gt;LG&lt;/a&gt;, &lt;a href=&quot;https://www.golem.de/specials/smartphone/&quot;&gt;Smartphone&lt;/a&gt;) &lt;img src=&quot;https://cpx.golem.de/cpx.php?class=17&amp;amp;aid=139248&amp;amp;page=1&amp;amp;ts=1549539780&quot; alt=&quot;&quot; width=&quot;1&quot; height=&quot;1&quot; /&gt;</description>
+            <comments>https://forum.golem.de/kommentare/handy/smartphone-lg-g8-thinq-kommt-mit-tof-frontkamera/123860,list.html</comments>
+            <pubDate>Thu, 07 Feb 2019 12:43:00 +0100</pubDate>
+            <guid>https://www.golem.de/1902/139248-rss.html</guid>
+            <content:encoded><![CDATA[<img src="https://www.golem.de/1902/139248-186566-186563_rc.jpg" width="140" height="140" vspace="3" hspace="8" align="left">Wie bei früheren Geräten hat LG kurz vor der Vorstellung seines neuen Smartphones erste Details verraten: Das G8 Thinq wird auf der Vorderseite neben einer normalen Kamera eine ToF-Kamera haben, die unter anderem für eine sicherere Gesichtsentsperrung sorgen soll. (<a href="https://www.golem.de/specials/lg-electronics/">LG</a>, <a href="https://www.golem.de/specials/smartphone/">Smartphone</a>) <img src="https://cpx.golem.de/cpx.php?class=17&amp;aid=139248&amp;page=1&amp;ts=1549539780" alt="" width="1" height="1" />]]></content:encoded>
+            <slash:comments />
+        </item>
+        <item>
+            <title>Devil May Cry 5 angespielt: Action mit Panther und einem Vogel</title>
+            <link>https://www.golem.de/news/devil-may-cry-5-angespielt-action-mit-panther-und-einem-vogel-1902-139247-rss.html</link>
+            <description>Es ist der erste wirklich neue Serienteil seit rund zehn Jahren: Das auf der Engine von Resident Evil 2 basierende Devil May Cry 5 setzt auf schöne und schnelle Action. Golem.de konnte beim Anspielen unter anderem die interessante indirekte Kampfsteuerung von einem der Helden ausprobieren. Von Peter Steinlechner (&lt;a href=&quot;https://www.golem.de/specials/devil-may-cry/&quot;&gt;Devil May Cry&lt;/a&gt;, &lt;a href=&quot;https://www.golem.de/specials/capcom/&quot;&gt;Capcom&lt;/a&gt;) &lt;img src=&quot;https://cpx.golem.de/cpx.php?class=17&amp;amp;aid=139247&amp;amp;page=1&amp;amp;ts=1549538460&quot; alt=&quot;&quot; width=&quot;1&quot; height=&quot;1&quot; /&gt;</description>
+            <comments>https://forum.golem.de/kommentare/games/devil-may-cry-5-angespielt-action-mit-panther-und-einem-vogel/123859,list.html</comments>
+            <pubDate>Thu, 07 Feb 2019 12:21:00 +0100</pubDate>
+            <guid>https://www.golem.de/1902/139247-rss.html</guid>
+            <content:encoded><![CDATA[<img src="https://www.golem.de/1902/139247-186556-186553_rc.jpg" width="140" height="140" vspace="3" hspace="8" align="left">Es ist der erste wirklich neue Serienteil seit rund zehn Jahren: Das auf der Engine von Resident Evil 2 basierende Devil May Cry 5 setzt auf schöne und schnelle Action. Golem.de konnte beim Anspielen unter anderem die interessante indirekte Kampfsteuerung von einem der Helden ausprobieren. Von Peter Steinlechner (<a href="https://www.golem.de/specials/devil-may-cry/">Devil May Cry</a>, <a href="https://www.golem.de/specials/capcom/">Capcom</a>) <img src="https://cpx.golem.de/cpx.php?class=17&amp;aid=139247&amp;page=1&amp;ts=1549538460" alt="" width="1" height="1" />]]></content:encoded>
+            <slash:comments>1</slash:comments>
+        </item>
+        <item>
+            <title>Asana-Gründer im Gespräch: &quot;Die Konkurrenz wird es schwer haben, zu uns aufzuschließen&quot;</title>
+            <link>https://www.golem.de/news/asana-gruender-im-gespraech-die-konkurrenz-wird-es-schwer-haben-zu-uns-aufzuschliessen-1902-139113-rss.html</link>
+            <description>Asana ist aktuell recht erfolgreich im Bereich Business-Software - zahlreiche große Unternehmen arbeiten mit der Organisationssuite. Für Mitgründer Justin Rosenstein geht es aber nicht nur ums Geld, sondern auch um die Unternehmenskultur - nicht nur bei Asana selbst. Ein Interview von Tobias Költzsch (&lt;a href=&quot;https://www.golem.de/specials/asana/&quot;&gt;Asana&lt;/a&gt;, &lt;a href=&quot;https://www.golem.de/specials/ibm/&quot;&gt;IBM&lt;/a&gt;) &lt;img src=&quot;https://cpx.golem.de/cpx.php?class=17&amp;amp;aid=139113&amp;amp;page=1&amp;amp;ts=1549537200&quot; alt=&quot;&quot; width=&quot;1&quot; height=&quot;1&quot; /&gt;</description>
+            <comments>https://forum.golem.de/kommentare/applikationen/asana-gruender-im-gespraech-die-konkurrenz-wird-es-schwer-haben-zu-uns-aufzuschliessen/123858,list.html</comments>
+            <pubDate>Thu, 07 Feb 2019 12:00:00 +0100</pubDate>
+            <guid>https://www.golem.de/1902/139113-rss.html</guid>
+            <content:encoded><![CDATA[<img src="https://www.golem.de/1902/139113-185903-185900_rc.jpg" width="140" height="140" vspace="3" hspace="8" align="left">Asana ist aktuell recht erfolgreich im Bereich Business-Software - zahlreiche große Unternehmen arbeiten mit der Organisationssuite. Für Mitgründer Justin Rosenstein geht es aber nicht nur ums Geld, sondern auch um die Unternehmenskultur - nicht nur bei Asana selbst. Ein Interview von Tobias Költzsch (<a href="https://www.golem.de/specials/asana/">Asana</a>, <a href="https://www.golem.de/specials/ibm/">IBM</a>) <img src="https://cpx.golem.de/cpx.php?class=17&amp;aid=139113&amp;page=1&amp;ts=1549537200" alt="" width="1" height="1" />]]></content:encoded>
+            <slash:comments>41</slash:comments>
+        </item>
+        <item>
+            <title>Microsoft: Surface Studio 2 kommt nach Deutschland - für 4.150 Euro</title>
+            <link>https://www.golem.de/news/microsoft-surface-studio-2-kommt-nach-deutschland-fuer-4-150-euro-1902-139245-rss.html</link>
+            <description>Schon zur Ankündigung hat Microsoft den Preis des Surface Studio 2 im Vergleich zum Vorgänger angehoben. Für den deutschen Marktstart verlangt das Unternehmen noch mehr Geld. Das macht Alternativen wie ein Wacom-Stift-Display und einen Desktop-PC attraktiver. (&lt;a href=&quot;https://www.golem.de/specials/surface/&quot;&gt;Surface&lt;/a&gt;, &lt;a href=&quot;https://www.golem.de/specials/microsoft/&quot;&gt;Microsoft&lt;/a&gt;) &lt;img src=&quot;https://cpx.golem.de/cpx.php?class=17&amp;amp;aid=139245&amp;amp;page=1&amp;amp;ts=1549536120&quot; alt=&quot;&quot; width=&quot;1&quot; height=&quot;1&quot; /&gt;</description>
+            <comments>https://forum.golem.de/kommentare/pc-hardware/microsoft-surface-studio-2-kommt-nach-deutschland-fuer-4.150-euro/123857,list.html</comments>
+            <pubDate>Thu, 07 Feb 2019 11:42:00 +0100</pubDate>
+            <guid>https://www.golem.de/1902/139245-rss.html</guid>
+            <content:encoded><![CDATA[<img src="https://www.golem.de/1902/139245-186552-186549_rc.jpg" width="140" height="140" vspace="3" hspace="8" align="left">Schon zur Ankündigung hat Microsoft den Preis des Surface Studio 2 im Vergleich zum Vorgänger angehoben. Für den deutschen Marktstart verlangt das Unternehmen noch mehr Geld. Das macht Alternativen wie ein Wacom-Stift-Display und einen Desktop-PC attraktiver. (<a href="https://www.golem.de/specials/surface/">Surface</a>, <a href="https://www.golem.de/specials/microsoft/">Microsoft</a>) <img src="https://cpx.golem.de/cpx.php?class=17&amp;aid=139245&amp;page=1&amp;ts=1549536120" alt="" width="1" height="1" />]]></content:encoded>
+            <slash:comments>11</slash:comments>
+        </item>
+        <item>
+            <title>Raumfahrt: SpaceX' Raumfähre Crew Dragon startet erst im März</title>
+            <link>https://www.golem.de/news/raumfahrt-spacex-raumfaehre-crew-dragon-startet-erst-im-maerz-1902-139244-rss.html</link>
+            <description>Crew Dragon und Starliner müssen noch etwas länger auf ihren ersten Flug warten: Die US-Raumfahrtbehörde Nasa hat angekündigt, dass sich die Flüge der Raumfähren der Raumfahrtunternehmen SpaceX und Boeing erneut nach hinten verschieben. (&lt;a href=&quot;https://www.golem.de/specials/raumschiff/&quot;&gt;Raumschiff&lt;/a&gt;, &lt;a href=&quot;https://www.golem.de/specials/technologie/&quot;&gt;Technologie&lt;/a&gt;) &lt;img src=&quot;https://cpx.golem.de/cpx.php?class=17&amp;amp;aid=139244&amp;amp;page=1&amp;amp;ts=1549534200&quot; alt=&quot;&quot; width=&quot;1&quot; height=&quot;1&quot; /&gt;</description>
+            <comments>https://forum.golem.de/kommentare/wissenschaft/raumfahrt-spacex-raumfaehre-crew-dragon-startet-erst-im-maerz/123856,list.html</comments>
+            <pubDate>Thu, 07 Feb 2019 11:10:00 +0100</pubDate>
+            <guid>https://www.golem.de/1902/139244-rss.html</guid>
+            <content:encoded><![CDATA[<img src="https://www.golem.de/1902/139244-186541-186538_rc.jpg" width="140" height="140" vspace="3" hspace="8" align="left">Crew Dragon und Starliner müssen noch etwas länger auf ihren ersten Flug warten: Die US-Raumfahrtbehörde Nasa hat angekündigt, dass sich die Flüge der Raumfähren der Raumfahrtunternehmen SpaceX und Boeing erneut nach hinten verschieben. (<a href="https://www.golem.de/specials/raumschiff/">Raumschiff</a>, <a href="https://www.golem.de/specials/technologie/">Technologie</a>) <img src="https://cpx.golem.de/cpx.php?class=17&amp;aid=139244&amp;page=1&amp;ts=1549534200" alt="" width="1" height="1" />]]></content:encoded>
+            <slash:comments>6</slash:comments>
+        </item>
+        <item>
+            <title>Take 2: Selbst Red Dead Redemption 2 kommt nicht gegen Fortnite an</title>
+            <link>https://www.golem.de/news/take-2-selbst-red-dead-redemption-2-kommt-nicht-gegen-fortnite-an-1902-139241-rss.html</link>
+            <description>Mit 23 Millionen verkauften Exemplaren in rund zwei Monaten läuft es extrem gut für Red Dead Redemption 2 - trotzdem sind Analysten nicht zufrieden: Sie sehen Publisher Take 2 wegen Fortnite vor Problemen. (&lt;a href=&quot;https://www.golem.de/specials/red-dead-redemption-2/&quot;&gt;Red Dead Redemption 2&lt;/a&gt;, &lt;a href=&quot;https://www.golem.de/specials/red-dead-redemption/&quot;&gt;Red Dead Redemption&lt;/a&gt;) &lt;img src=&quot;https://cpx.golem.de/cpx.php?class=17&amp;amp;aid=139241&amp;amp;page=1&amp;amp;ts=1549532820&quot; alt=&quot;&quot; width=&quot;1&quot; height=&quot;1&quot; /&gt;</description>
+            <comments>https://forum.golem.de/kommentare/wirtschaft/take-2-selbst-red-dead-redemption-2-kommt-nicht-gegen-fortnite-an/123855,list.html</comments>
+            <pubDate>Thu, 07 Feb 2019 10:47:00 +0100</pubDate>
+            <guid>https://www.golem.de/1902/139241-rss.html</guid>
+            <content:encoded><![CDATA[<img src="https://www.golem.de/1902/139241-186536-186531_rc.jpg" width="140" height="140" vspace="3" hspace="8" align="left">Mit 23 Millionen verkauften Exemplaren in rund zwei Monaten läuft es extrem gut für Red Dead Redemption 2 - trotzdem sind Analysten nicht zufrieden: Sie sehen Publisher Take 2 wegen Fortnite vor Problemen. (<a href="https://www.golem.de/specials/red-dead-redemption-2/">Red Dead Redemption 2</a>, <a href="https://www.golem.de/specials/red-dead-redemption/">Red Dead Redemption</a>) <img src="https://cpx.golem.de/cpx.php?class=17&amp;aid=139241&amp;page=1&amp;ts=1549532820" alt="" width="1" height="1" />]]></content:encoded>
+            <slash:comments>43</slash:comments>
+        </item>
+        <item>
+            <title>Like: Kartellamt schränkt Datensammelei von Facebook ein</title>
+            <link>https://www.golem.de/news/like-kartellamt-schraenkt-datensammelei-von-facebook-ein-1902-139243-rss.html</link>
+            <description>Facebook hat in Deutschland eine marktbeherrschende Stellung - und missbraucht sie: Das hat nun das Bundeskartellamt entschieden. Es untersagt das Zusammenführen von Daten, auch Whatsapp und Instagram sind betroffen. (&lt;a href=&quot;https://www.golem.de/specials/facebook/&quot;&gt;Facebook&lt;/a&gt;, &lt;a href=&quot;https://www.golem.de/specials/socialnetwork/&quot;&gt;Soziales Netz&lt;/a&gt;) &lt;img src=&quot;https://cpx.golem.de/cpx.php?class=17&amp;amp;aid=139243&amp;amp;page=1&amp;amp;ts=1549532040&quot; alt=&quot;&quot; width=&quot;1&quot; height=&quot;1&quot; /&gt;</description>
+            <comments>https://forum.golem.de/kommentare/security/like-kartellamt-schraenkt-datensammelei-von-facebook-ein/123853,list.html</comments>
+            <pubDate>Thu, 07 Feb 2019 10:34:00 +0100</pubDate>
+            <guid>https://www.golem.de/1902/139243-rss.html</guid>
+            <content:encoded><![CDATA[<img src="https://www.golem.de/1902/139243-186548-186545_rc.jpg" width="140" height="140" vspace="3" hspace="8" align="left">Facebook hat in Deutschland eine marktbeherrschende Stellung - und missbraucht sie: Das hat nun das Bundeskartellamt entschieden. Es untersagt das Zusammenführen von Daten, auch Whatsapp und Instagram sind betroffen. (<a href="https://www.golem.de/specials/facebook/">Facebook</a>, <a href="https://www.golem.de/specials/socialnetwork/">Soziales Netz</a>) <img src="https://cpx.golem.de/cpx.php?class=17&amp;aid=139243&amp;page=1&amp;ts=1549532040" alt="" width="1" height="1" />]]></content:encoded>
+            <slash:comments>15</slash:comments>
+        </item>
+        <item>
+            <title>Word und Excel: Microsoft stellt Office 2019 schlecht dar - mit Office 365</title>
+            <link>https://www.golem.de/news/word-und-excel-microsoft-stellt-office-2019-schlecht-dar-mit-office-365-1902-139240-rss.html</link>
+            <description>Office 2019 ist ein unbeliebtes Programm bei Microsoft. Das zeigt das Unternehmen in verschiedenen Werbevideos, die Office 2019 gegen Office 365 antreten lassen. Das Ergebnis ist für Microsoft klar: Office 365 ist dank Cloud-Anbindung überlegen. Einige Kunden dürften das anders sehen. (&lt;a href=&quot;https://www.golem.de/specials/office-365/&quot;&gt;Office 365&lt;/a&gt;, &lt;a href=&quot;https://www.golem.de/specials/microsoft/&quot;&gt;Microsoft&lt;/a&gt;) &lt;img src=&quot;https://cpx.golem.de/cpx.php?class=17&amp;amp;aid=139240&amp;amp;page=1&amp;amp;ts=1549531140&quot; alt=&quot;&quot; width=&quot;1&quot; height=&quot;1&quot; /&gt;</description>
+            <comments>https://forum.golem.de/kommentare/applikationen/word-und-excel-microsoft-stellt-office-2019-schlecht-dar-mit-office-365/123852,list.html</comments>
+            <pubDate>Thu, 07 Feb 2019 10:19:00 +0100</pubDate>
+            <guid>https://www.golem.de/1902/139240-rss.html</guid>
+            <content:encoded><![CDATA[<img src="https://www.golem.de/1902/139240-186530-186527_rc.jpg" width="140" height="140" vspace="3" hspace="8" align="left">Office 2019 ist ein unbeliebtes Programm bei Microsoft. Das zeigt das Unternehmen in verschiedenen Werbevideos, die Office 2019 gegen Office 365 antreten lassen. Das Ergebnis ist für Microsoft klar: Office 365 ist dank Cloud-Anbindung überlegen. Einige Kunden dürften das anders sehen. (<a href="https://www.golem.de/specials/office-365/">Office 365</a>, <a href="https://www.golem.de/specials/microsoft/">Microsoft</a>) <img src="https://cpx.golem.de/cpx.php?class=17&amp;aid=139240&amp;page=1&amp;ts=1549531140" alt="" width="1" height="1" />]]></content:encoded>
+            <slash:comments>104</slash:comments>
+        </item>
+        <item>
+            <title>Huawei: Ohne Rücksicht</title>
+            <link>https://www.golem.de/news/huawei-ohne-ruecksicht-1902-139188-rss.html</link>
+            <description>Die Regierung von Donald Trump geht auf allen Ebenen gegen den chinesischen Hersteller Huawei vor. Es geht um viel mehr als Finanzbetrug und Spionage. Von Felix Lee (&lt;a href=&quot;https://www.golem.de/specials/huawei/&quot;&gt;Huawei&lt;/a&gt;, &lt;a href=&quot;https://www.golem.de/specials/spionage/&quot;&gt;Spionage&lt;/a&gt;) &lt;img src=&quot;https://cpx.golem.de/cpx.php?class=17&amp;amp;aid=139188&amp;amp;page=1&amp;amp;ts=1549529940&quot; alt=&quot;&quot; width=&quot;1&quot; height=&quot;1&quot; /&gt;</description>
+            <comments>https://forum.golem.de/kommentare/wirtschaft/huawei-ohne-ruecksicht/123851,list.html</comments>
+            <pubDate>Thu, 07 Feb 2019 09:59:00 +0100</pubDate>
+            <guid>https://www.golem.de/1902/139188-rss.html</guid>
+            <content:encoded><![CDATA[<img src="https://www.golem.de/1902/139188-186453-186450_rc.jpg" width="140" height="140" vspace="3" hspace="8" align="left">Die Regierung von Donald Trump geht auf allen Ebenen gegen den chinesischen Hersteller Huawei vor. Es geht um viel mehr als Finanzbetrug und Spionage. Von Felix Lee (<a href="https://www.golem.de/specials/huawei/">Huawei</a>, <a href="https://www.golem.de/specials/spionage/">Spionage</a>) <img src="https://cpx.golem.de/cpx.php?class=17&amp;aid=139188&amp;page=1&amp;ts=1549529940" alt="" width="1" height="1" />]]></content:encoded>
+            <slash:comments>90</slash:comments>
+        </item>
+        <item>
+            <title>Mypio: Virtuelle Zweitnummer fürs Smartphone ist weg</title>
+            <link>https://www.golem.de/news/mypio-virtuelle-zweitnummer-fuers-smartphone-ist-weg-1902-139239-rss.html</link>
+            <description>Die virtuelle Mobilfunkrufnummer von Mypio gibt es nicht mehr. Der Grund: Das österreichische Startup dahinter hat Insolvenz angemeldet. Kunden wurden nicht informiert. (&lt;a href=&quot;https://www.golem.de/specials/handy/&quot;&gt;Handy&lt;/a&gt;, &lt;a href=&quot;https://www.golem.de/specials/voip/&quot;&gt;VoIP&lt;/a&gt;) &lt;img src=&quot;https://cpx.golem.de/cpx.php?class=17&amp;amp;aid=139239&amp;amp;page=1&amp;amp;ts=1549528200&quot; alt=&quot;&quot; width=&quot;1&quot; height=&quot;1&quot; /&gt;</description>
+            <comments>https://forum.golem.de/kommentare/handy/mypio-virtuelle-zweitnummer-fuers-smartphone-ist-weg/123850,list.html</comments>
+            <pubDate>Thu, 07 Feb 2019 09:30:00 +0100</pubDate>
+            <guid>https://www.golem.de/1902/139239-rss.html</guid>
+            <content:encoded><![CDATA[<img src="https://www.golem.de/1902/139239-186522-186519_rc.jpg" width="140" height="140" vspace="3" hspace="8" align="left">Die virtuelle Mobilfunkrufnummer von Mypio gibt es nicht mehr. Der Grund: Das österreichische Startup dahinter hat Insolvenz angemeldet. Kunden wurden nicht informiert. (<a href="https://www.golem.de/specials/handy/">Handy</a>, <a href="https://www.golem.de/specials/voip/">VoIP</a>) <img src="https://cpx.golem.de/cpx.php?class=17&amp;aid=139239&amp;page=1&amp;ts=1549528200" alt="" width="1" height="1" />]]></content:encoded>
+            <slash:comments>14</slash:comments>
+        </item>
+        <item>
+            <title>EOS RP: Canon plant offenbar leichte spiegellose Vollformatkamera</title>
+            <link>https://www.golem.de/news/eos-rp-canon-plant-offenbar-leichte-spiegellose-vollformatkamera-1902-139235-rss.html</link>
+            <description>Der Vollformatkamera Canon EOS R scheint bald eine zweite spiegellose Systemkamera mit 35-mm-Sensor zu folgen. Die EOS RP ist noch nicht offiziell, scheint jedoch kleiner und leichter zu sein als die EOS R. (&lt;a href=&quot;https://www.golem.de/specials/canon/&quot;&gt;Canon&lt;/a&gt;, &lt;a href=&quot;https://www.golem.de/specials/systemkamera/&quot;&gt;Systemkamera&lt;/a&gt;) &lt;img src=&quot;https://cpx.golem.de/cpx.php?class=17&amp;amp;aid=139235&amp;amp;page=1&amp;amp;ts=1549527300&quot; alt=&quot;&quot; width=&quot;1&quot; height=&quot;1&quot; /&gt;</description>
+            <comments>https://forum.golem.de/kommentare/foto/eos-rp-canon-plant-offenbar-leichte-spiegellose-vollformatkamera/123849,list.html</comments>
+            <pubDate>Thu, 07 Feb 2019 09:15:00 +0100</pubDate>
+            <guid>https://www.golem.de/1902/139235-rss.html</guid>
+            <content:encoded><![CDATA[<img src="https://www.golem.de/1902/139235-186509-186508_rc.jpg" width="140" height="140" vspace="3" hspace="8" align="left">Der Vollformatkamera Canon EOS R scheint bald eine zweite spiegellose Systemkamera mit 35-mm-Sensor zu folgen. Die EOS RP ist noch nicht offiziell, scheint jedoch kleiner und leichter zu sein als die EOS R. (<a href="https://www.golem.de/specials/canon/">Canon</a>, <a href="https://www.golem.de/specials/systemkamera/">Systemkamera</a>) <img src="https://cpx.golem.de/cpx.php?class=17&amp;aid=139235&amp;page=1&amp;ts=1549527300" alt="" width="1" height="1" />]]></content:encoded>
+            <slash:comments>6</slash:comments>
+        </item>
+        <item>
+            <title>Surface Headphones: Microsofts erster ANC-Bluetooth-Kopfhörer kostet 380 Euro</title>
+            <link>https://www.golem.de/news/surface-headphones-microsofts-erster-anc-bluetooth-kopfhoerer-kostet-380-euro-1902-139221-rss.html</link>
+            <description>Microsoft bringt seinen ANC-Kopfhörer Surface Headphones nach Deutschland. Die ANC-Intensität kann direkt am Bluetooth-Kopfhörer reguliert werden und es gibt eine automatische Wiedergabesteuerung. (&lt;a href=&quot;https://www.golem.de/specials/active-noise-cancellation/&quot;&gt;Active Noise Cancellation&lt;/a&gt;, &lt;a href=&quot;https://www.golem.de/specials/microsoft/&quot;&gt;Microsoft&lt;/a&gt;) &lt;img src=&quot;https://cpx.golem.de/cpx.php?class=17&amp;amp;aid=139221&amp;amp;page=1&amp;amp;ts=1549526400&quot; alt=&quot;&quot; width=&quot;1&quot; height=&quot;1&quot; /&gt;</description>
+            <comments>https://forum.golem.de/kommentare/audio-video/surface-headphones-microsofts-erster-anc-bluetooth-kopfhoerer-kostet-380-euro/123848,list.html</comments>
+            <pubDate>Thu, 07 Feb 2019 09:00:00 +0100</pubDate>
+            <guid>https://www.golem.de/1902/139221-rss.html</guid>
+            <content:encoded><![CDATA[<img src="https://www.golem.de/1902/139221-186419-186416_rc.jpg" width="140" height="140" vspace="3" hspace="8" align="left">Microsoft bringt seinen ANC-Kopfhörer Surface Headphones nach Deutschland. Die ANC-Intensität kann direkt am Bluetooth-Kopfhörer reguliert werden und es gibt eine automatische Wiedergabesteuerung. (<a href="https://www.golem.de/specials/active-noise-cancellation/">Active Noise Cancellation</a>, <a href="https://www.golem.de/specials/microsoft/">Microsoft</a>) <img src="https://cpx.golem.de/cpx.php?class=17&amp;aid=139221&amp;page=1&amp;ts=1549526400" alt="" width="1" height="1" />]]></content:encoded>
+            <slash:comments>9</slash:comments>
+        </item>
+        <item>
+            <title>Google Assistant als Dolmetscher: Google-Home-Lautsprecher können übersetzen</title>
+            <link>https://www.golem.de/news/google-assistant-als-dolmetscher-google-home-lautsprecher-koennen-uebersetzen-1902-139238-rss.html</link>
+            <description>Auf Zuruf können Google-Home-Lautsprecher nun in 25 Sprachen übersetzen. Dazu wird ein Satz in der Zielsprache angesagt. Den Dolmetschermodus gibt es allerdings nicht für alle Google-Assistant-Lautsprecher. (&lt;a href=&quot;https://www.golem.de/specials/google-home/&quot;&gt;Google Home&lt;/a&gt;, &lt;a href=&quot;https://www.golem.de/specials/google/&quot;&gt;Google&lt;/a&gt;) &lt;img src=&quot;https://cpx.golem.de/cpx.php?class=17&amp;amp;aid=139238&amp;amp;page=1&amp;amp;ts=1549522860&quot; alt=&quot;&quot; width=&quot;1&quot; height=&quot;1&quot; /&gt;</description>
+            <comments>https://forum.golem.de/kommentare/sonstiges/google-assistant-als-dolmetscher-google-home-lautsprecher-koennen-uebersetzen/123847,list.html</comments>
+            <pubDate>Thu, 07 Feb 2019 08:01:00 +0100</pubDate>
+            <guid>https://www.golem.de/1902/139238-rss.html</guid>
+            <content:encoded><![CDATA[<img src="https://www.golem.de/1902/139238-186526-186523_rc.jpg" width="140" height="140" vspace="3" hspace="8" align="left">Auf Zuruf können Google-Home-Lautsprecher nun in 25 Sprachen übersetzen. Dazu wird ein Satz in der Zielsprache angesagt. Den Dolmetschermodus gibt es allerdings nicht für alle Google-Assistant-Lautsprecher. (<a href="https://www.golem.de/specials/google-home/">Google Home</a>, <a href="https://www.golem.de/specials/google/">Google</a>) <img src="https://cpx.golem.de/cpx.php?class=17&amp;aid=139238&amp;page=1&amp;ts=1549522860" alt="" width="1" height="1" />]]></content:encoded>
+            <slash:comments>2</slash:comments>
+        </item>
+        <item>
+            <title>In eigener Sache: Golem.de sucht Verstärkung für die Videoredaktion</title>
+            <link>https://www.golem.de/news/in-eigener-sache-golem-de-sucht-verstaerkung-fuer-die-videoredaktion-1902-139206-rss.html</link>
+            <description>Du produzierst professionell Videos für Mobile und Desktop und möchtest mit eigenen Ideen und Konzepten Golem.de weiterentwickeln? Dann hätten wir dich gern in unserem Team. (&lt;a href=&quot;https://www.golem.de/specials/golem.de/&quot;&gt;Golem.de&lt;/a&gt;, &lt;a href=&quot;https://www.golem.de/specials/internet/&quot;&gt;Internet&lt;/a&gt;) &lt;img src=&quot;https://cpx.golem.de/cpx.php?class=17&amp;amp;aid=139206&amp;amp;page=1&amp;amp;ts=1549522800&quot; alt=&quot;&quot; width=&quot;1&quot; height=&quot;1&quot; /&gt;</description>
+            <comments>https://forum.golem.de/kommentare/internet/in-eigener-sache-golem.de-sucht-verstaerkung-fuer-die-videoredaktion/123846,list.html</comments>
+            <pubDate>Thu, 07 Feb 2019 08:00:00 +0100</pubDate>
+            <guid>https://www.golem.de/1902/139206-rss.html</guid>
+            <content:encoded><![CDATA[<img src="https://www.golem.de/1902/139206-186374-186370_rc.jpg" width="140" height="140" vspace="3" hspace="8" align="left">Du produzierst professionell Videos für Mobile und Desktop und möchtest mit eigenen Ideen und Konzepten Golem.de weiterentwickeln? Dann hätten wir dich gern in unserem Team. (<a href="https://www.golem.de/specials/golem.de/">Golem.de</a>, <a href="https://www.golem.de/specials/internet/">Internet</a>) <img src="https://cpx.golem.de/cpx.php?class=17&amp;aid=139206&amp;page=1&amp;ts=1549522800" alt="" width="1" height="1" />]]></content:encoded>
+            <slash:comments>6</slash:comments>
+        </item>
+        <item>
+            <title>Gocycle GX: Elektrofahrrad soll in 10 Sekunden gefaltet sein</title>
+            <link>https://www.golem.de/news/gocycle-gx-elektrofahrrad-soll-in-10-sekunden-gefaltet-sein-1902-139237-rss.html</link>
+            <description>Gocycle hat mit dem GX ein Elektrofahrrad vorgestellt, das gefaltet in öffentlichen Verkehrsmitteln transportiert sowie in Wohnung und Büro gelagert werden kann. Der Faltvorgang soll nur zehn Sekunden dauern. (&lt;a href=&quot;https://www.golem.de/specials/e-bike/&quot;&gt;E-Bike&lt;/a&gt;, &lt;a href=&quot;https://www.golem.de/specials/technologie/&quot;&gt;Technologie&lt;/a&gt;) &lt;img src=&quot;https://cpx.golem.de/cpx.php?class=17&amp;amp;aid=139237&amp;amp;page=1&amp;amp;ts=1549521840&quot; alt=&quot;&quot; width=&quot;1&quot; height=&quot;1&quot; /&gt;</description>
+            <comments>https://forum.golem.de/kommentare/wissenschaft/gocycle-gx-elektrofahrrad-soll-in-10-sekunden-gefaltet-sein/123845,list.html</comments>
+            <pubDate>Thu, 07 Feb 2019 07:44:00 +0100</pubDate>
+            <guid>https://www.golem.de/1902/139237-rss.html</guid>
+            <content:encoded><![CDATA[<img src="https://www.golem.de/1902/139237-186513-186510_rc.jpg" width="140" height="140" vspace="3" hspace="8" align="left">Gocycle hat mit dem GX ein Elektrofahrrad vorgestellt, das gefaltet in öffentlichen Verkehrsmitteln transportiert sowie in Wohnung und Büro gelagert werden kann. Der Faltvorgang soll nur zehn Sekunden dauern. (<a href="https://www.golem.de/specials/e-bike/">E-Bike</a>, <a href="https://www.golem.de/specials/technologie/">Technologie</a>) <img src="https://cpx.golem.de/cpx.php?class=17&amp;aid=139237&amp;page=1&amp;ts=1549521840" alt="" width="1" height="1" />]]></content:encoded>
+            <slash:comments>69</slash:comments>
+        </item>
+        <item>
+            <title>Nach Nutzerbeschwerden: Flickr verlängert Löschfrist bis März 2019</title>
+            <link>https://www.golem.de/news/nach-nutzerbeschwerden-flickr-verlaengert-loeschfrist-bis-maerz-2019-1902-139236-rss.html</link>
+            <description>Der Bilderdienst Flickr verlängert die Frist, nach der überzählige Bilder kostenloser Accounts gelöscht werden, bis 12. März 2019. Nutzer hatten sich beschwert, das Herunterladen von der Plattform gehe zu langsam. (&lt;a href=&quot;https://www.golem.de/specials/flickr/&quot;&gt;Flickr&lt;/a&gt;, &lt;a href=&quot;https://www.golem.de/specials/yahoo/&quot;&gt;Yahoo&lt;/a&gt;) &lt;img src=&quot;https://cpx.golem.de/cpx.php?class=17&amp;amp;aid=139236&amp;amp;page=1&amp;amp;ts=1549520820&quot; alt=&quot;&quot; width=&quot;1&quot; height=&quot;1&quot; /&gt;</description>
+            <comments>https://forum.golem.de/kommentare/internet/nach-nutzerbeschwerden-flickr-verlaengert-loeschfrist-bis-maerz-2019/123843,list.html</comments>
+            <pubDate>Thu, 07 Feb 2019 07:27:00 +0100</pubDate>
+            <guid>https://www.golem.de/1902/139236-rss.html</guid>
+            <content:encoded><![CDATA[<img src="https://www.golem.de/1811/137474-178092-178089_rc.jpg" width="140" height="140" vspace="3" hspace="8" align="left">Der Bilderdienst Flickr verlängert die Frist, nach der überzählige Bilder kostenloser Accounts gelöscht werden, bis 12. März 2019. Nutzer hatten sich beschwert, das Herunterladen von der Plattform gehe zu langsam. (<a href="https://www.golem.de/specials/flickr/">Flickr</a>, <a href="https://www.golem.de/specials/yahoo/">Yahoo</a>) <img src="https://cpx.golem.de/cpx.php?class=17&amp;aid=139236&amp;page=1&amp;ts=1549520820" alt="" width="1" height="1" />]]></content:encoded>
+            <slash:comments>5</slash:comments>
+        </item>
+        <item>
+            <title>Landkreis Cham: M-net bekommt Geld zur Problemlösung</title>
+            <link>https://www.golem.de/news/landkreis-cham-landrat-droht-m-net-wegen-panne-beim-glasfaserbau-mit-klage-1902-139233-rss.html</link>
+            <description>M-net bekommt von den Stadtwerken München 50 Millionen Euro, um die Krise im Landkreis Cham zu überstehen. Auch der weitere FTTB-Ausbau in München braucht eine Stärkung der Kapitalbasis. (&lt;a href=&quot;https://www.golem.de/specials/glasfaser/&quot;&gt;Glasfaser&lt;/a&gt;, &lt;a href=&quot;https://www.golem.de/specials/internet/&quot;&gt;Internet&lt;/a&gt;) &lt;img src=&quot;https://cpx.golem.de/cpx.php?class=17&amp;amp;aid=139233&amp;amp;page=1&amp;amp;ts=1549477320&quot; alt=&quot;&quot; width=&quot;1&quot; height=&quot;1&quot; /&gt;</description>
+            <comments>https://forum.golem.de/kommentare/wirtschaft/landkreis-cham-m-net-bekommt-geld-zur-problemloesung/123842,list.html</comments>
+            <pubDate>Wed, 06 Feb 2019 19:22:00 +0100</pubDate>
+            <guid>https://www.golem.de/1902/139233-rss.html</guid>
+            <content:encoded><![CDATA[<img src="https://www.golem.de/1902/139233-186492-186491_rc.jpg" width="140" height="140" vspace="3" hspace="8" align="left">M-net bekommt von den Stadtwerken München 50 Millionen Euro, um die Krise im Landkreis Cham zu überstehen. Auch der weitere FTTB-Ausbau in München braucht eine Stärkung der Kapitalbasis. (<a href="https://www.golem.de/specials/glasfaser/">Glasfaser</a>, <a href="https://www.golem.de/specials/internet/">Internet</a>) <img src="https://cpx.golem.de/cpx.php?class=17&amp;aid=139233&amp;page=1&amp;ts=1549477320" alt="" width="1" height="1" />]]></content:encoded>
+            <slash:comments>24</slash:comments>
+        </item>
+        <item>
+            <title>Remastered: Ubisoft überarbeitet Assassin's Creed 3</title>
+            <link>https://www.golem.de/news/remastered-ubisoft-ueberarbeitet-assassin-s-creed-3-1902-139232-rss.html</link>
+            <description>Ein ganz neues Assassin's Creed soll es 2019 nicht geben - aber eine Neuauflage von Serienteil 3: Der schickt Spieler mit schönerer Grafik und optimiertem Gameplay in die Zeit des amerikanischen Unabhängigkeitskriegs. (&lt;a href=&quot;https://www.golem.de/specials/assassins-creed-3/&quot;&gt;Assassin&amp;#039;s Creed 3&lt;/a&gt;, &lt;a href=&quot;https://www.golem.de/specials/ubisoft/&quot;&gt;Ubisoft&lt;/a&gt;) &lt;img src=&quot;https://cpx.golem.de/cpx.php?class=17&amp;amp;aid=139232&amp;amp;page=1&amp;amp;ts=1549476120&quot; alt=&quot;&quot; width=&quot;1&quot; height=&quot;1&quot; /&gt;</description>
+            <comments>https://forum.golem.de/kommentare/games/remastered-ubisoft-ueberarbeitet-assassin-s-creed-3/123841,list.html</comments>
+            <pubDate>Wed, 06 Feb 2019 19:02:00 +0100</pubDate>
+            <guid>https://www.golem.de/1902/139232-rss.html</guid>
+            <content:encoded><![CDATA[<img src="https://www.golem.de/1902/139232-186489-186486_rc.jpg" width="140" height="140" vspace="3" hspace="8" align="left">Ein ganz neues Assassin's Creed soll es 2019 nicht geben - aber eine Neuauflage von Serienteil 3: Der schickt Spieler mit schönerer Grafik und optimiertem Gameplay in die Zeit des amerikanischen Unabhängigkeitskriegs. (<a href="https://www.golem.de/specials/assassins-creed-3/">Assassin&#039;s Creed 3</a>, <a href="https://www.golem.de/specials/ubisoft/">Ubisoft</a>) <img src="https://cpx.golem.de/cpx.php?class=17&amp;aid=139232&amp;page=1&amp;ts=1549476120" alt="" width="1" height="1" />]]></content:encoded>
+            <slash:comments>18</slash:comments>
+        </item>
+        <item>
+            <title>Verwaltungsgericht Köln: Auch Telekom erwägt Eilantrag gegen 5G-Auktion</title>
+            <link>https://www.golem.de/news/verwaltungsgericht-koeln-auch-telekom-erwaegt-eilantrag-gegen-5g-auktion-1902-139231-rss.html</link>
+            <description>Nach dem Eilantrag der Telefónica gegen die 5G-Auktionsregeln bewertet wohl auch die Telekom die Situation neu. Das zur Auktion stehende Spektrum werde den Netzbetreibern erst ab Ende 2020 zugeteilt, daher habe eine Klage keine Verzögerung des Netzausbaus zur Folge, betont Telefónica-Chef Markus Haas. (&lt;a href=&quot;https://www.golem.de/specials/5g/&quot;&gt;5G&lt;/a&gt;, &lt;a href=&quot;https://www.golem.de/specials/telekom/&quot;&gt;Telekom&lt;/a&gt;) &lt;img src=&quot;https://cpx.golem.de/cpx.php?class=17&amp;amp;aid=139231&amp;amp;page=1&amp;amp;ts=1549469400&quot; alt=&quot;&quot; width=&quot;1&quot; height=&quot;1&quot; /&gt;</description>
+            <comments>https://forum.golem.de/kommentare/handy/verwaltungsgericht-koeln-auch-telekom-erwaegt-eilantrag-gegen-5g-auktion/123839,list.html</comments>
+            <pubDate>Wed, 06 Feb 2019 17:10:00 +0100</pubDate>
+            <guid>https://www.golem.de/1902/139231-rss.html</guid>
+            <content:encoded><![CDATA[<img src="https://www.golem.de/1902/139231-186582-186581_rc.jpg" width="140" height="140" vspace="3" hspace="8" align="left">Nach dem Eilantrag der Telefónica gegen die 5G-Auktionsregeln bewertet wohl auch die Telekom die Situation neu. Das zur Auktion stehende Spektrum werde den Netzbetreibern erst ab Ende 2020 zugeteilt, daher habe eine Klage keine Verzögerung des Netzausbaus zur Folge, betont Telefónica-Chef Markus Haas. (<a href="https://www.golem.de/specials/5g/">5G</a>, <a href="https://www.golem.de/specials/telekom/">Telekom</a>) <img src="https://cpx.golem.de/cpx.php?class=17&amp;aid=139231&amp;page=1&amp;ts=1549469400" alt="" width="1" height="1" />]]></content:encoded>
+            <slash:comments>19</slash:comments>
+        </item>
+        <item>
+            <title>EU-Urheberrechtsreform: Die Uploadfilter sollen doch noch kommen</title>
+            <link>https://www.golem.de/news/eu-urheberrechtsreform-die-uploadfilter-sollen-doch-noch-kommen-1902-139228-rss.html</link>
+            <description>Die Verhandlungen über die umstrittene EU-Urheberrechtsreform galten als gescheitert. Nun soll sie ein Kompromiss zwischen Frankreich und Deutschland retten. Von Eike Kühl (&lt;a href=&quot;https://www.golem.de/specials/uploadfilter/&quot;&gt;Uploadfilter&lt;/a&gt;, &lt;a href=&quot;https://www.golem.de/specials/urheberrecht/&quot;&gt;Urheberrecht&lt;/a&gt;) &lt;img src=&quot;https://cpx.golem.de/cpx.php?class=17&amp;amp;aid=139228&amp;amp;page=1&amp;amp;ts=1549468440&quot; alt=&quot;&quot; width=&quot;1&quot; height=&quot;1&quot; /&gt;</description>
+            <comments>https://forum.golem.de/kommentare/politik-recht/eu-urheberrechtsreform-die-uploadfilter-sollen-doch-noch-kommen/123838,list.html</comments>
+            <pubDate>Wed, 06 Feb 2019 16:54:00 +0100</pubDate>
+            <guid>https://www.golem.de/1902/139228-rss.html</guid>
+            <content:encoded><![CDATA[<img src="https://www.golem.de/1902/139228-186481-186477_rc.jpg" width="140" height="140" vspace="3" hspace="8" align="left">Die Verhandlungen über die umstrittene EU-Urheberrechtsreform galten als gescheitert. Nun soll sie ein Kompromiss zwischen Frankreich und Deutschland retten. Von Eike Kühl (<a href="https://www.golem.de/specials/uploadfilter/">Uploadfilter</a>, <a href="https://www.golem.de/specials/urheberrecht/">Urheberrecht</a>) <img src="https://cpx.golem.de/cpx.php?class=17&amp;aid=139228&amp;page=1&amp;ts=1549468440" alt="" width="1" height="1" />]]></content:encoded>
+            <slash:comments>70</slash:comments>
+        </item>
+        <item>
+            <title>Autonomes Fahren: Allianz Renault-Nissan-Mitsubishi will mit Waymo kooperieren</title>
+            <link>https://www.golem.de/news/autonomes-fahren-allianz-renault-nissan-mitsubishi-will-mit-waymo-kooperieren-1902-139229-rss.html</link>
+            <description>Bisher sind die Taxis mit Waymos Technik für autonomes Fahren von Chrysler. Künftig könnten Autos von Renault, Nissan und Mitsubishi hinzukommen: Die japanisch-französische Allianz verhandelt über eine Zusammenarbeit mit Waymo. (&lt;a href=&quot;https://www.golem.de/specials/navigationssystem/&quot;&gt;Navigationssystem&lt;/a&gt;, &lt;a href=&quot;https://www.golem.de/specials/google/&quot;&gt;Google&lt;/a&gt;) &lt;img src=&quot;https://cpx.golem.de/cpx.php?class=17&amp;amp;aid=139229&amp;amp;page=1&amp;amp;ts=1549466280&quot; alt=&quot;&quot; width=&quot;1&quot; height=&quot;1&quot; /&gt;</description>
+            <comments>https://forum.golem.de/kommentare/automobil/autonomes-fahren-allianz-renault-nissan-mitsubishi-will-mit-waymo-kooperieren/123837,list.html</comments>
+            <pubDate>Wed, 06 Feb 2019 16:18:00 +0100</pubDate>
+            <guid>https://www.golem.de/1902/139229-rss.html</guid>
+            <content:encoded><![CDATA[<img src="https://www.golem.de/1902/139229-186476-186473_rc.jpg" width="140" height="140" vspace="3" hspace="8" align="left">Bisher sind die Taxis mit Waymos Technik für autonomes Fahren von Chrysler. Künftig könnten Autos von Renault, Nissan und Mitsubishi hinzukommen: Die japanisch-französische Allianz verhandelt über eine Zusammenarbeit mit Waymo. (<a href="https://www.golem.de/specials/navigationssystem/">Navigationssystem</a>, <a href="https://www.golem.de/specials/google/">Google</a>) <img src="https://cpx.golem.de/cpx.php?class=17&amp;aid=139229&amp;page=1&amp;ts=1549466280" alt="" width="1" height="1" />]]></content:encoded>
+            <slash:comments>1</slash:comments>
+        </item>
+        <item>
+            <title>Testnetz: Ericsson und Telekom starten 5G-Testfeld in Darmstadt</title>
+            <link>https://www.golem.de/news/testnetz-ericsson-und-telekom-starten-5g-testfeld-in-darmstadt-1902-139227-rss.html</link>
+            <description>Bei einem neuen 5G-Testfeld betont die Telekom die Zusammenarbeit mit Ericsson. Doch auch der schwedische Konzern setzt auf Made in China und betreibt Produktion und Entwicklung mit chinesischen Konzernen. (&lt;a href=&quot;https://www.golem.de/specials/5g/&quot;&gt;5G&lt;/a&gt;, &lt;a href=&quot;https://www.golem.de/specials/telekom/&quot;&gt;Telekom&lt;/a&gt;) &lt;img src=&quot;https://cpx.golem.de/cpx.php?class=17&amp;amp;aid=139227&amp;amp;page=1&amp;amp;ts=1549464000&quot; alt=&quot;&quot; width=&quot;1&quot; height=&quot;1&quot; /&gt;</description>
+            <comments>https://forum.golem.de/kommentare/handy/testnetz-ericsson-und-telekom-starten-5g-testfeld-in-darmstadt/123836,list.html</comments>
+            <pubDate>Wed, 06 Feb 2019 15:40:00 +0100</pubDate>
+            <guid>https://www.golem.de/1902/139227-rss.html</guid>
+            <content:encoded><![CDATA[<img src="https://www.golem.de/1902/139227-186472-186468_rc.jpg" width="140" height="140" vspace="3" hspace="8" align="left">Bei einem neuen 5G-Testfeld betont die Telekom die Zusammenarbeit mit Ericsson. Doch auch der schwedische Konzern setzt auf Made in China und betreibt Produktion und Entwicklung mit chinesischen Konzernen. (<a href="https://www.golem.de/specials/5g/">5G</a>, <a href="https://www.golem.de/specials/telekom/">Telekom</a>) <img src="https://cpx.golem.de/cpx.php?class=17&amp;aid=139227&amp;page=1&amp;ts=1549464000" alt="" width="1" height="1" />]]></content:encoded>
+            <slash:comments />
+        </item>
+        <item>
+            <title>Refrigerdating: Samsung präsentiert Kühlschrank-Tinder</title>
+            <link>https://www.golem.de/news/refrigerdating-samsung-praesentiert-kuehlschrank-tinder-1902-139226-rss.html</link>
+            <description>Liebe geht durch den Magen - oder den Kühlschrank: Mit der Plattform Refrigerdating können sich Singles anhand des Inhaltes ihrer Kühlschränke kennenlernen. Samsung nutzt den tatsächlich existierenden Service als Marketing-Werkzeug für seine Familiy-Hub-Kühlschränke mit eingebauter Kamera. (&lt;a href=&quot;https://www.golem.de/specials/samsung/&quot;&gt;Samsung&lt;/a&gt;, &lt;a href=&quot;https://www.golem.de/specials/desktop-applikationen/&quot;&gt;Applikationen&lt;/a&gt;) &lt;img src=&quot;https://cpx.golem.de/cpx.php?class=17&amp;amp;aid=139226&amp;amp;page=1&amp;amp;ts=1549462440&quot; alt=&quot;&quot; width=&quot;1&quot; height=&quot;1&quot; /&gt;</description>
+            <comments>https://forum.golem.de/kommentare/applikationen/refrigerdating-samsung-praesentiert-kuehlschrank-tinder/123835,list.html</comments>
+            <pubDate>Wed, 06 Feb 2019 15:14:00 +0100</pubDate>
+            <guid>https://www.golem.de/1902/139226-rss.html</guid>
+            <content:encoded><![CDATA[<img src="https://www.golem.de/1902/139226-186467-186464_rc.jpg" width="140" height="140" vspace="3" hspace="8" align="left">Liebe geht durch den Magen - oder den Kühlschrank: Mit der Plattform Refrigerdating können sich Singles anhand des Inhaltes ihrer Kühlschränke kennenlernen. Samsung nutzt den tatsächlich existierenden Service als Marketing-Werkzeug für seine Familiy-Hub-Kühlschränke mit eingebauter Kamera. (<a href="https://www.golem.de/specials/samsung/">Samsung</a>, <a href="https://www.golem.de/specials/desktop-applikationen/">Applikationen</a>) <img src="https://cpx.golem.de/cpx.php?class=17&amp;aid=139226&amp;page=1&amp;ts=1549462440" alt="" width="1" height="1" />]]></content:encoded>
+            <slash:comments>30</slash:comments>
+        </item>
+        <item>
+            <title>SPNV: Ceské dráhy will akkubetriebene Elektrotriebzüge testen</title>
+            <link>https://www.golem.de/news/spnv-ceske-drahy-will-akkubetriebene-elektrotriebzuege-testen-1902-139225-rss.html</link>
+            <description>In Tschechien sollen bald Elektrotriebwagen mit Akkus zum Einsatz kommen. Dafür baut &amp;#x160;koda ein paar Regiopanter um, die dann im Regionalverkehr auf nicht elektrifizierten Strecken zum Einsatz kommen sollen. (&lt;a href=&quot;https://www.golem.de/specials/elektromobilitaet/&quot;&gt;Elektromobilität&lt;/a&gt;, &lt;a href=&quot;https://www.golem.de/specials/verkehr/&quot;&gt;Verkehr&lt;/a&gt;) &lt;img src=&quot;https://cpx.golem.de/cpx.php?class=17&amp;amp;aid=139225&amp;amp;page=1&amp;amp;ts=1549461660&quot; alt=&quot;&quot; width=&quot;1&quot; height=&quot;1&quot; /&gt;</description>
+            <comments>https://forum.golem.de/kommentare/automobil/spnv-cesk-dr-hy-will-akkubetriebene-elektrotriebzuege-testen/123834,list.html</comments>
+            <pubDate>Wed, 06 Feb 2019 15:01:00 +0100</pubDate>
+            <guid>https://www.golem.de/1902/139225-rss.html</guid>
+            <content:encoded><![CDATA[<img src="https://www.golem.de/1902/139225-186461-186460_rc.jpg" width="140" height="140" vspace="3" hspace="8" align="left">In Tschechien sollen bald Elektrotriebwagen mit Akkus zum Einsatz kommen. Dafür baut &#x160;koda ein paar Regiopanter um, die dann im Regionalverkehr auf nicht elektrifizierten Strecken zum Einsatz kommen sollen. (<a href="https://www.golem.de/specials/elektromobilitaet/">Elektromobilität</a>, <a href="https://www.golem.de/specials/verkehr/">Verkehr</a>) <img src="https://cpx.golem.de/cpx.php?class=17&amp;aid=139225&amp;page=1&amp;ts=1549461660" alt="" width="1" height="1" />]]></content:encoded>
+            <slash:comments>7</slash:comments>
+        </item>
+        <item>
+            <title>Landkreis: Deutsche Glasfaser will 120.000 Haushalte gewinnen</title>
+            <link>https://www.golem.de/news/landkreis-deutsche-glasfaser-will-120-000-haushalte-gewinnen-1902-139224-rss.html</link>
+            <description>Über die nächsten Jahre will die Deutsche Glasfaser zusammen mit einem Energieversorger einen ganzen Landkreis in Hessen ausbauen. Das Projekt mit Entega hat eine Besonderheit: Man bietet Open Access. (&lt;a href=&quot;https://www.golem.de/specials/glasfaser/&quot;&gt;Glasfaser&lt;/a&gt;, &lt;a href=&quot;https://www.golem.de/specials/openaccess/&quot;&gt;Open Access&lt;/a&gt;) &lt;img src=&quot;https://cpx.golem.de/cpx.php?class=17&amp;amp;aid=139224&amp;amp;page=1&amp;amp;ts=1549460760&quot; alt=&quot;&quot; width=&quot;1&quot; height=&quot;1&quot; /&gt;</description>
+            <comments>https://forum.golem.de/kommentare/internet/landkreis-deutsche-glasfaser-will-120.000-haushalte-gewinnen/123833,list.html</comments>
+            <pubDate>Wed, 06 Feb 2019 14:46:00 +0100</pubDate>
+            <guid>https://www.golem.de/1902/139224-rss.html</guid>
+            <content:encoded><![CDATA[<img src="https://www.golem.de/1902/139224-186459-186456_rc.jpg" width="140" height="140" vspace="3" hspace="8" align="left">Über die nächsten Jahre will die Deutsche Glasfaser zusammen mit einem Energieversorger einen ganzen Landkreis in Hessen ausbauen. Das Projekt mit Entega hat eine Besonderheit: Man bietet Open Access. (<a href="https://www.golem.de/specials/glasfaser/">Glasfaser</a>, <a href="https://www.golem.de/specials/openaccess/">Open Access</a>) <img src="https://cpx.golem.de/cpx.php?class=17&amp;aid=139224&amp;page=1&amp;ts=1549460760" alt="" width="1" height="1" />]]></content:encoded>
+            <slash:comments>22</slash:comments>
+        </item>
+        <item>
+            <title>MacOS: APFS kann Dateien immer noch nicht schnell zusammenzählen</title>
+            <link>https://www.golem.de/news/macos-apfs-kann-dateien-immer-noch-nicht-schnell-zusammenzaehlen-1902-139223-rss.html</link>
+            <description>Das Dateisystem APFS sollte für Mac-Nutzer vieles besser machen. Vor allem die Berechnung von freiem oder belegtem Speicherplatz über Fast Directory Sizing hätte Verbesserungen bringen müssen. Stattdessen müssen Anwender weiter auf APFS warten. (&lt;a href=&quot;https://www.golem.de/specials/apfs/&quot;&gt;APFS&lt;/a&gt;, &lt;a href=&quot;https://www.golem.de/specials/apple/&quot;&gt;Apple&lt;/a&gt;) &lt;img src=&quot;https://cpx.golem.de/cpx.php?class=17&amp;amp;aid=139223&amp;amp;page=1&amp;amp;ts=1549458060&quot; alt=&quot;&quot; width=&quot;1&quot; height=&quot;1&quot; /&gt;</description>
+            <comments>https://forum.golem.de/kommentare/applikationen/macos-apfs-kann-dateien-immer-noch-nicht-schnell-zusammenzaehlen/123831,list.html</comments>
+            <pubDate>Wed, 06 Feb 2019 14:01:00 +0100</pubDate>
+            <guid>https://www.golem.de/1902/139223-rss.html</guid>
+            <content:encoded><![CDATA[<img src="https://www.golem.de/1902/139223-186449-186446_rc.jpg" width="140" height="140" vspace="3" hspace="8" align="left">Das Dateisystem APFS sollte für Mac-Nutzer vieles besser machen. Vor allem die Berechnung von freiem oder belegtem Speicherplatz über Fast Directory Sizing hätte Verbesserungen bringen müssen. Stattdessen müssen Anwender weiter auf APFS warten. (<a href="https://www.golem.de/specials/apfs/">APFS</a>, <a href="https://www.golem.de/specials/apple/">Apple</a>) <img src="https://cpx.golem.de/cpx.php?class=17&amp;aid=139223&amp;page=1&amp;ts=1549458060" alt="" width="1" height="1" />]]></content:encoded>
+            <slash:comments>21</slash:comments>
+        </item>
+    </channel>
+</rss>

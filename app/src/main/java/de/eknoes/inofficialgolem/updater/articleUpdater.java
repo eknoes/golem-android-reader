@@ -45,8 +45,8 @@ public class articleUpdater extends GolemUpdater {
         try {
             String response = future.get(15, TimeUnit.SECONDS);
             if(useAbo)
-                return new GolemAboParser().parse(response);
-            return new GolemRSSParser().parse(response);
+                return getItems(response, new GolemAboParser());
+            return getItems(response, new GolemRSSParser());
 
         } catch (InterruptedException | ExecutionException e) {
             e.printStackTrace();
@@ -65,6 +65,10 @@ public class articleUpdater extends GolemUpdater {
         }
 
         return new LinkedList<>();
+    }
+
+    static List<GolemItem> getItems(String feed, GolemRSSParser parser) {
+        return parser.parse(feed);
     }
 
     private String buildFeedURL() {
