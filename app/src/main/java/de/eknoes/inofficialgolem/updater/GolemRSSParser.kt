@@ -1,5 +1,7 @@
 package de.eknoes.inofficialgolem.updater
 
+import android.os.Build
+import android.text.Html
 import android.util.Xml
 import org.xmlpull.v1.XmlPullParser
 import java.io.StringReader
@@ -95,10 +97,10 @@ Pattern.CASE_INSENSITIVE or Pattern.MULTILINE or Pattern.DOTALL)
         }
 
         val item = GolemItem()
-        item.setProp(GolemItem.ItemProperties.TITLE, title)
+        item.setProp(GolemItem.ItemProperties.TITLE, decodeHTML(title))
         item.setProp(GolemItem.ItemProperties.COMMENT_URL, commentUrl)
         item.setProp(GolemItem.ItemProperties.COMMENT_NR, commentNumber)
-        item.setProp(GolemItem.ItemProperties.TEASER, desc)
+        item.setProp(GolemItem.ItemProperties.TEASER, decodeHTML(desc))
 
         //Extract IMG Url from content
         val matcher = urlPattern.matcher(content)
@@ -147,8 +149,18 @@ Pattern.CASE_INSENSITIVE or Pattern.MULTILINE or Pattern.DOTALL)
         parser.require(XmlPullParser.START_TAG, ns, "description")
         val content = readText(parser)
         parser.require(XmlPullParser.END_TAG, ns, "description")
-        return content
+
+        return cleanTeaser(content)
     }
+
+    private val teaserPattern = Pattern.compile("\\(<a href=\".*\\) <img src=\".*/>")
+    private fun cleanTeaser(teaser: String?): String {
+        val matcher = teaserPattern.matcher(teaser!!)
+        if (matcher.find())
+            return teaser.substring(0, matcher.start(0))
+        return teaser
+    }
+
 
     private fun readPubDate(parser: XmlPullParser): String? {
         parser.require(XmlPullParser.START_TAG, ns, "pubDate")
@@ -179,7 +191,16 @@ Pattern.CASE_INSENSITIVE or Pattern.MULTILINE or Pattern.DOTALL)
             result = parser.text
             parser.nextTag()
         }
+
         return result
+    }
+
+    private fun decodeHTML(str: String?): String {
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            Html.fromHtml(str, Html.FROM_HTML_MODE_LEGACY).toString()
+        } else {
+            Html.fromHtml(str).toString()
+        }
     }
 
     internal fun skip(parser: XmlPullParser) {

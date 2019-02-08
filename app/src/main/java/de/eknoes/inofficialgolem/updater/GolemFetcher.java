@@ -22,8 +22,6 @@ import de.eknoes.inofficialgolem.R;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.Callable;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * Created by soenke on 27.08.16.
@@ -171,7 +169,7 @@ public class GolemFetcher extends AsyncTask<Void, Float, GolemFetcher.FETCH_STAT
                 }
             }
             if (item.hasProp(GolemItem.ItemProperties.TEASER)) {
-                values.put(FeedReaderContract.Article.COLUMN_NAME_TEASER, cleanTeaser(item.getProp(GolemItem.ItemProperties.TEASER)));
+                values.put(FeedReaderContract.Article.COLUMN_NAME_TEASER, item.getProp(GolemItem.ItemProperties.TEASER));
             }
 
             if (item.hasProp(GolemItem.ItemProperties.DATE)) {
@@ -207,16 +205,6 @@ public class GolemFetcher extends AsyncTask<Void, Float, GolemFetcher.FETCH_STAT
                 return;
             }
         }
-    }
-
-    private static Pattern teaserPattern = Pattern.compile("\\(<a href=\".*\\) <img src=\".*/>");
-
-    private static String cleanTeaser(String teaser) {
-        Matcher matcher = teaserPattern.matcher(teaser);
-        if(matcher.find())
-            teaser = teaser.substring(0, matcher.start(0));
-
-        return teaser;
     }
 
     enum FETCH_STATE {SUCCESS, NO_CONNECTION, TIMEOUT, ABO_INVALID, UNDEFINED_ERROR}
