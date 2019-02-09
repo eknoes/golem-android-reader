@@ -8,7 +8,7 @@ android {
         applicationId "de.eknoes.inofficialgolem"
         minSdkVersion 14
         targetSdkVersion 28
-        versionCode 121
+        versionCode 122
         versionName "1.1.0"
     }
     buildTypes {
