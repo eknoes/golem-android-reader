@@ -17,6 +17,9 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme"
             android:resizeableActivity="true">
+        <uses-library
+                android:name="org.apache.http.legacy"
+                android:required="false" />
         <activity
                 android:name=".ArticleView"
                 android:parentActivityName=".MainActivity"
