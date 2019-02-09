@@ -3,6 +3,7 @@ package de.eknoes.inofficialgolem.updater;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -29,14 +30,20 @@ import java.util.concurrent.Callable;
  */
 public class GolemFetcher extends AsyncTask<Void, Float, GolemFetcher.FETCH_STATE> {
     private static final String TAG = "GolemFetcher";
-    private final SQLiteDatabase db;
+    private SQLiteDatabase db;
     private final WeakReference<ProgressBar> mProgress;
     private final GolemUpdater[] updater;
     private final WeakReference<Context> context;
     private final Callable<Void> notifier;
 
     public GolemFetcher(Context context, ProgressBar mProgress, Callable<Void> notifier) {
-        this.db = FeedReaderDbHelper.getInstance(context.getApplicationContext()).getWritableDatabase();
+        try {
+            this.db = FeedReaderDbHelper.getInstance(context.getApplicationContext()).getWritableDatabase();
+        } catch (SQLException exception) {
+            Log.e(TAG, "GolemFetcher: Could not open Database: ", exception);
+            Toast.makeText(context, R.string.error_database, Toast.LENGTH_LONG);
+            this.cancel(true);
+        }
         this.mProgress = new WeakReference<>(mProgress);
         this.context = new WeakReference<>(context);
         this.notifier = notifier;
@@ -148,6 +155,10 @@ public class GolemFetcher extends AsyncTask<Void, Float, GolemFetcher.FETCH_STAT
 
     private void writeArticles(List<GolemItem> articles) {
         for (GolemItem item : articles) {
+            if (isCancelled() || db == null) {
+                return;
+            }
+
             int id = item.getId();
 
             if (item.getUrl().startsWith("http://")) {
@@ -220,10 +231,6 @@ public class GolemFetcher extends AsyncTask<Void, Float, GolemFetcher.FETCH_STAT
             } else {
                 Log.d(TAG, "doInBackground: Creating new article with Title " + item.getProp(GolemItem.ItemProperties.TITLE));
                 db.insert(FeedReaderContract.Article.TABLE_NAME, null, values);
-            }
-
-            if (isCancelled()) {
-                return;
             }
         }
     }

@@ -46,4 +46,6 @@
     <string name="write_a_mail">Mail schreiben</string>
     <string name="mobileViewTippText">Golem.de zeigt für Tablets in dieser Größe das Desktop Layout an. Wenn du eine kompaktere Artikelansicht nutzen möchtest, kannst du das \"Mobile Layout\" auswählen.</string>
     <string name="action_open_comments">Open Forum in Browser</string>
+    <string name="teaser_img_desc">Teaserbild des Artikels</string>
+    <string name="error_database">Unerwarteter Fehler beim Öffnen der Datenbank</string>
 </resources>

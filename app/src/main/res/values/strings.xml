@@ -12,6 +12,7 @@
     <string name="action_share">Share</string>
     <string name="shareAppText">Try this App for reading golem.de: %s</string>
     <string name="title_activity_settings" translatable="false">Settings</string>
+    <string name="error_database">Unexpected error on opening Database</string>
 
     <!-- Settings -->
     <string name="pref_article_limit">Article Limit</string>
