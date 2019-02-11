@@ -52,7 +52,7 @@ class GolemAboParser : GolemRSSParser() {
 
         val item = GolemItem()
         item.setProp(GolemItem.ItemProperties.TITLE, title)
-        item.setProp(GolemItem.ItemProperties.DATE, parseDate(pubDate, "yyyy-mm-dd'T'HH:mm:ssz"))
+        item.setProp(GolemItem.ItemProperties.DATE, parseDate(pubDate, "yyyy-MM-dd'T'HH:mm:ssz"))
         item.setProp(GolemItem.ItemProperties.FULLTEXT, fulltext)
         item.setProp(GolemItem.ItemProperties.HAS_MEDIA_FULLTEXT, "true")
         item.setProp(GolemItem.ItemProperties.OFFLINE_AVAILABLE, "true")

@@ -226,7 +226,7 @@ public class GolemFetcher extends AsyncTask<Void, Float, GolemFetcher.FETCH_STAT
             }
 
             if (id != 0) {
-                Log.d(TAG, "doInBackground: Updating article with id " + id);
+                Log.d(TAG, "doInBackground: Updating article with id " + id + ": Date " + item.getProp(GolemItem.ItemProperties.DATE));
                 db.update(FeedReaderContract.Article.TABLE_NAME, values, FeedReaderContract.Article._ID + "='" + id + "'", null);
             } else {
                 Log.d(TAG, "doInBackground: Creating new article with Title " + item.getProp(GolemItem.ItemProperties.TITLE));
