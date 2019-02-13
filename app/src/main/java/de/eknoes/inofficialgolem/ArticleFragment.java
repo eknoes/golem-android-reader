@@ -171,7 +171,8 @@ public class ArticleFragment extends Fragment {
         inflater.inflate(R.menu.menu_webview, menu);
 
         if(article == null || article.getCommentUrl() == null) {
-            menu.findItem(R.id.action_comments).setVisible(false);
+            MenuItem item = menu.findItem(R.id.action_comments);
+            item.setVisible(false);
         }
     }
 
