@@ -172,7 +172,9 @@ public class ArticleFragment extends Fragment {
 
         if(article == null || article.getCommentUrl() == null) {
             MenuItem item = menu.findItem(R.id.action_comments);
-            item.setVisible(false);
+            if(item != null) {
+                item.setVisible(false);
+            }
         }
     }
 
