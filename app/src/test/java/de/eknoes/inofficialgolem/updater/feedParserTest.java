@@ -13,8 +13,4 @@ public class feedParserTest {
         byte[] encoded = Files.readAllBytes(Paths.get(path));
         return new String(encoded, encoding);
     }
-    @Test
-    public void getItems() {
-        // Test Invalid Feed
-    }
 }

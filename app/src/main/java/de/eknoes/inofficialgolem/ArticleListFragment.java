@@ -11,8 +11,8 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 import android.util.Log;
 import android.util.LruCache;
 import android.view.*;
@@ -66,8 +66,7 @@ public class ArticleListFragment extends Fragment {
         setHasOptionsMenu(true);
     }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container) {
         //super.onCreateView(inflater, container, savedInstanceState);
         View v = inflater.inflate(R.layout.fragment_articlelist, container, false);
         mProgress = v.findViewById(R.id.progressBar);

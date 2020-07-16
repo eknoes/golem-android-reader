@@ -13,8 +13,8 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 import android.util.Log;
 import android.view.*;
 import android.webkit.WebSettings;
@@ -22,12 +22,6 @@ import android.webkit.WebView;
 import android.widget.ProgressBar;
 
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * Use the {@link ArticleFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class ArticleFragment extends Fragment {
     static final String ARTICLE_URL = "de.eknoes.inofficialgolem.ARTICLE_URL";
     static final String FORCE_WEBVIEW = "de.eknoes.inofficialgolem.FORCE_WEBVIEW";
