@@ -21,6 +21,9 @@ import android.view.*;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.ProgressBar;
+import org.jetbrains.annotations.NotNull;
+
+import java.util.Objects;
 
 
 public class ArticleFragment extends Fragment {
@@ -90,15 +93,11 @@ public class ArticleFragment extends Fragment {
     }
 
     private void setHasOptionsMenu() {
-        if (noArticle) {
-            setHasOptionsMenu(false);
-        } else {
-            setHasOptionsMenu(true);
-        }
+        setHasOptionsMenu(!noArticle);
     }
 
     @Override
-    public void onSaveInstanceState(Bundle outState) {
+    public void onSaveInstanceState(@NotNull Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putBoolean(FORCE_WEBVIEW, forceWebview);
         outState.putString(ARTICLE_URL, url);
@@ -154,7 +153,7 @@ public class ArticleFragment extends Fragment {
     }
 
     @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+    public void onCreateOptionsMenu(@NotNull Menu menu, @NotNull MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
         inflater.inflate(R.menu.menu_webview, menu);
 
@@ -272,7 +271,7 @@ public class ArticleFragment extends Fragment {
 
         @Override
         protected Void doInBackground(Void... params) {
-                FeedReaderDbHelper dbHelper = FeedReaderDbHelper.getInstance(getContext().getApplicationContext());
+                FeedReaderDbHelper dbHelper = FeedReaderDbHelper.getInstance(Objects.requireNonNull(getContext()).getApplicationContext());
 
                 SQLiteDatabase db = dbHelper.getReadableDatabase();
 

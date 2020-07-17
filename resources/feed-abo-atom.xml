@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- generator="FeedCreator 1.6" -->
+<!--suppress ALL -->
 <feed xmlns="http://www.w3.org/2005/Atom"
- xmlns:dc="http://purl.org/dc/elements/1.1/"
- xml:lang="de">
+      xml:lang="de">
     <title type="html">Golem.de</title>
     <subtitle type="html">IT-News fuer Profis</subtitle>
     <link rel="self" type="application/atom+xml" href="https://rss.golem.de/rss.php"/>

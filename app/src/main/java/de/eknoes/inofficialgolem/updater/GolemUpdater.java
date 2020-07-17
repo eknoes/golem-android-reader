@@ -17,7 +17,6 @@ abstract class GolemUpdater {
     /**
      * Class that fetches data from Golem RSS Feed, e.g. articles or videos
      *
-     * @param context
      */
     GolemUpdater(Context context) {
         this.context = context;

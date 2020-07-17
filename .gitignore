@@ -22,8 +22,6 @@ out
 /build
 
 ###OSX###
-
-.DS_Store
 .AppleDouble
 .LSOverride
 
@@ -40,8 +38,6 @@ Icon
 
 
 ###Linux###
-
-*~
 
 # KDE directory preferences
 .directory
@@ -92,8 +88,6 @@ hs_err_pid*
 
 
 ###IntelliJ###
-
-*.iml
 *.ipr
 *.iws
 .idea/
@@ -106,7 +100,6 @@ hs_err_pid*
 tmp/
 *.tmp
 *.bak
-*.swp
 *~.nib
 .settings/
 .loadpath

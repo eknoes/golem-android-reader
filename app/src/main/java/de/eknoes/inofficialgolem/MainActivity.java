@@ -11,6 +11,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import org.jetbrains.annotations.NotNull;
+
+import java.util.Objects;
 
 import static de.eknoes.inofficialgolem.ArticleFragment.*;
 
@@ -103,7 +106,7 @@ public class MainActivity extends AppCompatActivity implements ArticleListFragme
     }
 
     @Override
-    protected void onSaveInstanceState(Bundle outState) {
+    protected void onSaveInstanceState(@NotNull Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putString(CURRENT_ARTICLE, currentArticle);
     }
@@ -128,7 +131,7 @@ public class MainActivity extends AppCompatActivity implements ArticleListFragme
         int id = item.getItemId();
 
         if (id == R.id.action_refresh) {
-            ((ArticleListFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_articlelist)).refresh();
+            ((ArticleListFragment) Objects.requireNonNull(getSupportFragmentManager().findFragmentById(R.id.fragment_articlelist))).refresh();
             return true;
         } else if (id == R.id.action_share) {
             //Get Package Link

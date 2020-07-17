@@ -15,7 +15,8 @@
             android:logo="@drawable/golem_eye"
             android:supportsRtl="true"
             android:theme="@style/AppTheme"
-            android:resizeableActivity="true" tools:targetApi="n">
+            android:resizeableActivity="true" tools:targetApi="n"
+            android:fullBackupContent="@xml/backup_descriptor">
         <uses-library
                 android:name="org.apache.http.legacy"
                 android:required="false" />

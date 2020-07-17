@@ -22,9 +22,11 @@ import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.NetworkImageView;
 import com.android.volley.toolbox.Volley;
 import de.eknoes.inofficialgolem.updater.GolemFetcher;
+import org.jetbrains.annotations.NotNull;
 
 import java.text.DateFormat;
 import java.util.Date;
+import java.util.Objects;
 import java.util.concurrent.Callable;
 
 import static android.util.TypedValue.COMPLEX_UNIT_PX;
@@ -44,13 +46,13 @@ public class ArticleListFragment extends Fragment {
     }
 
     @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+    public void onCreateOptionsMenu(@NotNull Menu menu, @NotNull MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
         inflater.inflate(R.menu.menu_articlelist, menu);
     }
 
     @Override
-    public void onAttach(Context context) {
+    public void onAttach(@NotNull Context context) {
         super.onAttach(context);
         try {
             mListener = (OnArticleSelectedListener) context;
@@ -115,7 +117,7 @@ public class ArticleListFragment extends Fragment {
 
     void refresh() {
         if (fetcher == null || fetcher.getStatus() != AsyncTask.Status.RUNNING) {
-            fetcher = new GolemFetcher(getContext(), mProgress, new Callable<Void>() {
+            fetcher = new GolemFetcher(Objects.requireNonNull(getContext()), mProgress, new Callable<Void>() {
                 @Override
                 public Void call() {
                     if(listAdapter != null) {
@@ -146,7 +148,7 @@ public class ArticleListFragment extends Fragment {
 
         ArticleAdapter() {
             super();
-            context = getContext().getApplicationContext();
+            context = Objects.requireNonNull(getContext()).getApplicationContext();
             inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             FeedReaderDbHelper dbHelper = FeedReaderDbHelper.getInstance(context);
             db = dbHelper.getReadableDatabase();
