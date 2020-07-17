@@ -25,6 +25,7 @@ dependencies {
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'com.pavelsikun:material-seekbar-preference:0.12.1'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation 'androidx.fragment:fragment-ktx:1.2.5'
     testImplementation 'junit:junit:4.12'
 }
 repositories {

@@ -13,6 +13,7 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import android.util.Log;
@@ -38,8 +39,7 @@ public class ArticleFragment extends Fragment {
     private loadArticleTask mTask;
 
     public ArticleFragment() {
-        super();
-        // Required empty public constructor
+        super(R.layout.fragment_article);
     }
 
     /**
@@ -131,17 +131,11 @@ public class ArticleFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        super.onCreateView(inflater, container, savedInstanceState);
-        // Inflate the layout for this fragment
-        Log.d(TAG, "onCreateView: Inflating Fragment layout");
-        View v = inflater.inflate(R.layout.fragment_article, container, false);
-        webView = v.findViewById(R.id.articleWebView);
-        progress = v.findViewById(R.id.articleProgress);
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        webView = view.findViewById(R.id.articleWebView);
+        progress = view.findViewById(R.id.articleProgress);
 
-
-        return v;
     }
 
     @Override

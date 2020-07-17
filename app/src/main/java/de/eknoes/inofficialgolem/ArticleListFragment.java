@@ -11,6 +11,7 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import android.util.Log;
@@ -37,6 +38,10 @@ public class ArticleListFragment extends Fragment {
     private ArticleAdapter listAdapter;
     private ProgressBar mProgress; //Not yet implemented
     private OnArticleSelectedListener mListener;
+
+    public ArticleListFragment() {
+        super(R.layout.fragment_articlelist);
+    }
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
@@ -66,11 +71,11 @@ public class ArticleListFragment extends Fragment {
         setHasOptionsMenu(true);
     }
 
-    public View onCreateView(LayoutInflater inflater, ViewGroup container) {
-        //super.onCreateView(inflater, container, savedInstanceState);
-        View v = inflater.inflate(R.layout.fragment_articlelist, container, false);
-        mProgress = v.findViewById(R.id.progressBar);
-        ListView listView = v.findViewById(R.id.articleList);
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        mProgress = view.findViewById(R.id.progressBar);
+        ListView listView = view.findViewById(R.id.articleList);
 
         Log.d(TAG, "onStart: Creating Article List Adapter");
         listAdapter = new ArticleAdapter();
@@ -88,7 +93,6 @@ public class ArticleListFragment extends Fragment {
                 return true;
             }
         });
-        return v;
     }
 
     @Override
