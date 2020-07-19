@@ -9,6 +9,14 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+
+        <item name="materialButtonStyle">@style/ButtonColor</item>
+    </style>
+
+
+    <style name="ButtonColor" parent="Widget.MaterialComponents.Button">
+        <item name="android:textColor">?android:textColor</item>
+        <item name="backgroundTint">?android:colorButtonNormal</item>
     </style>
 
     <style name="AppTheme.NoActionBar">

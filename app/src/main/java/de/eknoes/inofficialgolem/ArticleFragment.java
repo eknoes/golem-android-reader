@@ -327,7 +327,7 @@ public class ArticleFragment extends Fragment {
                 // Change CSS for Dark Mode
                 if((getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK) == Configuration.UI_MODE_NIGHT_YES) {
                     if (fulltext != null) {
-                        fulltext = fulltext.replace("</head>", "<style type=\"text/css\">#screen, body {\n" +
+                        fulltext = fulltext.replace("</head>", "<style type=\"text/css\">#screen, body, html {\n" +
                                 "color: white;\n" +
                                 "background-color: black;\n" +
                                 "}" +

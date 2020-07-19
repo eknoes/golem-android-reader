@@ -39,6 +39,7 @@
             android:text="@string/take_me_to_store"/>
 
     <Button
+            android:theme="@style/AppTheme"
             android:id="@+id/mailBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
