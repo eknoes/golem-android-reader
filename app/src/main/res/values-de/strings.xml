@@ -5,8 +5,8 @@
     <string name="action_settings">Einstellungen</string>
     <string name="action_share">Teilen</string>
     <string name="article_published">Veröffentlicht am %s</string>
-    <string name="how_to_key">Golem.de Abo Account</string>
-    <string name="how_to_key_content">Hier können Sie Ihren Abo Token unter Volltext-RSS-Feed finden. Die Zeichen nach \"http://rss.golem.de/rss_sub.php?token=\" sind ihr Token. Außerdem können Sie hier auch ein Abo abschließen.</string>
+    <string name="how_to_key">Golem.de Pur Account</string>
+    <string name="how_to_key_content">Hier können Sie Ihren Abo Token unter Volltext-RSS-Feed finden. Die Zeichen nach \"http://rss.golem.de/rss_sub.php?token=\" sind ihr Token. Außerdem können Sie hier auch ein Abo abschließen und die Webansicht auf Dark Mode ändern.</string>
     <string name="pref_abo_key_sum">Richten sie hier ihr Abo ein</string>
     <string name="pref_article_limit">Anzahl Artikel</string>
     <string name="pref_article_limit_sum">Anzahl der Artikel, welche gespeichert bleiben sollen.</string>

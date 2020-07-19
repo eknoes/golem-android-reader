@@ -23,9 +23,11 @@ public class SettingsActivity extends PreferenceActivity implements SharedPrefer
         findPreference("how_to_key").setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
             @Override
             public boolean onPreferenceClick(Preference preference) {
-                Intent webIntent = new Intent(Intent.ACTION_VIEW);
-                webIntent.setData(Uri.parse("https://account.golem.de/subscription"));
-                startActivity(webIntent);
+                Intent intent = new Intent(SettingsActivity.this, ArticleView.class);
+                intent.putExtra(ARTICLE_URL, "https://account.golem.de/product/subscription");
+                intent.putExtra(FORCE_WEBVIEW, true);
+                intent.putExtra(NO_ARTICLE, true);
+                startActivity(intent);
                 return true;
             }
         });
@@ -34,7 +36,7 @@ public class SettingsActivity extends PreferenceActivity implements SharedPrefer
             @Override
             public boolean onPreferenceClick(Preference preference) {
                 Intent intent = new Intent(SettingsActivity.this, ArticleView.class);
-                intent.putExtra(ARTICLE_URL, "http://www.golem.de/sonstiges/ansicht/");
+                intent.putExtra(ARTICLE_URL, "https://www.golem.de/sonstiges/ansicht/");
                 intent.putExtra(FORCE_WEBVIEW, true);
                 intent.putExtra(NO_ARTICLE, true);
                 startActivity(intent);
@@ -46,7 +48,7 @@ public class SettingsActivity extends PreferenceActivity implements SharedPrefer
             @Override
             public boolean onPreferenceClick(Preference preference) {
                 Intent intent = new Intent(SettingsActivity.this, ArticleView.class);
-                intent.putExtra(ARTICLE_URL, "http://projekte.eknoes.de/datenschutz.html");
+                intent.putExtra(ARTICLE_URL, "https://projekte.eknoes.de/datenschutz.html");
                 intent.putExtra(FORCE_WEBVIEW, true);
                 intent.putExtra(NO_ARTICLE, true);
                 startActivity(intent);

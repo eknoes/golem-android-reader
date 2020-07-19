@@ -19,7 +19,7 @@ class GolemWebViewClient extends WebViewClient {
     @Override
     public boolean shouldOverrideUrlLoading(WebView view, String url) {
         String host = Uri.parse(url).getHost();
-        if (host == null || host.equals("www.golem.de") || host.equals("golem.de") || host.equals("forum.golem.de")) {
+        if (host == null || host.equals("www.golem.de") || host.equals("golem.de") || host.equals("forum.golem.de") || host.equals("account.golem.de")) {
             return false;
         }
         // Otherwise, the link is not for a page on my site, so launch another Activity that handles URLs
@@ -33,7 +33,7 @@ class GolemWebViewClient extends WebViewClient {
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
-        if (request.getUrl().getHost() == null || request.getUrl().getHost().equals("www.golem.de") || request.getUrl().getHost().equals("golem.de") || request.getUrl().getHost().equals("forum.golem.de")) {
+        if (request.getUrl().getHost() == null || request.getUrl().getHost().equals("www.golem.de") || request.getUrl().getHost().equals("golem.de") || request.getUrl().getHost().equals("account.golem.de") || request.getUrl().getHost().equals("forum.golem.de")) {
             return false;
         }
         // Otherwise, the link is not for a page on my site, so launch another Activity that handles URLs

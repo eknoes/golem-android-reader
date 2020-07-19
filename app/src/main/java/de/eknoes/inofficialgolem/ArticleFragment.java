@@ -4,23 +4,26 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Bitmap;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 import android.util.Log;
-import android.view.*;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.ProgressBar;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Objects;
@@ -36,7 +39,7 @@ public class ArticleFragment extends Fragment {
     private boolean forceWebview;
     private boolean noArticle;
     private WebView webView;
-    private ProgressBar progress;
+    private ProgressBar progressBar;
 
     private Article article;
     private loadArticleTask mTask;
@@ -112,10 +115,24 @@ public class ArticleFragment extends Fragment {
         if(webView != null) {
             webView.setWebViewClient(new GolemWebViewClient() {
                 @Override
+                public void onPageStarted(WebView view, String url, Bitmap favicon) {
+                    super.onPageStarted(view, url, favicon);
+                    webView.setVisibility(View.INVISIBLE);
+                    if(progressBar != null) {
+                        progressBar.setVisibility(View.VISIBLE);
+                        progressBar.setIndeterminate(true);
+                    }
+                }
+
+                @Override
                 public void onPageFinished(WebView view, String url) {
                     super.onPageFinished(view, url);
+                    webView.setVisibility(View.VISIBLE);
+                    if(progressBar != null) {
+                        progressBar.setVisibility(View.GONE);
+                        progressBar.setIndeterminate(false);
+                    }
 
-                    progress.setVisibility(View.GONE);
                 }
             });
             webView.getSettings().setJavaScriptEnabled(true);
@@ -133,8 +150,7 @@ public class ArticleFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         webView = view.findViewById(R.id.articleWebView);
-        progress = view.findViewById(R.id.articleProgress);
-
+        progressBar = view.findViewById(R.id.articleProgress);
     }
 
     @Override
@@ -211,37 +227,6 @@ public class ArticleFragment extends Fragment {
         settings.setBuiltInZoomControls(true);
         settings.setDisplayZoomControls(false);
         settings.setDefaultTextEncodingName("utf-8");
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
-            int value;
-            switch (PreferenceManager.getDefaultSharedPreferences(getContext()).getString("text_zoom", "normal")) {
-                case "smaller":
-                    value = 90;
-                    break;
-                case "bigger":
-                    value = 110;
-                    break;
-                default:
-                    value = 100;
-            }
-
-            settings.setTextZoom(value);
-        } else {
-            WebSettings.TextSize value;
-            switch (PreferenceManager.getDefaultSharedPreferences(getContext()).getString("text_zoom", "normal")) {
-                case "smaller":
-                    value = WebSettings.TextSize.SMALLER;
-                    break;
-                case "larger":
-                    value = WebSettings.TextSize.LARGER;
-                    break;
-                default:
-                    value = WebSettings.TextSize.NORMAL;
-            }
-
-            settings.setTextSize(value);
-        }
-
     }
 
     boolean handleBackPressed() {
@@ -251,6 +236,7 @@ public class ArticleFragment extends Fragment {
         }
         return false;
     }
+
 
     private class loadArticleTask extends AsyncTask<Void, Void, Void> {
 
@@ -327,9 +313,6 @@ public class ArticleFragment extends Fragment {
                         networkInfo = connMgr.getActiveNetworkInfo();
                     }
                     if (networkInfo != null && networkInfo.isConnected()) {
-                        progress.setVisibility(View.VISIBLE);
-                        progress.setEnabled(true);
-                        progress.setIndeterminate(true);
                         webView.loadUrl(url);
                     } else {
                         webView.loadData(getResources().getString(R.string.err_no_network), "text/html; charset=utf-8", "UTF-8");
@@ -339,7 +322,21 @@ public class ArticleFragment extends Fragment {
                 }
             } else {
                 Log.d(TAG, "onPostExecute: Fill Webview");
-                webView.loadDataWithBaseURL(article.getUrl(), article.getFulltext(), "text/html", "UTF-8", null);
+                String fulltext = article.getFulltext();
+
+                // Change CSS for Dark Mode
+                if((getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK) == Configuration.UI_MODE_NIGHT_YES) {
+                    if (fulltext != null) {
+                        fulltext = fulltext.replace("</head>", "<style type=\"text/css\">#screen, body {\n" +
+                                "color: white;\n" +
+                                "background-color: black;\n" +
+                                "}" +
+                                ".article #related a {\n" +
+                                "  color: white;\n" +
+                                "}</style></head>");
+                    }
+                }
+                webView.loadDataWithBaseURL(article.getUrl(), fulltext, "text/html", "UTF-8", null);
                 Log.d(TAG, "onPostExecute: Filled Webview");
                 webView.reload();
 

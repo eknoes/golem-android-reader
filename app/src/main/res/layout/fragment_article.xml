@@ -4,11 +4,14 @@
              android:layout_width="match_parent"
              android:layout_height="match_parent"
              tools:context="de.eknoes.inofficialgolem.ArticleFragment"
-             app:layout_behavior="@string/appbar_scrolling_view_behavior">
-
+             app:layout_behavior="@string/appbar_scrolling_view_behavior"
+             android:background="?android:colorBackground">
+    <WebView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/articleWebView"/>
     <ProgressBar
             style="?android:attr/progressBarStyleHorizontal"
-
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/articleProgress"
@@ -17,10 +20,5 @@
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
             android:layout_marginBottom="5dp"/>
-
-    <WebView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/articleWebView"/>
 
 </FrameLayout>

@@ -110,9 +110,6 @@ public class ArticleListFragment extends Fragment {
         } else {
             Log.d(TAG, "onCreate: No refresh, last refresh was " + (new Date().getTime() - last_refresh) / 1000 + "sec ago");
         }
-        if(listAdapter != null) {
-            listAdapter.calculateZoom();
-        }
     }
 
     void refresh() {
@@ -144,7 +141,6 @@ public class ArticleListFragment extends Fragment {
         private final ImageLoader imgLoader;
         private final Context context;
         private Cursor cursor;
-        private float zoom = 1;
 
         ArticleAdapter() {
             super();
@@ -174,26 +170,6 @@ public class ArticleListFragment extends Fragment {
                     mCache.put(url, bitmap);
                 }
             });
-            calculateZoom();
-        }
-
-        private void calculateZoom() {
-            float value;
-            switch (PreferenceManager.getDefaultSharedPreferences(context.getApplicationContext()).getString("text_zoom", "normal")) {
-                case "smaller":
-                    value = -1;
-                    break;
-                case "larger":
-                    value = 1;
-                    break;
-                default:
-                    value = 0;
-            }
-            value = (value * 0.15f + 1);
-            if(value != zoom) {
-                zoom = value;
-                this.notifyDataSetChanged();
-            }
         }
 
         private void loadData() {
@@ -271,32 +247,13 @@ public class ArticleListFragment extends Fragment {
             TextView subheading = view.findViewById(R.id.articleSubtitle);
             TextView info = view.findViewById(R.id.articleInfo);
             NetworkImageView image = view.findViewById(R.id.articleImage);
-            ImageView offlineImage = view.findViewById(R.id.articleOfflineAvailable);
-
-            Resources res = context.getResources();
 
             title.setText(art.getTitle());
-            title.setTextSize(COMPLEX_UNIT_PX, res.getDimension(R.dimen.title_size) * zoom);
             subheading.setText(art.getSubheadline());
-            subheading.setTextSize(COMPLEX_UNIT_PX, res.getDimension(R.dimen.subheading_size) * zoom);
             teaser.setText(art.getTeaser());
-            teaser.setTextSize(COMPLEX_UNIT_PX, res.getDimension(R.dimen.text_size) * zoom);
             info.setText(infoText);
-            info.setTextSize(COMPLEX_UNIT_PX, res.getDimension(R.dimen.info_size) * zoom);
 
             image.setImageUrl(art.getImgUrl(), imgLoader);
-            if (art.isOffline()) {
-                Drawable offlineIcon;
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                    offlineIcon = context.getResources().getDrawable(R.drawable.ic_offline_pin_black_24dp, null);
-                } else {
-                    offlineIcon = context.getResources().getDrawable(R.drawable.ic_offline_pin_black_24dp);
-                }
-                offlineImage.setImageDrawable(offlineIcon);
-            } else {
-                offlineImage.setImageDrawable(null);
-            }
-
             return view;
         }
 

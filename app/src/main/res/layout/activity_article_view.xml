@@ -18,10 +18,8 @@
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                android:background="?attr/colorPrimary"
                 app:logo="@drawable/golem_eye"
                 app:title="@string/golem_title"
-                app:popupTheme="@style/AppTheme.PopupOverlay"
                 android:title="@string/golem_title"/>
 
     </com.google.android.material.appbar.AppBarLayout>

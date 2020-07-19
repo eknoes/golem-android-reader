@@ -2,42 +2,29 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
-              android:padding="5dip"
-              android:orientation="vertical">
+                android:paddingHorizontal="12dp"
+                android:paddingVertical="15dp"
+              android:orientation="vertical"
+                android:theme="@style/AppTheme">
+
     <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/articleSubtitle"
-            android:textSize="@dimen/subheading_size"
             android:text="TEST"
-
-            android:textColor="@color/textColorSubhead"/>
-    <ImageView
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"/>
+    <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/articleOfflineAvailable"
-            android:layout_alignParentEnd="false"
-            android:layout_alignParentStart="false"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentLeft="false"
-            android:layout_toLeftOf="@+id/articleSubtitle"
-            android:layout_toStartOf="@+id/articleSubtitle"
-            android:contentDescription="@string/teaser_img_desc"/>
-    <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:id="@+id/articleTitle"
-            android:textSize="@dimen/title_size"
             android:text="Test title of this Article"
             android:layout_below="@+id/articleSubtitle"
-            android:textStyle="bold"
-            android:textColor="@color/textColorHeading"/>
+            android:textAppearance="@style/AppTheme.Title"/>
     <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/articleInfo"
-            android:textColor="@color/textColorSubhead"
-            android:textSize="@dimen/info_size"
+            android:textAppearance="@style/AppTheme.Caption"
             android:text="Published on 23.03.2016"
             android:layout_below="@id/articleTitle"
             />
@@ -50,14 +37,15 @@
             android:layout_marginTop="10dip"
             android:scaleType="fitStart"
             android:layout_marginEnd="10dip"/>
+
     <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/articleTeaser"
-            android:textSize="@dimen/text_size"
-            android:textColor="@color/textColorText"
             android:text="Test text of this Article"
+            android:textAppearance="@style/AppTheme.Body"
             android:layout_below="@+id/articleInfo"
+            android:layout_marginTop="5dip"
             android:layout_toRightOf="@id/articleImage"
             android:layout_toEndOf="@id/articleImage"/>
 </RelativeLayout>

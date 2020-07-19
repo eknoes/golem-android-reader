@@ -26,8 +26,8 @@
     <string name="pref_abo_key_sum">Your subscription of golem.de</string>
     <string name="action_open_webbrowser">Open in Browser</string>
     <string name="setting_contact" translatable="false">INFO</string>
-    <string name="how_to_key">How to get the golem token</string>
-    <string name="how_to_key_content">You can find your token here under Fulltext-RSS-Feed. The characters after \"http://rss.golem.de/rss_sub.php?token=\" make up your token.</string>
+    <string name="how_to_key">Golem.de Pur Account</string>
+    <string name="how_to_key_content">You can find your token here under Fulltext-RSS-Feed. The characters after \"http://rss.golem.de/rss_sub.php?token=\" make up your token. In Addition you are able to change to Dark Mode for Webviews.</string>
     <string name="pref_contact_title" translatable="false">Github</string>
     <string name="pref_contact_sum">This is not an official golem.de App. If you want to report a bug or have any ideas for improving this application just click here to open our github repository</string>
     <string name="privacy_sum">Click here to open our Data Privacy Policy</string>
@@ -60,5 +60,6 @@
     <string name="mobileViewTippText">Golem.de shows the desktop layout for Tablets at this size. You can fix this issue by choosing the \"Mobile Layout\".</string>
     <string name="action_open_comments">Open Forum in Browser</string>
     <string name="teaser_img_desc">Teaser image of article</string>
+    <string name="offline_icon">Article is offline available</string>
 
 </resources>
