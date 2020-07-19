@@ -13,6 +13,7 @@ import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Base64;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -327,18 +328,17 @@ public class ArticleFragment extends Fragment {
                 // Change CSS for Dark Mode
                 if((getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK) == Configuration.UI_MODE_NIGHT_YES) {
                     if (fulltext != null) {
-                        fulltext = fulltext.replace("</head>", "<style type=\"text/css\">#screen, body {\n" +
+                        fulltext = fulltext.replace("</head>", "<style type=\"text/css\">#screen, body, html {\n" +
                                 "color: white;\n" +
                                 "background-color: black;\n" +
                                 "}" +
-                                ".article #related a {\n" +
-                                "  color: white;\n" +
+                                ".article #related a, .header--centered, .dh1, .dh2 {\n" +
+                                "  color: white !important;\n" +
                                 "}</style></head>");
                     }
                 }
                 webView.loadDataWithBaseURL(article.getUrl(), fulltext, "text/html", "UTF-8", null);
                 Log.d(TAG, "onPostExecute: Filled Webview");
-                webView.reload();
 
             }
 
