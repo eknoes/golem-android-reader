@@ -1,71 +1,71 @@
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-                  xmlns:sample="http://schemas.android.com/apk/res-auto">
-    <PreferenceCategory
-        android:title="@string/pref_data_title">
+<PreferenceScreen
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+<PreferenceCategory
+        app:title="@string/pref_data_title">
         <com.pavelsikun.seekbarpreference.SeekBarPreference
-                android:key="article_limit"
-                android:title="@string/pref_article_limit"
-                android:summary="@string/pref_article_limit_sum"
-                android:contentDescription="@string/pref_article_limit_sum"
-                android:defaultValue="50"
-                sample:msbp_minValue="0"
-                sample:msbp_maxValue="200"
-                sample:msbp_interval="1"
-                sample:msbp_measurementUnit="@string/articles"/>
+                app:key="article_limit"
+                app:title="@string/pref_article_limit"
+                app:summary="@string/pref_article_limit_sum"
+                app:contentDescription="@string/pref_article_limit_sum"
+                app:defaultValue="50"
+                app:msbp_minValue="0"
+                app:msbp_maxValue="200"
+                app:msbp_interval="1"
+                app:msbp_measurementUnit="@string/articles"/>
 
         <com.pavelsikun.seekbarpreference.SeekBarPreference
-                android:key="refresh_limit"
-                android:title="@string/pref_article_refresh"
-                android:summary="@string/pref_article_refresh_sum"
-                android:contentDescription="@string/pref_article_refresh_sum"
-                android:defaultValue="5"
-                sample:msbp_minValue="0"
-                sample:msbp_maxValue="60"
-                sample:msbp_interval="1"
-                sample:msbp_measurementUnit="@string/minutes"/>
+                app:key="refresh_limit"
+                app:title="@string/pref_article_refresh"
+                app:summary="@string/pref_article_refresh_sum"
+                app:contentDescription="@string/pref_article_refresh_sum"
+                app:defaultValue="5"
+                app:msbp_minValue="0"
+                app:msbp_maxValue="60"
+                app:msbp_interval="1"
+                app:msbp_measurementUnit="@string/minutes"/>
     </PreferenceCategory>
     <PreferenceCategory
-        android:title="@string/pref_access">
+        app:title="@string/pref_access">
         <Preference
-                android:key="choose_layout"
-                android:title="@string/choose_layout"
-                android:summary="@string/choose_layout_content">
+                app:key="choose_layout"
+                app:title="@string/choose_layout"
+                app:summary="@string/choose_layout_content">
         </Preference>
 
     </PreferenceCategory>
     <PreferenceCategory
-        android:title="@string/pref_abo_title">
+        app:title="@string/pref_abo_title">
         <Preference
-                android:key="how_to_key"
-                android:title="@string/how_to_key"
-                android:summary="@string/how_to_key_content">
+                app:key="how_to_key"
+                app:title="@string/how_to_key"
+                app:summary="@string/how_to_key_content">
         </Preference>
-        <CheckBoxPreference
-                android:key="has_abo"
-                android:id="@+id/has_abo"
-                android:title="@string/pref_has_abo"
-                android:defaultValue="false"/>
+        <SwitchPreferenceCompat
+                app:key="has_abo"
+                app:title="@string/pref_has_abo"
+                app:defaultValue="false"/>
         <EditTextPreference
-                android:key="abo_key"
-                android:title="@string/pref_abo_key"
-                android:summary="@string/pref_abo_key_sum"/>
+                app:key="abo_key"
+                app:dependency="has_abo"
+                app:title="@string/pref_abo_key"
+                app:summary="@string/pref_abo_key_sum"/>
     </PreferenceCategory>
     <PreferenceCategory
-        android:title="@string/setting_contact">
+        app:title="@string/setting_contact">
         <Preference
-                android:key="start_contact"
-                android:title="@string/pref_contact_title"
-                android:summary="@string/pref_contact_sum">
+                app:key="start_contact"
+                app:title="@string/pref_contact_title"
+                app:summary="@string/pref_contact_sum">
         </Preference>
         <Preference
-                android:key="join_beta"
-                android:title="@string/pref_beta_title"
-                android:summary="@string/pref_beta_sum">
+                app:key="join_beta"
+                app:title="@string/pref_beta_title"
+                app:summary="@string/pref_beta_sum">
         </Preference>
         <Preference
-                android:key="privacy"
-                android:title="@string/privacy_title"
-                android:summary="@string/privacy_sum">
+                app:key="privacy"
+                app:title="@string/privacy_title"
+                app:summary="@string/privacy_sum">
         </Preference>
     </PreferenceCategory>
 </PreferenceScreen>
