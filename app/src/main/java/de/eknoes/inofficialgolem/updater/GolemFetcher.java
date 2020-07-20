@@ -41,7 +41,7 @@ public class GolemFetcher extends AsyncTask<Void, Float, GolemFetcher.FETCH_STAT
             this.db = FeedReaderDbHelper.getInstance(context.getApplicationContext()).getWritableDatabase();
         } catch (SQLException exception) {
             Log.e(TAG, "GolemFetcher: Could not open Database: ", exception);
-            Toast.makeText(context, R.string.error_database, Toast.LENGTH_LONG);
+            Toast.makeText(context, R.string.error_database, Toast.LENGTH_LONG).show();
             this.cancel(true);
         }
         this.mProgress = new WeakReference<>(mProgress);

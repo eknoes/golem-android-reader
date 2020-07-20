@@ -60,6 +60,5 @@
     <string name="mobileViewTippText">Golem.de shows the desktop layout for Tablets at this size. You can fix this issue by choosing the \"Mobile Layout\".</string>
     <string name="action_open_comments">Open Forum in Browser</string>
     <string name="teaser_img_desc">Teaser image of article</string>
-    <string name="offline_icon">Article is offline available</string>
 
 </resources>

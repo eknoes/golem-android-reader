@@ -1,14 +1,11 @@
 package de.eknoes.inofficialgolem;
 
 import android.content.Context;
-import android.content.res.Resources;
 import android.database.Cursor;
 import android.database.DataSetObserver;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
-import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import androidx.annotation.NonNull;
@@ -28,8 +25,6 @@ import java.text.DateFormat;
 import java.util.Date;
 import java.util.Objects;
 import java.util.concurrent.Callable;
-
-import static android.util.TypedValue.COMPLEX_UNIT_PX;
 
 /**
  * A placeholder fragment containing a simple view.

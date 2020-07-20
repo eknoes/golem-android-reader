@@ -6,7 +6,7 @@ android {
     buildToolsVersion "30.0.1"
     defaultConfig {
         applicationId "de.eknoes.inofficialgolem"
-        minSdkVersion 16
+        minSdkVersion 19
         targetSdkVersion 30
         versionCode 125
         versionName "1.2.0"
@@ -33,7 +33,7 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.2.0-rc01'
     implementation 'com.google.android.material:material:1.1.0'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    implementation 'com.pavelsikun:material-seekbar-preference:0.12.1'
+    implementation 'com.pavelsikun:material-seekbar-preference:2.3.0'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'androidx.fragment:fragment-ktx:1.2.5'
     testImplementation 'junit:junit:4.12'
