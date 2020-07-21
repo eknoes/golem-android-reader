@@ -87,7 +87,7 @@ public class MainActivity extends AppCompatActivity implements ArticleListFragme
                     @Override
                     public void onClick(View v) {
                         Intent intent = new Intent(MainActivity.this, ArticleView.class);
-                        intent.putExtra(ARTICLE_URL, "http://www.golem.de/sonstiges/ansicht/");
+                        intent.putExtra(ARTICLE_URL, "https://www.golem.de/sonstiges/ansicht/");
                         intent.putExtra(FORCE_WEBVIEW, true);
                         intent.putExtra(NO_ARTICLE, true);
                         startActivity(intent);
