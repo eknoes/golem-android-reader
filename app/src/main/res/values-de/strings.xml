@@ -10,7 +10,7 @@
     <string name="pref_abo_key_sum">Richten sie hier ihr Abo ein</string>
     <string name="pref_article_limit">Anzahl Artikel</string>
     <string name="pref_article_limit_sum">Anzahl der Artikel, welche gespeichert bleiben sollen.</string>
-    <string name="pref_article_refresh">Aktualisierungsintervall</string>
+    <string name="pref_article_refresh">Aktualisierungsintervall (Minuten)</string>
     <string name="pref_article_refresh_sum">Artikel werden regelmäßig aktualisiert, wenn die App geöffnet ist. Auswahl von 0 deaktiviert die automatische Aktualisierung.</string>
     <string name="pref_contact_sum">Dies ist keine offizielle golem.de App. Wenn sie einen Bug melden wollen oder Ideen zur Verbesserung haben, öffnen sie unser Github Repository</string>
     <string name="pref_has_abo">Golem.de Abo nutzen</string>
@@ -48,4 +48,6 @@
     <string name="action_open_comments">Open Forum in Browser</string>
     <string name="teaser_img_desc">Teaserbild des Artikels</string>
     <string name="error_database">Unerwarteter Fehler beim Öffnen der Datenbank</string>
+    <string name="how_to_darkmode">Dark Mode</string>
+    <string name="how_to_darkmode_content">Mit einem Pur Account, können sie einen Dark Mode für die Online Inhalte aktivieren</string>
 </resources>

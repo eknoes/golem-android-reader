@@ -17,7 +17,7 @@
     <!-- Settings -->
     <string name="pref_article_limit">Article Limit</string>
     <string name="pref_article_limit_sum">Number of Articles that should be kept for history.</string>
-    <string name="pref_article_refresh">Refresh Interval</string>
+    <string name="pref_article_refresh">Refresh Interval (Minutes)</string>
     <string name="pref_article_refresh_sum">Articles are refreshed periodically when the app is opened</string>
     <string name="pref_data_title" translatable="false">SYNC</string>
     <string name="pref_abo_title">SUBSCRIPTION</string>
@@ -60,5 +60,8 @@
     <string name="mobileViewTippText">Golem.de shows the desktop layout for Tablets at this size. You can fix this issue by choosing the \"Mobile Layout\".</string>
     <string name="action_open_comments">Open Forum in Browser</string>
     <string name="teaser_img_desc">Teaser image of article</string>
+
+    <string name="how_to_darkmode">Dark Mode</string>
+    <string name="how_to_darkmode_content">With a Pur Account, you can choose Dark Mode for Golem.de\'s online content</string>
 
 </resources>

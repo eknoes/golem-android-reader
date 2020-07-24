@@ -1,30 +1,31 @@
 <PreferenceScreen
-        xmlns:app="http://schemas.android.com/apk/res-auto">
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:android="http://schemas.android.com/apk/res/android">
 <PreferenceCategory
+        app:key="sync_category"
         app:title="@string/pref_data_title">
-        <com.pavelsikun.seekbarpreference.SeekBarPreference
+        <SeekBarPreference
                 app:key="article_limit"
                 app:title="@string/pref_article_limit"
                 app:summary="@string/pref_article_limit_sum"
                 app:contentDescription="@string/pref_article_limit_sum"
                 app:defaultValue="50"
-                app:msbp_minValue="0"
-                app:msbp_maxValue="200"
-                app:msbp_interval="1"
-                app:msbp_measurementUnit="@string/articles"/>
+                app:min="0"
+                android:max="200"
+                app:showSeekBarValue="true"/>
 
-        <com.pavelsikun.seekbarpreference.SeekBarPreference
+        <SeekBarPreference
                 app:key="refresh_limit"
                 app:title="@string/pref_article_refresh"
                 app:summary="@string/pref_article_refresh_sum"
                 app:contentDescription="@string/pref_article_refresh_sum"
                 app:defaultValue="5"
-                app:msbp_minValue="0"
-                app:msbp_maxValue="60"
-                app:msbp_interval="1"
-                app:msbp_measurementUnit="@string/minutes"/>
+                app:min="0"
+                android:max="60"
+                app:showSeekBarValue="true"/>
     </PreferenceCategory>
     <PreferenceCategory
+            app:key="accessibility_category"
         app:title="@string/pref_access">
         <Preference
                 app:key="choose_layout"
@@ -34,23 +35,29 @@
 
     </PreferenceCategory>
     <PreferenceCategory
+            app:key="subscription_category"
         app:title="@string/pref_abo_title">
         <Preference
                 app:key="how_to_key"
                 app:title="@string/how_to_key"
                 app:summary="@string/how_to_key_content">
         </Preference>
-        <SwitchPreferenceCompat
-                app:key="has_abo"
-                app:title="@string/pref_has_abo"
-                app:defaultValue="false"/>
-        <EditTextPreference
+        <Preference
+                app:key="how_to_darkmode"
+                app:title="@string/how_to_darkmode"
+                app:summary="@string/how_to_darkmode_content">
+        </Preference>
+        <androidx.preference.SwitchPreferenceCompat
+                              app:key="has_abo"
+                app:title="@string/pref_has_abo"/>
+        <androidx.preference.EditTextPreference
                 app:key="abo_key"
                 app:dependency="has_abo"
                 app:title="@string/pref_abo_key"
                 app:summary="@string/pref_abo_key_sum"/>
     </PreferenceCategory>
     <PreferenceCategory
+            app:key="info_category"
         app:title="@string/setting_contact">
         <Preference
                 app:key="start_contact"
