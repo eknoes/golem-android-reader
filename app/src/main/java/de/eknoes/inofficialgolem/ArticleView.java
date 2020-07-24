@@ -49,7 +49,7 @@ public class ArticleView extends AppCompatActivity {
         int id = item.getItemId();
 
         if (id == R.id.action_settings) {
-            Intent i = new Intent(this, SettingsActivity.SettingsFragment.class);
+            Intent i = new Intent(this, SettingsActivity.class);
             startActivity(i);
         }
 
