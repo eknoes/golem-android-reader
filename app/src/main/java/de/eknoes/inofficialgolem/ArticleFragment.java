@@ -331,10 +331,18 @@ public class ArticleFragment extends Fragment {
                                 "color: white;\n" +
                                 "background-color: black;\n" +
                                 "}" +
-                                ".article #related a, .header--centered, .dh1, .dh2 {\n" +
+                                ".article #related a, .header--centered, .dh1, .dh2, .authors {\n" +
                                 "  color: white !important;\n" +
                                 "}</style></head>");
                     }
+                } else if (fulltext != null) {
+                    fulltext = fulltext.replace("</head>", "<style type=\"text/css\">#screen, body, html {\n" +
+                            "color: black;\n" +
+                            "background-color: white;\n" +
+                            "}\n" +
+                            ".article #related a, .header--centered, .dh1, .dh2, .authors {\n" +
+                            "  color: black !important;\n" +
+                            "}</style></head>");
                 }
                 webView.loadDataWithBaseURL(article.getUrl(), fulltext, "text/html", "UTF-8", null);
                 Log.d(TAG, "onPostExecute: Filled Webview");
