@@ -12,7 +12,8 @@
                 app:defaultValue="50"
                 app:min="0"
                 android:max="200"
-                app:showSeekBarValue="true"/>
+                app:showSeekBarValue="true"
+                android:icon="@drawable/ic_history"/>
 
         <SeekBarPreference
                 app:key="refresh_limit"
@@ -22,7 +23,8 @@
                 app:defaultValue="5"
                 app:min="0"
                 android:max="60"
-                app:showSeekBarValue="true"/>
+                app:showSeekBarValue="true"
+                android:icon="@drawable/ic_refresh_black"/>
     </PreferenceCategory>
     <PreferenceCategory
             app:key="accessibility_category"
@@ -30,7 +32,8 @@
         <Preference
                 app:key="choose_layout"
                 app:title="@string/choose_layout"
-                app:summary="@string/choose_layout_content">
+                app:summary="@string/choose_layout_content"
+                android:icon="@drawable/ic_view">
         </Preference>
 
     </PreferenceCategory>
@@ -40,12 +43,14 @@
         <Preference
                 app:key="how_to_key"
                 app:title="@string/how_to_key"
-                app:summary="@string/how_to_key_content">
+                app:summary="@string/how_to_key_content"
+                android:icon="@drawable/ic_account">
         </Preference>
         <Preference
                 app:key="how_to_darkmode"
                 app:title="@string/how_to_darkmode"
-                app:summary="@string/how_to_darkmode_content">
+                app:summary="@string/how_to_darkmode_content"
+                android:icon="@drawable/ic_darkmode">
         </Preference>
         <androidx.preference.SwitchPreferenceCompat
                               app:key="has_abo"
@@ -54,25 +59,35 @@
                 app:key="abo_key"
                 app:dependency="has_abo"
                 app:title="@string/pref_abo_key"
-                app:summary="@string/pref_abo_key_sum"/>
+                app:summary="@string/pref_abo_key_sum"
+                android:icon="@drawable/ic_token"/>
     </PreferenceCategory>
     <PreferenceCategory
             app:key="info_category"
         app:title="@string/setting_contact">
         <Preference
+                app:key="github"
+                app:title="@string/pref_github_title"
+                app:summary="@string/pref_github_sum"
+                android:icon="@drawable/ic_github">
+        </Preference>
+        <Preference
                 app:key="start_contact"
                 app:title="@string/pref_contact_title"
-                app:summary="@string/pref_contact_sum">
+                app:summary="@string/pref_contact_sum"
+                android:icon="@drawable/ic_contact">
         </Preference>
         <Preference
                 app:key="join_beta"
                 app:title="@string/pref_beta_title"
+                android:icon="@drawable/ic_beta"
                 app:summary="@string/pref_beta_sum">
         </Preference>
         <Preference
                 app:key="privacy"
                 app:title="@string/privacy_title"
-                app:summary="@string/privacy_sum">
+                app:summary="@string/privacy_sum"
+                android:icon="@drawable/ic_privacy">
         </Preference>
     </PreferenceCategory>
 </PreferenceScreen>

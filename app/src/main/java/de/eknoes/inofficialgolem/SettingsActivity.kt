@@ -57,9 +57,17 @@ class SettingsActivity : AppCompatActivity() {
                     intent.putExtra(NO_ARTICLE, true)
                     startActivity(intent)
                     return true
-                } else if (preference.key == "start_contact") {
+                } else if (preference.key == "github") {
                     val intent = Intent(Intent.ACTION_VIEW)
                     intent.data = Uri.parse("https://github.com/eknoes/golem-android-reader/issues")
+                    startActivity(intent)
+                    return true
+                } else if (preference.key == "start_contact") {
+                    val intent = Intent(Intent.ACTION_SENDTO).apply {
+                        data = Uri.parse("mailto:projekte@eknoes.de")
+                        putExtra(Intent.EXTRA_SUBJECT, "Golem.de Android App")
+                        putExtra(Intent.EXTRA_TEXT, "Hi Sönke,")
+                    }
                     startActivity(intent)
                     return true
                 } else if (preference.key == "join_beta") {

@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name" translatable="false">Golem.de</string>
-    <string name="action_settings">Settings</string>
     <string name="action_refresh">Refresh</string>
     <string name="refresh_success">Successfully refreshed articles</string>
     <string name="refresh_error_undefined">Error while refreshing articles</string>
@@ -27,9 +26,8 @@
     <string name="action_open_webbrowser">Open in Browser</string>
     <string name="setting_contact" translatable="false">INFO</string>
     <string name="how_to_key">Golem.de Pur Account</string>
-    <string name="how_to_key_content">You can find your token here under Fulltext-RSS-Feed. The characters after \"http://rss.golem.de/rss_sub.php?token=\" make up your token. In Addition you are able to change to Dark Mode for Webviews.</string>
-    <string name="pref_contact_title" translatable="false">Github</string>
-    <string name="pref_contact_sum">This is not an official golem.de App. If you want to report a bug or have any ideas for improving this application just click here to open our github repository</string>
+    <string name="how_to_key_content">You can find your token here under Fulltext-RSS-Feed. The characters after \"http://rss.golem.de/rss_sub.php?token=\" make up your token.</string>
+    <string name="pref_contact_title">Contact</string>
     <string name="privacy_sum">Click here to open our Data Privacy Policy</string>
     <string name="privacy_title">Data Privacy Policy</string>
     <string name="err_no_network">Sorry, this article is not available offline.</string>
@@ -63,5 +61,9 @@
 
     <string name="how_to_darkmode">Dark Mode</string>
     <string name="how_to_darkmode_content">With a Pur Account, you can choose Dark Mode for Golem.de\'s online content</string>
+    <string name="pref_github_title" translatable="false">Github</string>
+    <string name="pref_github_sum">This is not an official golem.de App. If you want to report a bug or have any ideas for improving this application just click here to open our github repository</string>
+    <string name="action_settings">Settings</string>
+    <string name="pref_contact_sum">Drop me a mail with feedback at projekte@eknoes.de</string>
 
 </resources>
