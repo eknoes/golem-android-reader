@@ -1,6 +1,7 @@
 package de.eknoes.inofficialgolem;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -23,12 +24,12 @@ public class ArticleView extends AppCompatActivity {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
 
+        Intent intent = getIntent();
+        Uri url = intent.getData();
+        boolean forceWebview = intent.getBooleanExtra(ArticleFragment.FORCE_WEBVIEW, false);
+        boolean noArticle = intent.getBooleanExtra(ArticleFragment.NO_ARTICLE, false);
 
-        String url = getIntent().getStringExtra(ArticleFragment.ARTICLE_URL);
-        boolean forceWebview = getIntent().getBooleanExtra(ArticleFragment.FORCE_WEBVIEW, false);
-        boolean noArticle = getIntent().getBooleanExtra(ArticleFragment.NO_ARTICLE, false);
-
-        articleFragment = ArticleFragment.newInstance(url, forceWebview, noArticle);
+        articleFragment = ArticleFragment.newInstance(url.toString(), forceWebview, noArticle);
 
         getSupportFragmentManager().beginTransaction().replace(R.id.articleFragment, articleFragment).commit();
 

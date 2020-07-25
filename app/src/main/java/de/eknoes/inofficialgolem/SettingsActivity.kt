@@ -38,21 +38,21 @@ class SettingsActivity : AppCompatActivity() {
             if (preference != null) {
                 if (preference.key == "choose_layout") {
                     val intent = Intent(context, ArticleView::class.java)
-                    intent.putExtra(ARTICLE_URL, "https://www.golem.de/sonstiges/ansicht/")
+                    intent.setData(Uri.parse("https://www.golem.de/sonstiges/ansicht/"))
                     intent.putExtra(FORCE_WEBVIEW, true)
                     intent.putExtra(NO_ARTICLE, true)
                     startActivity(intent)
                     return true
                 } else if (preference.key == "how_to_key") {
                     val intent = Intent(context, ArticleView::class.java)
-                    intent.putExtra(ARTICLE_URL, "https://account.golem.de/product/subscription")
+                    intent.setData(Uri.parse( "https://account.golem.de/product/subscription"))
                     intent.putExtra(FORCE_WEBVIEW, true)
                     intent.putExtra(NO_ARTICLE, true)
                     startActivity(intent)
                     return true
                 } else if (preference.key == "how_to_darkmode") {
                     val intent = Intent(context, ArticleView::class.java)
-                    intent.putExtra(ARTICLE_URL, "https://account.golem.de/product/subscription#videotype1")
+                    intent.setData(Uri.parse( "https://account.golem.de/product/subscription#videotype1"))
                     intent.putExtra(FORCE_WEBVIEW, true)
                     intent.putExtra(NO_ARTICLE, true)
                     startActivity(intent)
@@ -77,7 +77,7 @@ class SettingsActivity : AppCompatActivity() {
                     return true
                 } else if (preference.key == "privacy") {
                     val intent = Intent(context, ArticleView::class.java)
-                    intent.putExtra(ARTICLE_URL, "https://projekte.eknoes.de/datenschutz.html")
+                    intent.setData(Uri.parse("https://projekte.eknoes.de/datenschutz.html"))
                     intent.putExtra(FORCE_WEBVIEW, true)
                     intent.putExtra(NO_ARTICLE, true)
                     startActivity(intent)

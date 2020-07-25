@@ -17,7 +17,7 @@ android {
         applicationId "de.eknoes.inofficialgolem"
         minSdkVersion 19
         targetSdkVersion 30
-        versionCode 133
+        versionCode 134
         versionName "1.2.0"
         signingConfig signingConfigs.debug
     }
@@ -36,7 +36,6 @@ dependencies {
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'androidx.fragment:fragment-ktx:1.2.5'
-    testImplementation 'junit:junit:4.12'
 }
 repositories {
     mavenCentral()
