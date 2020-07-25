@@ -2,6 +2,7 @@ package de.eknoes.inofficialgolem;
 
 import android.annotation.TargetApi;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Build;
@@ -27,7 +28,10 @@ class GolemWebViewClient extends WebViewClient {
             url = "http://" + url;
         }
         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-        view.getContext().startActivity(intent);
+        PackageManager packageManager = view.getContext().getPackageManager();
+        if (intent.resolveActivity(packageManager) != null) {
+            view.getContext().startActivity(intent);
+        }
         return true;
     }
 
@@ -38,7 +42,10 @@ class GolemWebViewClient extends WebViewClient {
         }
         // Otherwise, the link is not for a page on my site, so launch another Activity that handles URLs
         Intent intent = new Intent(Intent.ACTION_VIEW, request.getUrl());
-        view.getContext().startActivity(intent);
+        PackageManager packageManager = view.getContext().getPackageManager();
+        if (intent.resolveActivity(packageManager) != null) {
+            view.getContext().startActivity(intent);
+        }
         return true;
     }
 
