@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.Toast;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.android.volley.AuthFailureError;
 import com.android.volley.NoConnectionError;
 import com.android.volley.TimeoutError;
@@ -31,12 +32,11 @@ import java.util.concurrent.Callable;
 public class GolemFetcher extends AsyncTask<Void, Float, GolemFetcher.FETCH_STATE> {
     private static final String TAG = "GolemFetcher";
     private SQLiteDatabase db;
-    private final WeakReference<ProgressBar> mProgress;
     private final GolemUpdater[] updater;
     private final WeakReference<Context> context;
     private final Callable<Void> notifier;
 
-    public GolemFetcher(Context context, ProgressBar mProgress, Callable<Void> notifier) {
+    public GolemFetcher(Context context, Callable<Void> notifier) {
         try {
             this.db = FeedReaderDbHelper.getInstance(context.getApplicationContext()).getWritableDatabase();
         } catch (SQLException exception) {
@@ -44,7 +44,6 @@ public class GolemFetcher extends AsyncTask<Void, Float, GolemFetcher.FETCH_STAT
             Toast.makeText(context, R.string.error_database, Toast.LENGTH_LONG).show();
             this.cancel(true);
         }
-        this.mProgress = new WeakReference<>(mProgress);
         this.context = new WeakReference<>(context);
         this.notifier = notifier;
         if(PreferenceManager.getDefaultSharedPreferences(context).getBoolean("has_abo", false)) {
@@ -63,14 +62,6 @@ public class GolemFetcher extends AsyncTask<Void, Float, GolemFetcher.FETCH_STAT
             NetworkInfo networkInfo = null;
             if (connMgr != null) {
                 networkInfo = connMgr.getActiveNetworkInfo();
-            }
-            if (networkInfo != null && networkInfo.isConnected()) {
-                ProgressBar progressBar = mProgress.get();
-                if(progressBar != null) {
-                    progressBar.setProgress(1);
-                    progressBar.setIndeterminate(true);
-                    progressBar.setVisibility(View.VISIBLE);
-                }
             }
         }
     }
@@ -116,10 +107,7 @@ public class GolemFetcher extends AsyncTask<Void, Float, GolemFetcher.FETCH_STAT
     @Override
     protected void onPostExecute(GolemFetcher.FETCH_STATE finished) {
         super.onPostExecute(finished);
-        ProgressBar progressBar = mProgress.get();
-        if(progressBar != null) {
-            progressBar.setVisibility(View.GONE);
-        }
+
         int msgString;
         switch (finished) {
             case SUCCESS:

@@ -15,6 +15,7 @@ import android.widget.*;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.NetworkImageView;
 import com.android.volley.toolbox.Volley;
@@ -34,6 +35,7 @@ public class ArticleListFragment extends Fragment {
     private GolemFetcher fetcher;
     private ArticleAdapter listAdapter;
     private ProgressBar mProgress; //Not yet implemented
+    private SwipeRefreshLayout mSwipeLayout;
     private OnArticleSelectedListener mListener;
 
     public ArticleListFragment() {
@@ -72,6 +74,7 @@ public class ArticleListFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         mProgress = view.findViewById(R.id.progressBar);
+        mSwipeLayout = view.findViewById(R.id.swipeRefresh);
         ListView listView = view.findViewById(R.id.articleList);
 
         Log.d(TAG, "onStart: Creating Article List Adapter");
@@ -88,6 +91,13 @@ public class ArticleListFragment extends Fragment {
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
                 mListener.onArticleSelected(listAdapter.getItem(position).getUrl(), true);
                 return true;
+            }
+        });
+
+        mSwipeLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                refresh();
             }
         });
     }
@@ -109,12 +119,14 @@ public class ArticleListFragment extends Fragment {
 
     void refresh() {
         if (fetcher == null || fetcher.getStatus() != AsyncTask.Status.RUNNING) {
-            fetcher = new GolemFetcher(Objects.requireNonNull(getContext()), mProgress, new Callable<Void>() {
+            mSwipeLayout.setRefreshing(true);
+            fetcher = new GolemFetcher(Objects.requireNonNull(getContext()), new Callable<Void>() {
                 @Override
                 public Void call() {
                     if(listAdapter != null) {
                         listAdapter.notifyDataSetChanged();
                     }
+                    mSwipeLayout.setRefreshing(false);
                     return null;
                 }
             });
