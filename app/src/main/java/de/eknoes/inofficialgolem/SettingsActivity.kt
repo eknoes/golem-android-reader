@@ -8,7 +8,10 @@ import androidx.preference.EditTextPreference
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.PreferenceManager
-import de.eknoes.inofficialgolem.ArticleFragment.*
+import com.google.android.gms.oss.licenses.OssLicensesMenuActivity
+import de.eknoes.inofficialgolem.ArticleFragment.FORCE_WEBVIEW
+import de.eknoes.inofficialgolem.ArticleFragment.NO_ARTICLE
+
 
 class SettingsActivity : AppCompatActivity() {
 
@@ -82,6 +85,9 @@ class SettingsActivity : AppCompatActivity() {
                     intent.putExtra(NO_ARTICLE, true)
                     startActivity(intent)
                     return true
+                } else if (preference.key == "licenses") {
+                    OssLicensesMenuActivity.setActivityTitle(resources.getString(R.string.oss_license_title));
+                    startActivity(Intent(context, OssLicensesMenuActivity::class.java))
                 }
 
             }

@@ -89,5 +89,9 @@
                 app:summary="@string/privacy_sum"
                 android:icon="@drawable/ic_privacy">
         </Preference>
+        <Preference
+                app:key="licenses"
+                android:title="@string/licenses"
+                android:summary="@string/licenses_summary"/>
     </PreferenceCategory>
 </PreferenceScreen>

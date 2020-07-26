@@ -53,4 +53,6 @@
     <string name="pref_github_sum">Dies ist keine offizielle golem.de App. Wenn sie einen Bug melden wollen oder Ideen zur Verbesserung haben, öffnen sie unser Github Repository</string>
     <string name="pref_contact_sum">Schreiben sie mir eine Mail mit Feedback an projekte@eknoes.de</string>
     <string name="filter_view_golem">Golem.de Artikel öffnen</string>
+    <string name="licenses">Lizenzen</string>
+    <string name="licenses_summary">Zeige genutzte Komponenten und deren Lizenz an</string>
 </resources>
