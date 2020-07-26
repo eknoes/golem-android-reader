@@ -56,8 +56,6 @@ public class articleUpdater extends GolemUpdater {
             } else if (e.getCause() instanceof AuthFailureError) {
                 Log.d(TAG, "getItems: Invalid Abo key");
                 throw new AuthFailureError();
-            } else if (e.getCause() instanceof RedirectError) {
-                Log.w(TAG, "getItems: Redirect Error: Can not get Feed items");
             }
         } catch (TimeoutException e) {
             e.printStackTrace();

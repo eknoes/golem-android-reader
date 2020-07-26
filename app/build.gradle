@@ -38,7 +38,7 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'androidx.fragment:fragment-ktx:1.2.5'
     implementation 'com.google.android.gms:play-services-oss-licenses:17.0.0'
-
+    implementation 'com.android.volley:volley:1.1.1'
 }
 repositories {
     mavenCentral()
