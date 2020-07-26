@@ -34,7 +34,6 @@ public class ArticleListFragment extends Fragment {
     private static final String TAG = "ArticleListFragment";
     private GolemFetcher fetcher;
     private ArticleAdapter listAdapter;
-    private ProgressBar mProgress; //Not yet implemented
     private SwipeRefreshLayout mSwipeLayout;
     private OnArticleSelectedListener mListener;
 
@@ -73,7 +72,6 @@ public class ArticleListFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        mProgress = view.findViewById(R.id.progressBar);
         mSwipeLayout = view.findViewById(R.id.swipeRefresh);
         ListView listView = view.findViewById(R.id.articleList);
 
