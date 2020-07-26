@@ -1,0 +1,5 @@
+The unofficial app for the German news site golem.de makes reading the current articles comfortable.
+It is optimized for all screen sizes, has functions like dark mode, deeplinks and offline articles (for premium user). And if a feature is missing, it can be implemented or requested easily due to its open source development.
+
+Information for permissions:
+* Network: Requirement to communicate with Golem.de

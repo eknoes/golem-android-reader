@@ -1,0 +1,6 @@
+* Dark Mode (in Artikelansicht leider nur für Premium Nutzer)
+* Deeplinks
+* Layoutanpassungen, Swipe-to-Refresh
+* Verbesserung der Tablet-Ansicht
+* Überarbeitete Einstellungen
+* Fehlberbehebungen

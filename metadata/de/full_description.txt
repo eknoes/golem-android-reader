@@ -1,0 +1,6 @@
+Die inoffizielle golem.de App bietet dir auch unterwegs einen komfortablen Zugriff auf die aktuellen Inhalte von Golem.de, optimiert für alle Geräte.  Funktionen wie das schnelle Navigieren direkt zu den Kommentaren, Deeplinks, Dark Mode und die Offline-Funktion für Golem.de Abonnenten ermöglichen eine gute User Experience. Und wenn ein Feature fehlt, kann dieses dank Quelloffenheit einfach gemeldet und schnell implementiert werden! 
+
+Der Dark Mode ist in der einzelnen Artikelansicht leider nur mit einem Golem.de Pur Account möglich - ohne diesen wird er in den normalen Farben dargestellt.
+
+Informationen zu Berechtigungen:
+* Netzkommunikation (Netzwerkzugriff): Voraussetzung, um Inhalte von Golem.de abzurufen

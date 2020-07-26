@@ -1,0 +1,6 @@
+* Dark Mode
+* Deeplinks
+* Layout changes, Swipe-to-Refresh
+* Improvement of Tablet layout
+* Improved preferences
+* Bugfixes
