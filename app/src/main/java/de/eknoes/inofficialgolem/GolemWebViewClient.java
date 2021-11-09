@@ -44,8 +44,10 @@ class GolemWebViewClient extends WebViewClient {
         Intent intent = new Intent(Intent.ACTION_VIEW, request.getUrl());
         PackageManager packageManager = view.getContext().getPackageManager();
         if (intent.resolveActivity(packageManager) != null) {
-            view.getContext().startActivity(intent);
-        }
+			view.getContext().startActivity(intent);
+        } else {
+        	view.loadUrl(request.getUrl().toString());
+		}
         return true;
     }
 
