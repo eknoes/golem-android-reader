@@ -189,10 +189,10 @@ public class ArticleFragment extends Fragment {
         int id = item.getItemId();
 
         if (id == R.id.action_open) {
-            Intent webIntent = new Intent(Intent.ACTION_VIEW);
             if (url != null) {
-                webIntent.setData(Uri.parse(url));
-                startActivity(webIntent);
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(Intent.createChooser(intent, "Select Browser"));
             }
         } else if (id == R.id.action_comments) {
             Log.d(TAG, "onOptionsItemSelected: Open Comments: " + article.getCommentUrl());
@@ -257,7 +257,7 @@ public class ArticleFragment extends Fragment {
 
         @Override
         protected Void doInBackground(Void... params) {
-                FeedReaderDbHelper dbHelper = FeedReaderDbHelper.getInstance(Objects.requireNonNull(getContext()).getApplicationContext());
+                FeedReaderDbHelper dbHelper = FeedReaderDbHelper.getInstance(requireContext().getApplicationContext());
 
                 SQLiteDatabase db = dbHelper.getReadableDatabase();
 
