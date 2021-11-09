@@ -11,7 +11,7 @@ internal class Article : GolemItem() {
     var subheadline: String? = null
         get() = if (field == null) {
             null
-        } else field!!.toUpperCase(Locale.ROOT)
+        } else field!!.uppercase(Locale.ROOT)
     var teaser: String? = null
     var isOffline = false
     var fulltext: String? = null
