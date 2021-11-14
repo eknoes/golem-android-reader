@@ -282,14 +282,14 @@ public class ArticleFragment extends Fragment {
                             null);
                     if (cursor.moveToFirst()) {
                         article = new Article();
-                        article.setId(cursor.getInt(cursor.getColumnIndex(FeedReaderContract.Article.COLUMN_NAME_ID)));
-                        article.setTitle(cursor.getString(cursor.getColumnIndex(FeedReaderContract.Article.COLUMN_NAME_TITLE)));
-                        article.setSubheadline(cursor.getString(cursor.getColumnIndex(FeedReaderContract.Article.COLUMN_NAME_SUBHEADING)));
-                        article.setUrl(cursor.getString(cursor.getColumnIndex(FeedReaderContract.Article.COLUMN_NAME_URL)));
-                        article.setCommentUrl(cursor.getString(cursor.getColumnIndex(FeedReaderContract.Article.COLUMN_NAME_COMMENTURL)));
-                        article.setCommentNr(cursor.getString(cursor.getColumnIndex(FeedReaderContract.Article.COLUMN_NAME_COMMENTNR)));
-                        article.setOffline(cursor.getInt(cursor.getColumnIndex(FeedReaderContract.Article.COLUMN_NAME_OFFLINE)) == 1);
-                        article.setFulltext(cursor.getString(cursor.getColumnIndex(FeedReaderContract.Article.COLUMN_NAME_FULLTEXT)));
+                        article.setId(cursor.getInt(cursor.getColumnIndexOrThrow(FeedReaderContract.Article.COLUMN_NAME_ID)));
+                        article.setTitle(cursor.getString(cursor.getColumnIndexOrThrow(FeedReaderContract.Article.COLUMN_NAME_TITLE)));
+                        article.setSubheadline(cursor.getString(cursor.getColumnIndexOrThrow(FeedReaderContract.Article.COLUMN_NAME_SUBHEADING)));
+                        article.setUrl(cursor.getString(cursor.getColumnIndexOrThrow(FeedReaderContract.Article.COLUMN_NAME_URL)));
+                        article.setCommentUrl(cursor.getString(cursor.getColumnIndexOrThrow(FeedReaderContract.Article.COLUMN_NAME_COMMENTURL)));
+                        article.setCommentNr(cursor.getString(cursor.getColumnIndexOrThrow(FeedReaderContract.Article.COLUMN_NAME_COMMENTNR)));
+                        article.setOffline(cursor.getInt(cursor.getColumnIndexOrThrow(FeedReaderContract.Article.COLUMN_NAME_OFFLINE)) == 1);
+                        article.setFulltext(cursor.getString(cursor.getColumnIndexOrThrow(FeedReaderContract.Article.COLUMN_NAME_FULLTEXT)));
                     }
 
 
