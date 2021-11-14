@@ -107,7 +107,7 @@ public class ArticleListFragment extends Fragment {
         int refresh_limit = PreferenceManager.getDefaultSharedPreferences(getContext()).getInt("refresh_limit", 5); //Saved as minutes
 
 
-        if (refresh_limit != 0 && last_refresh + (refresh_limit * 1000 * 60) < new Date().getTime()) {
+        if (refresh_limit != 0 && last_refresh + ((long) refresh_limit * 1000 * 60) < new Date().getTime()) {
             Log.d(TAG, "onCreate: Refresh, last refresh was " + ((new Date().getTime() - last_refresh) / 1000) + "sec ago");
             refresh();
         } else {
@@ -118,7 +118,7 @@ public class ArticleListFragment extends Fragment {
     void refresh() {
         if (fetcher == null || fetcher.getStatus() != AsyncTask.Status.RUNNING) {
             mSwipeLayout.setRefreshing(true);
-            fetcher = new GolemFetcher(Objects.requireNonNull(getContext()), new Callable<Void>() {
+            fetcher = new GolemFetcher(requireContext(), new Callable<Void>() {
                 @Override
                 public Void call() {
                     if(listAdapter != null) {
@@ -149,7 +149,7 @@ public class ArticleListFragment extends Fragment {
 
         ArticleAdapter() {
             super();
-            context = Objects.requireNonNull(getContext()).getApplicationContext();
+            context = requireContext().getApplicationContext();
             inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             FeedReaderDbHelper dbHelper = FeedReaderDbHelper.getInstance(context);
             db = dbHelper.getReadableDatabase();
@@ -216,24 +216,24 @@ public class ArticleListFragment extends Fragment {
         public Article getItem(int position) {
             cursor.moveToPosition(position);
             Article a = new Article();
-            a.setId(cursor.getInt(cursor.getColumnIndex(FeedReaderContract.Article.COLUMN_NAME_ID)));
-            a.setTitle(cursor.getString(cursor.getColumnIndex(FeedReaderContract.Article.COLUMN_NAME_TITLE)));
-            a.setSubheadline(cursor.getString(cursor.getColumnIndex(FeedReaderContract.Article.COLUMN_NAME_SUBHEADING)));
-            a.setTeaser(cursor.getString(cursor.getColumnIndex(FeedReaderContract.Article.COLUMN_NAME_TEASER)));
-            a.setDate(cursor.getLong(cursor.getColumnIndex(FeedReaderContract.Article.COLUMN_NAME_DATE)));
-            a.setImgUrl(cursor.getString(cursor.getColumnIndex(FeedReaderContract.Article.COLUMN_NAME_IMG)));
-            a.setCommentUrl(cursor.getString(cursor.getColumnIndex(FeedReaderContract.Article.COLUMN_NAME_COMMENTURL)));
-            a.setCommentNr(cursor.getString(cursor.getColumnIndex(FeedReaderContract.Article.COLUMN_NAME_COMMENTNR)));
-            a.setUrl(cursor.getString(cursor.getColumnIndex(FeedReaderContract.Article.COLUMN_NAME_URL)));
-            a.setOffline(cursor.getInt(cursor.getColumnIndex(FeedReaderContract.Article.COLUMN_NAME_OFFLINE)) == 1);
-            a.setFulltext(cursor.getString(cursor.getColumnIndex(FeedReaderContract.Article.COLUMN_NAME_FULLTEXT)));
+            a.setId(cursor.getInt(cursor.getColumnIndexOrThrow(FeedReaderContract.Article.COLUMN_NAME_ID)));
+            a.setTitle(cursor.getString(cursor.getColumnIndexOrThrow(FeedReaderContract.Article.COLUMN_NAME_TITLE)));
+            a.setSubheadline(cursor.getString(cursor.getColumnIndexOrThrow(FeedReaderContract.Article.COLUMN_NAME_SUBHEADING)));
+            a.setTeaser(cursor.getString(cursor.getColumnIndexOrThrow(FeedReaderContract.Article.COLUMN_NAME_TEASER)));
+            a.setDate(cursor.getLong(cursor.getColumnIndexOrThrow(FeedReaderContract.Article.COLUMN_NAME_DATE)));
+            a.setImgUrl(cursor.getString(cursor.getColumnIndexOrThrow(FeedReaderContract.Article.COLUMN_NAME_IMG)));
+            a.setCommentUrl(cursor.getString(cursor.getColumnIndexOrThrow(FeedReaderContract.Article.COLUMN_NAME_COMMENTURL)));
+            a.setCommentNr(cursor.getString(cursor.getColumnIndexOrThrow(FeedReaderContract.Article.COLUMN_NAME_COMMENTNR)));
+            a.setUrl(cursor.getString(cursor.getColumnIndexOrThrow(FeedReaderContract.Article.COLUMN_NAME_URL)));
+            a.setOffline(cursor.getInt(cursor.getColumnIndexOrThrow(FeedReaderContract.Article.COLUMN_NAME_OFFLINE)) == 1);
+            a.setFulltext(cursor.getString(cursor.getColumnIndexOrThrow(FeedReaderContract.Article.COLUMN_NAME_FULLTEXT)));
             return a;
         }
 
         @Override
         public long getItemId(int position) {
             cursor.moveToPosition(position);
-            return cursor.getLong(cursor.getColumnIndex(FeedReaderContract.Article.COLUMN_NAME_ID));
+            return cursor.getLong(cursor.getColumnIndexOrThrow(FeedReaderContract.Article.COLUMN_NAME_ID));
         }
 
         @Override
