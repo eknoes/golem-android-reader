@@ -192,7 +192,7 @@ public class ArticleFragment extends Fragment {
             if (url != null) {
                 Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(Intent.createChooser(intent, "Select Browser"));
+                startActivity(Intent.createChooser(intent, getString(R.string.open_browser)));
             }
         } else if (id == R.id.action_comments) {
             Log.d(TAG, "onOptionsItemSelected: Open Comments: " + article.getCommentUrl());
