@@ -38,57 +38,66 @@ class SettingsActivity : AppCompatActivity() {
 
         override fun onPreferenceTreeClick(preference: Preference?): Boolean {
             if (preference != null) {
-                if (preference.key == "choose_layout") {
-                    val intent = Intent(context, ArticleView::class.java)
-                    intent.setData(Uri.parse("https://www.golem.de/sonstiges/ansicht/"))
-                    intent.putExtra(FORCE_WEBVIEW, true)
-                    intent.putExtra(NO_ARTICLE, true)
-                    startActivity(intent)
-                    return true
-                } else if (preference.key == "how_to_key") {
-                    val intent = Intent(context, ArticleView::class.java)
-                    intent.setData(Uri.parse( "https://account.golem.de/product/subscription"))
-                    intent.putExtra(FORCE_WEBVIEW, true)
-                    intent.putExtra(NO_ARTICLE, true)
-                    startActivity(intent)
-                    return true
-                } else if (preference.key == "how_to_darkmode") {
-                    val intent = Intent(context, ArticleView::class.java)
-                    intent.setData(Uri.parse( "https://account.golem.de/product/subscription#videotype1"))
-                    intent.putExtra(FORCE_WEBVIEW, true)
-                    intent.putExtra(NO_ARTICLE, true)
-                    startActivity(intent)
-                    return true
-                } else if (preference.key == "github") {
-                    val intent = Intent(Intent.ACTION_VIEW)
-                    intent.data = Uri.parse("https://github.com/eknoes/golem-android-reader/issues")
-                    startActivity(intent)
-                    return true
-                } else if (preference.key == "start_contact") {
-                    val intent = Intent(Intent.ACTION_SENDTO).apply {
-                        data = Uri.parse("mailto:projekte@eknoes.de")
-                        putExtra(Intent.EXTRA_SUBJECT, "Golem.de Android App")
-                        putExtra(Intent.EXTRA_TEXT, "Hi Sönke,")
+                when (preference.key) {
+                    "choose_layout" -> {
+                        val intent = Intent(context, ArticleView::class.java)
+                        intent.setData(Uri.parse("https://www.golem.de/sonstiges/ansicht/"))
+                        intent.putExtra(FORCE_WEBVIEW, true)
+                        intent.putExtra(NO_ARTICLE, true)
+                        startActivity(intent)
+                        return true
                     }
-                    startActivity(intent)
-                    return true
-                } else if (preference.key == "join_beta") {
-                    val intent = Intent(Intent.ACTION_VIEW)
-                    intent.data = Uri.parse("https://play.google.com/apps/testing/de.eknoes.inofficialgolem")
-                    startActivity(intent)
-                    return true
-                } else if (preference.key == "privacy") {
-                    val intent = Intent(context, ArticleView::class.java)
-                    intent.setData(Uri.parse("https://projekte.eknoes.de/datenschutz.html"))
-                    intent.putExtra(FORCE_WEBVIEW, true)
-                    intent.putExtra(NO_ARTICLE, true)
-                    startActivity(intent)
-                    return true
-                } else if (preference.key == "open_imprint") {
-                    val intent = Intent(context, ArticleView::class.java)
-                    intent.setData(Uri.parse("https://www.golem.de/sonstiges/impressum.html"))
-                    startActivity(intent)
-                    return true
+                    "how_to_key" -> {
+                        val intent = Intent(context, ArticleView::class.java)
+                        intent.setData(Uri.parse( "https://account.golem.de/product/subscription"))
+                        intent.putExtra(FORCE_WEBVIEW, true)
+                        intent.putExtra(NO_ARTICLE, true)
+                        startActivity(intent)
+                        return true
+                    }
+                    "how_to_darkmode" -> {
+                        val intent = Intent(context, ArticleView::class.java)
+                        intent.setData(Uri.parse( "https://account.golem.de/product/subscription#videotype1"))
+                        intent.putExtra(FORCE_WEBVIEW, true)
+                        intent.putExtra(NO_ARTICLE, true)
+                        startActivity(intent)
+                        return true
+                    }
+                    "github" -> {
+                        val intent = Intent(Intent.ACTION_VIEW)
+                        intent.data = Uri.parse("https://github.com/eknoes/golem-android-reader/issues")
+                        startActivity(intent)
+                        return true
+                    }
+                    "start_contact" -> {
+                        val intent = Intent(Intent.ACTION_SENDTO).apply {
+                            data = Uri.parse("mailto:projekte@eknoes.de")
+                            putExtra(Intent.EXTRA_SUBJECT, "Golem.de Android App")
+                            putExtra(Intent.EXTRA_TEXT, "Hi Sönke,")
+                        }
+                        startActivity(intent)
+                        return true
+                    }
+                    "join_beta" -> {
+                        val intent = Intent(Intent.ACTION_VIEW)
+                        intent.data = Uri.parse("https://play.google.com/apps/testing/de.eknoes.inofficialgolem")
+                        startActivity(intent)
+                        return true
+                    }
+                    "privacy" -> {
+                        val intent = Intent(context, ArticleView::class.java)
+                        intent.setData(Uri.parse("https://projekte.eknoes.de/datenschutz.html"))
+                        intent.putExtra(FORCE_WEBVIEW, true)
+                        intent.putExtra(NO_ARTICLE, true)
+                        startActivity(intent)
+                        return true
+                    }
+                    "open_imprint" -> {
+                        val intent = Intent(context, ArticleView::class.java)
+                        intent.setData(Uri.parse("https://www.golem.de/sonstiges/impressum.html"))
+                        startActivity(intent)
+                        return true
+                    }
                 }
 
             }
