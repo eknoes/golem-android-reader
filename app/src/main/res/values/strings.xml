@@ -69,5 +69,7 @@
     <string name="filter_view_golem">Open Golem.de Articles</string>
     <string name="licenses">Licenses</string>
     <string name="licenses_summary">Show third party licenses</string>
+    <string name="pref_imprint_title">Imprint of Golem.de</string>
+    <string name="pref_imprint_desc">Show contact and legal information of Golem.de</string>
 
 </resources>

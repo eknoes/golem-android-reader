@@ -66,6 +66,12 @@
             app:key="info_category"
         app:title="@string/setting_contact">
         <Preference
+                app:key="open_imprint"
+                app:title="@string/pref_imprint_title"
+                app:summary="@string/pref_imprint_desc"
+                android:icon="@drawable/ic_legal">
+        </Preference>
+        <Preference
                 app:key="github"
                 app:title="@string/pref_github_title"
                 app:summary="@string/pref_github_sum"

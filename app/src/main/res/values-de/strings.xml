@@ -55,4 +55,6 @@
     <string name="filter_view_golem">Golem.de Artikel öffnen</string>
     <string name="licenses">Lizenzen</string>
     <string name="licenses_summary">Zeige genutzte Komponenten und deren Lizenz an</string>
+    <string name="pref_imprint_title">Impressum Golem.de</string>
+    <string name="pref_imprint_desc">Zeige Kontaktdaten und rechtliche Informationen von Golem.de</string>
 </resources>

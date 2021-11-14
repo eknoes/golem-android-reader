@@ -84,6 +84,11 @@ class SettingsActivity : AppCompatActivity() {
                     intent.putExtra(NO_ARTICLE, true)
                     startActivity(intent)
                     return true
+                } else if (preference.key == "open_imprint") {
+                    val intent = Intent(context, ArticleView::class.java)
+                    intent.setData(Uri.parse("https://www.golem.de/sonstiges/impressum.html"))
+                    startActivity(intent)
+                    return true
                 }
 
             }
