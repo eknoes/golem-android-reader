@@ -1,0 +1,2 @@
+* Link zum Impressum von Golem.de hinzugefügt
+* Fehlerbehebungen (Danke, Gabriel!)

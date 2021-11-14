@@ -1,0 +1,2 @@
+* Adds link to Impressum of Golem.de
+* Bugfixes (Thanks, Gabriel!)
