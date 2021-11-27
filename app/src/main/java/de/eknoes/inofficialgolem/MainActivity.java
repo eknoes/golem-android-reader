@@ -147,6 +147,11 @@ public class MainActivity extends AppCompatActivity implements ArticleListFragme
         } else if (id == R.id.action_settings) {
             Intent i = new Intent(this, SettingsActivity.class);
             startActivity(i);
+        } else if (id == R.id.action_imprint) {
+            Intent intent = new Intent(this, ArticleView.class);
+            intent.setData(Uri.parse("https://www.golem.de/sonstiges/impressum.html"));
+            startActivity(intent);
+            return true;
         }
 
         return super.onOptionsItemSelected(item);

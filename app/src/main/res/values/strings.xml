@@ -73,4 +73,5 @@
     <string name="pref_imprint_desc">Show contact and legal information of Golem.de</string>
 
     <string name="open_browser">Select a browser</string>
+    <string name="action_imprint">Golem.de Contact</string>
 </resources>
