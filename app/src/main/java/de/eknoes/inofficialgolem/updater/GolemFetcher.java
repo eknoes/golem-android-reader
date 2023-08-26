@@ -44,7 +44,7 @@ public class GolemFetcher extends AsyncTask<Void, Float, GolemFetcher.FETCH_STAT
         this.context = new WeakReference<>(context);
         this.notifier = notifier;
         if(PreferenceManager.getDefaultSharedPreferences(context).getBoolean("has_abo", false)) {
-            updater = new GolemUpdater[]{new articleUpdater(context, false), new articleUpdater(context, true)};
+            updater = new GolemUpdater[]{new articleUpdater(context, true), new articleUpdater(context, false)};
         } else {
             updater = new GolemUpdater[]{new articleUpdater(context, false)};
         }
@@ -74,11 +74,13 @@ public class GolemFetcher extends AsyncTask<Void, Float, GolemFetcher.FETCH_STAT
             }
             if (networkInfo != null && networkInfo.isConnected()) {
                 FETCH_STATE result = FETCH_STATE.SUCCESS;
-                for (GolemUpdater u : updater) {
+                for (int i = 0; i < updater.length; i++) {
+                    GolemUpdater u = updater[i];
                     try {
                         List<GolemItem> items = u.getItems();
                         if (items != null && items.size() != 0) {
-                            writeArticles(items);
+                            // Only insert new articles for the first updater (AboKey updater needs to be first in the list)
+                            writeArticles(items, i == 0);
                         } else {
                             Log.d(TAG, "doInBackground: Updater did not return items");
                         }
@@ -138,7 +140,7 @@ public class GolemFetcher extends AsyncTask<Void, Float, GolemFetcher.FETCH_STAT
         }
     }
 
-    private void writeArticles(List<GolemItem> articles) {
+    private void writeArticles(List<GolemItem> articles, boolean insertNew) {
         for (GolemItem item : articles) {
             if (isCancelled() || db == null) {
                 return;
@@ -213,7 +215,7 @@ public class GolemFetcher extends AsyncTask<Void, Float, GolemFetcher.FETCH_STAT
             if (id != 0) {
                 Log.d(TAG, "doInBackground: Updating article with id " + id + ": Date " + item.getProp(GolemItem.ItemProperties.DATE));
                 db.update(FeedReaderContract.Article.TABLE_NAME, values, FeedReaderContract.Article._ID + "='" + id + "'", null);
-            } else {
+            } else if (insertNew) {
                 Log.d(TAG, "doInBackground: Creating new article with Title " + item.getProp(GolemItem.ItemProperties.TITLE));
                 db.insert(FeedReaderContract.Article.TABLE_NAME, null, values);
             }
