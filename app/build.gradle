@@ -10,8 +10,6 @@ android {
             keyPassword 'golemapp'
         }
     }
-    compileSdkVersion 31
-    buildToolsVersion "30.0.3"
     defaultConfig {
         applicationId "de.eknoes.inofficialgolem"
         minSdkVersion 19
@@ -25,6 +23,7 @@ android {
             signingConfig signingConfigs.debug
         }
     }
+    namespace 'de.eknoes.inofficialgolem'
 }
 
 dependencies {

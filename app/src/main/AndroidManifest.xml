@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           xmlns:tools="http://schemas.android.com/tools"
-          package="de.eknoes.inofficialgolem">
+        >
 
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
@@ -11,9 +11,9 @@
 
     <queries>
         <intent>
-            <action android:name="android.intent.action.VIEW" />
-            <category android:name="android.intent.category.BROWSABLE" />
-            <data android:scheme="https" />
+            <action android:name="android.intent.action.VIEW"/>
+            <category android:name="android.intent.category.BROWSABLE"/>
+            <data android:scheme="https"/>
         </intent>
     </queries>
 
@@ -35,17 +35,19 @@
                 android:name=".ArticleView"
                 android:configChanges="orientation|screenSize"
                 android:parentActivityName=".MainActivity"
-                tools:targetApi="jelly_bean"
                 android:exported="true">
             <meta-data
                     android:name="android.support.PARENT_ACTIVITY"
                     android:value=".MainActivity"/>
             <intent-filter android:label="@string/filter_view_golem">
-                <action android:name="android.intent.action.VIEW" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-                <data android:scheme="https"
-                      android:host="www.golem.de"
+                <action android:name="android.intent.action.VIEW"/>
+
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+
+                <data
+                        android:scheme="https"
+                        android:host="www.golem.de"
                         android:pathPrefix="/news"/>
                 <!-- note that the leading "/" is required for pathPrefix-->
             </intent-filter>
@@ -55,14 +57,13 @@
                 android:name=".SettingsActivity"
                 android:label="@string/title_activity_settings"
                 android:parentActivityName=".MainActivity"
-                tools:targetApi="jelly_bean">
+                >
             <meta-data
                     android:name="android.support.PARENT_ACTIVITY"
                     android:value=".MainActivity"/>
         </activity>
         <activity
                 android:name=".MainActivity"
-                android:label="@string/app_name"
                 android:logo="@drawable/golem_eye"
                 android:exported="true">
             <intent-filter>
