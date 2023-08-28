@@ -18,9 +18,9 @@ class SettingsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.settings_activity)
         supportFragmentManager
-                .beginTransaction()
-                .replace(R.id.settings, SettingsFragment())
-                .commit()
+            .beginTransaction()
+            .replace(R.id.settings, SettingsFragment())
+            .commit()
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 
@@ -29,9 +29,8 @@ class SettingsActivity : AppCompatActivity() {
             setPreferencesFromResource(R.xml.preferences, rootKey)
 
             val aboKey = findPreference<EditTextPreference>("abo_key")
-
             aboKey?.setOnPreferenceChangeListener { _: Preference, _: Any ->
-                PreferenceManager.getDefaultSharedPreferences(context).edit() .putLong("last_refresh", 0).apply()
+                PreferenceManager.getDefaultSharedPreferences(context).edit().putLong("last_refresh", 0).apply()
                 true
             }
         }
@@ -47,28 +46,32 @@ class SettingsActivity : AppCompatActivity() {
                         startActivity(intent)
                         return true
                     }
+
                     "how_to_key" -> {
                         val intent = Intent(context, ArticleView::class.java)
-                        intent.setData(Uri.parse( "https://account.golem.de/product/subscription"))
+                        intent.setData(Uri.parse("https://account.golem.de/product/subscription"))
                         intent.putExtra(FORCE_WEBVIEW, true)
                         intent.putExtra(NO_ARTICLE, true)
                         startActivity(intent)
                         return true
                     }
+
                     "how_to_darkmode" -> {
                         val intent = Intent(context, ArticleView::class.java)
-                        intent.setData(Uri.parse( "https://account.golem.de/product/subscription#videotype1"))
+                        intent.setData(Uri.parse("https://account.golem.de/product/subscription#videotype1"))
                         intent.putExtra(FORCE_WEBVIEW, true)
                         intent.putExtra(NO_ARTICLE, true)
                         startActivity(intent)
                         return true
                     }
+
                     "github" -> {
                         val intent = Intent(Intent.ACTION_VIEW)
                         intent.data = Uri.parse("https://github.com/eknoes/golem-android-reader/issues")
                         startActivity(intent)
                         return true
                     }
+
                     "start_contact" -> {
                         val intent = Intent(Intent.ACTION_SENDTO).apply {
                             data = Uri.parse("mailto:projekte@eknoes.de")
@@ -78,12 +81,14 @@ class SettingsActivity : AppCompatActivity() {
                         startActivity(intent)
                         return true
                     }
+
                     "join_beta" -> {
                         val intent = Intent(Intent.ACTION_VIEW)
                         intent.data = Uri.parse("https://play.google.com/apps/testing/de.eknoes.inofficialgolem")
                         startActivity(intent)
                         return true
                     }
+
                     "privacy" -> {
                         val intent = Intent(context, ArticleView::class.java)
                         intent.setData(Uri.parse("https://projekte.eknoes.de/datenschutz.html"))
@@ -92,6 +97,7 @@ class SettingsActivity : AppCompatActivity() {
                         startActivity(intent)
                         return true
                     }
+
                     "open_imprint" -> {
                         val intent = Intent(context, ArticleView::class.java)
                         intent.setData(Uri.parse("https://www.golem.de/sonstiges/impressum.html"))
@@ -104,6 +110,6 @@ class SettingsActivity : AppCompatActivity() {
 
             return super.onPreferenceTreeClick(preference)
         }
-        
+
     }
 }
