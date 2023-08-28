@@ -2,6 +2,8 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 
 android {
+    compileSdk 33
+
     signingConfigs {
         debug {
             storeFile file('../resources/debug-keystore.jks')
@@ -10,12 +12,13 @@ android {
             keyPassword 'golemapp'
         }
     }
+
     defaultConfig {
         applicationId "de.eknoes.inofficialgolem"
         minSdkVersion 19
-        targetSdkVersion 31
-        versionCode 141
-        versionName "1.2.3"
+        targetSdkVersion 33
+        versionCode 142
+        versionName "1.2.4"
         signingConfig signingConfigs.debug
     }
     buildTypes {

@@ -103,20 +103,25 @@ Pattern.CASE_INSENSITIVE or Pattern.MULTILINE or Pattern.DOTALL)
         item.setProp(GolemItem.ItemProperties.TEASER, decodeHTML(desc))
 
         //Extract IMG Url from content
-        val matcher = urlPattern.matcher(content)
-        if(matcher.find())
-            item.setProp(GolemItem.ItemProperties.IMG_URL, content?.substring(matcher.start(0), matcher.end(0)))
+        if (content != null) {
+            val matcher = urlPattern.matcher(content)
+            if(matcher.find())
+                item.setProp(GolemItem.ItemProperties.IMG_URL, content.substring(matcher.start(0), matcher.end(0)))
+        }
         item.setProp(GolemItem.ItemProperties.DATE, parseDate(pubDate,"EEE, d MMM yyyy HH:mm:ss Z"))
         item.url = link
         return item
     }
 
     internal fun parseDate(datestring: String?, fmtstring: String): String? {
-        // Thu, 07 Feb 2019 19:16:00 +0100
+        if (datestring == null) {
+            return "0"
+        }
+
         val df = SimpleDateFormat(fmtstring, Locale.ENGLISH)
         try {
             val result = df.parse(datestring)
-            return result.time.toString()
+            return result?.time.toString()
         } catch (e: ParseException) {
             e.printStackTrace()
         }

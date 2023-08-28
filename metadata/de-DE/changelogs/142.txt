@@ -1,0 +1,2 @@
+* Fehler behoben: Golem Abonnenten sehen Werbung (Danke an FBkass & JVMerkle!)
+* Fehlerbehebungen & Dependency Updates
