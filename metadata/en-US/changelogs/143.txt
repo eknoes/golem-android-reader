@@ -1,0 +1,2 @@
+* Bugfixes: Golem Plus Users see ads (Thanks to FBlass & JVMerkle!)
+* Dependency Upgrades
