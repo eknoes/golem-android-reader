@@ -28,9 +28,6 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Objects;
-
-
 public class ArticleFragment extends Fragment {
     static final String ARTICLE_URL = "de.eknoes.inofficialgolem.ARTICLE_URL";
     static final String FORCE_WEBVIEW = "de.eknoes.inofficialgolem.FORCE_WEBVIEW";
