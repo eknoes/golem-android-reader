@@ -1,0 +1,2 @@
+* Improved explanation of Golem Pur settings
+* Fixed bug concerning Golem Pur login

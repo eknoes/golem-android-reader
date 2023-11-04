@@ -1,0 +1,2 @@
+* Golem-Pur Accounteinstellungen klarer formuliert
+* Cookie-Probleme gelöst, die Login von Golem Pur behindert haben
