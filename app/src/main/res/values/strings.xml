@@ -19,14 +19,14 @@
     <string name="pref_article_refresh">Refresh Interval (Minutes)</string>
     <string name="pref_article_refresh_sum">Articles are refreshed periodically when the app is opened</string>
     <string name="pref_data_title" translatable="false">SYNC</string>
-    <string name="pref_abo_title">SUBSCRIPTION</string>
-    <string name="pref_has_abo">Use golem.de subscription</string>
-    <string name="pref_abo_key" translatable="false">golem.de Token</string>
-    <string name="pref_abo_key_sum">Your subscription of golem.de</string>
+    <string name="pref_abo_title">GOLEM PUR</string>
+    <string name="pref_has_abo">Use Golem Pur</string>
+    <string name="pref_abo_key" translatable="false">Golem Pur Token</string>
+    <string name="pref_abo_key_sum">Add your Token here. It is required to access the ad-free fulltext feed.</string>
     <string name="action_open_webbrowser">Open in Browser</string>
     <string name="setting_contact" translatable="false">INFO</string>
     <string name="how_to_key">Golem.de Pur Account</string>
-    <string name="how_to_key_content">You can find your token here under Fulltext-RSS-Feed. The characters after \"http://rss.golem.de/rss_sub.php?token=\" make up your token.</string>
+    <string name="how_to_key_content">You can find your RSS-feed token here under Fulltext-RSS-Feed. The characters after \"http://rss.golem.de/rss_sub.php?token=\" make up your token.</string>
     <string name="pref_contact_title">Contact</string>
     <string name="privacy_sum">Click here to open our Data Privacy Policy</string>
     <string name="privacy_title">Data Privacy Policy</string>
