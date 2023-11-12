@@ -23,9 +23,12 @@ import android.webkit.CookieManager;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.ProgressBar;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+
 import org.jetbrains.annotations.NotNull;
 
 public class ArticleFragment extends Fragment {
@@ -42,6 +45,7 @@ public class ArticleFragment extends Fragment {
 
     private Article article;
     private loadArticleTask mTask;
+    private SwipeRefreshLayout mArticleSwipeRefresh;
 
     public ArticleFragment() {
         super(R.layout.fragment_article);
@@ -155,6 +159,8 @@ public class ArticleFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         webView = view.findViewById(R.id.articleWebView);
         progressBar = view.findViewById(R.id.articleProgress);
+        mArticleSwipeRefresh = view.findViewById(R.id.articleSwipeRefresh);
+        mArticleSwipeRefresh.setOnRefreshListener(() -> articleRefresh());
     }
 
     @Override
@@ -359,6 +365,12 @@ public class ArticleFragment extends Fragment {
                 mainActivity.invalidateOptionsMenu();
 
         }
+    }
+
+    void articleRefresh() {
+        mArticleSwipeRefresh.setRefreshing(true);
+        webView.reload();
+        mArticleSwipeRefresh.setRefreshing(false);
     }
 
 }
