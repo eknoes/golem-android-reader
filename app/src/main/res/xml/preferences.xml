@@ -5,27 +5,34 @@
         app:key="sync_category"
         app:title="@string/pref_data_title">
         <SeekBarPreference
-                app:key="article_limit"
-                app:title="@string/pref_article_limit"
-                app:summary="@string/pref_article_limit_sum"
-                app:contentDescription="@string/pref_article_limit_sum"
-                app:defaultValue="50"
-                app:min="0"
-                android:max="200"
-                app:showSeekBarValue="true"
-                android:icon="@drawable/ic_history"/>
+            android:icon="@drawable/ic_history"
+            android:max="200"
+            app:contentDescription="@string/pref_article_limit_sum"
+            app:defaultValue="50"
+            app:key="article_limit"
+            app:min="0"
+            app:showSeekBarValue="true"
+            app:summary="@string/pref_article_limit_sum"
+            app:title="@string/pref_article_limit" />
 
-        <SeekBarPreference
-                app:key="refresh_limit"
-                app:title="@string/pref_article_refresh"
-                app:summary="@string/pref_article_refresh_sum"
-                app:contentDescription="@string/pref_article_refresh_sum"
-                app:defaultValue="5"
-                app:min="0"
-                android:max="60"
-                app:showSeekBarValue="true"
-                android:icon="@drawable/ic_refresh_black"/>
-    </PreferenceCategory>
+    <SeekBarPreference
+        android:icon="@drawable/ic_refresh_black"
+        android:max="60"
+        app:contentDescription="@string/pref_article_refresh_sum"
+        app:defaultValue="5"
+        app:key="refresh_limit"
+        app:min="0"
+        app:showSeekBarValue="true"
+        app:summary="@string/pref_article_refresh_sum"
+        app:title="@string/pref_article_refresh" />
+
+    <SwitchPreference
+        app:defaultValue="false"
+        app:icon="@drawable/ic_wlan"
+        app:key="only_wifi"
+        app:summary="@string/if_enabled_articles_will_be_synchronized_only_when_wi_fi_is_available"
+        app:title="@string/synchronize_only_if_wi_fi_is_available" />
+</PreferenceCategory>
     <PreferenceCategory
             app:key="accessibility_category"
         app:title="@string/pref_access">
