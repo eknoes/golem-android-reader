@@ -1,21 +1,24 @@
 package de.eknoes.inofficialgolem;
 
+import static de.eknoes.inofficialgolem.ArticleFragment.FORCE_WEBVIEW;
+import static de.eknoes.inofficialgolem.ArticleFragment.NO_ARTICLE;
+
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Objects;
-
-import static de.eknoes.inofficialgolem.ArticleFragment.*;
 
 public class MainActivity extends AppCompatActivity implements ArticleListFragment.OnArticleSelectedListener {
     private static final String TAG = "MainActivity";
@@ -131,7 +134,7 @@ public class MainActivity extends AppCompatActivity implements ArticleListFragme
         int id = item.getItemId();
 
         if (id == R.id.action_refresh) {
-            ((ArticleListFragment) Objects.requireNonNull(getSupportFragmentManager().findFragmentById(R.id.fragment_articlelist))).refresh();
+            ((ArticleListFragment) Objects.requireNonNull(getSupportFragmentManager().findFragmentById(R.id.fragment_articlelist))).refresh(true);
             return true;
         } else if (id == R.id.action_share) {
             //Get Package Link
