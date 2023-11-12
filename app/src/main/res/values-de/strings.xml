@@ -59,7 +59,6 @@
     <string name="pref_imprint_desc">Zeige Kontaktdaten und rechtliche Informationen von Golem.de</string>
     <string name="open_browser">Wählen Sie einen Browser aus</string>
     <string name="action_imprint">Golem.de Kontakt</string>
-    <string name="synchronize_only_if_wi_fi_is_available">Synchronisiere nur, wenn WLAN verfügbar ist.</string>
-    <string name="if_enabled_articles_will_be_synchronized_only_when_wi_fi_is_available">Wenn aktiviert, werden Artikel nur synchronisiert, wenn WLAN verfügbar ist.</string>
-    <string name="wifi_is_not_connected">Wlan ist nicht verbunden!</string>
+    <string name="synchronize_only_if_wi_fi_is_available">Synchronisiere nur beim Start, wenn WLAN verfügbar ist.</string>
+    <string name="if_enabled_articles_will_be_synchronized_only_when_wi_fi_is_available">Wenn aktiviert, werden Artikel beim Start nur synchronisiert, wenn WLAN verfügbar ist.</string>
 </resources>
