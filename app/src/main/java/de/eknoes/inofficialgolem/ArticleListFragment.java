@@ -10,22 +10,33 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.util.LruCache;
-import android.view.*;
-import android.widget.*;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.BaseAdapter;
+import android.widget.ListView;
+import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.NetworkImageView;
 import com.android.volley.toolbox.Volley;
-import de.eknoes.inofficialgolem.updater.GolemFetcher;
+
 import org.jetbrains.annotations.NotNull;
 
 import java.text.DateFormat;
 import java.util.Date;
-import java.util.Objects;
 import java.util.concurrent.Callable;
+
+import de.eknoes.inofficialgolem.updater.GolemFetcher;
+import de.eknoes.inofficialgolem.utils.NetworkUtils;
 
 /**
  * A placeholder fragment containing a simple view.
@@ -95,7 +106,7 @@ public class ArticleListFragment extends Fragment {
         mSwipeLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                refresh();
+                refresh(true);
             }
         });
     }
@@ -109,19 +120,24 @@ public class ArticleListFragment extends Fragment {
 
         if (refresh_limit != 0 && last_refresh + ((long) refresh_limit * 1000 * 60) < new Date().getTime()) {
             Log.d(TAG, "onCreate: Refresh, last refresh was " + ((new Date().getTime() - last_refresh) / 1000) + "sec ago");
-            refresh();
+            refresh(false);
         } else {
             Log.d(TAG, "onCreate: No refresh, last refresh was " + (new Date().getTime() - last_refresh) / 1000 + "sec ago");
         }
     }
 
-    void refresh() {
+    void refresh(boolean force) {
+        if (!force && PreferenceManager.getDefaultSharedPreferences(getContext()).getBoolean("only_wifi", false)) {
+            if (!NetworkUtils.hashWifiConnection(getContext())) {
+                return;
+            }
+        }
         if (fetcher == null || fetcher.getStatus() != AsyncTask.Status.RUNNING) {
             mSwipeLayout.setRefreshing(true);
             fetcher = new GolemFetcher(requireContext(), new Callable<Void>() {
                 @Override
                 public Void call() {
-                    if(listAdapter != null) {
+                    if (listAdapter != null) {
                         listAdapter.notifyDataSetChanged();
                     }
                     mSwipeLayout.setRefreshing(false);
