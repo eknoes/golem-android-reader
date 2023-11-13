@@ -128,7 +128,7 @@ public class ArticleListFragment extends Fragment {
 
     void refresh(boolean force) {
         if (!force && PreferenceManager.getDefaultSharedPreferences(getContext()).getBoolean("only_wifi", false)) {
-            if (!NetworkUtils.hashWifiConnection(getContext())) {
+            if (!NetworkUtils.hasWifiConnection(getContext())) {
                 return;
             }
         }
