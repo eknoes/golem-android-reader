@@ -13,7 +13,7 @@ public class NetworkUtils {
         return (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
     }
 
-    public static boolean hashWifiConnection(Context context) {
+    public static boolean hasWifiConnection(Context context) {
         ConnectivityManager connectivityManager = getConnectivityManager(context);
         NetworkInfo wifiInfo = connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
         return wifiInfo.isConnected();
