@@ -121,9 +121,12 @@ public class ArticleFragment extends Fragment {
                 public void onPageStarted(WebView view, String url, Bitmap favicon) {
                     super.onPageStarted(view, url, favicon);
                     webView.setVisibility(View.INVISIBLE);
-                    if(progressBar != null) {
+                    if (progressBar != null) {
                         progressBar.setVisibility(View.VISIBLE);
                         progressBar.setIndeterminate(true);
+                    }
+                    if (!mArticleSwipeRefresh.isRefreshing()) {
+                        mArticleSwipeRefresh.setRefreshing(true);
                     }
                 }
 
@@ -131,11 +134,13 @@ public class ArticleFragment extends Fragment {
                 public void onPageFinished(WebView view, String url) {
                     super.onPageFinished(view, url);
                     webView.setVisibility(View.VISIBLE);
-                    if(progressBar != null) {
+                    if (progressBar != null) {
                         progressBar.setVisibility(View.GONE);
                         progressBar.setIndeterminate(false);
                     }
-
+                    if (mArticleSwipeRefresh.isRefreshing()) {
+                        mArticleSwipeRefresh.setRefreshing(false);
+                    }
                 }
             });
             webView.getSettings().setJavaScriptEnabled(true);
@@ -160,7 +165,7 @@ public class ArticleFragment extends Fragment {
         webView = view.findViewById(R.id.articleWebView);
         progressBar = view.findViewById(R.id.articleProgress);
         mArticleSwipeRefresh = view.findViewById(R.id.articleSwipeRefresh);
-        mArticleSwipeRefresh.setOnRefreshListener(() -> articleRefresh());
+        mArticleSwipeRefresh.setOnRefreshListener(() -> webView.reload());
     }
 
     @Override
@@ -366,11 +371,4 @@ public class ArticleFragment extends Fragment {
 
         }
     }
-
-    void articleRefresh() {
-        mArticleSwipeRefresh.setRefreshing(true);
-        webView.reload();
-        mArticleSwipeRefresh.setRefreshing(false);
-    }
-
 }
