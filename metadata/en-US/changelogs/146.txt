@@ -1,0 +1,3 @@
+Thanks to @Zusel's Pull Requests, the following new features are available:
+* Sync RSS feed only with Wifi (defaults to off)
+* Pull to refresh now available in the article and comments view

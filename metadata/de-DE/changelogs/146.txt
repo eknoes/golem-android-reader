@@ -1,0 +1,3 @@
+Danke @Zusel für die Pull-Requests mit den beiden neuen Features:
+* Neue Einstellung, den RSS-Feed nur mit WLAN zu aktualisieren (Default ist immer)
+* In der Artikelansicht / Kommentare kann man die Seite nun durch Herunterziehen aktualisieren
