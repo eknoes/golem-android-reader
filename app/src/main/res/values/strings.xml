@@ -74,6 +74,6 @@
 
     <string name="open_browser">Select a browser</string>
     <string name="action_imprint">Golem.de Contact</string>
-    <string name="synchronize_only_if_wi_fi_is_available">Synchronize only at startup when Wi-Fi is available.</string>
+    <string name="synchronize_only_if_wi_fi_is_available">Synchronize with Wi-Fi only</string>
     <string name="if_enabled_articles_will_be_synchronized_only_when_wi_fi_is_available">If enabled, articles will only be synchronized at startup when Wi-Fi is available.</string>
 </resources>
