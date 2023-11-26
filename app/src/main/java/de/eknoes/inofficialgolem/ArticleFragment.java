@@ -5,8 +5,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -30,6 +28,10 @@ import androidx.fragment.app.Fragment;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import org.jetbrains.annotations.NotNull;
+
+import de.eknoes.inofficialgolem.entities.DBColumns;
+import de.eknoes.inofficialgolem.entities.QueryRequest;
+import de.eknoes.inofficialgolem.utils.DBHelper;
 
 public class ArticleFragment extends Fragment {
     static final String ARTICLE_URL = "de.eknoes.inofficialgolem.ARTICLE_URL";
@@ -272,43 +274,12 @@ public class ArticleFragment extends Fragment {
 
         @Override
         protected Void doInBackground(Void... params) {
-                FeedReaderDbHelper dbHelper = FeedReaderDbHelper.getInstance(requireContext().getApplicationContext());
-
-                SQLiteDatabase db = dbHelper.getReadableDatabase();
-
                 if (url != null) {
-                    String[] columns = {
-                            FeedReaderContract.Article.COLUMN_NAME_ID,
-                            FeedReaderContract.Article.COLUMN_NAME_TITLE,
-                            FeedReaderContract.Article.COLUMN_NAME_SUBHEADING,
-                            FeedReaderContract.Article.COLUMN_NAME_URL,
-                            FeedReaderContract.Article.COLUMN_NAME_COMMENTNR,
-                            FeedReaderContract.Article.COLUMN_NAME_COMMENTURL,
-                            FeedReaderContract.Article.COLUMN_NAME_OFFLINE,
-                            FeedReaderContract.Article.COLUMN_NAME_FULLTEXT,
-                    };
-                    Cursor cursor = db.query(
-                            FeedReaderContract.Article.TABLE_NAME,
-                            columns,
-                            "url=\"" + url + "\"",
-                            null,
-                            null,
-                            null,
-                            null);
-                    if (cursor.moveToFirst()) {
-                        article = new Article();
-                        article.setId(cursor.getInt(cursor.getColumnIndexOrThrow(FeedReaderContract.Article.COLUMN_NAME_ID)));
-                        article.setTitle(cursor.getString(cursor.getColumnIndexOrThrow(FeedReaderContract.Article.COLUMN_NAME_TITLE)));
-                        article.setSubheadline(cursor.getString(cursor.getColumnIndexOrThrow(FeedReaderContract.Article.COLUMN_NAME_SUBHEADING)));
-                        article.setUrl(cursor.getString(cursor.getColumnIndexOrThrow(FeedReaderContract.Article.COLUMN_NAME_URL)));
-                        article.setCommentUrl(cursor.getString(cursor.getColumnIndexOrThrow(FeedReaderContract.Article.COLUMN_NAME_COMMENTURL)));
-                        article.setCommentNr(cursor.getString(cursor.getColumnIndexOrThrow(FeedReaderContract.Article.COLUMN_NAME_COMMENTNR)));
-                        article.setOffline(cursor.getInt(cursor.getColumnIndexOrThrow(FeedReaderContract.Article.COLUMN_NAME_OFFLINE)) == 1);
-                        article.setFulltext(cursor.getString(cursor.getColumnIndexOrThrow(FeedReaderContract.Article.COLUMN_NAME_FULLTEXT)));
-                    }
-
-
-                    cursor.close();
+                    QueryRequest queryRequest = new QueryRequest.QueryRequestBuilder()
+                            .withTableName(DBColumns.getTableName())
+                            .withSelection("url=\"" + url + "\"")
+                            .build();
+                    article = DBHelper.getArticle(queryRequest);
                 }
             return null;
         }
@@ -328,6 +299,7 @@ public class ArticleFragment extends Fragment {
                         networkInfo = connMgr.getActiveNetworkInfo();
                     }
                     if (networkInfo != null && networkInfo.isConnected()) {
+                        DBHelper.updateArticleReadState(article);
                         webView.loadUrl(url);
                     } else {
                         webView.loadData(getResources().getString(R.string.err_no_network), "text/html; charset=utf-8", "UTF-8");

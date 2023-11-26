@@ -5,26 +5,29 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import de.eknoes.inofficialgolem.entities.DBColumns;
+
 public class FeedReaderDbHelper extends SQLiteOpenHelper {
     private static final int DATABASE_VERSION = 15;
     private static final String DATABASE_NAME = "FeedReader.db";
     private static final String TAG = "FeedReaderDbHelper";
     private static final String SQL_CREATE_ENTRIES =
-            "CREATE TABLE " + FeedReaderContract.Article.TABLE_NAME + " (" +
-                    FeedReaderContract.Article._ID + " INTEGER PRIMARY KEY," +
-                    FeedReaderContract.Article.COLUMN_NAME_TITLE + " TEXT, " +
-                    FeedReaderContract.Article.COLUMN_NAME_SUBHEADING + " TEXT, " +
-                    FeedReaderContract.Article.COLUMN_NAME_TEASER + " TEXT, " +
-                    FeedReaderContract.Article.COLUMN_NAME_URL + " TEXT, " +
-                    FeedReaderContract.Article.COLUMN_NAME_COMMENTURL + " TEXT, " +
-                    FeedReaderContract.Article.COLUMN_NAME_COMMENTNR + " TEXT, " +
-                    FeedReaderContract.Article.COLUMN_NAME_IMG + " TEXT, " +
-                    FeedReaderContract.Article.COLUMN_NAME_DATE + " INTEGER," +
-                    FeedReaderContract.Article.COLUMN_NAME_FULLTEXT + " TEXT," +
-                    //FeedReaderContract.Article.COLUMN_NAME_AUTHORS + " TEXT," +
-                    FeedReaderContract.Article.COLUMN_NAME_OFFLINE + " INTEGER" +
+            "CREATE TABLE " + DBColumns.getTableName() + " (" +
+                    DBColumns.COLUMN_NAME_ID.getColumnName() + " INTEGER PRIMARY KEY," +
+                    DBColumns.COLUMN_NAME_TITLE.getColumnName() + " TEXT, " +
+                    DBColumns.COLUMN_NAME_SUBHEADING.getColumnName() + " TEXT, " +
+                    DBColumns.COLUMN_NAME_TEASER.getColumnName() + " TEXT, " +
+                    DBColumns.COLUMN_NAME_URL.getColumnName() + " TEXT, " +
+                    DBColumns.COLUMN_NAME_COMMENTURL.getColumnName() + " TEXT, " +
+                    DBColumns.COLUMN_NAME_COMMENTNR.getColumnName() + " TEXT, " +
+                    DBColumns.COLUMN_NAME_IMG.getColumnName() + " TEXT, " +
+                    DBColumns.COLUMN_NAME_DATE.getColumnName() + " INTEGER," +
+                    DBColumns.COLUMN_NAME_FULLTEXT.getColumnName() + " TEXT," +
+                    //DBColumns.COLUMN_NAME_AUTHORS + " TEXT," +
+                    DBColumns.COLUMN_NAME_OFFLINE.getColumnName() + " INTEGER," +
+                    DBColumns.COLUMN_NAME_ALREADY_READ.getColumnName() + " INTEGER DEFAULT FALSE" +
                     ")";
-    private static final String SQL_DELETE_ENTRIES = "DROP TABLE IF EXISTS " + FeedReaderContract.Article.TABLE_NAME;
+    private static final String SQL_DELETE_ENTRIES = "DROP TABLE IF EXISTS " + DBColumns.getTableName();
     private static FeedReaderDbHelper self;
 
 
