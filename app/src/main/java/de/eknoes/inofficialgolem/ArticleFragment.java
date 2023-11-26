@@ -305,6 +305,7 @@ public class ArticleFragment extends Fragment {
                         webView.loadData(getResources().getString(R.string.err_no_network), "text/html; charset=utf-8", "UTF-8");
                     }
                 } else {
+                    DBHelper.updateArticleReadState(article);
                     webView.loadUrl(url);
                 }
             } else {
