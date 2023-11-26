@@ -2,7 +2,6 @@ package de.eknoes.inofficialgolem.updater;
 
 import android.content.ContentValues;
 import android.content.Context;
-import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.ConnectivityManager;
@@ -11,17 +10,22 @@ import android.os.AsyncTask;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.widget.Toast;
+
 import com.android.volley.AuthFailureError;
 import com.android.volley.NoConnectionError;
 import com.android.volley.TimeoutError;
-import de.eknoes.inofficialgolem.FeedReaderContract;
-import de.eknoes.inofficialgolem.FeedReaderDbHelper;
-import de.eknoes.inofficialgolem.R;
 
 import java.lang.ref.WeakReference;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.Callable;
+
+import de.eknoes.inofficialgolem.Article;
+import de.eknoes.inofficialgolem.FeedReaderDbHelper;
+import de.eknoes.inofficialgolem.R;
+import de.eknoes.inofficialgolem.entities.DBColumns;
+import de.eknoes.inofficialgolem.entities.QueryRequest;
+import de.eknoes.inofficialgolem.utils.DBHelper;
 
 /**
  * Created by soenke on 27.08.16.
@@ -156,68 +160,60 @@ public class GolemFetcher extends AsyncTask<Void, Float, GolemFetcher.FETCH_STAT
                 item.setUrl(item.getUrl().substring(0, (item.getUrl().length() - "-rss.html".length())) + ".html");
             }
 
-            String[] cols = {FeedReaderContract.Article.COLUMN_NAME_ID};
-            Cursor cursor = db.query(
-                    FeedReaderContract.Article.TABLE_NAME,
-                    cols,
-                    "url='" + item.getUrl() + "'",
-                    null,
-                    null,
-                    null,
-                    null);
-            if (cursor.getCount() > 0) {
-                cursor.moveToFirst();
-                id = cursor.getInt(cursor.getColumnIndex(FeedReaderContract.Article.COLUMN_NAME_ID));
-            }
-
-            cursor.close();
-
-
-
             ContentValues values = new ContentValues();
 
-            values.put(FeedReaderContract.Article.COLUMN_NAME_URL, item.getUrl());
+            values.put(DBColumns.COLUMN_NAME_URL.getColumnName(), item.getUrl());
 
             if (item.hasProp(GolemItem.ItemProperties.TITLE)) {
                 String[] titles = item.getProp(GolemItem.ItemProperties.TITLE).split(":");
                 if (titles.length != 2) {
-                    values.put(FeedReaderContract.Article.COLUMN_NAME_TITLE, item.getProp(GolemItem.ItemProperties.TITLE));
+                    values.put(DBColumns.COLUMN_NAME_TITLE.getColumnName(), item.getProp(GolemItem.ItemProperties.TITLE));
                 } else {
-                    values.put(FeedReaderContract.Article.COLUMN_NAME_TITLE, titles[1].trim());
-                    values.put(FeedReaderContract.Article.COLUMN_NAME_SUBHEADING, titles[0].trim());
+                    values.put(DBColumns.COLUMN_NAME_TITLE.getColumnName(), titles[1].trim());
+                    values.put(DBColumns.COLUMN_NAME_SUBHEADING.getColumnName(), titles[0].trim());
                 }
             }
             if (item.hasProp(GolemItem.ItemProperties.TEASER)) {
-                values.put(FeedReaderContract.Article.COLUMN_NAME_TEASER, item.getProp(GolemItem.ItemProperties.TEASER));
+                values.put(DBColumns.COLUMN_NAME_TEASER.getColumnName(), item.getProp(GolemItem.ItemProperties.TEASER));
             }
 
             if (item.hasProp(GolemItem.ItemProperties.DATE)) {
-                values.put(FeedReaderContract.Article.COLUMN_NAME_DATE, item.getProp(GolemItem.ItemProperties.DATE));
+                values.put(DBColumns.COLUMN_NAME_DATE.getColumnName(), item.getProp(GolemItem.ItemProperties.DATE));
             }
 
             if (item.hasProp(GolemItem.ItemProperties.FULLTEXT)) {
-                values.put(FeedReaderContract.Article.COLUMN_NAME_FULLTEXT, item.getProp(GolemItem.ItemProperties.FULLTEXT));
-                values.put(FeedReaderContract.Article.COLUMN_NAME_OFFLINE, item.getProp(GolemItem.ItemProperties.OFFLINE_AVAILABLE));
+                values.put(DBColumns.COLUMN_NAME_FULLTEXT.getColumnName(), item.getProp(GolemItem.ItemProperties.FULLTEXT));
+                values.put(DBColumns.COLUMN_NAME_OFFLINE.getColumnName(), item.getProp(GolemItem.ItemProperties.OFFLINE_AVAILABLE));
             }
 
             if (item.hasProp(GolemItem.ItemProperties.OFFLINE_AVAILABLE)) {
-                values.put(FeedReaderContract.Article.COLUMN_NAME_OFFLINE, Boolean.valueOf(item.getProp(GolemItem.ItemProperties.OFFLINE_AVAILABLE)));
+                values.put(DBColumns.COLUMN_NAME_OFFLINE.getColumnName(), Boolean.valueOf(item.getProp(GolemItem.ItemProperties.OFFLINE_AVAILABLE)));
             }
 
             if (item.hasProp(GolemItem.ItemProperties.IMG_URL)) {
-                values.put(FeedReaderContract.Article.COLUMN_NAME_IMG, item.getProp(GolemItem.ItemProperties.IMG_URL));
+                values.put(DBColumns.COLUMN_NAME_IMG.getColumnName(), item.getProp(GolemItem.ItemProperties.IMG_URL));
             }
 
             if (item.hasProp(GolemItem.ItemProperties.COMMENT_URL)) {
-                values.put(FeedReaderContract.Article.COLUMN_NAME_COMMENTURL, item.getProp(GolemItem.ItemProperties.COMMENT_URL));
+                values.put(DBColumns.COLUMN_NAME_COMMENTURL.getColumnName(), item.getProp(GolemItem.ItemProperties.COMMENT_URL));
             }
 
-            if (id != 0) {
+            if (item.hasProp(GolemItem.ItemProperties.ALREADY_READ)) {
+                values.put(DBColumns.COLUMN_NAME_ALREADY_READ.getColumnName(), item.getProp(GolemItem.ItemProperties.ALREADY_READ));
+            }
+
+            QueryRequest queryRequest = new QueryRequest.QueryRequestBuilder()
+                    .withTableName(DBColumns.getTableName())
+                    .withSelection("url='" + item.getUrl() + "'")
+                    .build();
+            Article article = DBHelper.getArticle(queryRequest);
+
+            if (article != null) {
                 Log.d(TAG, "doInBackground: Updating article with id " + id + ": Date " + item.getProp(GolemItem.ItemProperties.DATE));
-                db.update(FeedReaderContract.Article.TABLE_NAME, values, FeedReaderContract.Article._ID + "='" + id + "'", null);
+                db.update(DBColumns.getTableName(), values, DBColumns.COLUMN_NAME_ID.getColumnName() + "='" + id + "'", null);
             } else if (insertNew) {
                 Log.d(TAG, "doInBackground: Creating new article with Title " + item.getProp(GolemItem.ItemProperties.TITLE));
-                db.insert(FeedReaderContract.Article.TABLE_NAME, null, values);
+                db.insert(DBColumns.getTableName(), null, values);
             }
         }
     }

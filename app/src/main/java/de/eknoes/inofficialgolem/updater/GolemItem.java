@@ -43,5 +43,5 @@ public class GolemItem {
         this.url = url;
     }
 
-    public enum ItemProperties {TITLE, TEASER, IMG_URL, COMMENT_URL, COMMENT_NR, DATE, FULLTEXT, OFFLINE_AVAILABLE, HAS_MEDIA_FULLTEXT}
+    public enum ItemProperties {TITLE, TEASER, IMG_URL, COMMENT_URL, COMMENT_NR, DATE, FULLTEXT, OFFLINE_AVAILABLE, HAS_MEDIA_FULLTEXT, ALREADY_READ}
 }

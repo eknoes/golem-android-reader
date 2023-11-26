@@ -1,7 +1,8 @@
 package de.eknoes.inofficialgolem
 
 import de.eknoes.inofficialgolem.updater.GolemItem
-import java.util.*
+import java.util.Date
+import java.util.Locale
 
 /**
  * Created by soenke on 10.04.16.
@@ -19,6 +20,7 @@ internal class Article : GolemItem() {
     var imgUrl: String? = null
     var commentUrl: String? = null
     var commentNr: String? = null
+    var alreadyRead: Boolean? = false
 
     fun getDate(): Date {
         return date

@@ -2,10 +2,10 @@ package de.eknoes.inofficialgolem;
 
 import android.animation.ValueAnimator;
 import android.content.Context;
-import android.database.Cursor;
+import android.content.res.Configuration;
 import android.database.DataSetObserver;
-import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -35,9 +35,13 @@ import org.jetbrains.annotations.NotNull;
 
 import java.text.DateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.concurrent.Callable;
 
+import de.eknoes.inofficialgolem.entities.DBColumns;
+import de.eknoes.inofficialgolem.entities.QueryRequest;
 import de.eknoes.inofficialgolem.updater.GolemFetcher;
+import de.eknoes.inofficialgolem.utils.DBHelper;
 import de.eknoes.inofficialgolem.utils.NetworkUtils;
 
 /**
@@ -152,17 +156,14 @@ public class ArticleListFragment extends Fragment {
     private class ArticleAdapter extends BaseAdapter {
 
         private final LayoutInflater inflater;
-        private final SQLiteDatabase db;
         private final ImageLoader imgLoader;
         private final Context context;
-        private Cursor cursor;
+        private List<Article> articles;
 
         ArticleAdapter() {
             super();
             context = requireContext().getApplicationContext();
             inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            FeedReaderDbHelper dbHelper = FeedReaderDbHelper.getInstance(context);
-            db = dbHelper.getReadableDatabase();
             loadData();
             this.registerDataSetObserver(new DataSetObserver() {
                 @Override
@@ -188,62 +189,29 @@ public class ArticleListFragment extends Fragment {
         }
 
         private void loadData() {
-            String[] columns = {
-                    FeedReaderContract.Article.COLUMN_NAME_ID,
-                    FeedReaderContract.Article.COLUMN_NAME_TITLE,
-                    FeedReaderContract.Article.COLUMN_NAME_SUBHEADING,
-                    FeedReaderContract.Article.COLUMN_NAME_TEASER,
-                    FeedReaderContract.Article.COLUMN_NAME_DATE,
-                    FeedReaderContract.Article.COLUMN_NAME_IMG,
-                    FeedReaderContract.Article.COLUMN_NAME_URL,
-                    FeedReaderContract.Article.COLUMN_NAME_COMMENTURL,
-                    FeedReaderContract.Article.COLUMN_NAME_COMMENTNR,
-                    FeedReaderContract.Article.COLUMN_NAME_OFFLINE,
-                    FeedReaderContract.Article.COLUMN_NAME_FULLTEXT
-            };
+            QueryRequest queryRequest = new QueryRequest.QueryRequestBuilder()
+                    .withSort(DBColumns.COLUMN_NAME_DATE + " DESC")
+                    .withLimit("0, " + PreferenceManager.getDefaultSharedPreferences(context).getInt("article_limit", 200))
+                    .withTableName(DBColumns.getTableName())
+                    .build();
 
-            String sort = FeedReaderContract.Article.COLUMN_NAME_DATE + " DESC";
-            String limit = "0, " + PreferenceManager.getDefaultSharedPreferences(context).getInt("article_limit", 200);
+            articles = DBHelper.getArticles(queryRequest);
 
-
-            cursor = db.query(
-                    FeedReaderContract.Article.TABLE_NAME,
-                    columns,
-                    null,
-                    null,
-                    null,
-                    null,
-                    sort,
-                    limit);
         }
 
         @Override
         public int getCount() {
-            return cursor.getCount();
+            return articles.size();
         }
 
         @Override
         public Article getItem(int position) {
-            cursor.moveToPosition(position);
-            Article a = new Article();
-            a.setId(cursor.getInt(cursor.getColumnIndexOrThrow(FeedReaderContract.Article.COLUMN_NAME_ID)));
-            a.setTitle(cursor.getString(cursor.getColumnIndexOrThrow(FeedReaderContract.Article.COLUMN_NAME_TITLE)));
-            a.setSubheadline(cursor.getString(cursor.getColumnIndexOrThrow(FeedReaderContract.Article.COLUMN_NAME_SUBHEADING)));
-            a.setTeaser(cursor.getString(cursor.getColumnIndexOrThrow(FeedReaderContract.Article.COLUMN_NAME_TEASER)));
-            a.setDate(cursor.getLong(cursor.getColumnIndexOrThrow(FeedReaderContract.Article.COLUMN_NAME_DATE)));
-            a.setImgUrl(cursor.getString(cursor.getColumnIndexOrThrow(FeedReaderContract.Article.COLUMN_NAME_IMG)));
-            a.setCommentUrl(cursor.getString(cursor.getColumnIndexOrThrow(FeedReaderContract.Article.COLUMN_NAME_COMMENTURL)));
-            a.setCommentNr(cursor.getString(cursor.getColumnIndexOrThrow(FeedReaderContract.Article.COLUMN_NAME_COMMENTNR)));
-            a.setUrl(cursor.getString(cursor.getColumnIndexOrThrow(FeedReaderContract.Article.COLUMN_NAME_URL)));
-            a.setOffline(cursor.getInt(cursor.getColumnIndexOrThrow(FeedReaderContract.Article.COLUMN_NAME_OFFLINE)) == 1);
-            a.setFulltext(cursor.getString(cursor.getColumnIndexOrThrow(FeedReaderContract.Article.COLUMN_NAME_FULLTEXT)));
-            return a;
+            return articles.get(position);
         }
 
         @Override
         public long getItemId(int position) {
-            cursor.moveToPosition(position);
-            return cursor.getLong(cursor.getColumnIndexOrThrow(FeedReaderContract.Article.COLUMN_NAME_ID));
+            return articles.get(position).getId();
         }
 
         @Override
@@ -267,6 +235,19 @@ public class ArticleListFragment extends Fragment {
             subheading.setText(art.getSubheadline());
             teaser.setText(art.getTeaser());
             info.setText(infoText);
+            if (art.getAlreadyRead().equals(true)) {
+                int nightMode = context.getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
+                switch (nightMode) {
+                    case Configuration.UI_MODE_NIGHT_YES:
+                        view.setBackgroundColor(Color.LTGRAY);
+                        break;
+                    case Configuration.UI_MODE_NIGHT_NO:
+                        view.setBackgroundColor(Color.LTGRAY);
+                        break;
+                    default:
+                        break;
+                }
+            }
 
             image.setImageUrl(art.getImgUrl(), imgLoader);
             return view;
