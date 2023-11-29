@@ -6,6 +6,7 @@ import android.database.DataSetObserver;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
@@ -22,6 +23,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
@@ -220,6 +222,7 @@ public class ArticleListFragment extends Fragment {
             return articles.get(position).getId();
         }
 
+        @RequiresApi(api = Build.VERSION_CODES.O)
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
             View view = convertView;
@@ -227,6 +230,7 @@ public class ArticleListFragment extends Fragment {
             if (convertView == null) {
                 view = inflater.inflate(R.layout.list_article, parent, false);
             }
+
 
             Article art = getItem(position);
             String infoText = String.format(context.getResources().getString(R.string.article_published), DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.SHORT).format(art.getDate()));
@@ -243,12 +247,19 @@ public class ArticleListFragment extends Fragment {
             info.setText(infoText);
             if (art.getAlreadyRead().equals(true)) {
                 int nightMode = context.getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
+                // Danke an Alma für die Idee mit dem Text
                 switch (nightMode) {
                     case Configuration.UI_MODE_NIGHT_YES:
-                        view.setBackgroundColor(Color.LTGRAY);
+                        title.setTextColor(Color.parseColor("#424040"));
+                        subheading.setTextColor(Color.parseColor("#424040"));
+                        teaser.setTextColor(Color.parseColor("#424040"));
+                        info.setTextColor(Color.parseColor("#424040"));
                         break;
                     case Configuration.UI_MODE_NIGHT_NO:
-                        view.setBackgroundColor(Color.LTGRAY);
+                        title.setTextColor(Color.parseColor("#8a8484"));
+                        subheading.setTextColor(Color.parseColor("#8a8484"));
+                        teaser.setTextColor(Color.parseColor("#8a8484"));
+                        info.setTextColor(Color.parseColor("#8a8484"));
                         break;
                     default:
                         break;
