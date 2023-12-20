@@ -61,4 +61,6 @@
     <string name="action_imprint">Golem.de Kontakt</string>
     <string name="synchronize_only_if_wi_fi_is_available">Synchronisiere nur mit WLAN</string>
     <string name="if_enabled_articles_will_be_synchronized_only_when_wi_fi_is_available">Wenn aktiviert, werden Artikel beim Start nur synchronisiert, wenn WLAN verfügbar ist.</string>
+    <string name="force_dark_mode">Erzwinge Dark-Mode (buggy)</string>
+    <string name="force_dark_mode_title">Erzwinge Dark-Mode</string>
 </resources>

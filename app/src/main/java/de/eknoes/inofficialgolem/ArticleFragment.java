@@ -22,12 +22,16 @@ import android.view.View;
 import android.webkit.CookieManager;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
+import android.webkit.WebViewFragment;
 import android.widget.ProgressBar;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.preference.PreferenceManager;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+import androidx.webkit.WebSettingsCompat;
+import androidx.webkit.WebViewFeature;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -110,12 +114,17 @@ public class ArticleFragment extends Fragment {
         outState.putBoolean(NO_ARTICLE, noArticle);
     }
 
-    @SuppressLint("SetJavaScriptEnabled")
+    @SuppressLint({"SetJavaScriptEnabled", "RequiresFeature"})
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        if(webView != null) {
+        if (webView != null) {
+            if (PreferenceManager.getDefaultSharedPreferences(getContext()).getBoolean("force_dark_mode", false) &&
+                    WebViewFeature.isFeatureSupported(WebViewFeature.ALGORITHMIC_DARKENING) &&
+                    Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                WebSettingsCompat.setAlgorithmicDarkeningAllowed(webView.getSettings(), true);
+            }
             webView.setWebViewClient(new GolemWebViewClient() {
                 @Override
                 public void onPageStarted(WebView view, String url, Bitmap favicon) {
@@ -146,8 +155,8 @@ public class ArticleFragment extends Fragment {
             webView.getSettings().setJavaScriptEnabled(true);
             CookieManager cookieManager = CookieManager.getInstance();
             cookieManager.setAcceptCookie(true);
-            if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                cookieManager.setAcceptThirdPartyCookies(webView,true);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                cookieManager.setAcceptThirdPartyCookies(webView, true);
             }
         }
 
@@ -178,7 +187,7 @@ public class ArticleFragment extends Fragment {
     @Override
     public void onDetach() {
         super.onDetach();
-        if(mTask != null) {
+        if (mTask != null) {
             mTask.cancel(false);
         }
     }
@@ -188,9 +197,9 @@ public class ArticleFragment extends Fragment {
         super.onCreateOptionsMenu(menu, inflater);
         inflater.inflate(R.menu.menu_webview, menu);
 
-        if(article == null || article.getCommentUrl() == null) {
+        if (article == null || article.getCommentUrl() == null) {
             MenuItem item = menu.findItem(R.id.action_comments);
-            if(item != null) {
+            if (item != null) {
                 item.setVisible(false);
             }
         }
@@ -272,44 +281,44 @@ public class ArticleFragment extends Fragment {
 
         @Override
         protected Void doInBackground(Void... params) {
-                FeedReaderDbHelper dbHelper = FeedReaderDbHelper.getInstance(requireContext().getApplicationContext());
+            FeedReaderDbHelper dbHelper = FeedReaderDbHelper.getInstance(requireContext().getApplicationContext());
 
-                SQLiteDatabase db = dbHelper.getReadableDatabase();
+            SQLiteDatabase db = dbHelper.getReadableDatabase();
 
-                if (url != null) {
-                    String[] columns = {
-                            FeedReaderContract.Article.COLUMN_NAME_ID,
-                            FeedReaderContract.Article.COLUMN_NAME_TITLE,
-                            FeedReaderContract.Article.COLUMN_NAME_SUBHEADING,
-                            FeedReaderContract.Article.COLUMN_NAME_URL,
-                            FeedReaderContract.Article.COLUMN_NAME_COMMENTNR,
-                            FeedReaderContract.Article.COLUMN_NAME_COMMENTURL,
-                            FeedReaderContract.Article.COLUMN_NAME_OFFLINE,
-                            FeedReaderContract.Article.COLUMN_NAME_FULLTEXT,
-                    };
-                    Cursor cursor = db.query(
-                            FeedReaderContract.Article.TABLE_NAME,
-                            columns,
-                            "url=\"" + url + "\"",
-                            null,
-                            null,
-                            null,
-                            null);
-                    if (cursor.moveToFirst()) {
-                        article = new Article();
-                        article.setId(cursor.getInt(cursor.getColumnIndexOrThrow(FeedReaderContract.Article.COLUMN_NAME_ID)));
-                        article.setTitle(cursor.getString(cursor.getColumnIndexOrThrow(FeedReaderContract.Article.COLUMN_NAME_TITLE)));
-                        article.setSubheadline(cursor.getString(cursor.getColumnIndexOrThrow(FeedReaderContract.Article.COLUMN_NAME_SUBHEADING)));
-                        article.setUrl(cursor.getString(cursor.getColumnIndexOrThrow(FeedReaderContract.Article.COLUMN_NAME_URL)));
-                        article.setCommentUrl(cursor.getString(cursor.getColumnIndexOrThrow(FeedReaderContract.Article.COLUMN_NAME_COMMENTURL)));
-                        article.setCommentNr(cursor.getString(cursor.getColumnIndexOrThrow(FeedReaderContract.Article.COLUMN_NAME_COMMENTNR)));
-                        article.setOffline(cursor.getInt(cursor.getColumnIndexOrThrow(FeedReaderContract.Article.COLUMN_NAME_OFFLINE)) == 1);
-                        article.setFulltext(cursor.getString(cursor.getColumnIndexOrThrow(FeedReaderContract.Article.COLUMN_NAME_FULLTEXT)));
-                    }
-
-
-                    cursor.close();
+            if (url != null) {
+                String[] columns = {
+                        FeedReaderContract.Article.COLUMN_NAME_ID,
+                        FeedReaderContract.Article.COLUMN_NAME_TITLE,
+                        FeedReaderContract.Article.COLUMN_NAME_SUBHEADING,
+                        FeedReaderContract.Article.COLUMN_NAME_URL,
+                        FeedReaderContract.Article.COLUMN_NAME_COMMENTNR,
+                        FeedReaderContract.Article.COLUMN_NAME_COMMENTURL,
+                        FeedReaderContract.Article.COLUMN_NAME_OFFLINE,
+                        FeedReaderContract.Article.COLUMN_NAME_FULLTEXT,
+                };
+                Cursor cursor = db.query(
+                        FeedReaderContract.Article.TABLE_NAME,
+                        columns,
+                        "url=\"" + url + "\"",
+                        null,
+                        null,
+                        null,
+                        null);
+                if (cursor.moveToFirst()) {
+                    article = new Article();
+                    article.setId(cursor.getInt(cursor.getColumnIndexOrThrow(FeedReaderContract.Article.COLUMN_NAME_ID)));
+                    article.setTitle(cursor.getString(cursor.getColumnIndexOrThrow(FeedReaderContract.Article.COLUMN_NAME_TITLE)));
+                    article.setSubheadline(cursor.getString(cursor.getColumnIndexOrThrow(FeedReaderContract.Article.COLUMN_NAME_SUBHEADING)));
+                    article.setUrl(cursor.getString(cursor.getColumnIndexOrThrow(FeedReaderContract.Article.COLUMN_NAME_URL)));
+                    article.setCommentUrl(cursor.getString(cursor.getColumnIndexOrThrow(FeedReaderContract.Article.COLUMN_NAME_COMMENTURL)));
+                    article.setCommentNr(cursor.getString(cursor.getColumnIndexOrThrow(FeedReaderContract.Article.COLUMN_NAME_COMMENTNR)));
+                    article.setOffline(cursor.getInt(cursor.getColumnIndexOrThrow(FeedReaderContract.Article.COLUMN_NAME_OFFLINE)) == 1);
+                    article.setFulltext(cursor.getString(cursor.getColumnIndexOrThrow(FeedReaderContract.Article.COLUMN_NAME_FULLTEXT)));
                 }
+
+
+                cursor.close();
+            }
             return null;
         }
 
@@ -340,7 +349,7 @@ public class ArticleFragment extends Fragment {
                 String fulltext = article.getFulltext();
 
                 // Change CSS for Dark Mode
-                if((getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK) == Configuration.UI_MODE_NIGHT_YES) {
+                if ((getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK) == Configuration.UI_MODE_NIGHT_YES) {
                     if (fulltext != null) {
                         fulltext = fulltext.replace("</head>", "<style type=\"text/css\">#screen, body, html {\n" +
                                 "color: white;\n" +
