@@ -42,6 +42,12 @@
                 app:summary="@string/choose_layout_content"
                 android:icon="@drawable/ic_view">
         </Preference>
+        <SwitchPreference
+            app:key="force_dark_mode"
+            app:title="@string/force_dark_mode_title"
+            app:summary="@string/force_dark_mode"
+            android:icon="@drawable/ic_darkmode">
+        </SwitchPreference>
 
     </PreferenceCategory>
     <PreferenceCategory
