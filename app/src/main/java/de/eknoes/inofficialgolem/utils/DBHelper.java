@@ -8,9 +8,9 @@ import android.util.Log;
 import java.util.ArrayList;
 import java.util.List;
 
-import de.eknoes.inofficialgolem.Article;
 import de.eknoes.inofficialgolem.FeedReaderDbHelper;
 import de.eknoes.inofficialgolem.MainApplication;
+import de.eknoes.inofficialgolem.entities.Article;
 import de.eknoes.inofficialgolem.entities.DBColumns;
 import de.eknoes.inofficialgolem.entities.QueryRequest;
 
@@ -75,7 +75,7 @@ public class DBHelper {
             }
             value = getValueFromCursor(cursor, DBColumns.COLUMN_NAME_SUBHEADING);
             if (value != null) {
-                a.setSubheadline((String) value);
+                a.setSubHeadLine((String) value);
             }
             value = getValueFromCursor(cursor, DBColumns.COLUMN_NAME_TEASER);
             if (value != null) {
@@ -83,7 +83,7 @@ public class DBHelper {
             }
             value = getValueFromCursor(cursor, DBColumns.COLUMN_NAME_DATE);
             if (value != null) {
-                a.setDate((Long) value);
+//                a.setDate((Long) value);
             }
             value = getValueFromCursor(cursor, DBColumns.COLUMN_NAME_IMG);
             if (value != null) {
@@ -99,7 +99,7 @@ public class DBHelper {
             }
             value = getValueFromCursor(cursor, DBColumns.COLUMN_NAME_URL);
             if (value != null) {
-                a.setUrl((String) value);
+                a.setArticleUrl((String) value);
             }
             value = getValueFromCursor(cursor, DBColumns.COLUMN_NAME_OFFLINE);
             if (value != null) {
@@ -107,7 +107,7 @@ public class DBHelper {
             }
             value = getValueFromCursor(cursor, DBColumns.COLUMN_NAME_FULLTEXT);
             if (value != null) {
-                a.setFulltext((String) value);
+                a.setFullText((String) value);
             }
             value = getValueFromCursor(cursor, DBColumns.COLUMN_NAME_ALREADY_READ);
             if (value != null) {

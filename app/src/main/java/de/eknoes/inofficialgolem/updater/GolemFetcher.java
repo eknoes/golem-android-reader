@@ -20,9 +20,9 @@ import java.util.Date;
 import java.util.List;
 import java.util.concurrent.Callable;
 
-import de.eknoes.inofficialgolem.Article;
 import de.eknoes.inofficialgolem.FeedReaderDbHelper;
 import de.eknoes.inofficialgolem.R;
+import de.eknoes.inofficialgolem.entities.Article;
 import de.eknoes.inofficialgolem.entities.DBColumns;
 import de.eknoes.inofficialgolem.entities.QueryRequest;
 import de.eknoes.inofficialgolem.utils.DBHelper;
