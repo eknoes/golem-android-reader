@@ -29,6 +29,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import org.jetbrains.annotations.NotNull;
 
+import de.eknoes.inofficialgolem.entities.Article;
 import de.eknoes.inofficialgolem.entities.DBColumns;
 import de.eknoes.inofficialgolem.entities.QueryRequest;
 import de.eknoes.inofficialgolem.utils.DBHelper;
@@ -210,14 +211,14 @@ public class ArticleFragment extends Fragment {
             Intent shareIntent = new Intent();
             shareIntent.setAction(Intent.ACTION_SEND);
             String link = null;
-            if (article != null && article.getUrl() != null) {
-                link = article.getUrl();
+            if (article != null && article.getArticleUrl() != null) {
+                link = article.getArticleUrl();
             } else if (url != null) {
                 link = url;
             }
 
             if (link != null && article != null) {
-                shareIntent.putExtra(Intent.EXTRA_TEXT, article.getSubheadline() + ": " + article.getTitle() + " - " + link);
+                shareIntent.putExtra(Intent.EXTRA_TEXT, article.getSubHeadLine() + ": " + article.getTitle() + " - " + link);
             } else {
                 shareIntent.putExtra(Intent.EXTRA_TEXT, link);
             }
@@ -302,7 +303,7 @@ public class ArticleFragment extends Fragment {
                 }
             } else {
                 Log.d(TAG, "onPostExecute: Fill Webview");
-                String fulltext = article.getFulltext();
+                String fulltext = article.getFullText();
 
                 // Change CSS for Dark Mode
                 if((getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK) == Configuration.UI_MODE_NIGHT_YES) {
@@ -326,7 +327,7 @@ public class ArticleFragment extends Fragment {
                               color: black !important;
                             }</style></head>""");
                 }
-                webView.loadDataWithBaseURL(article.getUrl(), fulltext, "text/html", "UTF-8", null);
+                webView.loadDataWithBaseURL(article.getArticleUrl(), fulltext, "text/html", "UTF-8", null);
                 Log.d(TAG, "onPostExecute: Filled Webview");
 
             }

@@ -39,6 +39,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.concurrent.Callable;
 
+import de.eknoes.inofficialgolem.entities.Article;
 import de.eknoes.inofficialgolem.entities.DBColumns;
 import de.eknoes.inofficialgolem.entities.QueryRequest;
 import de.eknoes.inofficialgolem.updater.GolemFetcher;
@@ -96,18 +97,12 @@ public class ArticleListFragment extends Fragment {
         Log.d(TAG, "onStart: Creating Article List Adapter");
         listAdapter = new ArticleAdapter();
         listView.setAdapter(listAdapter);
-        listView.setOnItemClickListener((parent, view1, position, id) -> mListener.onArticleSelected(listAdapter.getItem(position).getUrl(), false));
-        listView.setOnItemLongClickListener((parent, view12, position, id) -> {
-            mListener.onArticleSelected(listAdapter.getItem(position).getUrl(), true);
+        listView.setOnItemClickListener((parent, view12, position, id) -> mListener.onArticleSelected(listAdapter.getItem(position).getArticleUrl(), false));
+        listView.setOnItemLongClickListener((parent, view1, position, id) -> {
+            mListener.onArticleSelected(listAdapter.getItem(position).getArticleUrl(), true);
             return true;
         });
-
-        mSwipeLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                refresh(true);
-            }
-        });
+        mSwipeLayout.setOnRefreshListener(() -> refresh(true));
     }
 
     @Override
@@ -235,10 +230,10 @@ public class ArticleListFragment extends Fragment {
             NetworkImageView image = view.findViewById(R.id.articleImage);
 
             title.setText(art.getTitle());
-            subheading.setText(art.getSubheadline());
+            subheading.setText(art.getSubHeadLine());
             teaser.setText(art.getTeaser());
             info.setText(infoText);
-            if (art.getAlreadyRead().equals(true)) {
+            if (art.isAlreadyRead()) {
                 int nightMode = context.getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
                 // Danke an Alma für die Idee mit dem Text
                 switch (nightMode) {
