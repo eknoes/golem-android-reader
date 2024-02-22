@@ -3,6 +3,7 @@ package de.eknoes.inofficialgolem.updater
 import android.os.Build
 import android.text.Html
 import android.util.Xml
+import de.eknoes.inofficialgolem.entities.Article
 import org.xmlpull.v1.XmlPullParser
 import java.io.StringReader
 import java.text.ParseException
@@ -24,11 +25,11 @@ open class GolemRSSParser {
         return parser
     }
 
-    open fun parse(stream: String): List<GolemItem> {
+    open fun parse(stream: String): List<Article> {
         return readFeed(getParser(stream))
     }
 
-    private fun readFeed(parser: XmlPullParser): List<GolemItem> {
+    private fun readFeed(parser: XmlPullParser): List<Article> {
         parser.require(XmlPullParser.START_TAG, ns, "rss")
         while (parser.next() != XmlPullParser.END_TAG) {
             if (parser.eventType != XmlPullParser.START_TAG) {
@@ -45,8 +46,8 @@ open class GolemRSSParser {
         return emptyList()
     }
 
-    private fun readChannel(parser: XmlPullParser): List<GolemItem> {
-        val entries = mutableListOf<GolemItem>()
+    private fun readChannel(parser: XmlPullParser): List<Article> {
+        val entries = mutableListOf<Article>()
 
         parser.require(XmlPullParser.START_TAG, ns, "channel")
         while (parser.next() != XmlPullParser.END_TAG) {
@@ -70,7 +71,7 @@ open class GolemRSSParser {
             + "[\\p{Alnum}.,%_=?&#\\-+()\\[\\]\\*$~@!:/{};']*)",
 Pattern.CASE_INSENSITIVE or Pattern.MULTILINE or Pattern.DOTALL)
 
-    private fun readItem(parser: XmlPullParser): GolemItem {
+    private fun readItem(parser: XmlPullParser): Article {
         parser.require(XmlPullParser.START_TAG, ns, "item")
         var title: String? = null
         var link: String? = null
@@ -79,6 +80,7 @@ Pattern.CASE_INSENSITIVE or Pattern.MULTILINE or Pattern.DOTALL)
         var pubDate: String? = null
         var desc: String? = null
         var content: String? = null
+        var guid: String? = null
 
         while (parser.next() != XmlPullParser.END_TAG) {
             if (parser.eventType != XmlPullParser.START_TAG) {
@@ -89,28 +91,32 @@ Pattern.CASE_INSENSITIVE or Pattern.MULTILINE or Pattern.DOTALL)
                 "link" -> link = readLink(parser)
                 "description" -> desc = readDesc(parser)
                 "comments" -> commentUrl = readCommentUrl(parser)
+                "guid" -> guid = readGuid(parser)
+                "content:encoded" -> content = readContent(parser)
                 "slash:comments" -> commentNumber = readCommentNumber(parser)
                 "pubDate" -> pubDate = readPubDate(parser)
-                "content:encoded" -> content = readContent(parser)
                 else -> skip(parser)
             }
         }
 
-        val item = GolemItem()
-        item.setProp(GolemItem.ItemProperties.TITLE, decodeHTML(title))
-        item.setProp(GolemItem.ItemProperties.COMMENT_URL, commentUrl)
-        item.setProp(GolemItem.ItemProperties.COMMENT_NR, commentNumber)
-        item.setProp(GolemItem.ItemProperties.TEASER, decodeHTML(desc))
+        val article = Article()
+        if (guid != null) {
+            article.id = guid.toInt()
+        }
+        article.title = decodeHTML(title)
+        article.commentUrl = commentUrl
+        article.commentNr = commentNumber
+        article.teaser = decodeHTML(desc)
 
         //Extract IMG Url from content
         if (content != null) {
             val matcher = urlPattern.matcher(content)
             if(matcher.find())
-                item.setProp(GolemItem.ItemProperties.IMG_URL, content.substring(matcher.start(0), matcher.end(0)))
+                article.imgUrl = content.substring(matcher.start(0), matcher.end(0))
         }
-        item.setProp(GolemItem.ItemProperties.DATE, parseDate(pubDate,"EEE, d MMM yyyy HH:mm:ss Z"))
-        item.url = link
-        return item
+        article.date = parseDate(pubDate,"EEE, d MMM yyyy HH:mm:ss Z")
+        article.articleUrl = link
+        return article
     }
 
     internal fun parseDate(datestring: String?, fmtstring: String): String? {
@@ -187,6 +193,13 @@ Pattern.CASE_INSENSITIVE or Pattern.MULTILINE or Pattern.DOTALL)
         val content = readText(parser)
         parser.require(XmlPullParser.END_TAG, ns, "title")
         return content
+    }
+
+    internal fun readGuid(parser: XmlPullParser): String? {
+        parser.require(XmlPullParser.START_TAG, ns, "guid")
+        val content = readText(parser)
+        parser.require(XmlPullParser.END_TAG,ns,"guid")
+        return content.split("/").get(4).replace(".html","")
     }
 
 

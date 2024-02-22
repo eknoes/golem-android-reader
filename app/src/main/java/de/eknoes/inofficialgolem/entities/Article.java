@@ -1,26 +1,42 @@
 package de.eknoes.inofficialgolem.entities;
 
-import java.util.Date;
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.Index;
+import androidx.room.PrimaryKey;
 
+@Entity(indices = {@Index(value = {"article_url"}, unique = true)})
 public class Article {
-    long id;
+    @PrimaryKey
+    int id;
+    @ColumnInfo(name = "title")
     String title;
+    @ColumnInfo(name = "article_url")
     String articleUrl;
-    String subHeadLine;
+    @ColumnInfo(name = "sub_headline")
+    String subHeadline;
+    @ColumnInfo(name = "teaser")
     String teaser;
+    @ColumnInfo(name = "offline")
     boolean isOffline;
+    @ColumnInfo(name = "full_text")
     String fullText;
-    Date date;
+    @ColumnInfo(name = "date")
+    String date;
+    @ColumnInfo(name = "image_url")
     String imgUrl;
+    @ColumnInfo(name = "comment_url")
     String commentUrl;
+    @ColumnInfo(name = "comment_number")
     String commentNr;
+    @ColumnInfo(name = "already_read")
     boolean alreadyRead;
 
-    public long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -30,6 +46,11 @@ public class Article {
 
     public void setTitle(String title) {
         this.title = title;
+        String[] splitTitle = title.split(":");
+        if (splitTitle.length == 2) {
+            this.title = splitTitle[1].trim();
+            this.subHeadline = splitTitle[0].trim();
+        }
     }
 
     public String getArticleUrl() {
@@ -40,12 +61,12 @@ public class Article {
         this.articleUrl = articleUrl;
     }
 
-    public String getSubHeadLine() {
-        return subHeadLine;
+    public String getSubHeadline() {
+        return subHeadline;
     }
 
-    public void setSubHeadLine(String subHeadLine) {
-        this.subHeadLine = subHeadLine;
+    public void setSubHeadline(String subHeadline) {
+        this.subHeadline = subHeadline;
     }
 
     public String getTeaser() {
@@ -72,11 +93,11 @@ public class Article {
         this.fullText = fullText;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 

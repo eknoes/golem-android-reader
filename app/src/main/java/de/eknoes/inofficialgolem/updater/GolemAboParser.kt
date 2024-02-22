@@ -1,5 +1,6 @@
 package de.eknoes.inofficialgolem.updater
 
+import de.eknoes.inofficialgolem.entities.Article
 import org.xmlpull.v1.XmlPullParser
 
 
@@ -7,12 +8,12 @@ private val ns: String? = null
 
 class GolemAboParser : GolemRSSParser() {
 
-    override fun parse(stream: String): List<GolemItem> {
+    override fun parse(stream: String): List<Article> {
         return readFeed(getParser(stream))
     }
 
-    private fun readFeed(parser: XmlPullParser): List<GolemItem> {
-        val entries = mutableListOf<GolemItem>()
+    private fun readFeed(parser: XmlPullParser): List<Article> {
+        val entries = mutableListOf<Article>()
 
         parser.require(XmlPullParser.START_TAG, ns, "feed")
         while (parser.next() != XmlPullParser.END_TAG) {
@@ -30,7 +31,7 @@ class GolemAboParser : GolemRSSParser() {
         return entries
     }
 
-    private fun readEntry(parser: XmlPullParser): GolemItem {
+    private fun readEntry(parser: XmlPullParser): Article {
         parser.require(XmlPullParser.START_TAG, ns, "entry")
         var title: String? = null
         var link: String? = null
@@ -50,13 +51,13 @@ class GolemAboParser : GolemRSSParser() {
             }
         }
 
-        val item = GolemItem()
-        item.setProp(GolemItem.ItemProperties.TITLE, title)
-        item.setProp(GolemItem.ItemProperties.DATE, parseDate(pubDate, "yyyy-MM-dd'T'HH:mm:ssz"))
-        item.setProp(GolemItem.ItemProperties.FULLTEXT, fulltext)
-        item.setProp(GolemItem.ItemProperties.HAS_MEDIA_FULLTEXT, "true")
-        item.setProp(GolemItem.ItemProperties.OFFLINE_AVAILABLE, "true")
-        item.url = link
+        val item = Article()
+        item.title = title;
+        //TODO
+//        item.date = parseDate(pubDate,"yyyy-MM-dd'T'HH:mm:ssz")
+        item.fullText = fulltext;
+        item.isOffline = true;
+        item.articleUrl = link
         return item
     }
 
