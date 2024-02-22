@@ -17,7 +17,6 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -26,6 +25,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
+import androidx.room.Room;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.android.volley.toolbox.ImageLoader;
@@ -40,10 +40,10 @@ import java.util.List;
 import java.util.concurrent.Callable;
 
 import de.eknoes.inofficialgolem.entities.Article;
-import de.eknoes.inofficialgolem.entities.DBColumns;
-import de.eknoes.inofficialgolem.entities.QueryRequest;
+import de.eknoes.inofficialgolem.entities.DATABASES;
 import de.eknoes.inofficialgolem.updater.GolemFetcher;
-import de.eknoes.inofficialgolem.utils.DBHelper;
+import de.eknoes.inofficialgolem.utils.ArticleDao;
+import de.eknoes.inofficialgolem.utils.ArticleDatabase;
 import de.eknoes.inofficialgolem.utils.NetworkUtils;
 
 /**
@@ -185,14 +185,9 @@ public class ArticleListFragment extends Fragment {
         }
 
         private void loadData() {
-            QueryRequest queryRequest = new QueryRequest.QueryRequestBuilder()
-                    .withSort(DBColumns.COLUMN_NAME_DATE + " DESC")
-                    .withLimit("0, " + PreferenceManager.getDefaultSharedPreferences(context).getInt("article_limit", 200))
-                    .withTableName(DBColumns.getTableName())
-                    .build();
-
-            articles = DBHelper.getArticles(queryRequest);
-
+            ArticleDatabase db = Room.databaseBuilder(getContext(), ArticleDatabase.class, DATABASES.ARTICLE.name()).allowMainThreadQueries().build();
+            ArticleDao doa = db.articleDao();
+            articles = doa.getArticlesWithLimit(PreferenceManager.getDefaultSharedPreferences(context).getInt("article_limit", 200));
         }
 
         @Override
@@ -221,7 +216,7 @@ public class ArticleListFragment extends Fragment {
 
 
             Article art = getItem(position);
-            String infoText = String.format(context.getResources().getString(R.string.article_published), DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.SHORT).format(art.getDate()));
+            String infoText = String.format(context.getResources().getString(R.string.article_published), DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.SHORT).format(new Date(Long.parseLong(art.getDate()) * 1000)));
 
             TextView teaser = view.findViewById(R.id.articleTeaser);
             TextView title = view.findViewById(R.id.articleTitle);
@@ -230,7 +225,7 @@ public class ArticleListFragment extends Fragment {
             NetworkImageView image = view.findViewById(R.id.articleImage);
 
             title.setText(art.getTitle());
-            subheading.setText(art.getSubHeadLine());
+            subheading.setText(art.getSubHeadline());
             teaser.setText(art.getTeaser());
             info.setText(infoText);
             if (art.isAlreadyRead()) {

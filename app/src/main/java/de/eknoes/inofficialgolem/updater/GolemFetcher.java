@@ -1,6 +1,5 @@
 package de.eknoes.inofficialgolem.updater;
 
-import android.content.ContentValues;
 import android.content.Context;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
@@ -11,6 +10,8 @@ import android.preference.PreferenceManager;
 import android.util.Log;
 import android.widget.Toast;
 
+import androidx.room.Room;
+
 import com.android.volley.AuthFailureError;
 import com.android.volley.NoConnectionError;
 import com.android.volley.TimeoutError;
@@ -20,37 +21,28 @@ import java.util.Date;
 import java.util.List;
 import java.util.concurrent.Callable;
 
-import de.eknoes.inofficialgolem.FeedReaderDbHelper;
 import de.eknoes.inofficialgolem.R;
 import de.eknoes.inofficialgolem.entities.Article;
-import de.eknoes.inofficialgolem.entities.DBColumns;
-import de.eknoes.inofficialgolem.entities.QueryRequest;
-import de.eknoes.inofficialgolem.utils.DBHelper;
+import de.eknoes.inofficialgolem.entities.DATABASES;
+import de.eknoes.inofficialgolem.utils.ArticleDao;
+import de.eknoes.inofficialgolem.utils.ArticleDatabase;
 
 /**
  * Created by soenke on 27.08.16.
  */
 public class GolemFetcher extends AsyncTask<Void, Float, GolemFetcher.FETCH_STATE> {
     private static final String TAG = "GolemFetcher";
-    private SQLiteDatabase db;
     private final GolemUpdater[] updater;
     private final WeakReference<Context> context;
     private final Callable<Void> notifier;
 
     public GolemFetcher(Context context, Callable<Void> notifier) {
-        try {
-            this.db = FeedReaderDbHelper.getInstance(context.getApplicationContext()).getWritableDatabase();
-        } catch (SQLException exception) {
-            Log.e(TAG, "GolemFetcher: Could not open Database: ", exception);
-            Toast.makeText(context, R.string.error_database, Toast.LENGTH_LONG).show();
-            this.cancel(true);
-        }
         this.context = new WeakReference<>(context);
         this.notifier = notifier;
         if(PreferenceManager.getDefaultSharedPreferences(context).getBoolean("has_abo", false)) {
-            updater = new GolemUpdater[]{new articleUpdater(context, true), new articleUpdater(context, false)};
+            updater = new GolemUpdater[]{new ArticleUpdater(context, true), new ArticleUpdater(context, false)};
         } else {
-            updater = new GolemUpdater[]{new articleUpdater(context, false)};
+            updater = new GolemUpdater[]{new ArticleUpdater(context, false)};
         }
     }
 
@@ -81,7 +73,7 @@ public class GolemFetcher extends AsyncTask<Void, Float, GolemFetcher.FETCH_STAT
                 for (int i = 0; i < updater.length; i++) {
                     GolemUpdater u = updater[i];
                     try {
-                        List<GolemItem> items = u.getItems();
+                        List<Article> items = u.getItems();
                         if (items != null && items.size() != 0) {
                             // Only insert new articles for the first updater (AboKey updater needs to be first in the list)
                             writeArticles(items, i == 0);
@@ -144,76 +136,14 @@ public class GolemFetcher extends AsyncTask<Void, Float, GolemFetcher.FETCH_STAT
         }
     }
 
-    private void writeArticles(List<GolemItem> articles, boolean insertNew) {
-        for (GolemItem item : articles) {
-            if (isCancelled() || db == null) {
-                return;
-            }
+    private void writeArticles(List<Article> articles, boolean insertNew) {
+        ArticleDatabase database = Room.databaseBuilder(context.get(), ArticleDatabase.class, DATABASES.ARTICLE.name()).build();
+        ArticleDao dao = database.articleDao();
 
-            int id = item.getId();
-
-            if (item.getUrl().startsWith("http://")) {
-                item.setUrl(item.getUrl().replace("http://", "https://"));
-            }
-
-            if (item.getUrl().endsWith("-rss.html")) {
-                item.setUrl(item.getUrl().substring(0, (item.getUrl().length() - "-rss.html".length())) + ".html");
-            }
-
-            ContentValues values = new ContentValues();
-
-            values.put(DBColumns.COLUMN_NAME_URL.getColumnName(), item.getUrl());
-
-            if (item.hasProp(GolemItem.ItemProperties.TITLE)) {
-                String[] titles = item.getProp(GolemItem.ItemProperties.TITLE).split(":");
-                if (titles.length != 2) {
-                    values.put(DBColumns.COLUMN_NAME_TITLE.getColumnName(), item.getProp(GolemItem.ItemProperties.TITLE));
-                } else {
-                    values.put(DBColumns.COLUMN_NAME_TITLE.getColumnName(), titles[1].trim());
-                    values.put(DBColumns.COLUMN_NAME_SUBHEADING.getColumnName(), titles[0].trim());
-                }
-            }
-            if (item.hasProp(GolemItem.ItemProperties.TEASER)) {
-                values.put(DBColumns.COLUMN_NAME_TEASER.getColumnName(), item.getProp(GolemItem.ItemProperties.TEASER));
-            }
-
-            if (item.hasProp(GolemItem.ItemProperties.DATE)) {
-                values.put(DBColumns.COLUMN_NAME_DATE.getColumnName(), item.getProp(GolemItem.ItemProperties.DATE));
-            }
-
-            if (item.hasProp(GolemItem.ItemProperties.FULLTEXT)) {
-                values.put(DBColumns.COLUMN_NAME_FULLTEXT.getColumnName(), item.getProp(GolemItem.ItemProperties.FULLTEXT));
-                values.put(DBColumns.COLUMN_NAME_OFFLINE.getColumnName(), item.getProp(GolemItem.ItemProperties.OFFLINE_AVAILABLE));
-            }
-
-            if (item.hasProp(GolemItem.ItemProperties.OFFLINE_AVAILABLE)) {
-                values.put(DBColumns.COLUMN_NAME_OFFLINE.getColumnName(), Boolean.valueOf(item.getProp(GolemItem.ItemProperties.OFFLINE_AVAILABLE)));
-            }
-
-            if (item.hasProp(GolemItem.ItemProperties.IMG_URL)) {
-                values.put(DBColumns.COLUMN_NAME_IMG.getColumnName(), item.getProp(GolemItem.ItemProperties.IMG_URL));
-            }
-
-            if (item.hasProp(GolemItem.ItemProperties.COMMENT_URL)) {
-                values.put(DBColumns.COLUMN_NAME_COMMENTURL.getColumnName(), item.getProp(GolemItem.ItemProperties.COMMENT_URL));
-            }
-
-            if (item.hasProp(GolemItem.ItemProperties.ALREADY_READ)) {
-                values.put(DBColumns.COLUMN_NAME_ALREADY_READ.getColumnName(), item.getProp(GolemItem.ItemProperties.ALREADY_READ));
-            }
-
-            QueryRequest queryRequest = new QueryRequest.QueryRequestBuilder()
-                    .withTableName(DBColumns.getTableName())
-                    .withSelection("url='" + item.getUrl() + "'")
-                    .build();
-            Article article = DBHelper.getArticle(queryRequest);
-
-            if (article != null) {
-                Log.d(TAG, "doInBackground: Updating article with id " + id + ": Date " + item.getProp(GolemItem.ItemProperties.DATE));
-                db.update(DBColumns.getTableName(), values, DBColumns.COLUMN_NAME_ID.getColumnName() + "='" + id + "'", null);
-            } else if (insertNew) {
-                Log.d(TAG, "doInBackground: Creating new article with Title " + item.getProp(GolemItem.ItemProperties.TITLE));
-                db.insert(DBColumns.getTableName(), null, values);
+        for (Article item : articles) {
+            if (insertNew) {
+                Log.d(TAG, "doInBackground: Creating new article with Title " + item.getTitle());
+                dao.addArticle(item);
             }
         }
     }
