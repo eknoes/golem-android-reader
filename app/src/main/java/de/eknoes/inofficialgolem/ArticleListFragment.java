@@ -127,15 +127,12 @@ public class ArticleListFragment extends Fragment {
         }
         if (fetcher == null || fetcher.getStatus() != AsyncTask.Status.RUNNING) {
             mSwipeLayout.setRefreshing(true);
-            fetcher = new GolemFetcher(requireContext(), new Callable<Void>() {
-                @Override
-                public Void call() {
-                    if (listAdapter != null) {
-                        listAdapter.notifyDataSetChanged();
-                    }
-                    mSwipeLayout.setRefreshing(false);
-                    return null;
+            fetcher = new GolemFetcher(requireContext(), () -> {
+                if (listAdapter != null) {
+                    listAdapter.notifyDataSetChanged();
                 }
+                mSwipeLayout.setRefreshing(false);
+                return null;
             });
             fetcher.execute();
         }
@@ -215,7 +212,7 @@ public class ArticleListFragment extends Fragment {
 
 
             Article art = getItem(position);
-            String infoText = String.format(context.getResources().getString(R.string.article_published), DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.SHORT).format(new Date(Long.parseLong(art.getDate()) * 1000)));
+            String infoText = String.format(context.getResources().getString(R.string.article_published), DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.SHORT).format(new Date(Long.parseLong(art.getDate()))));
 
             TextView teaser = view.findViewById(R.id.articleTeaser);
             TextView title = view.findViewById(R.id.articleTitle);

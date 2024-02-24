@@ -11,7 +11,7 @@ public class DBHelper {
     private final static String TAG = "DBHelper";
 
     public static void updateArticle( Context context,Article article){
-        ArticleDatabase db = Room.databaseBuilder(context,ArticleDatabase.class, DATABASES.ARTICLE.name()).build();
+        ArticleDatabase db = Room.databaseBuilder(context,ArticleDatabase.class, DATABASES.ARTICLE.name()).allowMainThreadQueries().build();
         ArticleDao dao = db.articleDao();
         dao.updateArticle(article);
     }

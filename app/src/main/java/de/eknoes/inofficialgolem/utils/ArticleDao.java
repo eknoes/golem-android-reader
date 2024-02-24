@@ -2,10 +2,12 @@ package de.eknoes.inofficialgolem.utils;
 
 import androidx.room.Dao;
 import androidx.room.Insert;
+import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 import androidx.room.Update;
 
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
 import de.eknoes.inofficialgolem.entities.Article;
 
@@ -14,10 +16,10 @@ public interface ArticleDao {
     @Query("SELECT * FROM article")
     List<Article> getAllArticles();
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     void addArticle(Article article);
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     void addArticle(List<Article> articles);
 
     @Query("SELECT * FROM article where article_url = :url")
