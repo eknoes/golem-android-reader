@@ -50,8 +50,6 @@ public class ArticleFragment extends Fragment {
     private Article article;
     private loadArticleTask mTask;
     private SwipeRefreshLayout mArticleSwipeRefresh;
-    private ArticleDatabase db = Room.databaseBuilder(getContext(), ArticleDatabase.class, DATABASES.ARTICLE.name()).build();
-    private ArticleDao dao = db.articleDao();
 
     public ArticleFragment() {
         super(R.layout.fragment_article);
@@ -272,6 +270,8 @@ public class ArticleFragment extends Fragment {
         @Override
         protected Void doInBackground(Void... params) {
             if (url != null) {
+                ArticleDatabase db = Room.databaseBuilder(getContext(), ArticleDatabase.class, DATABASES.ARTICLE.name()).build();
+                ArticleDao dao = db.articleDao();
                 article = dao.getArticleByUrl(url);
             }
             return null;

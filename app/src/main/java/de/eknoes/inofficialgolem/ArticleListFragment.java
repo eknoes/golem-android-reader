@@ -216,7 +216,7 @@ public class ArticleListFragment extends Fragment {
 
 
             Article art = getItem(position);
-            String infoText = String.format(context.getResources().getString(R.string.article_published), DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.SHORT).format(new Date(Long.parseLong(art.getDate()) * 1000)));
+            String infoText = String.format(context.getResources().getString(R.string.article_published), DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.SHORT).format(new Date(Long.parseLong(art.getDate()))));
 
             TextView teaser = view.findViewById(R.id.articleTeaser);
             TextView title = view.findViewById(R.id.articleTitle);

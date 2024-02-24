@@ -2,6 +2,7 @@ package de.eknoes.inofficialgolem.updater;
 
 import android.content.Context;
 import android.database.SQLException;
+import android.database.sqlite.SQLiteConstraintException;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -39,7 +40,7 @@ public class GolemFetcher extends AsyncTask<Void, Float, GolemFetcher.FETCH_STAT
     public GolemFetcher(Context context, Callable<Void> notifier) {
         this.context = new WeakReference<>(context);
         this.notifier = notifier;
-        if(PreferenceManager.getDefaultSharedPreferences(context).getBoolean("has_abo", false)) {
+        if (PreferenceManager.getDefaultSharedPreferences(context).getBoolean("has_abo", false)) {
             updater = new GolemUpdater[]{new ArticleUpdater(context, true), new ArticleUpdater(context, false)};
         } else {
             updater = new GolemUpdater[]{new ArticleUpdater(context, false)};
@@ -50,7 +51,7 @@ public class GolemFetcher extends AsyncTask<Void, Float, GolemFetcher.FETCH_STAT
     protected void onPreExecute() {
         super.onPreExecute();
         Context ctx = context.get();
-        if(ctx != null) {
+        if (ctx != null) {
             ConnectivityManager connMgr = (ConnectivityManager) ctx.getSystemService(Context.CONNECTIVITY_SERVICE);
             NetworkInfo networkInfo = null;
             if (connMgr != null) {
@@ -62,7 +63,7 @@ public class GolemFetcher extends AsyncTask<Void, Float, GolemFetcher.FETCH_STAT
     @Override
     protected GolemFetcher.FETCH_STATE doInBackground(Void... voids) {
         Context ctx = context.get();
-        if(ctx != null) {
+        if (ctx != null) {
             ConnectivityManager connMgr = (ConnectivityManager) ctx.getSystemService(Context.CONNECTIVITY_SERVICE);
             NetworkInfo networkInfo = null;
             if (connMgr != null) {
@@ -74,7 +75,7 @@ public class GolemFetcher extends AsyncTask<Void, Float, GolemFetcher.FETCH_STAT
                     GolemUpdater u = updater[i];
                     try {
                         List<Article> items = u.getItems();
-                        if (items != null && items.size() != 0) {
+                        if (items != null && !items.isEmpty()) {
                             // Only insert new articles for the first updater (AboKey updater needs to be first in the list)
                             writeArticles(items, i == 0);
                         } else {
@@ -122,7 +123,7 @@ public class GolemFetcher extends AsyncTask<Void, Float, GolemFetcher.FETCH_STAT
                 msgString = R.string.refresh_error_undefined;
         }
         Context ctx = context.get();
-        if(ctx != null) {
+        if (ctx != null) {
             Toast.makeText(ctx, msgString, Toast.LENGTH_SHORT).show();
             if (finished == FETCH_STATE.ABO_INVALID) {
                 PreferenceManager.getDefaultSharedPreferences(ctx).edit().putBoolean("has_abo", false).apply();
