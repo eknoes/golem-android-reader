@@ -1,11 +1,12 @@
 package de.eknoes.inofficialgolem;
 
 import android.content.Context;
-import android.database.Cursor;
+import android.content.res.Configuration;
 import android.database.DataSetObserver;
-import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
@@ -15,14 +16,15 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
+import androidx.room.Room;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.android.volley.toolbox.ImageLoader;
@@ -33,9 +35,14 @@ import org.jetbrains.annotations.NotNull;
 
 import java.text.DateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.concurrent.Callable;
 
+import de.eknoes.inofficialgolem.entities.Article;
+import de.eknoes.inofficialgolem.entities.DATABASES;
 import de.eknoes.inofficialgolem.updater.GolemFetcher;
+import de.eknoes.inofficialgolem.utils.ArticleDao;
+import de.eknoes.inofficialgolem.utils.ArticleDatabase;
 import de.eknoes.inofficialgolem.utils.NetworkUtils;
 
 /**
@@ -89,26 +96,12 @@ public class ArticleListFragment extends Fragment {
         Log.d(TAG, "onStart: Creating Article List Adapter");
         listAdapter = new ArticleAdapter();
         listView.setAdapter(listAdapter);
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                mListener.onArticleSelected(listAdapter.getItem(position).getUrl(), false);
-            }
+        listView.setOnItemClickListener((parent, view12, position, id) -> mListener.onArticleSelected(listAdapter.getItem(position).getArticleUrl(), false));
+        listView.setOnItemLongClickListener((parent, view1, position, id) -> {
+            mListener.onArticleSelected(listAdapter.getItem(position).getArticleUrl(), true);
+            return true;
         });
-        listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-            @Override
-            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                mListener.onArticleSelected(listAdapter.getItem(position).getUrl(), true);
-                return true;
-            }
-        });
-
-        mSwipeLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                refresh(true);
-            }
-        });
+        mSwipeLayout.setOnRefreshListener(() -> refresh(true));
     }
 
     @Override
@@ -134,15 +127,12 @@ public class ArticleListFragment extends Fragment {
         }
         if (fetcher == null || fetcher.getStatus() != AsyncTask.Status.RUNNING) {
             mSwipeLayout.setRefreshing(true);
-            fetcher = new GolemFetcher(requireContext(), new Callable<Void>() {
-                @Override
-                public Void call() {
-                    if (listAdapter != null) {
-                        listAdapter.notifyDataSetChanged();
-                    }
-                    mSwipeLayout.setRefreshing(false);
-                    return null;
+            fetcher = new GolemFetcher(requireContext(), () -> {
+                if (listAdapter != null) {
+                    listAdapter.notifyDataSetChanged();
                 }
+                mSwipeLayout.setRefreshing(false);
+                return null;
             });
             fetcher.execute();
         }
@@ -158,17 +148,14 @@ public class ArticleListFragment extends Fragment {
     private class ArticleAdapter extends BaseAdapter {
 
         private final LayoutInflater inflater;
-        private final SQLiteDatabase db;
         private final ImageLoader imgLoader;
         private final Context context;
-        private Cursor cursor;
+        private List<Article> articles;
 
         ArticleAdapter() {
             super();
             context = requireContext().getApplicationContext();
             inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            FeedReaderDbHelper dbHelper = FeedReaderDbHelper.getInstance(context);
-            db = dbHelper.getReadableDatabase();
             loadData();
             this.registerDataSetObserver(new DataSetObserver() {
                 @Override
@@ -194,64 +181,27 @@ public class ArticleListFragment extends Fragment {
         }
 
         private void loadData() {
-            String[] columns = {
-                    FeedReaderContract.Article.COLUMN_NAME_ID,
-                    FeedReaderContract.Article.COLUMN_NAME_TITLE,
-                    FeedReaderContract.Article.COLUMN_NAME_SUBHEADING,
-                    FeedReaderContract.Article.COLUMN_NAME_TEASER,
-                    FeedReaderContract.Article.COLUMN_NAME_DATE,
-                    FeedReaderContract.Article.COLUMN_NAME_IMG,
-                    FeedReaderContract.Article.COLUMN_NAME_URL,
-                    FeedReaderContract.Article.COLUMN_NAME_COMMENTURL,
-                    FeedReaderContract.Article.COLUMN_NAME_COMMENTNR,
-                    FeedReaderContract.Article.COLUMN_NAME_OFFLINE,
-                    FeedReaderContract.Article.COLUMN_NAME_FULLTEXT
-            };
-
-            String sort = FeedReaderContract.Article.COLUMN_NAME_DATE + " DESC";
-            String limit = "0, " + PreferenceManager.getDefaultSharedPreferences(context).getInt("article_limit", 200);
-
-
-            cursor = db.query(
-                    FeedReaderContract.Article.TABLE_NAME,
-                    columns,
-                    null,
-                    null,
-                    null,
-                    null,
-                    sort,
-                    limit);
+            ArticleDatabase db = Room.databaseBuilder(getContext(), ArticleDatabase.class, DATABASES.ARTICLE.name()).allowMainThreadQueries().build();
+            ArticleDao doa = db.articleDao();
+            articles = doa.getArticlesWithLimit(PreferenceManager.getDefaultSharedPreferences(context).getInt("article_limit", 200));
         }
 
         @Override
         public int getCount() {
-            return cursor.getCount();
+            return articles.size();
         }
 
         @Override
         public Article getItem(int position) {
-            cursor.moveToPosition(position);
-            Article a = new Article();
-            a.setId(cursor.getInt(cursor.getColumnIndexOrThrow(FeedReaderContract.Article.COLUMN_NAME_ID)));
-            a.setTitle(cursor.getString(cursor.getColumnIndexOrThrow(FeedReaderContract.Article.COLUMN_NAME_TITLE)));
-            a.setSubheadline(cursor.getString(cursor.getColumnIndexOrThrow(FeedReaderContract.Article.COLUMN_NAME_SUBHEADING)));
-            a.setTeaser(cursor.getString(cursor.getColumnIndexOrThrow(FeedReaderContract.Article.COLUMN_NAME_TEASER)));
-            a.setDate(cursor.getLong(cursor.getColumnIndexOrThrow(FeedReaderContract.Article.COLUMN_NAME_DATE)));
-            a.setImgUrl(cursor.getString(cursor.getColumnIndexOrThrow(FeedReaderContract.Article.COLUMN_NAME_IMG)));
-            a.setCommentUrl(cursor.getString(cursor.getColumnIndexOrThrow(FeedReaderContract.Article.COLUMN_NAME_COMMENTURL)));
-            a.setCommentNr(cursor.getString(cursor.getColumnIndexOrThrow(FeedReaderContract.Article.COLUMN_NAME_COMMENTNR)));
-            a.setUrl(cursor.getString(cursor.getColumnIndexOrThrow(FeedReaderContract.Article.COLUMN_NAME_URL)));
-            a.setOffline(cursor.getInt(cursor.getColumnIndexOrThrow(FeedReaderContract.Article.COLUMN_NAME_OFFLINE)) == 1);
-            a.setFulltext(cursor.getString(cursor.getColumnIndexOrThrow(FeedReaderContract.Article.COLUMN_NAME_FULLTEXT)));
-            return a;
+            return articles.get(position);
         }
 
         @Override
         public long getItemId(int position) {
-            cursor.moveToPosition(position);
-            return cursor.getLong(cursor.getColumnIndexOrThrow(FeedReaderContract.Article.COLUMN_NAME_ID));
+            return articles.get(position).getId();
         }
 
+        @RequiresApi(api = Build.VERSION_CODES.O)
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
             View view = convertView;
@@ -260,8 +210,9 @@ public class ArticleListFragment extends Fragment {
                 view = inflater.inflate(R.layout.list_article, parent, false);
             }
 
+
             Article art = getItem(position);
-            String infoText = String.format(context.getResources().getString(R.string.article_published), DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.SHORT).format(art.getDate()));
+            String infoText = String.format(context.getResources().getString(R.string.article_published), DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.SHORT).format(new Date(Long.parseLong(art.getDate()))));
 
             TextView teaser = view.findViewById(R.id.articleTeaser);
             TextView title = view.findViewById(R.id.articleTitle);
@@ -270,9 +221,29 @@ public class ArticleListFragment extends Fragment {
             NetworkImageView image = view.findViewById(R.id.articleImage);
 
             title.setText(art.getTitle());
-            subheading.setText(art.getSubheadline());
+            subheading.setText(art.getSubHeadline());
             teaser.setText(art.getTeaser());
             info.setText(infoText);
+            if (art.isAlreadyRead()) {
+                int nightMode = context.getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
+                // Danke an Alma für die Idee mit dem Text
+                switch (nightMode) {
+                    case Configuration.UI_MODE_NIGHT_YES:
+                        title.setTextColor(Color.parseColor("#424040"));
+                        subheading.setTextColor(Color.parseColor("#424040"));
+                        teaser.setTextColor(Color.parseColor("#424040"));
+                        info.setTextColor(Color.parseColor("#424040"));
+                        break;
+                    case Configuration.UI_MODE_NIGHT_NO:
+                        title.setTextColor(Color.parseColor("#8a8484"));
+                        subheading.setTextColor(Color.parseColor("#8a8484"));
+                        teaser.setTextColor(Color.parseColor("#8a8484"));
+                        info.setTextColor(Color.parseColor("#8a8484"));
+                        break;
+                    default:
+                        break;
+                }
+            }
 
             image.setImageUrl(art.getImgUrl(), imgLoader);
             return view;
