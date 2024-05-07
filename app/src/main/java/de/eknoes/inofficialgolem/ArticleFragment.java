@@ -1,5 +1,6 @@
 package de.eknoes.inofficialgolem;
 
+import android.animation.ValueAnimator;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
@@ -121,7 +122,7 @@ public class ArticleFragment extends Fragment {
                 public void onPageStarted(WebView view, String url, Bitmap favicon) {
                     super.onPageStarted(view, url, favicon);
                     webView.setVisibility(View.INVISIBLE);
-                    if (progressBar != null) {
+                    if (progressBar != null && (Build.VERSION.SDK_INT < Build.VERSION_CODES.O || ValueAnimator.areAnimatorsEnabled())) {
                         progressBar.setVisibility(View.VISIBLE);
                         progressBar.setIndeterminate(true);
                     }
