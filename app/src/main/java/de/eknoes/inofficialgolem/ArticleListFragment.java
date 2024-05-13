@@ -1,11 +1,13 @@
 package de.eknoes.inofficialgolem;
 
+import android.animation.ValueAnimator;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.DataSetObserver;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
@@ -133,7 +135,10 @@ public class ArticleListFragment extends Fragment {
             }
         }
         if (fetcher == null || fetcher.getStatus() != AsyncTask.Status.RUNNING) {
-            mSwipeLayout.setRefreshing(true);
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O || ValueAnimator.areAnimatorsEnabled()) {
+                mSwipeLayout.setRefreshing(true);
+            }
+
             fetcher = new GolemFetcher(requireContext(), new Callable<Void>() {
                 @Override
                 public Void call() {
