@@ -26,8 +26,8 @@ android {
         applicationId "de.eknoes.inofficialgolem"
         minSdkVersion 19
         targetSdkVersion 34
-        versionCode 146
-        versionName "1.2.8"
+        versionCode 147
+        versionName "1.2.9"
         signingConfig signingConfigs.debug
     }
     buildTypes {
