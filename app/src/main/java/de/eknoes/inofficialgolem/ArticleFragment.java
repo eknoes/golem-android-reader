@@ -22,7 +22,6 @@ import android.view.View;
 import android.webkit.CookieManager;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
-import android.widget.ProgressBar;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -41,7 +40,6 @@ public class ArticleFragment extends Fragment {
     private boolean forceWebview;
     private boolean noArticle;
     private WebView webView;
-    private ProgressBar progressBar;
 
     private Article article;
     private loadArticleTask mTask;
@@ -121,10 +119,7 @@ public class ArticleFragment extends Fragment {
                 public void onPageStarted(WebView view, String url, Bitmap favicon) {
                     super.onPageStarted(view, url, favicon);
                     webView.setVisibility(View.INVISIBLE);
-                    if (progressBar != null) {
-                        progressBar.setVisibility(View.VISIBLE);
-                        progressBar.setIndeterminate(true);
-                    }
+
                     if (!mArticleSwipeRefresh.isRefreshing()) {
                         mArticleSwipeRefresh.setRefreshing(true);
                     }
@@ -134,10 +129,7 @@ public class ArticleFragment extends Fragment {
                 public void onPageFinished(WebView view, String url) {
                     super.onPageFinished(view, url);
                     webView.setVisibility(View.VISIBLE);
-                    if (progressBar != null) {
-                        progressBar.setVisibility(View.GONE);
-                        progressBar.setIndeterminate(false);
-                    }
+
                     if (mArticleSwipeRefresh.isRefreshing()) {
                         mArticleSwipeRefresh.setRefreshing(false);
                     }
@@ -163,7 +155,6 @@ public class ArticleFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         webView = view.findViewById(R.id.articleWebView);
-        progressBar = view.findViewById(R.id.articleProgress);
         mArticleSwipeRefresh = view.findViewById(R.id.articleSwipeRefresh);
         mArticleSwipeRefresh.setOnRefreshListener(() -> webView.reload());
     }
