@@ -27,7 +27,7 @@ jobs:
           path: app/build/outputs/apk/debug/app-debug.apk
       - name: Create Release
         id: create_release
-        uses: actions/create-release@v4
+        uses: actions/create-release@v1.1.4
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
