@@ -35,7 +35,7 @@ jobs:
           asset_name: app-release.apk
           asset_content_type: application/zip
       - name: Delete Release if Build-Step failed
-        if: steps.build_apk.outcome != 'success' || steps.upload_release_asset.outcome != 'success'
+        if: steps.build_apk.outputs.status == 'failure' || steps.upload_release_asset.outputs.status == 'failure'
         uses: dev-drprasad/delete-tag-and-release@v1.1
         with:
           tag_name: ${{ env.RELEASE_NUMBER }}
