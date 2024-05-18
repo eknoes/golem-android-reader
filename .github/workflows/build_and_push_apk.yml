@@ -11,7 +11,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-
       - name: Get Version
         run: echo "RELEASE_NUMBER=$(cat app/build.gradle | grep versionName | grep -o -P '".*"' | tr -d '"')" >> $GITHUB_ENV
       - name: Setup JDK
@@ -32,7 +31,6 @@ jobs:
           tag_name: ${{ env.RELEASE_NUMBER }}
           release_name: Release ${{ env.RELEASE_NUMBER }}
       - name: Upload Release APK
-        id: upload_release_asset
         uses: actions/upload-release-asset@v1.0.2
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
