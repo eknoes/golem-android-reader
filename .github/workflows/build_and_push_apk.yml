@@ -22,6 +22,7 @@ jobs:
           tag_name: ${{ env.RELEASE_NUMBER }}
           release_name: Release ${{ env.RELEASE_NUMBER }}
       - name: Build APK
+        id: build_apk
         run: ./gradlew assemble
       - name: Upload Release APK
         id: upload_release_asset
@@ -33,3 +34,9 @@ jobs:
           asset_path: app/build/outputs/apk/release/app-release.apk
           asset_name: app-release.apk
           asset_content_type: application/zip
+      - name: Delete Release if Build-Step failed
+        if: steps.build_apk.outcome != 'success' || steps.upload_release_asset.outcome != 'success'
+        uses: dev-drprasad/delete-tag-and-release@v1.1
+        with:
+          tag_name: ${{ env.RELEASE_NUMBER }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
