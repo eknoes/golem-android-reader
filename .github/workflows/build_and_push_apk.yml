@@ -11,8 +11,14 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
       - name: Get Version
         run: echo "RELEASE_NUMBER=$(cat app/build.gradle | grep versionName | grep -o -P '".*"' | tr -d '"')" >> $GITHUB_ENV
+      - name: Setup JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: "21"
       - name: Change Permissions
         run: chmod +x ./gradlew
       - name: Build APK
