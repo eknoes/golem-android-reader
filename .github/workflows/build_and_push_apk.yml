@@ -14,28 +14,28 @@ jobs:
       - name: Get Version
         run: echo "RELEASE_NUMBER=$(cat app/build.gradle | grep versionName | grep -o -P '".*"' | tr -d '"')" >> $GITHUB_ENV
       - run: echo ${{ env.RELEASE_NUMBER }}
-#      - name: Setup JDK
-#        uses: actions/setup-java@v4
-#        with:
-#          distribution: 'temurin'
-#          java-version: "21"
-#      - name: Build APK
-#        run: bash ./gradlew assemble --stacktrace
-#      - name: Create Release
-#        id: create_release
-#        uses: actions/create-release@v1.1.4
-#        env:
-#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-#        with:
-#          tag_name: ${{ env.GITHUB_SHA_SHORT }}
-#          release_name: Release ${{ env.GITHUB_SHA_SHORT }}
-#      - name: Upload Release APK
-#        id: upload_release_asset
-#        uses: actions/upload-release-asset@v1.0.2
-#        env:
-#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-#        with:
-#          upload_url: ${{ steps.create_release.outputs.upload_url }}
-#          asset_path: app/build/outputs/apk/release/app-release.apk
-#          asset_name: app-release.apk
-#          asset_content_type: application/zip
+      - name: Setup JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: "21"
+      - name: Build APK
+        run: bash ./gradlew assemble --stacktrace
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1.1.4
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ env.RELEASE_NUMBER }}
+          release_name: Release ${{ env.RELEASE_NUMBER }}
+      - name: Upload Release APK
+        id: upload_release_asset
+        uses: actions/upload-release-asset@v1.0.2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: app/build/outputs/apk/release/app-release.apk
+          asset_name: app-release.apk
+          asset_content_type: application/zip
