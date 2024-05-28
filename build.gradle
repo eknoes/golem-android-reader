@@ -24,8 +24,9 @@ plugins {
 
 sonar {
     properties {
-        property "sonar.projectKey", "golem-reader_app"
-        property "sonar.organization", "golem-reader"
+        //TODO change this
+        property "sonar.projectKey", "Zusel_golem-android-reader"
+        property "sonar.organization", "main-org"
         property "sonar.host.url", "https://sonarcloud.io"
     }
 }

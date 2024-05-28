@@ -1,5 +1,6 @@
 package de.eknoes.inofficialgolem.updater;
 
+import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -17,6 +18,7 @@ import com.android.volley.TimeoutError;
 import de.eknoes.inofficialgolem.FeedReaderContract;
 import de.eknoes.inofficialgolem.FeedReaderDbHelper;
 import de.eknoes.inofficialgolem.R;
+import kotlin.Suppress;
 
 import java.lang.ref.WeakReference;
 import java.util.Date;
@@ -140,6 +142,7 @@ public class GolemFetcher extends AsyncTask<Void, Float, GolemFetcher.FETCH_STAT
         }
     }
 
+    @SuppressLint("Range")
     private void writeArticles(List<GolemItem> articles, boolean insertNew) {
         for (GolemItem item : articles) {
             if (isCancelled() || db == null) {
