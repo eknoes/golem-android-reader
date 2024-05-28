@@ -1,5 +1,6 @@
 package de.eknoes.inofficialgolem;
 
+import android.animation.ValueAnimator;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
@@ -22,7 +23,6 @@ import android.view.View;
 import android.webkit.CookieManager;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
-import android.widget.ProgressBar;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -41,7 +41,6 @@ public class ArticleFragment extends Fragment {
     private boolean forceWebview;
     private boolean noArticle;
     private WebView webView;
-    private ProgressBar progressBar;
 
     private Article article;
     private loadArticleTask mTask;
@@ -121,11 +120,8 @@ public class ArticleFragment extends Fragment {
                 public void onPageStarted(WebView view, String url, Bitmap favicon) {
                     super.onPageStarted(view, url, favicon);
                     webView.setVisibility(View.INVISIBLE);
-                    if (progressBar != null) {
-                        progressBar.setVisibility(View.VISIBLE);
-                        progressBar.setIndeterminate(true);
-                    }
-                    if (!mArticleSwipeRefresh.isRefreshing()) {
+
+                    if (!mArticleSwipeRefresh.isRefreshing() && (Build.VERSION.SDK_INT < Build.VERSION_CODES.O || ValueAnimator.areAnimatorsEnabled())) {
                         mArticleSwipeRefresh.setRefreshing(true);
                     }
                 }
@@ -134,10 +130,7 @@ public class ArticleFragment extends Fragment {
                 public void onPageFinished(WebView view, String url) {
                     super.onPageFinished(view, url);
                     webView.setVisibility(View.VISIBLE);
-                    if (progressBar != null) {
-                        progressBar.setVisibility(View.GONE);
-                        progressBar.setIndeterminate(false);
-                    }
+
                     if (mArticleSwipeRefresh.isRefreshing()) {
                         mArticleSwipeRefresh.setRefreshing(false);
                     }
@@ -163,7 +156,6 @@ public class ArticleFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         webView = view.findViewById(R.id.articleWebView);
-        progressBar = view.findViewById(R.id.articleProgress);
         mArticleSwipeRefresh = view.findViewById(R.id.articleSwipeRefresh);
         mArticleSwipeRefresh.setOnRefreshListener(() -> webView.reload());
     }
@@ -342,22 +334,24 @@ public class ArticleFragment extends Fragment {
                 // Change CSS for Dark Mode
                 if((getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK) == Configuration.UI_MODE_NIGHT_YES) {
                     if (fulltext != null) {
-                        fulltext = fulltext.replace("</head>", "<style type=\"text/css\">#screen, body, html {\n" +
-                                "color: white;\n" +
-                                "background-color: black;\n" +
-                                "}" +
-                                ".article #related a, .header--centered, .dh1, .dh2, .authors {\n" +
-                                "  color: white !important;\n" +
-                                "}</style></head>");
+                        fulltext = fulltext.replace("</head>", """
+                                <style type="text/css">#screen, body, html {
+                                color: white;
+                                background-color: black;
+                                }\
+                                .article #related a, .header--centered, .dh1, .dh2, .authors {
+                                  color: white !important;
+                                }</style></head>""");
                     }
                 } else if (fulltext != null) {
-                    fulltext = fulltext.replace("</head>", "<style type=\"text/css\">#screen, body, html {\n" +
-                            "color: black;\n" +
-                            "background-color: white;\n" +
-                            "}\n" +
-                            ".article #related a, .header--centered, .dh1, .dh2, .authors {\n" +
-                            "  color: black !important;\n" +
-                            "}</style></head>");
+                    fulltext = fulltext.replace("</head>", """
+                            <style type="text/css">#screen, body, html {
+                            color: black;
+                            background-color: white;
+                            }
+                            .article #related a, .header--centered, .dh1, .dh2, .authors {
+                              color: black !important;
+                            }</style></head>""");
                 }
                 webView.loadDataWithBaseURL(article.getUrl(), fulltext, "text/html", "UTF-8", null);
                 Log.d(TAG, "onPostExecute: Filled Webview");
