@@ -37,11 +37,11 @@ import org.jetbrains.annotations.NotNull;
 import java.text.DateFormat;
 import java.util.Date;
 import java.util.List;
-import java.util.concurrent.Callable;
 
 import de.eknoes.inofficialgolem.entities.Article;
 import de.eknoes.inofficialgolem.entities.DATABASES;
 import de.eknoes.inofficialgolem.updater.GolemFetcher;
+import de.eknoes.inofficialgolem.updater.RunningState;
 import de.eknoes.inofficialgolem.utils.ArticleDao;
 import de.eknoes.inofficialgolem.utils.ArticleDatabase;
 import de.eknoes.inofficialgolem.utils.NetworkUtils;
@@ -126,11 +126,10 @@ public class ArticleListFragment extends Fragment {
                 return;
             }
         }
-        if (fetcher == null || fetcher.getStatus() != AsyncTask.Status.RUNNING) {
+        if (fetcher == null || fetcher.getStatus() != RunningState.RUNNING) {
             if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O || ValueAnimator.areAnimatorsEnabled()) {
                 mSwipeLayout.setRefreshing(true);
             }
-
             fetcher = new GolemFetcher(requireContext(), () -> {
                 if (listAdapter != null) {
                     listAdapter.notifyDataSetChanged();

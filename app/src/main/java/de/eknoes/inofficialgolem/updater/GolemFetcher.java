@@ -1,12 +1,8 @@
 package de.eknoes.inofficialgolem.updater;
 
 import android.content.Context;
-import android.database.SQLException;
-import android.database.sqlite.SQLiteConstraintException;
-import android.database.sqlite.SQLiteDatabase;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.os.AsyncTask;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.widget.Toast;
@@ -31,7 +27,7 @@ import de.eknoes.inofficialgolem.utils.ArticleDatabase;
 /**
  * Created by soenke on 27.08.16.
  */
-public class GolemFetcher extends AsyncTask<Void, Float, GolemFetcher.FETCH_STATE> {
+public class GolemFetcher extends AsyncTaskExecutorService<Void> {
     private static final String TAG = "GolemFetcher";
     private final GolemUpdater[] updater;
     private final WeakReference<Context> context;
@@ -61,7 +57,7 @@ public class GolemFetcher extends AsyncTask<Void, Float, GolemFetcher.FETCH_STAT
     }
 
     @Override
-    protected GolemFetcher.FETCH_STATE doInBackground(Void... voids) {
+    protected FETCH_STATE doInBackground(Void unused) {
         Context ctx = context.get();
         if (ctx != null) {
             ConnectivityManager connMgr = (ConnectivityManager) ctx.getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -101,8 +97,7 @@ public class GolemFetcher extends AsyncTask<Void, Float, GolemFetcher.FETCH_STAT
     }
 
     @Override
-    protected void onPostExecute(GolemFetcher.FETCH_STATE finished) {
-        super.onPostExecute(finished);
+    protected void onPostExecute(FETCH_STATE finished) {
 
         int msgString;
         switch (finished) {

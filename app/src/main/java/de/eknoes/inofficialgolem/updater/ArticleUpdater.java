@@ -79,7 +79,6 @@ public class ArticleUpdater extends GolemUpdater {
 
         Log.d(TAG, "buildFeedURL: Using private feed");
         return "https://rss.golem.de/rss_sub_media.php?token=" + Uri.encode(this.aboKey);
-        //return "https://rss.golem.de/rss_sub.php?token=" + Uri.encode(this.aboKey);
     }
 
 }
