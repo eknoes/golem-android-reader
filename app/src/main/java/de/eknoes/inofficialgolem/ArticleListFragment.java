@@ -24,6 +24,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.room.Room;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
@@ -227,8 +228,8 @@ public class ArticleListFragment extends Fragment {
             subheading.setText(art.getSubHeadline());
             teaser.setText(art.getTeaser());
             info.setText(infoText);
+            int nightMode = context.getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
             if (art.isAlreadyRead()) {
-                int nightMode = context.getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
                 // Danke an Alma für die Idee mit dem Text
                 switch (nightMode) {
                     case Configuration.UI_MODE_NIGHT_YES:
@@ -242,6 +243,23 @@ public class ArticleListFragment extends Fragment {
                         subheading.setTextColor(Color.parseColor("#8a8484"));
                         teaser.setTextColor(Color.parseColor("#8a8484"));
                         info.setTextColor(Color.parseColor("#8a8484"));
+                        break;
+                    default:
+                        break;
+                }
+            }else{
+                switch (nightMode) {
+                    case Configuration.UI_MODE_NIGHT_YES:
+                        title.setTextColor(ContextCompat.getColor(context, R.color.design_default_color_on_primary));
+                        subheading.setTextColor(ContextCompat.getColor(context, R.color.design_default_color_on_primary));
+                        teaser.setTextColor(ContextCompat.getColor(context, R.color.design_default_color_on_primary));
+                        info.setTextColor(ContextCompat.getColor(context, R.color.design_default_color_on_primary));
+                        break;
+                    case Configuration.UI_MODE_NIGHT_NO:
+                        title.setTextColor(ContextCompat.getColor(context, R.color.design_default_color_on_secondary));
+                        subheading.setTextColor(ContextCompat.getColor(context, R.color.design_default_color_on_secondary));
+                        teaser.setTextColor(ContextCompat.getColor(context, R.color.design_default_color_on_secondary));
+                        info.setTextColor(ContextCompat.getColor(context, R.color.design_default_color_on_secondary));
                         break;
                     default:
                         break;
