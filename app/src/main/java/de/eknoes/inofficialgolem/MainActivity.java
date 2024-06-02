@@ -12,7 +12,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
@@ -20,10 +22,20 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Objects;
 
+import de.eknoes.inofficialgolem.utils.MigrationHelper;
+
 public class MainActivity extends AppCompatActivity implements ArticleListFragment.OnArticleSelectedListener {
     private static final String TAG = "MainActivity";
     private static final String CURRENT_ARTICLE = "currentArticle";
     private String currentArticle;
+
+    @Override
+    protected void onPostCreate(@Nullable Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+        if(MigrationHelper.migrateOldDatabase(this.getApplicationContext())){
+            Toast.makeText(this, "Database migrated", Toast.LENGTH_SHORT).show();
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

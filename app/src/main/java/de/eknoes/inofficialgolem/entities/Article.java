@@ -132,4 +132,81 @@ public class Article {
     public void setAlreadyRead(boolean alreadyRead) {
         this.alreadyRead = alreadyRead;
     }
+
+
+    public static final class ArticleBuilder {
+        private Article article;
+
+        private ArticleBuilder() {
+            article = new Article();
+        }
+
+        public static ArticleBuilder anArticle() {
+            return new ArticleBuilder();
+        }
+
+        public ArticleBuilder withId(int id) {
+            article.setId(id);
+            return this;
+        }
+
+        public ArticleBuilder withTitle(String title) {
+            article.setTitle(title);
+            return this;
+        }
+
+        public ArticleBuilder withArticleUrl(String articleUrl) {
+            article.setArticleUrl(articleUrl);
+            return this;
+        }
+
+        public ArticleBuilder withSubHeadline(String subHeadline) {
+            article.setSubHeadline(subHeadline);
+            return this;
+        }
+
+        public ArticleBuilder withTeaser(String teaser) {
+            article.setTeaser(teaser);
+            return this;
+        }
+
+        public ArticleBuilder withFullText(String fullText) {
+            article.setFullText(fullText);
+            return this;
+        }
+
+        public ArticleBuilder withDate(String date) {
+            article.setDate(date);
+            return this;
+        }
+
+        public ArticleBuilder withImgUrl(String imgUrl) {
+            article.setImgUrl(imgUrl);
+            return this;
+        }
+
+        public ArticleBuilder withCommentUrl(String commentUrl) {
+            article.setCommentUrl(commentUrl);
+            return this;
+        }
+
+        public ArticleBuilder withCommentNr(String commentNr) {
+            article.setCommentNr(commentNr);
+            return this;
+        }
+
+        public ArticleBuilder withAlreadyRead(boolean alreadyRead) {
+            article.setAlreadyRead(alreadyRead);
+            return this;
+        }
+
+        public ArticleBuilder withOffline(boolean offline) {
+            article.setOffline(offline);
+            return this;
+        }
+
+        public Article build() {
+            return article;
+        }
+    }
 }
