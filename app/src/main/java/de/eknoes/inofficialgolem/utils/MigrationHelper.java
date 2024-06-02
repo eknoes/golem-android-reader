@@ -50,7 +50,7 @@ public class MigrationHelper {
                             .withCommentUrl(cursor.getString(cursor.getColumnIndexOrThrow("commenturl")))
                             .withCommentNr(cursor.getString(cursor.getColumnIndexOrThrow("commentnr")))
                             .withImgUrl(cursor.getString(cursor.getColumnIndexOrThrow("img")))
-                            .withDate(String.valueOf(cursor.getInt(cursor.getColumnIndexOrThrow("date"))))
+                            .withDate(cursor.getString(cursor.getColumnIndexOrThrow("date")))
                             .withFullText(cursor.getString(cursor.getColumnIndexOrThrow("fulltext")))
                             .withOffline(cursor.getInt(cursor.getColumnIndexOrThrow("offline_available")) == 1)
                             .build();
