@@ -15,16 +15,18 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
+import de.eknoes.inofficialgolem.entities.Article;
+
 /**
  * Fetches articles for users with golem abo token
  */
-public class articleUpdater extends GolemUpdater {
+public class ArticleUpdater extends GolemUpdater {
 
     private final RequestQueue queue;
     private boolean useAbo;
     private String aboKey;
 
-    public articleUpdater(Context c, boolean useAbo) {
+    public ArticleUpdater(Context c, boolean useAbo) {
         super(c);
         queue = Volley.newRequestQueue(context);
         this.useAbo = useAbo;
@@ -37,7 +39,7 @@ public class articleUpdater extends GolemUpdater {
     }
 
     @Override
-    public List<GolemItem> getItems() throws TimeoutError, NoConnectionError, AuthFailureError {
+    public List<Article> getItems() throws TimeoutError, NoConnectionError, AuthFailureError {
         Log.d(TAG, "getItems: Fetching RSS Feed");
         RequestFuture<String> future = RequestFuture.newFuture();
         StringRequest request = new StringRequest(buildFeedURL(), future, future);
@@ -65,7 +67,7 @@ public class articleUpdater extends GolemUpdater {
         return new LinkedList<>();
     }
 
-    static List<GolemItem> getItems(String feed, GolemRSSParser parser) {
+    static List<Article> getItems(String feed, GolemRSSParser parser) {
         return parser.parse(feed);
     }
 
@@ -77,7 +79,6 @@ public class articleUpdater extends GolemUpdater {
 
         Log.d(TAG, "buildFeedURL: Using private feed");
         return "https://rss.golem.de/rss_sub_media.php?token=" + Uri.encode(this.aboKey);
-        //return "https://rss.golem.de/rss_sub.php?token=" + Uri.encode(this.aboKey);
     }
 
 }

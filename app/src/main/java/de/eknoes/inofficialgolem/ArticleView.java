@@ -12,7 +12,6 @@ public class ArticleView extends AppCompatActivity {
 
     private ArticleFragment articleFragment;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

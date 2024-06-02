@@ -6,8 +6,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -27,9 +25,16 @@ import android.webkit.WebView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.room.Room;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import org.jetbrains.annotations.NotNull;
+
+import de.eknoes.inofficialgolem.entities.Article;
+import de.eknoes.inofficialgolem.entities.DATABASES;
+import de.eknoes.inofficialgolem.utils.ArticleDao;
+import de.eknoes.inofficialgolem.utils.ArticleDatabase;
+import de.eknoes.inofficialgolem.utils.DBHelper;
 
 public class ArticleFragment extends Fragment {
     static final String ARTICLE_URL = "de.eknoes.inofficialgolem.ARTICLE_URL";
@@ -114,7 +119,7 @@ public class ArticleFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        if(webView != null) {
+        if (webView != null) {
             webView.setWebViewClient(new GolemWebViewClient() {
                 @Override
                 public void onPageStarted(WebView view, String url, Bitmap favicon) {
@@ -139,8 +144,8 @@ public class ArticleFragment extends Fragment {
             webView.getSettings().setJavaScriptEnabled(true);
             CookieManager cookieManager = CookieManager.getInstance();
             cookieManager.setAcceptCookie(true);
-            if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                cookieManager.setAcceptThirdPartyCookies(webView,true);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                cookieManager.setAcceptThirdPartyCookies(webView, true);
             }
         }
 
@@ -170,7 +175,7 @@ public class ArticleFragment extends Fragment {
     @Override
     public void onDetach() {
         super.onDetach();
-        if(mTask != null) {
+        if (mTask != null) {
             mTask.cancel(false);
         }
     }
@@ -180,9 +185,9 @@ public class ArticleFragment extends Fragment {
         super.onCreateOptionsMenu(menu, inflater);
         inflater.inflate(R.menu.menu_webview, menu);
 
-        if(article == null || article.getCommentUrl() == null) {
+        if (article == null || article.getCommentUrl() == null) {
             MenuItem item = menu.findItem(R.id.action_comments);
-            if(item != null) {
+            if (item != null) {
                 item.setVisible(false);
             }
         }
@@ -208,14 +213,14 @@ public class ArticleFragment extends Fragment {
             Intent shareIntent = new Intent();
             shareIntent.setAction(Intent.ACTION_SEND);
             String link = null;
-            if (article != null && article.getUrl() != null) {
-                link = article.getUrl();
+            if (article != null && article.getArticleUrl() != null) {
+                link = article.getArticleUrl();
             } else if (url != null) {
                 link = url;
             }
 
             if (link != null && article != null) {
-                shareIntent.putExtra(Intent.EXTRA_TEXT, article.getSubheadline() + ": " + article.getTitle() + " - " + link);
+                shareIntent.putExtra(Intent.EXTRA_TEXT, article.getSubHeadline() + ": " + article.getTitle() + " - " + link);
             } else {
                 shareIntent.putExtra(Intent.EXTRA_TEXT, link);
             }
@@ -264,44 +269,11 @@ public class ArticleFragment extends Fragment {
 
         @Override
         protected Void doInBackground(Void... params) {
-                FeedReaderDbHelper dbHelper = FeedReaderDbHelper.getInstance(requireContext().getApplicationContext());
-
-                SQLiteDatabase db = dbHelper.getReadableDatabase();
-
-                if (url != null) {
-                    String[] columns = {
-                            FeedReaderContract.Article.COLUMN_NAME_ID,
-                            FeedReaderContract.Article.COLUMN_NAME_TITLE,
-                            FeedReaderContract.Article.COLUMN_NAME_SUBHEADING,
-                            FeedReaderContract.Article.COLUMN_NAME_URL,
-                            FeedReaderContract.Article.COLUMN_NAME_COMMENTNR,
-                            FeedReaderContract.Article.COLUMN_NAME_COMMENTURL,
-                            FeedReaderContract.Article.COLUMN_NAME_OFFLINE,
-                            FeedReaderContract.Article.COLUMN_NAME_FULLTEXT,
-                    };
-                    Cursor cursor = db.query(
-                            FeedReaderContract.Article.TABLE_NAME,
-                            columns,
-                            "url=\"" + url + "\"",
-                            null,
-                            null,
-                            null,
-                            null);
-                    if (cursor.moveToFirst()) {
-                        article = new Article();
-                        article.setId(cursor.getInt(cursor.getColumnIndexOrThrow(FeedReaderContract.Article.COLUMN_NAME_ID)));
-                        article.setTitle(cursor.getString(cursor.getColumnIndexOrThrow(FeedReaderContract.Article.COLUMN_NAME_TITLE)));
-                        article.setSubheadline(cursor.getString(cursor.getColumnIndexOrThrow(FeedReaderContract.Article.COLUMN_NAME_SUBHEADING)));
-                        article.setUrl(cursor.getString(cursor.getColumnIndexOrThrow(FeedReaderContract.Article.COLUMN_NAME_URL)));
-                        article.setCommentUrl(cursor.getString(cursor.getColumnIndexOrThrow(FeedReaderContract.Article.COLUMN_NAME_COMMENTURL)));
-                        article.setCommentNr(cursor.getString(cursor.getColumnIndexOrThrow(FeedReaderContract.Article.COLUMN_NAME_COMMENTNR)));
-                        article.setOffline(cursor.getInt(cursor.getColumnIndexOrThrow(FeedReaderContract.Article.COLUMN_NAME_OFFLINE)) == 1);
-                        article.setFulltext(cursor.getString(cursor.getColumnIndexOrThrow(FeedReaderContract.Article.COLUMN_NAME_FULLTEXT)));
-                    }
-
-
-                    cursor.close();
-                }
+            if (url != null) {
+                ArticleDatabase db = Room.databaseBuilder(getContext(), ArticleDatabase.class, DATABASES.ARTICLE.name()).build();
+                ArticleDao dao = db.articleDao();
+                article = dao.getArticleByUrl(url);
+            }
             return null;
         }
 
@@ -320,19 +292,23 @@ public class ArticleFragment extends Fragment {
                         networkInfo = connMgr.getActiveNetworkInfo();
                     }
                     if (networkInfo != null && networkInfo.isConnected()) {
+                        article.setAlreadyRead(true);
+                        DBHelper.updateArticle(getContext(), article);
                         webView.loadUrl(url);
                     } else {
                         webView.loadData(getResources().getString(R.string.err_no_network), "text/html; charset=utf-8", "UTF-8");
                     }
                 } else {
+                    article.setAlreadyRead(true);
+                    DBHelper.updateArticle(getContext(),article);
                     webView.loadUrl(url);
                 }
             } else {
                 Log.d(TAG, "onPostExecute: Fill Webview");
-                String fulltext = article.getFulltext();
+                String fulltext = article.getFullText();
 
                 // Change CSS for Dark Mode
-                if((getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK) == Configuration.UI_MODE_NIGHT_YES) {
+                if ((getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK) == Configuration.UI_MODE_NIGHT_YES) {
                     if (fulltext != null) {
                         fulltext = fulltext.replace("</head>", """
                                 <style type="text/css">#screen, body, html {
@@ -353,7 +329,7 @@ public class ArticleFragment extends Fragment {
                               color: black !important;
                             }</style></head>""");
                 }
-                webView.loadDataWithBaseURL(article.getUrl(), fulltext, "text/html", "UTF-8", null);
+                webView.loadDataWithBaseURL(article.getArticleUrl(), fulltext, "text/html", "UTF-8", null);
                 Log.d(TAG, "onPostExecute: Filled Webview");
 
             }

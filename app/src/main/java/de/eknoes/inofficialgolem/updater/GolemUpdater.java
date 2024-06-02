@@ -7,6 +7,8 @@ import com.android.volley.TimeoutError;
 
 import java.util.List;
 
+import de.eknoes.inofficialgolem.entities.Article;
+
 /**
  * Created by soenke on 20.04.16.
  */
@@ -30,5 +32,5 @@ abstract class GolemUpdater {
      * @throws NoConnectionError e.g. on Connection Error
      * @throws AuthFailureError e.g. on Invalid Abo Key
      */
-    public abstract List<GolemItem> getItems() throws TimeoutError, NoConnectionError, AuthFailureError;
+    public abstract List<Article> getItems() throws TimeoutError, NoConnectionError, AuthFailureError;
 }
