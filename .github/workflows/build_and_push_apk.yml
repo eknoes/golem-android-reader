@@ -23,17 +23,9 @@ jobs:
         run: ./gradlew assemble
       - name: Create Release
         id: create_release
-        uses: elgohr/Github-Release-Action@v5
+        uses: softprops/action-gh-release@v2.0.5
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          title: ${{ env.RELEASE_NUMBER }}
-      - name: Upload Release APK
-        uses: actions/upload-release-asset@v1.0.2
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: app/build/outputs/apk/release/app-release.apk
-          asset_name: app-release.apk
-          asset_content_type: application/zip
+          name: ${{ env.RELEASE_NUMBER }}
+          files: app/build/outputs/apk/release/app-release.apk
