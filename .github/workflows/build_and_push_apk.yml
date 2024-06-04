@@ -23,12 +23,11 @@ jobs:
         run: ./gradlew assemble
       - name: Create Release
         id: create_release
-        uses: actions/create-release@v1.1.4
+        uses: elgohr/Github-Release-Action@v5
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: ${{ env.RELEASE_NUMBER }}
-          release_name: Release ${{ env.RELEASE_NUMBER }}
+          title: ${{ env.RELEASE_NUMBER }}
       - name: Upload Release APK
         uses: actions/upload-release-asset@v1.0.2
         env:
