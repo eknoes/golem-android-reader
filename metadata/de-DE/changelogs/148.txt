@@ -1,0 +1,1 @@
+* Performance Bug: Artikel werden deutlich schneller geladen
