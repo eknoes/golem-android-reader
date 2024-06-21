@@ -119,7 +119,6 @@ public class ArticleFragment extends Fragment {
                 @Override
                 public void onPageStarted(WebView view, String url, Bitmap favicon) {
                     super.onPageStarted(view, url, favicon);
-                    webView.setVisibility(View.INVISIBLE);
 
                     if (!mArticleSwipeRefresh.isRefreshing() && (Build.VERSION.SDK_INT < Build.VERSION_CODES.O || ValueAnimator.areAnimatorsEnabled())) {
                         mArticleSwipeRefresh.setRefreshing(true);
@@ -129,7 +128,6 @@ public class ArticleFragment extends Fragment {
                 @Override
                 public void onPageFinished(WebView view, String url) {
                     super.onPageFinished(view, url);
-                    webView.setVisibility(View.VISIBLE);
 
                     if (mArticleSwipeRefresh.isRefreshing()) {
                         mArticleSwipeRefresh.setRefreshing(false);
@@ -312,6 +310,7 @@ public class ArticleFragment extends Fragment {
             }
             if (article == null || !article.isOffline() || forceWebview) {
                 Context c = getContext();
+                Log.d(TAG, "onPostExecute: Start loading website");
                 if (c != null) {
                     ConnectivityManager connMgr = (ConnectivityManager)
                             getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
